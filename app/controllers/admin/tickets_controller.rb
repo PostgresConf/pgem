@@ -61,7 +61,8 @@ module Admin
       params.require(:ticket).permit(:conference, :title, :short_title, :url, :description,
                                      :conference_id, :price_cents, :price_currency, :price, 
                                      :hidden, :ticket_group_id, :early_bird_price_cents, 
-                                     :early_bird_price_currency, :early_bird_price)
+                                     :early_bird_price_currency, :early_bird_price, :ticket_type,
+                                     :start_date, :end_date)
     end
   end
 end

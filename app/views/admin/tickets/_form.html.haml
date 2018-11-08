@@ -18,5 +18,8 @@
       = f.input :early_bird_price_currency, as: :hidden, :input_html => { :value => @conference.default_currency }
       = f.input :hidden
       = f.input :ticket_group
+      = f.input :ticket_type, as: :select, collection: Ticket.ticket_types.keys
+      = f.input :start_date, as: :string, input_html: { class: 'ticket-start-date-datepicker'}, label: 'Start Date (Set if the ticket type is date range)'
+      = f.input :end_date, as: :string, input_html: { class: 'ticket-end-date-datepicker'}, label: 'End Date (Set if the ticket type is date range)'
       %p.text-right
         = f.action :submit, as: :button, button_html: { class: 'btn btn-primary' }

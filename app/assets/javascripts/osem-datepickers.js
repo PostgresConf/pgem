@@ -111,6 +111,17 @@ $(function () {
       pickTime: false,
       format: "YYYY-MM-DD"
   });
+
+  $(".ticket-start-date-datepicker").datetimepicker({
+      pickTime: false,
+      format: "YYYY-MM-DD"
+  });
+
+  $(".ticket-end-date-datepicker").datetimepicker({
+      pickTime: false,
+      format: "YYYY-MM-DD"
+  });
+
   /* Appends the datetimepicker to new injected nested target fields. */
   $('a:contains("Add target")').click(function () {
       setTimeout(function () {

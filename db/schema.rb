@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180815133124) do
+ActiveRecord::Schema.define(version: 20181108133341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1862,6 +1862,9 @@ ActiveRecord::Schema.define(version: 20180815133124) do
     t.string  "short_title"
     t.integer "early_bird_price_cents",    default: 0,     null: false
     t.string  "early_bird_price_currency", default: "USD", null: false
+    t.integer "ticket_type",               default: 0
+    t.date    "start_date"
+    t.date    "end_date"
   end
 
   add_index "tickets", ["ticket_group_id"], name: "index_tickets_on_ticket_group_id", using: :btree
@@ -1878,6 +1881,9 @@ ActiveRecord::Schema.define(version: 20180815133124) do
     t.string  "short_title"
     t.integer "early_bird_price_cents",    default: 0,     null: false
     t.string  "early_bird_price_currency", default: "USD", null: false
+    t.integer "ticket_type",               default: 0
+    t.date    "start_date"
+    t.date    "end_date"
   end
 
   add_index "tickets", ["ticket_group_id"], name: "index_tickets_on_ticket_group_id", using: :btree

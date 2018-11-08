@@ -12,6 +12,8 @@ class Ticket < ActiveRecord::Base
 
   cattr_accessor :applied_code
 
+  enum ticket_type: [:normal, :date_range, :day_pass]
+
   has_paper_trail meta: { conference_id: :conference_id }
 
   monetize :price_cents, with_model_currency: :price_currency
