@@ -229,7 +229,6 @@ class Event < ActiveRecord::Base
   # Returns +Hash+
   def progress_status
     {
-      registered: self.program.conference.user_registered?(self.submitter),
       biography: !self.submitter.biography.blank?,
       subtitle: !self.subtitle.blank?,
       track: (!self.track.blank? unless self.program.tracks.empty?),

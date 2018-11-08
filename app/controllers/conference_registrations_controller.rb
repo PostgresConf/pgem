@@ -78,37 +78,15 @@ class ConferenceRegistrationsController < ApplicationController
     end
   end
 
-  def update
-    if @registration.update_attributes(registration_params)
-      redirect_to  conference_conference_registration_path(@conference.short_title),
-                   notice: 'Registration was successfully updated.'
-    else
-      flash.now[:error] = "Could not update your registration for #{@conference.title}: "\
-                        "#{@registration.errors.full_messages.join('. ')}."
-      render :edit
-    end
-  end
-
-  def destroy
-    if @registration.destroy
-      redirect_to root_path,
-                  notice: "You are not registered for #{@conference.title} anymore!"
-    else
-      redirect_to conference_conference_registration_path(@conference.short_title),
-                  error: "Could not delete your registration for #{@conference.title}: "\
-                  "#{@registration.errors.full_messages.join('. ')}."
-    end
-  end
-
   protected
 
   def set_registration
     @registration = Registration.find_by(conference: @conference, user: current_user)
     unless @registration
-      if @conference.tickets.any?
+      if current_user.ticket_purchases.by_conference(@conference).any?
         create
       else
-        redirect_to new_conference_conference_registration_path(@conference.short_title),
+        redirect_to conference_tickets_path(@conference.short_title),
                     error: "Can't find a registration for #{@conference.title} for you. Please register."
       end
     end

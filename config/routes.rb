@@ -189,7 +189,7 @@ Osem::Application.routes.draw do
     end
 
     # TODO: change conference_registrations to singular resource
-    resource :conference_registration, path: 'register'
+    resource :conference_registration, path: 'register', only: [:show]
     resources :tickets, only: [:index]
     resources :ticket_purchases, only: [:create, :destroy]
     resources :payments, only: [:index, :new, :create] do
