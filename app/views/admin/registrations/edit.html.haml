@@ -2,19 +2,31 @@
   .col-md-12
     .page-header
       %h1
-        Registration for #{@user.username} (#{@user.email})
+        Registration for #{@user.name} (#{@user.email})
 
-        = link_to 'Edit User', edit_admin_user_path(@user), class: 'btn btn-primary pull-right' if can? :edit, @user
 .row
   .col-md-6
-    = semantic_form_for(@registration, url: admin_conference_registration_path(@conference.short_title, @registration)) do |f|
-      = f.inputs 'Personal Information' do
-        = semantic_fields_for  :user do |u|
-          = u.input :first_name, as: :string
-          = u.input :last_name, as: :string
-          = u.input :nickname, as: :string
-          = u.input :affiliation, placeholder: 'Company/User Group/Organization', as: :string
-          = u.input :title, as: :string, label: 'Job Title'
-      = f.inputs 'Registration Information' do
-        = render partial: 'conference_registrations/registration_info', locals: { f: f }
-      = f.action :submit, button_html: { class: 'btn btn-primary' }
+    .row
+      .col-md-3
+        = image_tag @user.avatar_url(version: 'large'), class: "img-responsive img-rounded"
+      .col-md-9
+        %h4
+          = link_to @user.name, user_path(@user.id)
+        - if @user.affiliation?
+          .text-muted
+            = @user.affiliation
+    -if @user.biography?
+      .row.speakerbio
+        .col-md-12
+          = markdown(@user.biography)
+    .row.row-centered
+      = link_to 'Edit User', edit_admin_user_path(@user), class: 'btn btn-primary' if can? :edit, @user
+
+  .col-md-6
+    .row
+      .col-md-10
+        %h3
+          Proposals/Talks
+    .row
+      .col-md-10
+        = render partial: 'proposals'

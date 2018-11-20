@@ -1,0 +1,35 @@
+%table.table.table-striped
+- @proposals.each do |event|
+
+  %tr
+    %td{style: "padding:20px 8px 20px 8px;"}
+      %span{ title: event.state.humanize, class: "fa #{event_status_icon(event)}" }
+
+    %td.col-md-7{style: "padding:20px 8px 20px 8px;"}
+      - if @conference
+        = link_to event.title, conference_program_proposal_path(event.program.conference.short_title, event.id)
+      -else
+        = link_to "#{event.title} (#{event.program.conference.short_title})", conference_program_proposal_path(event.program.conference.short_title, event.id)
+      %br
+      %small.text-muted
+        = event.event_type.title
+        = "(#{event.event_type.length} min)"
+        = "in #{event.track.name}" if event.track
+
+    %td.col-md-3{style: "padding:20px 0px 20px 0px;"}
+      .pull-right
+        - if event.transition_possible? :confirm
+          = link_to 'Confirm',
+          confirm_conference_program_proposal_path(event.program.conference.short_title, event),
+          method: :patch, class: 'btn btn-mini btn-success', id: "confirm_proposal_#{event.id}"
+
+        - if event.transition_possible? :withdraw
+          = link_to 'Withdraw', withdraw_conference_program_proposal_path(event.program.conference.short_title, event.id), method: :patch,
+                      data: { confirm: 'Are you sure you want to withdraw this proposal?' }, class: 'btn btn-mini btn-warning',
+                      id: "delete_proposal_#{event.id}"
+        - if event.state == 'withdrawn' || event.state == 'rejected'
+          = link_to 'Re-Submit',
+          restart_conference_program_proposal_path(event.program.conference.short_title, event.id),
+          method: :patch, class: 'btn btn-mini btn-success', id: "review_event_#{event.id}"
+        = link_to 'Edit', edit_conference_program_proposal_path(event.program.conference.short_title, event.id),
+        class: 'btn btn-default', id: "edit_proposal_#{event.id}"

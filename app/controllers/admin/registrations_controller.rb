@@ -14,7 +14,9 @@ module Admin
       @affiliation_distribution = @conference.affiliation_distribution
     end
 
-    def edit; end
+    def edit
+          @proposals = @user.proposals(@conference)
+    end
 
     def update
       @user.update_attributes(user_params)
