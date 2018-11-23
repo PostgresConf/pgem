@@ -78,8 +78,9 @@ class TicketPurchase < ActiveRecord::Base
                      quantity: quantity,
                      code_id: code_id,
                      pending_event_tickets: event_list,
-                     purchase_price: price)
-      if price = 0
+                     purchase_price: price,
+                     paid: false)
+      if price == 0
         purchase.pay(nil, user)
       end
     end
