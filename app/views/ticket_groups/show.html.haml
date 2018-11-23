@@ -28,7 +28,7 @@
                     = ticket.short_title
                   %p
                     = ticket.description
-                    %a.package_link{ href: url_for(conference_tickets_path(@conference.short_title)), style: 'background: linear-gradient(to bottom, #5cb85c 0%,#369836 100%); display: block;'}
+                    %a.package_link{ href: conference_tickets_path(@conference.short_title, :ticket => ticket.id), style: 'background: linear-gradient(to bottom, #5cb85c 0%,#369836 100%); display: block;'}
                       = ticket.current_price.symbol
                       =  humanized_money ticket.current_price
                       %span.cta

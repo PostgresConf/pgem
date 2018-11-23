@@ -7,9 +7,11 @@ class TicketsController < ApplicationController
   before_filter :check_load_resource, only: :index
 
   def index
-    if ticket_params.present?
-      applied_code = ticket_params[:promo_code][:pcode]
+  @tix = params['ticket']
 
+  if ticket_params.present?
+
+      applied_code = ticket_params[:promo_code][:pcode]
       code = @conference.get_valid_code(applied_code)
       @discount_pct = 0.0
 
