@@ -49,11 +49,6 @@
             = button_tag(type: 'submit', class: 'btn btn-success btn-lg') do
               Continue
               %i.fa.fa-shopping-cart
-            - if current_user.ticket_purchases.by_conference(@conference).any?
-              = link_to 'Back to registration', conference_conference_registration_path(@conference.short_title), class: 'btn btn-default btn-sm'
-            - else
-              = link_to 'Cancel registration', conference_conference_registration_path(@conference.short_title), method: :delete, class: 'btn btn-danger btn-sm',
-                data: { confirm: 'Are you sure you want to unregister?' }
 
   .row
     .col-md-13
@@ -72,7 +67,6 @@
             .modal-dialog
               .modal-content
                 .modal-header
-                  %button.close{ data: { dismiss: 'modal' } }
-                  x
+                  %button.close.fa.fa-times{ data: { dismiss: 'modal' } }
                 .modal-body.text-center
                   You will have the opportunity to assign tickets to group members later in the registration process. The total fees for all registrants in the group will be charged to the first person in the group. If members of the group are paying individually (for example, with different credit cards), you must create separate registrations for each.
