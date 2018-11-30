@@ -17,6 +17,6 @@
       = link_to "View Conference", main_app.conference_path(conference.short_title), :class =>"btn btn-info btn-round"
 
   - if conference.registration_open? && conference.tickets.any?
-    = link_to "Tickets", main_app.conference_tickets_path(conference.short_title), class: "btn btn-success btn-round", disabled: conference.tickets_sold_out?
-    - if conference.tickets_sold_out?
+    = link_to "Tickets", main_app.conference_tickets_path(conference.short_title), class: "btn btn-success btn-round", disabled: conference.registration_limit_exceeded?
+    - if conference.registration_limit_exceeded?
       Sorry, no places left
