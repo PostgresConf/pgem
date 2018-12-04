@@ -1,0 +1,33 @@
+fr:
+  refinery:
+    plugins:
+      team_members:
+        title: Team Members
+    team_members:
+      admin:
+        team_members:
+          actions:
+            create_new: Créer un(e) nouve(au/l/lle) Team Member
+            reorder: Réordonner les Team Members
+            reorder_done: Fin de réordonnancement des Team Members
+          records:
+            title: Team Members
+            sorry_no_results: "Désolé ! Aucun résultat."
+            no_items_yet: 'Il n''y a actuellement aucun(e) Team Member. Cliquer sur "Créer un(e) nouve(au/l/lle) Team Member" pour créer votre premi(er/ère) team member.'
+          team_member:
+            view_live_html: Voir ce(t/tte) team member <br/><em>(Ouvre une nouvelle fenêtre)</em>
+            edit: Modifier ce(t/tte) team member
+            delete: Supprimer définitivement ce(t/tte) team member
+      team_members:
+        show:
+          other: Autres Team Members
+  activerecord:
+    attributes:
+      'refinery/team_members/team_member':
+        firstname: Firstname
+        middlename: Middlename
+        lastname: Lastname
+        photo: Photo
+        description: Description
+        twitter: Twitter
+        linkedin: Linkedin

@@ -1,0 +1,14 @@
+- unless current_user
+  = semantic_fields_for @user do |u|
+    - unless @conference.use_pg_flow
+      = u.input :username, input_html: { required: 'required', autocomplete: 'off' }
+    = u.input :first_name, :required => true, :label => "First Name"
+    = u.input :last_name, :required => true, :label => "Last Name"
+    = u.input :title, :required => true, :label => "Job Title"
+    = u.input :affiliation, :required => true, :hint => "This could be a company, a user group, or organization."
+    = u.input :mobile, :as => :phone, :label => "Phone Number (Optional)"
+    = u.input :email, :as => :email, :required => true
+    = u.input :password, :as => :password, :required => true, input_html: { required: 'required', autocomplete: 'off', id: 'password_inline' }
+    = u.input :password_confirmation, :as => :password, :required => true, :label => "Password Confirmation"
+  = render partial: 'devise/shared/openid'
+  = render partial: 'devise/shared/help'

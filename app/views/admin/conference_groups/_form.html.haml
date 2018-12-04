@@ -1,0 +1,14 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        -if @conference_group.new_record?
+          New
+        Conference Group
+        = @conference_group.name
+.row
+  .col-md-8
+    = semantic_form_for(@conference_group, :url => (@conference_group.new_record? ? admin_conference_groups_path : admin_conference_group_path(@conference_group))) do |f|
+      = f.input :name
+      %p.text-right
+        = f.action :submit, as: :button, button_html: { class: 'btn btn-primary' }

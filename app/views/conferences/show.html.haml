@@ -1,0 +1,143 @@
+= content_for :title do
+  = @conference.title
+= content_for :splash_base do
+  - if @conference.splashpage
+    #banner
+      .container
+        .row
+          .col-md-8.col-md-offset-2#header
+            .row
+              .col-md-4
+                = image_tag(@conference.picture_url, class: 'img-responsive img-center', id: 'splash-logo') if @conference.picture?
+              .col-md-8
+                .row
+                  .col-md-8
+                    %h1
+                      = @conference.title
+                  .col-md-4
+                    - if @conference.registration_open? && @conference.tickets.any?
+                      = link_to "Tickets", conference_buytickets_path(@conference.short_title), class: "btn btn-success btn-lg btn-block btn-cta pull-right", disabled: @conference.tickets_sold_out?
+                      - if @conference.tickets_sold_out?
+                        Sorry, no places left
+                %p.lead
+                  - if @conference.venue
+                    = "#{@conference.venue.city} / #{@conference.venue.country_name}"
+                  - if @conference.start_date && @conference.end_date
+                    %br
+                    = date_string(@conference.start_date, @conference.end_date)
+
+    - unless @conference.description.blank?
+      %section#about
+        .container
+          .row
+            .col-md-8.col-md-offset-2
+              .col-md-2
+                = image_tag('postgresql_logo.png', class: "img-responsive img-rounded", style: "margin-bottom: 10px;")
+              .col-md-8
+                %h4
+                  = markdown(@conference.description)
+    - if @conference.sponsorships.any? and @conference.splashpage.include_sponsors
+      %section#sponsors
+        = render 'sponsors'
+
+    - if @conference.registration_open? and @conference.splashpage.include_registrations
+      %section#registration
+        = render 'registration'
+
+    - if @conference.highlighted_speakers.any?
+      %section#speakers
+        = render 'speakers'
+
+    - if @conference.splashpage.include_program
+      - if @conference.program.events.highlights.any?
+        %section#highlights
+          = render 'hightlights'
+      %section#program
+        = render 'schedule_splashpage'
+
+    - if @conference.program.cfp_open? and @conference.splashpage.include_cfp
+      %section#callforpapers
+        = render 'call_for_paper'
+
+    - if @conference.venue and @conference.splashpage.include_venue
+      %section#venue
+        = render 'venue'
+        - if @conference.activities.any? and @conference.splashpage.include_activities
+          = render 'activity'
+
+    - if @conference.lodgings.any? and @conference.splashpage.include_lodgings
+      %section#lodging
+        = render 'lodging'
+
+    - if @conference.tickets.any? and @conference.splashpage.include_tickets
+      %section#tickets
+        = render 'tickets'
+
+    - if @conference.contact.has_social_media? and @conference.splashpage.include_social_media
+      %section#social-media
+        = render 'social_media'
+
+    = content_for :splash_nav do
+      %li
+        = link_to('About', conference_about_path(@conference.short_title), :class=>"smoothscroll hidden-xs")
+        = link_to('About', conference_about_path(@conference.short_title), :class=>"smoothscroll visible-xs", 'data-target'=>".navbar-collapse", 'data-toggle'=>"collapse")
+
+
+#splash
+  = yield :splash_base
+  // grmbl
+  = render 'footer'
+
+- content_for :script_head do
+  :javascript
+
+    $(window).scroll(function () {
+        handleTopNavAnimation();
+      });
+
+      $(window).load(function () {
+          handleTopNavAnimation();
+      });
+
+    function handleTopNavAnimation() {
+        var top = $(window).scrollTop();
+
+        // skip if user clicked navbar-toggle and the menu is shown
+        if($('.navbar-custom.expanded').length === 0) {
+          if (top > 50) {
+              $('#site-nav').addClass('navbar-solid');
+          }
+          else {
+              $('#site-nav').removeClass('navbar-solid');
+          }
+        }
+    }
+    var triangle_tcs = tinycolor("#ffffff").monochromatic();
+    var triangle_colors = triangle_tcs.map(function(t) { return t.toHexString(); });
+    $(function () {
+      $(document).ready(function() {
+        var triangle_width = document.body.clientWidth;
+        var triangle_height = ($( "#callforpapers" ).height() + 200 );
+        var pattern = Trianglify({ width: triangle_width,
+                                   height: triangle_height,
+                                   cell_size: 100,
+                                   x_colors: triangle_colors
+                                  });
+        $('#callforpapers').css('background-image', 'url("' + pattern.png() + '")');
+        //override background if conference has one
+        if("#{@conference.background_url}" !== '') {
+          $('#banner').css('background-image', 'url(#{@conference.background_url})');
+        }
+
+        #{link_policies(@conference)}
+      });
+
+      $('.navbar-toggle').click(function(){
+        var top = $(window).scrollTop();
+        if(top <= 50) {
+          $('#site-nav').toggleClass('navbar-solid expanded');
+        }
+      });
+
+    });
+

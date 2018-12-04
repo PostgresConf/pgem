@@ -1,0 +1,21 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Code Usage for #{@conference.short_title}".truncate(31,omission:'')) do |sheet|
+  bold_style = wb.styles.add_style(b: true)
+  row = ['Name', 'Uses', 'Type', 'Sponsor']
+  sheet.add_row row, style: bold_style
+
+  @codes.each do |code|
+    if code.sponsor.blank?
+      sponsor = ''
+    else
+      sponsor = code.sponsor.name
+    end
+
+    row = []
+    row << code.name
+    row << TicketPurchase.get_code_usage(@conference, code)
+    row << code.code_type.title
+    row << sponsor
+    sheet.add_row row
+  end
+end

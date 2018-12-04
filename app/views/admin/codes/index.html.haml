@@ -1,0 +1,34 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Promo Codes
+      %p.text-muted
+        Discount and access codes for your tickets
+- if @conference.codes.any?
+  .row
+    .col-md-12
+      %table.table.table-hover#codes
+        %thead
+          %th Name
+          %th Type
+          %th Discount Percentage
+          %th Max Uses
+        %tbody
+          - @conference.codes.each_with_index do |code|
+            %tr
+              %td
+                = code.name
+              %td
+                = code.code_type.title
+              %td
+                = number_to_percentage(code.discount, precision: 0)
+              %td
+                = code.max_uses
+              %td
+                = link_to 'Edit', edit_admin_conference_code_path(@conference.short_title, code),
+                method: :get, class: 'btn btn-primary'
+                = link_to 'Delete', admin_conference_code_path(@conference.short_title, code),
+                method: :delete, class: 'btn btn-danger', data: { confirm: "Do you really want to delete the promo code #{code.name}?" }
+.row
+  .col-md-12
+    = link_to 'New Promo Code', new_admin_conference_code_path(@conference.short_title), class: 'btn btn-success pull-right'

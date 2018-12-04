@@ -1,0 +1,53 @@
+ru:
+  refinery:
+    plugins:
+      sponsorship_levels:
+        title: Sponsorship Levels
+      sponsors:
+        title: Sponsors
+    sponsors:
+      admin:
+        sponsorship_levels:
+          actions:
+            create_new: "Добавить Sponsorship Level"
+            reorder: "Изменить порядок Sponsorship Levels"
+            reorder_done: "Закончить изменять порядок Sponsorship Levels"
+          records:
+            title: Sponsorship Levels
+            sorry_no_results: "Извините, поиск не дал результатов."
+            no_items_yet: Записей "Sponsorship Levels" не найдено. Нажмите "Добавить
+              Sponsorship Level" чтобы создать sponsorship level.
+          sponsorship_level:
+            view_live_html: "Просмотреть sponsorship level вживую <br/><em>(в новом
+              окне)</em>"
+            edit: "Редактировать sponsorship level"
+            delete: "Удалить sponsorship level навсегда"
+        sponsors:
+          actions:
+            create_new: "Добавить Sponsor"
+            reorder: "Изменить порядок Sponsors"
+            reorder_done: "Закончить изменять порядок Sponsors"
+          records:
+            title: Sponsors
+            sorry_no_results: "Извините, поиск не дал результатов."
+            no_items_yet: Записей "Sponsors" не найдено. Нажмите "Добавить Sponsor"
+              чтобы создать sponsor.
+          sponsor:
+            view_live_html: "Просмотреть sponsor вживую <br/><em>(в новом окне)</em>"
+            edit: "Редактировать sponsor"
+            delete: "Удалить sponsor навсегда"
+      sponsorship_levels:
+        show:
+          other: "Другие Sponsorship Levels"
+      sponsors:
+        show:
+          other: "Другие Sponsors"
+  activerecord:
+    attributes:
+      refinery/sponsors/sponsorship_level:
+        name: Name
+      refinery/sponsors/sponsor:
+        name: Name
+        url: Url
+        logo: Logo
+        description: Description

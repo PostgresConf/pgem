@@ -1,0 +1,22 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        - if @ticket.new_record?
+          New
+        = @ticket.title
+        Ticket
+.row
+  .col-md-8
+    = semantic_form_for(@ticket, :url => (@ticket.new_record? ? admin_conference_tickets_path : admin_conference_ticket_path(@conference.short_title, @ticket))) do |f|
+      = f.input :title
+      = f.input :short_title, :input_html => { :maxlength => 18 }
+      = f.input :description, input_html: { rows: 5, data: { provide: "markdown-editable" } }
+      = f.input :price, label: 'Price (' + @conference.default_currency + ')'
+      = f.input :price_currency, as: :hidden, :input_html => { :value => @conference.default_currency }
+      = f.input :early_bird_price, label: 'Early Bird Price (' + @conference.default_currency + ')'
+      = f.input :early_bird_price_currency, as: :hidden, :input_html => { :value => @conference.default_currency }
+      = f.input :hidden
+      = f.input :ticket_group
+      %p.text-right
+        = f.action :submit, as: :button, button_html: { class: 'btn btn-primary' }

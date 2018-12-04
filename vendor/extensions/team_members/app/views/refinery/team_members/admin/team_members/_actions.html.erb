@@ -1,0 +1,20 @@
+<ul>
+  <% if ::Refinery::TeamMembers::Admin::TeamMembersController.searchable? %>
+    <li>
+      <%= render '/refinery/admin/search', :url => refinery.team_members_admin_team_members_path %>
+    </li>
+  <% end %>
+  <li>
+    <%= action_label :add, refinery.new_team_members_admin_team_member_path, t('.create_new') %>
+  </li>
+<% if !searching? && ::Refinery::TeamMembers::Admin::TeamMembersController.sortable? && ::Refinery::TeamMembers::TeamMember.many? %>
+  <li>
+    <%= action_label :reorder,
+                     refinery.team_members_admin_team_members_path,
+                     t('.reorder', what:  "Team Members"), id: 'reorder_action'%>
+    <%= action_label :reorder_done,
+                     refinery.team_members_admin_team_members_path,
+                      t('.reorder_done', what: "Team Members"), id: 'reorder_action_done', class: 'hidden'%>
+  </li>
+<% end %>
+</ul>

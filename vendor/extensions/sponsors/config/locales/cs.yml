@@ -1,0 +1,53 @@
+cs:
+  refinery:
+    plugins:
+      sponsorship_levels:
+        title: Sponsorship Levels
+      sponsors:
+        title: Sponsors
+    sponsors:
+      admin:
+        sponsorship_levels:
+          actions:
+            create_new: Přidat Sponsorship Level
+            reorder: "Řadit Sponsorship Levels"
+            reorder_done: Konec řazení Sponsorship Levels
+          records:
+            title: Sponsorship Levels
+            sorry_no_results: Litujeme, ale nebyly nalezny žádné výsledky.
+            no_items_yet: Zatím nebyly vytvořeny žádné Sponsorship Levels. Zvolte
+              "Přidat Sponsorship Level" pro přidání prvního sponsorship level.
+          sponsorship_level:
+            view_live_html: Zobrazit náhled sponsorship level<br/><em>(otevře se v
+              novém okně)</em>
+            edit: Upravit sponsorship level
+            delete: Smazat sponsorship level
+        sponsors:
+          actions:
+            create_new: Přidat Sponsor
+            reorder: "Řadit Sponsors"
+            reorder_done: Konec řazení Sponsors
+          records:
+            title: Sponsors
+            sorry_no_results: Litujeme, ale nebyly nalezny žádné výsledky.
+            no_items_yet: Zatím nebyly vytvořeny žádné Sponsors. Zvolte "Přidat Sponsor"
+              pro přidání prvního sponsor.
+          sponsor:
+            view_live_html: Zobrazit náhled sponsor<br/><em>(otevře se v novém okně)</em>
+            edit: Upravit sponsor
+            delete: Smazat sponsor
+      sponsorship_levels:
+        show:
+          other: Další Sponsorship Levels
+      sponsors:
+        show:
+          other: Další Sponsors
+  activerecord:
+    attributes:
+      refinery/sponsors/sponsorship_level:
+        name: Name
+      refinery/sponsors/sponsor:
+        name: Name
+        url: Url
+        logo: Logo
+        description: Description

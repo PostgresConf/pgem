@@ -1,0 +1,16 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        - if @ticket_group.new_record?
+          New
+        Ticket Group
+        = @ticket_group.name
+.row
+  .col-md-8
+    = semantic_form_for(@ticket_group, :url => (@ticket_group.new_record? ? admin_conference_ticket_groups_path : admin_conference_ticket_group_path(@conference.short_title, @ticket_group))) do |f|
+      = f.input :name
+      = f.input :description
+      = f.input :additional_details, hint: markdown_hint('This will show at the bottom of the ticket groups page.'), input_html: { rows: 8, data: { provide: 'markdown-editable' } }
+      %p.text-right
+        = f.action :submit, as: :button, button_html: { class: 'btn btn-primary' }

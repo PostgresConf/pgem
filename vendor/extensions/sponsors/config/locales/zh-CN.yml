@@ -1,0 +1,51 @@
+zh-CN:
+  refinery:
+    plugins:
+      sponsorship_levels:
+        title: Sponsorship Levels
+      sponsors:
+        title: Sponsors
+    sponsors:
+      admin:
+        sponsorship_levels:
+          actions:
+            create_new: "建立新的 Sponsorship Level"
+            reorder: "对 Sponsorship Levels 重新排序"
+            reorder_done: "对 Sponsorship Levels 的重新排序结束"
+          records:
+            title: Sponsorship Levels
+            sorry_no_results: "对不起，未找到结果。"
+            no_items_yet: 目前没有 Sponsorship Levels . 点击 "Add New Sponsorship Level"
+              创建一个sponsorship level.
+          sponsorship_level:
+            view_live_html: "查看 sponsorship level 的最新内容.<br/><em>(新窗口中打开)</em>"
+            edit: "编辑 sponsorship level"
+            delete: "永久删除 sponsorship level"
+        sponsors:
+          actions:
+            create_new: "建立新的 Sponsor"
+            reorder: "对 Sponsors 重新排序"
+            reorder_done: "对 Sponsors 的重新排序结束"
+          records:
+            title: Sponsors
+            sorry_no_results: "对不起，未找到结果。"
+            no_items_yet: 目前没有 Sponsors . 点击 "Add New Sponsor" 创建一个sponsor.
+          sponsor:
+            view_live_html: "查看 sponsor 的最新内容.<br/><em>(新窗口中打开)</em>"
+            edit: "编辑 sponsor"
+            delete: "永久删除 sponsor"
+      sponsorship_levels:
+        show:
+          other: "其他 Sponsorship Levels"
+      sponsors:
+        show:
+          other: "其他 Sponsors"
+  activerecord:
+    attributes:
+      refinery/sponsors/sponsorship_level:
+        name: Name
+      refinery/sponsors/sponsor:
+        name: Name
+        url: Url
+        logo: Logo
+        description: Description

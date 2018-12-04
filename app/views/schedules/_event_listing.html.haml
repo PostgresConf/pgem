@@ -1,0 +1,13 @@
+- event_url = url_for(conference_program_proposal_path(@conference.short_title, event.id))
+.panel.panel-default.eventblock{:class => ("past" if (event.end_time.in_time_zone(@conference.timezone) < current_time.in_time_zone(@conference.timezone)))}
+  .panel-body.row
+    .col-md-2
+      %h4
+        = event_schedule.start_time.in_time_zone(@conference.timezone).strftime('%I:%M %p')
+
+    .col-md-10
+      %span.h4
+        = event.title
+        %br
+        %small
+          by #{event.speaker_names}

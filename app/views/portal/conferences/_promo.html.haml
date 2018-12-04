@@ -1,0 +1,31 @@
+.list-group
+  .row
+    .col-md-10
+      %h3
+        Promotional Codes
+
+      - if @promo_codes && !@promo_codes.empty?
+        .list-group
+        - @promo_codes.each do |code|
+          %li.list-group-item
+            .row
+              .col-md-8
+                %h4
+                  = code.name
+                  %div
+                    %small
+                      = code.code_type.title
+                      - if code.code_type.title == 'Discount'
+                        (#{code.discount}%)
+                  %div
+                    %small
+                      Uses:
+                      = TicketPurchase.get_code_usage(@conference, code)
+                      of
+                      - if code.max_uses == 0
+                        Unlimited
+                      - else
+                        = code.max_uses
+              .col-md-2
+                = link_to portal_sponsor_conference_code_path(@sponsor.short_name, @sponsorship.conference.short_title, code.id) do
+                  %i.fa.fa-list.fa-2x

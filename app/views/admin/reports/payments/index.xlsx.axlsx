@@ -1,0 +1,15 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Payments for #{@conference.short_title}".truncate(31,omission:'')) do |sheet|
+  bold_style = wb.styles.add_style(b: true)
+  row = ['Purchase Date', 'Buyer', 'Last 4', 'Amount']
+  sheet.add_row row, style: bold_style
+
+  @payments.each do |payment|
+    row = []
+    row << payment.created_at.strftime("%b %d, %Y")
+    row << payment.user.name
+    row << payment.last4
+    row << humanized_money_with_symbol(payment.amount_as_money)
+    sheet.add_row row
+  end
+end

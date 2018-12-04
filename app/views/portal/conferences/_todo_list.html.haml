@@ -1,0 +1,32 @@
+.list-group
+  %li.list-group-item
+    %h4
+      Benefits Progress
+    .progress
+      .progress-bar{ 'role'=>'progressbar', 'aria-valuenow'=>"#{sponsorship_progress}", 'aria-valuemin'=>'0',
+                    'aria-valuemax'=>'100', 'style'=>"width: #{sponsorship_progress}%;" }
+        = sponsorship_progress + '%'
+
+  - @sponsorship_items.each do |key, value|
+    %li{'class'=>"list-group-item #{class_for_todo(value)}"}
+      %span{'class'=>icon_for_todo(value)}
+      - if key == 'company_name'
+        = link_to key.humanize, edit_portal_sponsor_path(@sponsor.short_name)
+      - else
+        - benefit = Benefit.find_by_parameterize_name(@conference, key)
+        - case benefit.value_type
+        - when "main_url", "main_logo", "main_description"
+          = link_to key.humanize, edit_portal_sponsor_path(@sponsor.short_name)
+        - when "promo_code"
+          = link_to key.humanize, edit_portal_sponsor_path(@sponsor.short_name)
+        - else
+          - if value
+            - benefit_response = BenefitResponse.find_by_benefit(@conference, @sponsorship, benefit)
+            = link_to key.humanize, edit_portal_sponsor_conference_benefit_response_path(@sponsor.short_name, @conference.short_title, :id => benefit_response.id)
+          - else
+            = link_to key.humanize, new_portal_sponsor_conference_benefit_response_path(@sponsor.short_name, @conference.short_title, :bid => benefit.id)
+            %div
+              %small
+                Due:
+                - unless benefit.blank?
+                  = benefit.due_date.strftime("%b %d, %Y")

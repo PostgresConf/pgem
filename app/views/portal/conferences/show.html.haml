@@ -1,0 +1,12 @@
+%h1
+  %span.fa.fa-tachometer
+  Dashboard for #{@conference.title}
+%hr
+.row
+  .col-md-10
+    .row
+      .col-md-5
+        = render partial: 'information'
+      .col-md-5
+        = render partial: 'todo_list', locals: { sponsorship_progress: @sponsorship_progress,
+                                                 conference: @conference }

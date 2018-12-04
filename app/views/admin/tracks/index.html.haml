@@ -1,0 +1,36 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Tracks
+      %p.text-muted
+        Categorize events in your conference
+.row
+  .col-md-12
+    %table.table.table-hover#tracks
+      %thead
+        %th Name
+        %th Description
+        %th Color
+        %th Actions
+      %tbody
+        - @tracks.each do |track|
+          %tr
+            %td
+              = link_to(admin_conference_program_track_path(@conference.short_title, track)) do
+                = track.name
+            %td
+              %p
+                = truncate(track.description)
+            %td
+              %span.label{style: "background-color: #{track.color}; color: #{ contrast_color(track.color) }"}
+                = track.color
+            %td
+              .btn-group{role: "group"}
+                = link_to 'Edit', edit_admin_conference_program_track_path(@conference.short_title, track.id),
+                method: :get, class: 'btn btn-primary'
+                = link_to 'Delete', admin_conference_program_track_path(@conference.short_title, track.id),
+                method: :delete, class: 'btn btn-danger',
+                data: { confirm: "Do you really want to delete #{track.name}? Attention: This track will be removed from all Events that have it set" }
+.row
+  .col-md-12.text-right
+    = link_to 'New Track', new_admin_conference_program_track_path(@conference.short_title), class: 'btn btn-success'

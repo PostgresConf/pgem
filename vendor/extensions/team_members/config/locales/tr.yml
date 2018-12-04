@@ -1,0 +1,33 @@
+tr:
+  refinery:
+    plugins:
+      team_members:
+        title: Team Members
+    team_members:
+      admin:
+        team_members:
+          actions:
+            create_new: Yeni Ekle Team Member
+            reorder: Tekrar sirala Team Members
+            reorder_done: Tekrar siralama tamamlandiTeam Members
+          records:
+            title: Team Members
+            sorry_no_results: Uzgunum! Herhangi bir sonuc bulunamadi.
+            no_items_yet: Herhangi bir Team Members yok henuz.  Tikla "Yeni Ekle Team Member" eklemek senin ilk team member.
+          team_member:
+            view_live_html: Bunu canlu team member goruntule <br/><em>(yeni bir pencerede acar)</em>
+            edit: Bunu Duzenle team member
+            delete: Bunu Sil team member sonsuza dek
+      team_members:
+        show:
+          other: Diger Team Members
+  activerecord:
+    attributes:
+      'refinery/team_members/team_member':
+        firstname: Firstname
+        middlename: Middlename
+        lastname: Lastname
+        photo: Photo
+        description: Description
+        twitter: Twitter
+        linkedin: Linkedin

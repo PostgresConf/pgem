@@ -1,0 +1,5 @@
+= month_calendar(attribute: :start_date, end_attribute: :end_date, events: @events) do |date, events|
+  = content_tag :div, class: "calendar-day", data: {date: date.day} do
+    = date.day
+    - events.each do |event|
+      = event.name

@@ -1,0 +1,8 @@
+- headers = ['Purchase Date',
+             'Buyer',
+             'Last 4',
+             'Amount']
+= CSV.generate_line headers
+- @payments.each do |p|
+  = CSV.generate_line([p.created_at, p.user.name, p.last4,
+  p.amount_as_money]).html_safe

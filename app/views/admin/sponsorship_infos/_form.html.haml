@@ -1,0 +1,19 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Sponsorship Information
+.row
+  .col-md-8
+    = semantic_form_for(@sponsorship_info, url: admin_conference_sponsorship_info_path(@conference.short_title)) do |f|
+      = f.input :description, hint: markdown_hint('A description to be displayed on the of the conference sponsor info page.'), input_html: { rows: 5, data: { provide: 'markdown-editable' } }
+      = f.input :prospectus, label: 'Prospectus', :hint => "Upload the conference prospectus PDF file to be shown on the conference sponsor info page."
+      - if f.object.prospectus?
+        Existing Prospectus:
+        = link_to @sponsorship_info.prospectus.filename, @sponsorship_info.prospectus_url
+      = f.input :liaison_email
+      = f.input :manual, label: 'Sponsor Manual', :hint => "Upload the sponsorship manual PDF file to be shown on the sponsor portal."
+      - if f.object.manual?
+        Existing Sponsor Manual:
+        = link_to @sponsorship_info.manual.filename, @sponsorship_info.manual_url
+      %p.text-right
+        = f.submit 'Save Sponsorship Information', class: 'btn btn-primary'

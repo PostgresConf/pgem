@@ -1,0 +1,118 @@
+.container
+  = render partial: 'schedule_tabs',  locals: { active: 'schedule' }
+
+  #schedule-content
+    %h1.text-center
+      Schedule for
+      = @conference.title
+    .row
+      .col-md-6
+        .dropdown.schedule-dropdown.dates-dropdown
+          %button{ type: "button", class: "btn btn-default dropdown-toggle dates-dropdown-button", 'data-toggle' => "dropdown" }
+            %span.button-label
+              = @day
+            %span.caret
+          %ul.dropdown-menu
+            - @dates.each do |date|
+              %li.li-dropdown-schedule{ class: "#{ 'active' if @day == date }" }
+                = link_to date, "#" + "#{date}", "data-toggle" => "tab", "class" => "date-tab"
+
+      .col-md-6
+        .dropdown.schedule-dropdown.tracks-dropdown
+          %button{ type: "button", class: "btn btn-default dropdown-toggle tracks-dropdown-button", 'data-toggle' => "dropdown" }
+            %span.button-label
+              All Tracks
+            %span.caret
+          %ul.dropdown-menu
+            %li.li-dropdown-schedule-track.active
+              = link_to 'All Tracks', "#", "data-filter" => "", "class" => "track-filter-link"
+            - @tracks.each do |track|
+              %li.li-dropdown-schedule-track
+                = link_to track.name, "#", "data-filter" => "#{track.id}", "class" => "track-filter-link"
+    .tab-content
+      .row.legend
+        - @conference.program.tracks.each do |track|
+          - color = track.try(:color).present? ? track.try(:color) : '#dddddd'
+          %span.track
+            %span.label{ style: "background-color: #{color}"}
+              = track.name
+      - @dates.each do |date|
+        %div{ class: "tab-pane #{ 'active' if @day == date }", id: "#{ date }" }
+          = render partial: 'layout', locals: { date: date, current_time: nil }
+
+:javascript
+  function filter_events(trackid) {
+    if(trackid) {
+      $("td.event").addClass('transparent');
+      var event_selector = "td.event[data-trackid='" + trackid + "']"
+      $(event_selector).removeClass('transparent')
+    } else {
+      $("td.event").removeClass('transparent');
+    }
+  }
+
+  // hide the right and left controls when neccesary after moving the carousel
+  $('.carousel').on('slid.bs.carousel', '',
+  function(){
+    $(this).children('.left.carousel-control').show();
+    $(this).children('.right.carousel-control').show();
+    if($(this).find('.first').hasClass('active')) {
+      $(this).children('.left.carousel-control').hide();
+    }
+    if($(this).find('.last').hasClass('active')) {
+      $(this).children('.right.carousel-control').hide();
+    }
+  });
+
+  $(document).ready(function(){
+    // hide the left control when the page is ready
+    var params = url_to_params(window.location.hash)
+
+    // change of active tab and the button title when a date is clicked
+    $('.date-tab').on('click', function(e) {
+      $('.li-dropdown-schedule').removeClass('active');
+      $('.dates-dropdown').find('.button-label').text($(this).text());
+      params['day'] = $(this).text()
+      window.location.hash = params_to_url(params['day'],params['track'])
+      // do not follow the link url to prevent overwriting of the locaiton hash we've just set
+      e.preventDefault()
+    });
+
+    $('.track-filter-link').on('click', function(e) {
+      $('.li-dropdown-schedule-track').removeClass('active');
+      $('.tracks-dropdown').find('.button-label').text($(this).text());
+      var track_id = $(this).attr('data-filter')
+      filter_events(track_id)
+
+      params['track'] = track_id
+      window.location.hash = params_to_url(params['day'],params['track'])
+      // do not follow the link url to prevent overwriting of the locaiton hash we've just set
+      e.preventDefault()
+    });
+
+    $('.carousel').each(function() {
+      if($(this).find('.first').hasClass('active')) {
+        $(this).children('.left.carousel-control').hide();
+      }
+      if($(this).find('.last').hasClass('active')) {
+        $(this).children('.right.carousel-control').hide();
+      }
+    });
+
+    // carousel swipe
+    $(".carousel-inner").swiperight(function() {
+      $(this).parent().carousel('prev');
+    });
+    $(".carousel-inner").swipeleft(function() {
+      $(this).parent().carousel('next');
+    });
+
+    // filter events if track is in params
+    params['track'] && $("a.track-filter-link[data-filter='" + params['track'] +"']").click()
+    var day = "#{@current_day}";
+    // we only go to the date tag in the url if the conference is not taking place now
+    if(day === "") {
+      // use the date tag in the url to select a tab and the title of the button
+      params['day'] && $('ul a[href="#' + params['day'] + '"]').click()
+    }
+  });

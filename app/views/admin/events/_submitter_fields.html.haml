@@ -1,0 +1,6 @@
+- if @event.new_record?
+  = form.input :submitter_id, as: :select,
+  collection: options_for_select(@users.map {|user| ["#{user.name}", user.id]}, current_user.id),
+  include_blank: true, label: 'Submitter', input_html: { class: 'select-help-toggle' }
+
+

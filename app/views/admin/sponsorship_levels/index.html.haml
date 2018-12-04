@@ -1,0 +1,34 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Sponsorship Levels
+      %p.text-muted
+        Classify your sponsors
+- if @conference.sponsorship_levels.any?
+  .row
+    .col-md-12
+      %table.table.table-hover#sponsorship_levels
+        %thead
+          %th Title
+          %th Position
+          %th Actions
+        %tbody
+          - @conference.sponsorship_levels.each_with_index do |sponsorship_level, index|
+            %tr
+              %td
+                = sponsorship_level.title
+              %td
+                = sponsorship_level.position
+                .btn-group-vertical{role: "group"}
+                  = link_to(up_admin_conference_sponsorship_level_path(@conference.short_title, sponsorship_level.id), method: :patch, class: 'btn btn-default btn-xs') do
+                    %i.fa.fa-chevron-up
+                  = link_to(down_admin_conference_sponsorship_level_path(@conference.short_title, sponsorship_level.id), method: :patch, class: 'btn btn-default btn-xs') do
+                    %i.fa.fa-chevron-down
+              %td
+                = link_to 'Edit', edit_admin_conference_sponsorship_level_path(@conference.short_title, sponsorship_level.id),
+                method: :get, class: 'btn btn-primary'
+                = link_to 'Delete', admin_conference_sponsorship_level_path(@conference.short_title, sponsorship_level.id),
+                method: :delete, class: 'btn btn-danger', data: { confirm: "Do you really want to delete the sponsorship level #{sponsorship_level.title}?" }
+.row
+  .col-md-12
+    = link_to 'New Sponsorship Level', new_admin_conference_sponsorship_level_path(@conference.short_title), class: 'btn btn-success pull-right'

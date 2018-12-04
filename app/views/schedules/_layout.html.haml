@@ -1,0 +1,25 @@
+- ds = DaySchedule.new(@conference.id, date, EventType::LENGTH_STEP, current_time)
+- entries = ds.fetch
+- day_room_ids = Room.day_rooms(@conference.id, date)
+
+- intervals = @conf_period * 60 / EventType::LENGTH_STEP + 1
+- height = 85 / intervals
+
+- start_time = "#{date} #{@conf_start}".in_time_zone(@conference.timezone)
+
+.table-responsive
+  %table.table.table-bordered.schedule-table-layout#schedule
+    %tr
+      %th
+      - td_start_time = start_time
+      - day_room_ids.each do |record|
+        - room = Room.find(record.room_id)
+        %th.room{ style: "width: #{ td_width(@rooms) }px;" }
+          %span
+            .room.elipsis.break-words{ style: "-webkit-line-clamp: #{ room_lines(@rooms, false) }; width: #{ room_size(@rooms, false) }px;" }
+              = room.name
+
+    - if day_room_ids.length > 0
+      - entries.values.in_groups_of(day_room_ids.length) do |row|
+        %tr.schedule-layout
+          = render partial: 'schedule_row', locals: {row: row, height: height}

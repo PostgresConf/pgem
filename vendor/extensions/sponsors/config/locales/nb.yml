@@ -1,0 +1,54 @@
+nb:
+  refinery:
+    plugins:
+      sponsorship_levels:
+        title: Sponsorship Levels
+      sponsors:
+        title: Sponsors
+    sponsors:
+      admin:
+        sponsorship_levels:
+          actions:
+            create_new: Lag en ny Sponsorship Level
+            reorder: Endre rekkefølgen på Sponsorship Levels
+            reorder_done: Ferdig å endre rekkefølgen Sponsorship Levels
+          records:
+            title: Sponsorship Levels
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Sponsorship Levels enda. Klikk på "Lag en ny
+              Sponsorship Level" for å legge til din første sponsorship level.
+          sponsorship_level:
+            view_live_html: Vis hvordan denne sponsorship level ser ut offentlig <br/><em>(åpner
+              i et nytt vindu)</em>
+            edit: Rediger denne sponsorship level
+            delete: Fjern denne sponsorship level permanent
+        sponsors:
+          actions:
+            create_new: Lag en ny Sponsor
+            reorder: Endre rekkefølgen på Sponsors
+            reorder_done: Ferdig å endre rekkefølgen Sponsors
+          records:
+            title: Sponsors
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Sponsors enda. Klikk på "Lag en ny Sponsor"
+              for å legge til din første sponsor.
+          sponsor:
+            view_live_html: Vis hvordan denne sponsor ser ut offentlig <br/><em>(åpner
+              i et nytt vindu)</em>
+            edit: Rediger denne sponsor
+            delete: Fjern denne sponsor permanent
+      sponsorship_levels:
+        show:
+          other: Andre Sponsorship Levels
+      sponsors:
+        show:
+          other: Andre Sponsors
+  activerecord:
+    attributes:
+      refinery/sponsors/sponsorship_level:
+        name: Name
+      refinery/sponsors/sponsor:
+        name: Name
+        url: Url
+        logo: Logo
+        description: Description

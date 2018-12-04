@@ -1,0 +1,15 @@
+.field.clearfix
+  %hr
+  %h4
+    Question
+  .row
+    .form-group.col-sm-4
+      = f.label :text, class: 'sr-only'
+      = f.input :text, placeholder: 'question', class: 'form-control'
+
+  .appendable
+    = f.fields_for :options do |builder|
+      = render 'option_fields', :f => builder
+
+  link_to_add_field 'Add option', f, :options
+  = link_to_remove_field 'Remove question', f

@@ -1,0 +1,15 @@
+<%= form_for [refinery, :sponsors_admin, @sponsorship_level] do |f| -%>
+  <%= render '/refinery/admin/error_messages',
+              :object => @sponsorship_level,
+              :include_object_name => true %>
+
+  <div class='field'>
+    <%= f.label :name -%>
+    <%= f.text_field :name, :class => 'larger widest' -%>
+  </div>
+
+  <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :delete_title => t('delete', :scope => 'refinery.sponsorship_levels.admin.sponsorship_levels.sponsorship_level'),
+             :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @sponsorship_level.name) -%>
+<% end -%>

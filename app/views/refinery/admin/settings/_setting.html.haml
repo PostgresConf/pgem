@@ -1,0 +1,12 @@
+- edit_url = refinery.edit_admin_setting_path(setting, dialog: true, width: 725, height: 525)
+- delete_url = refinery.admin_setting_path(setting)
+- delete_options = { class: "cancel confirm-delete", data: { confirm: t('message', scope: 'refinery.admin.delete', title: setting.title)}}
+%li{:class => "clearfix record #{cycle("on", "on-hover")}"}
+  %span.title
+    = t(setting.name, :scope => 'refinery.admin.settings.form.title', :default => setting.title)
+    %span.preview
+      \- #{truncate(setting.value.to_s, :length => 40)}
+  %span.actions
+    = action_icon(:info, '#', t('restricted', scope: 'refinery.admin.settings')) if setting.restricted
+    = action_icon(:edit, edit_url, t('edit', scope: 'refinery.admin.settings'))
+    = action_icon(:delete, delete_url, t('delete', scope: 'refinery.admin.settings'), delete_options) if setting.destroyable

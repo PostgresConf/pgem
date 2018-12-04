@@ -1,0 +1,54 @@
+es:
+  refinery:
+    plugins:
+      sponsorship_levels:
+        title: Sponsorship Levels
+      sponsors:
+        title: Sponsors
+    sponsors:
+      admin:
+        sponsorship_levels:
+          actions:
+            create_new: Crear nuevo sponsorship level
+            reorder: Reordenar sponsorship levels
+            reorder_done: Reordenación de sponsorship levels completada
+          records:
+            title: Sponsorship Levels
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay sponsorship levels todavía. Pulsa en "Crear nuevo
+              Sponsorship Level" para crear tu primer sponsorship level.
+          sponsorship_level:
+            view_live_html: Ver este sponsorship level como abierto al público <br/><em>(abre
+              en ventana nueva)</em>
+            edit: Editar este sponsorship level
+            delete: Borrar este sponsorship level para siempre
+        sponsors:
+          actions:
+            create_new: Crear nuevo sponsor
+            reorder: Reordenar sponsors
+            reorder_done: Reordenación de sponsors completada
+          records:
+            title: Sponsors
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay sponsors todavía. Pulsa en "Crear nuevo Sponsor"
+              para crear tu primer sponsor.
+          sponsor:
+            view_live_html: Ver este sponsor como abierto al público <br/><em>(abre
+              en ventana nueva)</em>
+            edit: Editar este sponsor
+            delete: Borrar este sponsor para siempre
+      sponsorship_levels:
+        show:
+          other: Otros sponsorship levels
+      sponsors:
+        show:
+          other: Otros sponsors
+  activerecord:
+    attributes:
+      refinery/sponsors/sponsorship_level:
+        name: Name
+      refinery/sponsors/sponsor:
+        name: Name
+        url: Url
+        logo: Logo
+        description: Description

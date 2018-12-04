@@ -1,0 +1,26 @@
+- content_for :body do
+  = raw @page.content_for(Refinery::Pages.default_parts.first[:slug].to_sym) unless params[:page]
+  - if @items.any?
+    .row
+      .col-md-9
+        = render partial: '/refinery/news/items/item', collection: @items
+      .col-md-3
+        - @twitter_embed = ::Refinery::Setting.find_or_set(:twitter_embed, false)
+        - if @twitter_embed
+          = @twitter_embed.html_safe
+
+    .row
+      .col-md-12.text-center
+        = will_paginate @items, renderer: BootstrapPagination::Rails
+  - else
+    %p
+      %em= t('.no_items_yet')
+- content_for :body_content_right_prepend do
+  = raw @page.content_for(::Refinery::Pages.default_parts.second[:slug].to_sym)
+- end if ::Refinery::Pages.default_parts.many?
+
+- content_for :javascripts do
+  %script{src: '//platform.twitter.com/widgets.js'}
+
+= render '/refinery/news/shared/body_content_right'
+= render '/refinery/content_page'

@@ -1,0 +1,91 @@
+{
+  "name": "osem",
+  "description": "Open Source Event Manager",
+  "env": {
+    "DEPLOY_TASKS": "db:cleardb_env",
+    "CLOUDINARY_URL": {
+      "description": "Configure your cloudinary.com cloud name and api key/secret",
+      "required": true
+    },
+    "DATABASE_URL": {
+      "description": "Configure your database connection",
+      "required": true
+    },
+    "SECRET_KEY_BASE": {
+      "description": "a key which allows sessions to be verified against a known secure key to prevent tampering",
+      "required": true
+    },
+    "LANG": {
+      "required": false
+    },
+    "OSEM_EMAIL_ADDRESS": {
+      "description": "The address OSEM uses for sending mails",
+      "required": false
+    },
+    "OSEM_HOSTNAME": {
+      "description": "The host this OSEM instance runs on",
+      "required": false
+    },
+    "OSEM_NAME": {
+      "description": "The name of your page",
+      "required": false
+    },
+    "OSEM_SMTP_ADDRESS": {
+      "description": "The smtp server to use",
+      "required": false
+    },
+    "OSEM_SMTP_AUTHENTICATION": {
+      "description": "The auth method for the smtp server",
+      "required": false
+    },
+    "OSEM_SMTP_DOMAIN": {
+      "description": "The HELO domain for the smtp server",
+      "required": false
+    },
+    "OSEM_SMTP_PASSWORD": {
+      "description": "The password for the smtp server",
+      "required": false
+    },
+    "OSEM_SMTP_PORT": {
+      "description": "The port on the smtp server",
+      "required": false
+    },
+    "OSEM_SMTP_USERNAME": {
+      "description": "The user for the smtp server",
+      "required": false
+    },
+    "OSEM_SCHEDULE_CELL_SIZE": {
+      "description": "Schedule timeslot size in minutes",
+      "required": false
+    },
+    "RACK_ENV": {
+      "required": false
+    },
+    "RAILS_ENV": {
+      "required": false
+    }
+  },
+  "scripts": {
+    "postdeploy": "bundle exec rake db:reset data:demo"
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    },
+    "worker": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "cleardb",
+    "sendgrid"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    },
+    {
+      "url": "https://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks"
+    }
+  ]
+}

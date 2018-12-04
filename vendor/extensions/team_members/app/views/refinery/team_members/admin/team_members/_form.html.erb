@@ -1,0 +1,64 @@
+<%= form_for [refinery, :team_members_admin, @team_member] do |f| -%>
+  <%= render '/refinery/admin/error_messages',
+              :object => @team_member,
+              :include_object_name => true %>
+
+  <div class='field'>
+    <%= f.label :firstname -%>
+    <%= f.text_field :firstname, :class => 'larger widest' -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :middlename -%>
+    <%= f.text_field :middlename -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :lastname -%>
+    <%= f.text_field :lastname -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :role -%>
+    <%= f.text_field :role -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :photo -%>
+    <%= render '/refinery/admin/image_picker',
+               :f => f,
+               :field => :photo_id,
+               :image => @team_member.photo,
+               :toggle_image_display => false -%>
+  </div>
+
+  <div class='field'>
+    <%= render '/refinery/admin/wysiwyg',
+                :f => f,
+                :fields => [:description],
+                :object => "team_members/team_member" -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :twitter -%>
+    <%= f.text_field :twitter -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :linkedin -%>
+    <%= f.text_field :linkedin -%>
+  </div>
+
+  <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :delete_title => t('delete', :scope => 'refinery.team_members.admin.team_members.team_member'),
+             :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @team_member.firstname) -%>
+<% end -%>
+
+<% content_for :javascripts do -%>
+  <script>
+    $(document).ready(function(){
+      page_options.init(false, '', '');
+    });
+  </script>
+<% end -%>

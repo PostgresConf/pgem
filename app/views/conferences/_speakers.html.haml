@@ -1,0 +1,30 @@
+.container
+  .row
+    .col-md-12.text-center
+      %h2
+        Some of our speakers
+      %p.lead
+  .row.row-centered
+    %div.slider.speakers
+      - @conference.highlighted_speakers.each do |speaker|
+        .col-md-4.col-sm-4.col-centered.col-top
+          .thumbnail
+            = image_tag speaker.avatar_url(version: 'large'), class: "img-responsive img-rounded"
+            .caption
+              %h4.text-center
+                = speaker.name
+              %b.text-center
+                = speaker.affiliation
+              %br  
+              %i.text-center
+                = speaker.title
+
+:javascript
+  $('.speakers').slick({
+    slidesToShow: 4,
+    slidesToScroll: 2,
+    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    dots: true,
+  });

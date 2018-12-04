@@ -1,0 +1,36 @@
+- content_for :body do
+  - flash.each do |key, value|
+    #flash{:class => "flash flash_#{key}"}
+      = value
+
+  %article
+    .row.blog-banner.hidden
+    .row.blog-head
+      .col-md-12
+        %header.text-center
+          %h1= @post.title
+          %section.details.h4
+            = link_to @post.author.name, refinery.blog_author_feed_url(@post.author) if @post.author.present?
+            &nbsp;&nbsp;
+            = '|'
+            &nbsp;&nbsp;
+            = @post.published_at.strftime("%B %d, %Y")
+  .container
+    = render 'post'
+    = render 'nav' if next_or_previous?(@post)
+
+= render '/refinery/content_page', :remove_automatic_sections => true
+- content_for :stylesheets, stylesheet_link_tag('refinery/blog/frontend')
+- content_for :javascripts do
+  - if Refinery::Blog::Post::ShareThis.enabled?
+    %script{:src => 'http://w.sharethis.com/button/buttons.js'}
+    :javascript
+      stLight.options({publisher:'#{Refinery::Blog.share_this_key}'});
+
+- unless @post.image.blank?
+  - content_for :javascripts do
+    :javascript
+      $(window).load(function () {
+        $('.blog-banner').removeClass('hidden').css('background-image', 'url(#{@post.image.url})');
+      });
+

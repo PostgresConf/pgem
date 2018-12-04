@@ -1,0 +1,20 @@
+<ul>
+  <% if ::Refinery::Sponsors::Admin::SponsorsController.searchable? %>
+    <li>
+      <%= render '/refinery/admin/search', :url => refinery.sponsors_admin_sponsors_path %>
+    </li>
+  <% end %>
+  <li>
+    <%= action_label :add, refinery.new_sponsors_admin_sponsor_path, t('.create_new') %>
+  </li>
+<% if !searching? && ::Refinery::Sponsors::Admin::SponsorsController.sortable? && ::Refinery::Sponsors::Sponsor.many? %>
+  <li>
+    <%= action_label :reorder,
+                     refinery.sponsors_admin_sponsors_path,
+                     t('.reorder', what:  "Sponsors"), id: 'reorder_action'%>
+    <%= action_label :reorder_done,
+                     refinery.sponsors_admin_sponsors_path,
+                      t('.reorder_done', what: "Sponsors"), id: 'reorder_action_done', class: 'hidden'%>
+  </li>
+<% end %>
+</ul>

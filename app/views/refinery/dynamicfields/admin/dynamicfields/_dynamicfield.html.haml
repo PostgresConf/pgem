@@ -1,0 +1,10 @@
+- edit_url = refinery.edit_dynamicfields_admin_dynamicfield_path(dynamicfield)
+- delete_url = refinery.edit_dynamicfields_admin_dynamicfield_path(dynamicfield)
+- delete_options = { class: "cancel confirm-delete", data: { confirm: t('message', scope: 'refinery.admin.delete', title: dynamicfield.title)}}
+
+%li{:class => "clearfix record #{cycle("on", "on-hover")}", :id => "#{dom_id(dynamicfield)}"}
+  %span.title
+    = dynamicfield.model_title
+  %span.actions
+    = action_icon(:edit, edit_url, t('.edit'))
+    = action_icon(:delete, delete_url, t('.delete' ), delete_options )

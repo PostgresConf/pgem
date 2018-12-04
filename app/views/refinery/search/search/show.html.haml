@@ -1,0 +1,26 @@
+- content_for :body_content_title do
+  .container
+    - if params[:query].present?
+      = t('.search_results_for', what: params[:query])
+    - else
+      = t('.no_results')
+- content_for :body do
+  .container
+    - if params[:query].present?
+      - if @results.present?
+        %ul.list-group
+          - @results.each do |result|
+            %li.list-group-item
+              %span.badge.pull-right
+                = result_type result
+              .h4
+                = link_to result.title, result_url(result)
+              = result_mark(result.body).html_safe
+        .row
+          .col-md-12.text-center
+            = will_paginate @results, renderer: BootstrapPagination::Rails
+      - else
+        = t('.no_results')
+    - else
+      = t('.no_results')
+= render "/refinery/content_page"

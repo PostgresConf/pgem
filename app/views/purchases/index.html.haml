@@ -1,0 +1,44 @@
+.container
+  .row
+    .col-md-12.page-header
+      %h2
+        Purchases
+      .text-muted
+        Your payments for the conference
+
+    .col-md-12
+      - if @purchases.present?
+        %table.table.table-bordered.table-striped.table-hover#roles
+          %thead
+            %th Purchase Date
+            %th Amount
+            %th Card Number
+            %th Reference Code
+            %th Actions
+          %tbody
+            - @purchases.each do |payment|
+              %tr
+                %td= payment.created_at.strftime("%b %d, %Y")
+                %td= humanized_money_with_symbol payment.amount_as_money
+                %td= payment.masked_card_no
+                %td
+                  - if payment.authorization_code.present?
+                    = payment.authorization_code
+                  - elsif payment.reference.present?
+                    = payment.reference
+                %td
+                  - if payment.user_id == current_user.id
+                    .btn-group
+                      = link_to 'Show',
+                      conference_purchase_path(@conference.short_title,
+                                                      payment.id),
+                      class: 'btn btn-primary'
+
+                      = link_to 'Receipt',
+                      conference_purchase_path(@conference.short_title,
+                                                      payment.id,
+                                                      format: :pdf),
+                      class: 'button btn btn-default btn-info'
+
+      - else
+        %h5 No Payments found!

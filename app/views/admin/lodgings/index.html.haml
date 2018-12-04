@@ -1,0 +1,35 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Lodgings
+      %p.text-muted
+        Recommended some Hotels, Motels, Hostels or Campsites around your venue
+
+- @conference.lodgings.each_slice(3) do |slice|
+  .row
+    - slice.each do |lodging|
+      .col-md-4
+        .thumbnail
+          - unless lodging.picture?
+            %p.text-center
+              %i.fa.fa-home.fa-5x
+          - else
+            -if lodging.website_link.present?
+              = link_to(lodging.website_link, class: 'thumbnail') do
+                = image_tag lodging.picture.thumb, class: 'img-responsive img-lodging'
+            - else
+              = image_tag lodging.picture.thumb, class: 'img-responsive img-lodging'
+          .caption
+            %h3.text-center
+              = lodging.name
+            -if lodging.description.present?
+              = markdown(lodging.description)
+          .actions.text-right
+            = link_to 'Edit', edit_admin_conference_lodging_path(@conference.short_title, lodging), class: 'btn btn-primary'
+            = link_to 'Delete', admin_conference_lodging_path(@conference.short_title, lodging),
+                method: :delete, class: 'btn btn-danger', data: { confirm: "Do you really want to delete the lodging #{lodging.name}?" }
+
+
+.row
+  .col-md-12.text-right
+    = link_to 'Add Lodging', new_admin_conference_lodging_path(@conference.short_title), class: 'btn btn-primary'

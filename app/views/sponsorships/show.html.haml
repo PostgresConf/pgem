@@ -1,0 +1,100 @@
+= content_for :title do
+  = @conference.title
+  Sponsors
+
+
+= content_for :splash_nav do
+  %li
+    = link_to conference_path(@conference.short_title) do
+      %span.fa.fa-chevron-left
+      Back To Conference
+
+= content_for :sponsors_base do
+  - if @conference.splashpage
+    %section#sponsors-about
+      .container
+        - unless @conference.sponsorship_info.blank?
+          - if @conference.sponsorship_info.description
+            .row.description
+              .col-md-8.col-md-offset-2
+                %h3.text-center
+                  = markdown(@conference.sponsorship_info.description)
+          - if @conference.sponsorship_info.prospectus?
+            .row.prospectus
+              .col-md-12.text-center
+                .h3
+                  Conference Prospectus
+
+              / .col-md-2.col-md-offset-4.form-group
+              /   .btn.btn-info.btn-block.btn-lg{data: { toggle: 'modal', target: '#modal_viewprospectus' }}
+              /     %span.fa.fa-eye{aria: {hidden: true}}
+              /     View
+
+              .col-md-2.col-md-offset-5.form-group
+                = link_to conference_prospectus_path, class: 'btn btn-info btn-block btn-lg' do
+                  %span.fa.fa-download{aria: {hidden: true}}
+                  Download
+
+            .modal.fade{ id: 'modal_viewprospectus' }
+              .modal-dialog.modal-lg
+                .modal-content
+                  .modal-header
+                    %button.close.fa.fa-times{ data: { dismiss: 'modal' } }
+                    .modal-title
+                      Prospectus
+                  .modal-body
+                    // = pdfjs_viewer pdf_url: @conference.sponsorship_info.prospectus_url, style: :full
+        - else
+          .row.text-center
+            .h2
+              Nothing to show
+            .p
+              please setup sponsorship information for this conference
+
+    - if @conference.sponsorships.any? and @conference.splashpage.include_sponsors
+      %section#sponsors
+        .container
+          = render 'conferences/sponsors_listing'
+
+
+
+    - if @conference.contact.has_social_media? and @conference.splashpage.include_social_media
+      %section#social-media
+        = render 'conferences/social_media'
+
+
+
+#splash
+  = yield :sponsors_base
+
+- content_for :script_head do
+  :javascript
+
+    $(window).scroll(function () {
+        handleTopNavAnimation();
+    });
+
+    $(window).load(function () {
+        handleTopNavAnimation();
+    });
+
+    function handleTopNavAnimation() {
+        var top = $(window).scrollTop();
+
+        // skip if user clicked navbar-toggle and the menu is shown
+        if($('.navbar-custom.expanded').length === 0) {
+          if (top > 50) {
+              $('#site-nav').addClass('navbar-solid');
+          }
+          else {
+              $('#site-nav').removeClass('navbar-solid');
+          }
+        }
+    }
+
+    $('.navbar-toggle').click(function(){
+      var top = $(window).scrollTop();
+      if(top <= 50) {
+        $('#site-nav').toggleClass('navbar-solid expanded');
+      }
+    });

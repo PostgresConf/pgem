@@ -1,0 +1,16 @@
+.container
+  .row
+    .col-md-12
+      %h2.text-center
+        Conference Highlights
+      - @conference.program.events.highlights.each_slice(2) do |slice|
+        .row.row-centered
+          - slice.each do |event|
+            .col-md-6.col-centered.col-top.highlights
+              %h4.strong
+                - if event.time
+                  %span.fa.fa-calendar-o
+                  = event.time.to_date.strftime('%b %d')
+                = link_to event.title, conference_program_proposal_path(@conference.short_title, event)
+              %h5
+                = strip_markdown truncate(event.abstract, length: 500, separator: ' ')

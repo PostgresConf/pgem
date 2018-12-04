@@ -1,0 +1,8 @@
+%h2
+  Edit Policy "#{@policy.title}"
+= semantic_form_for(@policy, url: admin_conference_policy_path(@conference.short_title, @policy.id)) do |f|
+
+  = render partial: 'form', locals: {f: f}
+
+  = f.submit 'Save', class: 'btn btn-primary', confirm: 'Are you sure you want to make these changes?'
+

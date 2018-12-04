@@ -1,0 +1,38 @@
+.container
+  .row
+    .col-md-12.text-center
+      %h2
+        Things to do
+        - if @conference.venue
+          around
+          = @conference.venue.city
+      %p.lead
+  .row.row-centered
+    %div.slider.activities
+      - @conference.activities.each do |activity|
+        .col-md-4.col-sm-4.col-centered.col-top
+          .thumbnail
+            - unless activity.picture?
+              %p.text-center
+                %i.fa.fa-map-marker.fa-5x
+            - else
+              -if activity.website_link.present?
+                = link_to(activity.website_link, class: 'thumbnail') do
+                  = image_tag activity.picture.large.url, class: 'img-responsive img-activity'
+              - else
+                = image_tag activity.picture.large.url, class: 'img-responsive img-activity'
+            .caption
+              %h3.text-center
+                = activity.name
+              -if activity.description.present?
+                = markdown(activity.description)
+
+:javascript
+  $('.activities').slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    dots: true,
+  });

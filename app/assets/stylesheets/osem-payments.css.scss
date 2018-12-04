@@ -1,0 +1,42 @@
+.stripe-button-el {
+  float: right;
+}
+
+.styled-select {
+   background: image-url("15xvbd5.png") no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 60px;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; 
+   width: 88px;
+}
+
+.styled-span {
+   height: 29px;
+   overflow: hidden;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; 
+   width: 60px;
+}
+
+.semi-square {
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+
+.green    { background-color: #5cb85c; }
+.green select   { color: #fff; }
+.green select option { color: #000; }
+.green span { 
+   color: #fff; 
+   margin-left: 5px;
+}

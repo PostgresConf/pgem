@@ -1,0 +1,19 @@
+- headers = ['Question',
+             'Answer1',
+             'Answer1 Result',
+             'Answer2',
+             'Answer2 Result',
+             'Answer3',
+             'Answer3 Result',
+             'Answer4',
+             'Answer4 Result',
+             'Answer5',
+             'Answer5 Result']
+= CSV.generate_line headers
+- @poll_results.each do |result|
+  = CSV.generate_line([result.text,
+  PollResult.option_text(result.answer1), PollResult.option_result(result.survey_question_id, result.answer1),
+  PollResult.option_text(result.answer2), PollResult.option_result(result.survey_question_id, result.answer2),
+  PollResult.option_text(result.answer3), PollResult.option_result(result.survey_question_id, result.answer3),
+  PollResult.option_text(result.answer4), PollResult.option_result(result.survey_question_id, result.answer4),
+  PollResult.option_text(result.answer5), PollResult.option_result(result.survey_question_id, result.answer5)]).html_safe

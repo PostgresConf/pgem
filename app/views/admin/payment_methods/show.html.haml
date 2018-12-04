@@ -1,0 +1,19 @@
+.row
+  .col-md-8
+    .page-header
+      %h1 Payment Method
+- unless @payment_method.blank?
+  .row
+    .col-md-8
+      %h3
+        Gateway
+      %p.text-muted
+        = @payment_method.gateway
+.row
+  .col-md-8.text-right
+    - if @payment_method
+      - if can? :update, @payment_method
+        = link_to 'Edit', edit_admin_conference_payment_method_path, class: 'btn btn-primary'
+    - else
+      - if can? :update, @conference
+        = link_to 'Create Payment Method', new_admin_conference_payment_method_path, class: 'btn btn-primary'

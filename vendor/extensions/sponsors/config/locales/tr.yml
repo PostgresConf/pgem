@@ -1,0 +1,54 @@
+tr:
+  refinery:
+    plugins:
+      sponsorship_levels:
+        title: Sponsorship Levels
+      sponsors:
+        title: Sponsors
+    sponsors:
+      admin:
+        sponsorship_levels:
+          actions:
+            create_new: Yeni Ekle Sponsorship Level
+            reorder: Tekrar sirala Sponsorship Levels
+            reorder_done: Tekrar siralama tamamlandiSponsorship Levels
+          records:
+            title: Sponsorship Levels
+            sorry_no_results: Uzgunum! Herhangi bir sonuc bulunamadi.
+            no_items_yet: Herhangi bir Sponsorship Levels yok henuz.  Tikla "Yeni
+              Ekle Sponsorship Level" eklemek senin ilk sponsorship level.
+          sponsorship_level:
+            view_live_html: Bunu canlu sponsorship level goruntule <br/><em>(yeni
+              bir pencerede acar)</em>
+            edit: Bunu Duzenle sponsorship level
+            delete: Bunu Sil sponsorship level sonsuza dek
+        sponsors:
+          actions:
+            create_new: Yeni Ekle Sponsor
+            reorder: Tekrar sirala Sponsors
+            reorder_done: Tekrar siralama tamamlandiSponsors
+          records:
+            title: Sponsors
+            sorry_no_results: Uzgunum! Herhangi bir sonuc bulunamadi.
+            no_items_yet: Herhangi bir Sponsors yok henuz.  Tikla "Yeni Ekle Sponsor"
+              eklemek senin ilk sponsor.
+          sponsor:
+            view_live_html: Bunu canlu sponsor goruntule <br/><em>(yeni bir pencerede
+              acar)</em>
+            edit: Bunu Duzenle sponsor
+            delete: Bunu Sil sponsor sonsuza dek
+      sponsorship_levels:
+        show:
+          other: Diger Sponsorship Levels
+      sponsors:
+        show:
+          other: Diger Sponsors
+  activerecord:
+    attributes:
+      refinery/sponsors/sponsorship_level:
+        name: Name
+      refinery/sponsors/sponsor:
+        name: Name
+        url: Url
+        logo: Logo
+        description: Description

@@ -1,0 +1,54 @@
+fr:
+  refinery:
+    plugins:
+      sponsorship_levels:
+        title: Sponsorship Levels
+      sponsors:
+        title: Sponsors
+    sponsors:
+      admin:
+        sponsorship_levels:
+          actions:
+            create_new: Créer un(e) nouve(au/l/lle) Sponsorship Level
+            reorder: Réordonner les Sponsorship Levels
+            reorder_done: Fin de réordonnancement des Sponsorship Levels
+          records:
+            title: Sponsorship Levels
+            sorry_no_results: Désolé ! Aucun résultat.
+            no_items_yet: Il n'y a actuellement aucun(e) Sponsorship Level. Cliquer
+              sur "Créer un(e) nouve(au/l/lle) Sponsorship Level" pour créer votre
+              premi(er/ère) sponsorship level.
+          sponsorship_level:
+            view_live_html: Voir ce(t/tte) sponsorship level <br/><em>(Ouvre une nouvelle
+              fenêtre)</em>
+            edit: Modifier ce(t/tte) sponsorship level
+            delete: Supprimer définitivement ce(t/tte) sponsorship level
+        sponsors:
+          actions:
+            create_new: Créer un(e) nouve(au/l/lle) Sponsor
+            reorder: Réordonner les Sponsors
+            reorder_done: Fin de réordonnancement des Sponsors
+          records:
+            title: Sponsors
+            sorry_no_results: Désolé ! Aucun résultat.
+            no_items_yet: Il n'y a actuellement aucun(e) Sponsor. Cliquer sur "Créer
+              un(e) nouve(au/l/lle) Sponsor" pour créer votre premi(er/ère) sponsor.
+          sponsor:
+            view_live_html: Voir ce(t/tte) sponsor <br/><em>(Ouvre une nouvelle fenêtre)</em>
+            edit: Modifier ce(t/tte) sponsor
+            delete: Supprimer définitivement ce(t/tte) sponsor
+      sponsorship_levels:
+        show:
+          other: Autres Sponsorship Levels
+      sponsors:
+        show:
+          other: Autres Sponsors
+  activerecord:
+    attributes:
+      refinery/sponsors/sponsorship_level:
+        name: Name
+      refinery/sponsors/sponsor:
+        name: Name
+        url: Url
+        logo: Logo
+        description: Description

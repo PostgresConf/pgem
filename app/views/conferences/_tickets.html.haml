@@ -1,0 +1,5 @@
+= content_for :splash_nav do
+  - if @conference.registration_open? && @conference.tickets.any?
+    %li
+      = link_to('Tickets', conference_buytickets_path(@conference.short_title), :class=>"smoothscroll hidden-xs")
+      = link_to('Tickets', conference_buytickets_path(@conference.short_title), :class=>"smoothscroll visible-xs", 'data-target'=>".navbar-collapse", 'data-toggle'=>"collapse")

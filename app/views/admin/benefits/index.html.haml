@@ -1,0 +1,35 @@
+.row
+  .col-md-8
+    .page-header
+      %h1 Benefits
+      %p.text-muted
+        Benefits for conference sponsorships
+
+.row
+  .col-md-8
+    %table.table.table-hover#benefits
+      %thead
+        %th Name
+        %th Category
+        %th Type
+        %th Due Date
+      %tbody
+        - @conference.benefits.each do |benefit|
+          %tr
+            %td
+              = benefit.name
+            %td
+              = benefit.category
+            %td
+              = benefit.value_type
+            %td
+              = benefit.due_date.strftime("%b %d, %Y")
+            %td
+              .btn-group
+                = link_to 'Edit', edit_admin_conference_benefit_path(@conference.short_title, benefit),
+                method: :get, class: 'btn btn-primary'
+                = link_to 'Delete', admin_conference_benefit_path(@conference.short_title, benefit),
+                method: :delete, class: 'btn btn-danger', data: { confirm: "Do you really want to delete the benefit #{benefit.name}?" }
+.row
+  .col-md-8
+    = link_to 'Add Benefit', new_admin_conference_benefit_path, class: 'btn btn-primary pull-right'

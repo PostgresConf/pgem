@@ -1,0 +1,17 @@
+%h2
+  Latest News
+.row
+  .col-lg-12
+    %ul.media-list
+      - @items.each do |item|
+        %li.media
+          .media-body
+            .h4.media-hading
+              = link_to item.title, refinery.blog_post_path(item)
+              %span.small.text-muted
+                = item.published_at.strftime("%B %d, %Y")
+            .text-muted
+              = truncate(strip_tags(item.body), length: 350)
+      %li.media
+        .media-body.text-center
+          = link_to "More Blog Posts", refinery.blog_root_path

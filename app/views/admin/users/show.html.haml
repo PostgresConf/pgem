@@ -1,0 +1,56 @@
+.row
+  .col-md-12
+    .tabbable
+      %ul.nav.nav-tabs
+        %li{class: "#{'active' unless params[:tab] == 'submissions-content'}"}
+          = link_to 'User Info', '#user-info-content', 'data-toggle'=>'tab'
+        - unless @user.events.blank?
+          %li{class: "#{'active' if params[:tab] == 'submissions-content'}"}
+            = link_to 'Submissions', '#submissions-content', 'data-toggle'=>'tab'
+        %li{class: "#{'active' if params[:tab] == 'event_registrations-content'}"}
+          = link_to 'Event Registrations', '#event_registrations', 'data-toggle'=>'tab'
+      .tab-content
+        #user-info-content.tab-pane{class: "#{'active' unless params[:tab] == 'submissions-content'}"}
+          - if can? :edit, @user
+            .pull-right
+              = link_to 'Edit', edit_admin_user_path(@user), class: 'btn btn-primary'
+          %table.table
+            - @show_attributes.each do |attr|
+              %tr
+                %td.col-md-2
+                  %b
+                    = attr.capitalize.gsub('_', ' ')
+                - if attr == 'roles'
+                  %td
+                    = show_roles(@user.get_roles)
+                - elsif attr == 'biography'
+                  %td
+                    = markdown(@user.biography)
+                - elsif attr == 'email'
+                  %td 
+                    = @user.send(attr)
+                  %tr
+                    %td
+                      %b
+                        Confirmed?
+                    %td
+                      - if can? :toggle_confirmation, @user
+                        = check_box_tag @user.id, @user.id, @user.confirmed?, 
+                          method: :patch, 
+                          url: "/admin/users/#{@user.id}/toggle_confirmation?user[to_confirm]=", 
+                          class: 'switch-checkbox', 
+                          readonly: false,
+                          data: { size: 'small', on_color: 'success', off_color: 'warning', on_text: 'Yes', off_text: 'No' } 
+                      - else
+                        = check_box_tag @user.id, @user.id, @user.confirmed?, 
+                          method: :patch, 
+                          url: "/admin/users/#{@user.id}/toggle_confirmation?user[to_confirm]=", 
+                          class: 'switch-checkbox', 
+                          readonly: true,
+                          data: { size: 'small', on_color: 'success', off_color: 'warning', on_text: 'Yes', off_text: 'No' }
+                - else
+                  %td= @user.send(attr)
+        #submissions-content.tab-pane{class: "#{'active' if params[:tab] == 'submissions-content'}"}
+          = render 'submissions'
+        #event_registrations.tab-pane{class: "#{'active' if params[:tab] == 'event_registrations'}"}
+          = render 'event_registrations'

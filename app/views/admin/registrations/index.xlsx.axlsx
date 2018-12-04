@@ -1,0 +1,34 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: 'registrations') do |sheet|
+  bold_style = wb.styles.add_style(b: true)
+  row = ['Attended', 'Name', 'Nickname', 'Affilιation', 'Email', 'Arrival', 'Departure']
+
+  @conference.questions.each do |question|
+    row << question.title
+  end
+
+  sheet.add_row row, :style => bold_style
+
+  @registrations.each do |registration|
+    row = []
+    row << ( registration.attended ? 'X' : '' )
+    row << registration.first_name
+    row << registration.last_name
+    row << registration.nickname
+    row << registration.affiliation
+    row << registration.title
+    row << registration.email
+    row << registration.mobile
+    row << registration.arrival.to_s
+    row << registration.departure.to_s
+    @conference.questions.each do |question|
+      qa = registration.qanswers.find_by(question: question)
+      answer = ( qa ? qa.answer.title : '' )
+
+      row << answer
+    end
+
+    sheet.add_row row
+  end
+end
+

@@ -1,0 +1,32 @@
+.container
+  .row
+    .col-md-12
+      .page-header
+        %h1 Edit your profile
+  .row
+    .col-md-12
+      = semantic_form_for(@user, url: user_path(@user.id)) do |f|
+        = f.input :first_name, as: :string, :required => true, :label => "First Name"
+        = f.input :last_name, as: :string, :required => true, :label => "Last Name"
+        = f.input :nickname, as: :string, :label => "Twitter Handle"
+        = f.input :mobile, :as => :phone, :label => "Phone Number"
+        = f.input :affiliation, as: :string, :required => true
+        = f.input :title, as: :string, :required => true, :label => "Job Title", hint: 'This could be a company, a user group, or organization.'
+
+        = f.label 'Gravatar'
+        .form-group
+          = image_tag(@user.gravatar_url(size: '48'), title: "Yo #{@user.name}!", :alt => '', :hint => "The color will be used eg for the dashboard.")
+          = link_to 'Change your avatar here', 'https://gravatar.com'
+        = f.input :avatar, label: 'Local Avatar', :hint => "This image will override your Gravatar"
+        - if f.object.avatar?
+          = image_tag f.object.avatar.medium.url
+          = f.input :remove_avatar, as: :boolean, hint: "Tick this if you want to delete your local avatar and use Gravatar instead"
+        = f.input :biography, input_html: { rows: 5, data: { provide: 'markdown-editable' }, 'onkeyup' => "word_count(this, 'biography-count', 150)" },
+          hint: markdown_hint
+        You have used
+        %span#bio_length
+          = @user.biography ? @user.biography.split.length : 0
+        words.  Biographies are limited to 150 words.
+        %br
+        %br
+        = f.action :submit, as: :button, label: 'Update', button_html: {class: 'btn btn-primary'}

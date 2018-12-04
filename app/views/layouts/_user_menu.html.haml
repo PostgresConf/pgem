@@ -1,0 +1,81 @@
+- unless ENV['OSEM_ICHAIN_ENABLED'] == 'true'
+  %li
+    = link_to(main_app.edit_user_registration_path) do
+      %span.fa.fa-wrench
+      Edit Account
+%li
+  = link_to(main_app.edit_user_path(current_user.id)) do
+    %span.fa.fa-user
+    Edit Profile
+- if @conference && PhysicalTicket.user_tickets(@conference, current_user).any?
+  %li
+    = link_to(conference_physical_ticket_index_path(@conference.short_title)) do
+      %span.fa.fa-ticket
+      My Tickets
+
+- if @conference && Payment.purchases(@conference, current_user).any?
+  %li
+    = link_to(conference_purchases_path(@conference.short_title)) do
+      %span.fa.fa-money
+      My Purchases
+
+-if @conference and @conference.program
+  %li
+    = link_to(main_app.conference_program_proposals_path(@conference.short_title)) do
+      %span.fa.fa-comment
+      My Proposals for #{@conference.short_title}
+-else
+  %li
+    = link_to(main_app.my_proposals_path) do
+      %span.fa.fa-comment
+      My Proposals
+
+%li
+  - if ENV['OSEM_ICHAIN_ENABLED'] == 'true'
+    = link_to(main_app.destroy_user_ichain_session_path, :method=>'delete') do
+      %span.fa.fa-minus
+      Sign out
+  - else
+    = link_to(main_app.destroy_user_session_path, :method=>'delete') do
+      %span.fa.fa-minus
+      Sign out
+- if can? :access, Admin
+  %li.divider
+  %li
+    - if Conference.any?
+      = link_to(main_app.admin_conferences_path()) do
+        %span.fa.fa-home
+        Administration
+    - if can? :create, Conference
+      =link_to(main_app.new_admin_conference_path) do
+        %span.fa.fa-plus
+        Create Conference
+  -if @conference and @conference.id and can? :show, @conference
+    %li
+      = link_to(main_app.admin_conference_path(@conference.short_title)) do
+        %span.fa.fa-cog
+        Manage
+        %span.notranslate
+          = @conference.short_title
+  -if Refinery and current_user.is_admin?
+    %li
+      = link_to refinery.admin_root_path do
+        %span.fa.fa-wrench
+        Manage
+        %span.notranslate
+          Website
+- if can? :manage, User.new
+  %li
+    = link_to(main_app.admin_users_path) do
+      %span.fa.fa-user
+      Users
+- if can? :manage, Sponsor.new
+  %li
+    = link_to(main_app.admin_sponsors_path) do
+      %span.fa.fa-users
+      Sponsors
+- if can? :index, PaperTrail::Version.new(item_type: 'User')
+  %li
+    = link_to(main_app.admin_revision_history_path) do
+      %span.fa.fa-history
+      Revision History

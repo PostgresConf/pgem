@@ -1,0 +1,37 @@
+.row
+  .col-md-6
+    .page-header
+      %h1
+        Tickets
+      %p.text-muted
+        Purchased tickets for the conference
+  .col-md-6
+    .btn-group.pull-right.export-buttons
+      = link_to 'Export PDF', admin_conference_reports_tickets_path(@conference.short_title, @event, format: :pdf), class: 'btn btn-success'
+      = link_to 'Export CSV', admin_conference_reports_tickets_path(@conference.short_title, @event, format: :csv), class: 'btn btn-success'
+      = link_to 'Export XLS', admin_conference_reports_tickets_path(@conference.short_title, @event, format: :xlsx), class: 'btn btn-success'
+.row
+  .col-md-12
+    %table.table.table-hover.datatable
+      %thead
+        %th #
+        %th Date
+        %th Ticket
+        %th Buyer
+        %th Attendee
+        %th Purchase Price
+      %tbody
+        - @physical_tickets.each_with_index do |pt, index|
+          %tr
+            %td
+              = index + 1
+            %td
+              = pt.created_at.strftime("%b %d, %Y")
+            %td
+              = pt.ticket.title
+            %td
+              = pt.ticket_purchase.user.name
+            %td
+              = pt.user.name
+            %td
+              = humanized_money_with_symbol pt.ticket_purchase.purchase_price

@@ -1,0 +1,13 @@
+%div{ role: "tabpanel" }
+  / Nav tabs
+  %ul.nav.nav-tabs{ role: "tablist" }
+    %li{ class: "program #{ 'active' if active == 'program' }", role: "presentation" }
+      = link_to('All events', events_conference_schedule_path(@conference.short_title))
+    %li{ class: "schedule #{ 'active' if active == 'schedule' }", role: "presentation" }
+      = link_to('Schedule', conference_schedule_path(@conference.short_title))
+    %li{ class: "mobile_schedule #{ 'active' if active == 'mobile_schedule' }", role: "presentation" }
+      = link_to('Mobile Schedule', mobile_conference_schedule_path(@conference.short_title))
+    %li
+      = link_to('iCal', ical_conference_schedule_path(@conference.short_title))
+
+

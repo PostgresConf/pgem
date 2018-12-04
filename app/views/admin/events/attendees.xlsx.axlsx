@@ -1,0 +1,18 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Attendees for #{@event.friendly_id}".truncate(31,omission:'')) do |sheet|
+  bold_style = wb.styles.add_style(b: true)
+  row = ['User', 'First Name', 'Last Name', 'Email', 'Affiliation', 'Job Title', 'Conference']
+  sheet.add_row row, style: bold_style
+
+  @attendees.each do |attendee|
+    row = []
+    row << attendee.id
+    row << attendee.first_name
+    row << attendee.last_name
+    row << attendee.email
+   	row << (attendee.affiliation.present? ? attendee.affiliation : '')
+    row << (attendee.title.present? ? attendee.title : '')
+    row << @event.program.conference.short_title
+    sheet.add_row row
+  end
+end

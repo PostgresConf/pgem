@@ -1,0 +1,22 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Splashpage
+.row
+  .col-md-8
+    = semantic_form_for(@splashpage, url: admin_conference_splashpage_path(@conference.short_title)) do |f|
+      = f.inputs name: 'Components' do
+        = f.input :include_tracks, label: 'Display tracks on the splashpage?'
+        = f.input :include_program, label: 'Display program on the splashpage?'
+        = f.input :include_cfp, label: 'Display call for papers information on splashpage, while cfp is open?'
+        = f.input :include_venue, label: 'Display venue on the splashpage?'
+        = f.input :include_activities, label: 'Display activities on the splashpage?'
+        = f.input :include_registrations, label: 'Display the registration period on the splashpage?'
+        = f.input :include_tickets, label: 'Display tickets on the splashpage?'
+        = f.input :include_lodgings, label: 'Display the lodgings on the splashpage?'
+        = f.input :include_sponsors, label: 'Display sponsors on the splashpage?'
+        = f.input :include_social_media, label: 'Display social media on the splashpage?'
+      = f.inputs name: 'Access' do
+        = f.input :public, label: 'Make splash page public?'
+      %p.text-right
+        = f.submit 'Save Splashpage', class: 'btn btn-primary'

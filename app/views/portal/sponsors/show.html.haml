@@ -1,0 +1,30 @@
+.row
+  .col-md-4
+    %h1
+      Upcoming Sponsorships
+
+      %table.table.table-striped
+        - @upcoming_sponsorships.each do |sponsorship|
+          %tr
+            %td.col-md-4{style: "padding:20px 8px 20px 8px;"}
+              = link_to sponsorship.conference.title, portal_sponsor_conference_path(@sponsor.short_name, sponsorship.conference.short_title)
+              %br
+              %small.text-muted
+                Sponsorship Level:
+                = sponsorship.title
+
+            %td.col-md-2{style: "padding:20px 8px 20px 8px;"}
+              %small.text-muted
+                Benefits
+
+              - progress_percentage = sponsorship.calculate_progress
+              .progress
+                %div{class: "progress-bar #{event_progress_color(progress_percentage)}", style: "width:#{progress_percentage}%;"}
+                  = sponsorship.progress_status.reject{ |_key, value| value || value.nil? }.length
+                  left
+  .col-md-1
+  .col-md-6
+    %h1
+      Upcoming Events & Tasks
+    .row
+      = render partial: 'events'

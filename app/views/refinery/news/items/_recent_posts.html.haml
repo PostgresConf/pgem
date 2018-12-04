@@ -1,0 +1,14 @@
+%h2
+  Latest News
+.row
+  .col-lg-12
+    %ul.media-list
+      - @items.each do |item|
+        %li.media
+          .media-body
+            .h4.media-hading
+              = link_to item.title, refinery.news_item_path(item)
+              %span.small.text-muted
+                = item.publish_date.strftime("%B %d, %Y")
+            .text-muted
+              = truncate(strip_tags(item.body), length: 300)

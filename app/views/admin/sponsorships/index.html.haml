@@ -1,0 +1,37 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Sponsorships
+      %p.text-muted
+        People supporting your conference
+- if @conference.sponsorships.any?
+  .row
+    .col-md-12
+      %table.table.table-hover#sponsors
+        %thead
+          %th Logo
+          %th Name
+          %th URL
+          %th Level
+          %th Actions
+        %tbody
+          - @conference.sponsorships.each do |sponsor|
+            %tr
+              %td
+                - if sponsor.picture
+                  = image_tag(sponsor.picture.thumb.url, width: '20%')
+              %td
+                = sponsor.name
+              %td
+                = sponsor.website_url
+              %td
+                = sponsor.sponsorship_level.try(:title)
+              %td
+                .btn-group
+                  = link_to 'Edit', edit_admin_conference_sponsorship_path(@conference.short_title, sponsor),
+                  method: :get, class: 'btn btn-primary'
+                  = link_to 'Delete', admin_conference_sponsorship_path(@conference.short_title, sponsor),
+                  method: :delete, class: 'btn btn-danger', data: { confirm: "Do you really want to delete the sponsor #{sponsor.name}?" }
+.row
+  .col-md-12
+    = link_to 'Add Sponsor', new_admin_conference_sponsorship_path(@conference.short_title), class: 'btn btn-primary pull-right'

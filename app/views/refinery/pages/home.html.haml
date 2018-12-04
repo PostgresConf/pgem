@@ -1,0 +1,48 @@
+- @current = Conference.where('end_date >= ?', Date.current).reorder(start_date: :asc)
+%section.home-banner
+  - if @current.any?
+    .container.conferences
+      .row
+        .col-md-6.col-md-offset-3
+          %ul.nav.center-pills.conf-nav.h4
+            - @current.each_with_index do |conference, index|
+              %li{role: "presentation", class: ('active' if index == 0)}
+                %a{href: "##{conference.short_title}", data: {toggle: 'tab'}} #{conference.short_title}
+
+      .row.tab-content
+        - @current.each_with_index do |conference, index|
+          .tab-pane.fade.text-center{id: conference.short_title, class: ('in active' if index == 0)}
+            = render partial: '/refinery/pages/shared/conference_block', locals: { conference: conference }
+      .row
+        %h2.text-center The International Conference for Postgres
+
+  - else
+    .row.conferences
+      .h4.text-center
+        There are no upcoming conferences for the moment
+
+%section.news.container
+  .row
+    .col-md-9
+      - @items = Refinery::Blog::Post.recent(5)
+      = render partial: '/refinery/blog/posts/recent_posts'
+    .col-md-3
+      - @twitter_embed = ::Refinery::Setting.find_or_set(:twitter_embed, false)
+      - if @twitter_embed
+        = @twitter_embed.html_safe
+
+- content_for :javascripts do
+  %script{src: '//platform.twitter.com/widgets.js'}
+
+:javascript
+  $(function () {
+    $(document).ready(function() {
+      //override background if conference has one
+      var banner_bg = "#{::Refinery::Setting.find_or_set(:banner_background, '')}"
+      console.log(banner_bg)
+      if(banner_bg !== '') {
+        $('.home-banner').css('background', banner_bg);
+      }
+    });
+  });
+

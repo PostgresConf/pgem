@@ -1,0 +1,20 @@
+= content_for :happening_now do
+  .container
+
+    %h3.text-center
+      Happening now in
+      = @room.name
+
+    .row
+      - unless @upcoming_event.blank?
+        - if @current_time <= @upcoming_event.end_time
+          .col-md-12
+            = render partial: 'event', locals: { event: @upcoming_event.event, event_schedule: @upcoming_event, current_time: @current_time, signage: true }
+
+= yield :happening_now
+
+- content_for :script_head do
+  :javascript
+    setInterval(function(){
+       Turbolinks.visit(location.toString(),{action: "replace"});
+    }, 30000);

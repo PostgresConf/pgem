@@ -1,0 +1,43 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Venue
+      %p.text-muted
+        The place where your conference takes place
+-if @venue
+  .row
+    .col-md-6
+      - if @conference.venue.location?
+        = render '/conferences/venue_map'
+      -else
+        - if @venue.commercial.nil?
+          .row
+            %img{ "data-src" => "holder.js/500x300?text=No Commercial Set", class: 'img-responsive img-rounded' }
+        - else
+          - if @venue.commercial.persisted?
+            .thumbnail
+              .flexvideo{ id: "resource-content-#{@venue.commercial.id}"}
+                = render partial: 'shared/media_item', locals: { commercial: @venue.commercial }
+
+    .col-md-6
+      %address
+        %strong
+          = @venue.name
+        %br
+        = @venue.street
+        %br
+        = "#{@venue.city}, #{@venue.state} #{@venue.postalcode}"
+        %br
+        = @venue.country_name
+  .row
+    .col-md-12
+      %p.text-right
+        = link_to(edit_admin_conference_venue_path(@conference.short_title), class: 'btn btn-primary', disabled: !(can? :update, @venue) ) do
+          Edit Venue
+        = link_to(admin_conference_venue_path(@conference.short_title), method: 'delete', class: 'btn btn-danger', disabled: !(can? :destroy, @venue)) do
+          Delete Venue
+-else
+  .row
+    .col-md-12.text-right
+      = link_to(new_admin_conference_venue_path(@conference.short_title), class: 'btn btn-primary') do
+        Create Venue

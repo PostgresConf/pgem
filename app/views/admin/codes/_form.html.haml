@@ -1,0 +1,21 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        -if @code.new_record?
+          New
+        Promo Code
+        = @code.name
+.row
+  .col-md-8
+    = semantic_form_for(@code, :url => (@code.new_record? ? admin_conference_codes_path : admin_conference_code_path(@conference.short_title, @code))) do |f|
+      = f.input :name
+      = f.input :code_type
+      = f.input :discount, hint: 'This is this discount percentage'
+      = f.input :max_uses, hint: 'The maximum number of times the code can be used (0 no limit)'
+      = f.input :tickets, :as => :check_boxes, collection: @conference.tickets,  hint: 'The tickets that this promo code applies'
+      = f.input :sponsor, :required => false, :include_blank => true, hint: 'The sponsor if any that this promo code is associated'
+      %p.text-right
+        = f.action :submit, as: :button, button_html: { class: 'btn btn-primary' }
+
+

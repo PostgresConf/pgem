@@ -1,0 +1,13 @@
+- unless omniauth_configured.empty?
+  .row
+    .col-md-4
+      %hr
+    .col-md-4
+      %h4.text-center
+        or sign in using
+    .col-md-4
+      %hr
+  .row
+    .col-md-12
+      #openidlinks
+        = render partial: 'devise/shared/openid_links'

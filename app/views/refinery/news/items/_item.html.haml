@@ -1,0 +1,16 @@
+%article.card
+  .card-block
+    %h2.card-title
+      = link_to item.title, refinery.news_item_path(item)
+
+  .card-block
+    .card-text
+      %p
+        = item.body.html_safe
+  .card-header.text-muted
+    %span.fa.fa-clock-o
+    = l(item.publish_date, :format => :long)
+
+
+
+

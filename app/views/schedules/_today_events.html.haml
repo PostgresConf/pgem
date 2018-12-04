@@ -1,0 +1,9 @@
+.row.text-center.h3
+  What's happening now
+
+- @today_event_schedules.each do |event_schedule|
+  - event_end = event_schedule.end_time.in_time_zone(@conference.timezone)
+  - if @current_time < event_end
+    .col-md-6
+      = render partial: 'event_mini', locals: { event: event_schedule.event, event_schedule: event_schedule, current_time: @current_time }
+

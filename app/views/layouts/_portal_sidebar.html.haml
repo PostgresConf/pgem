@@ -1,0 +1,20 @@
+%ul.nav.nav-stacked.nav-pills.portal-sidebar
+  %li
+    %a
+      = link_to(portal_sponsor_path(@sponsor.short_name)) do
+        %span.fa.fa-cog
+        = @sponsor.name
+    %ul
+      %li
+        = link_to(edit_portal_sponsor_path(@sponsor.short_name)) do
+          General Info
+  %li
+    %a
+      %span.fa.fa-tasks
+      Upcoming Sponsorships
+      - @sponsor.upcoming_sponsorships.each do |sponsorships|
+        %ul
+          %li
+            = link_to(portal_sponsor_conference_path(@sponsor.short_name, sponsorships.conference.short_title)) do
+              = sponsorships.conference.short_title
+

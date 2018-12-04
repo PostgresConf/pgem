@@ -1,0 +1,19 @@
+%table.table.table-hover#policies
+  %th Enabled
+  %th Policy
+  %th Actions
+  - @policies.each do |p|
+    %tr
+      %td
+        = hidden_field_tag "conference[policy_ids][]", nil
+        = check_box_tag "conference[policy_ids][]", p.id,
+                        @conference.policy_ids.include?(p.id), id: dom_id(p)
+      %td
+        = p.title
+
+      %td
+        .btn-group
+          = link_to 'Show', admin_conference_policy_path(@conference.short_title, p), class: 'btn btn-success'
+          = link_to 'Edit', edit_admin_conference_policy_path(@conference.short_title, p),
+                    class: 'btn btn-primary', disabled: !(can? :update, p)
+

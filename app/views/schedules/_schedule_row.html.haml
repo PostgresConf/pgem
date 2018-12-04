@@ -1,0 +1,36 @@
+- i = 0
+- row.each do |entry|
+  -# Print the row header if it is a new row
+  - if i == 0
+    - row_time = DateTime.parse(entry[1]).in_time_zone(@conference.timezone)
+    - current_block = false
+    - unless @current_time.blank?
+      - if @current_time >= row_time and @current_time < (row_time + (EventType::LENGTH_STEP*60))
+        - current_block = true
+    %td.date-layout{class: ('current-block' if current_block == true)}
+      %span
+        = row_time.strftime("%H:")
+      %span
+        = row_time.strftime("%M")
+
+  - i = i + 1
+  - span = entry[4].to_i
+  - room_id = entry[2]
+  - event_id = entry[3]
+  - interval_start = DateTime.parse(entry[1])
+
+  - if event_id.blank?
+    - if span == 0
+      -# There are no entries nor spanned entries for this interval so
+      -# print an empty entry
+      %td.no-padding{ height: "#{ height }%"}
+    - elsif span < 0
+      // This entry has spanned for a higher up interval so do nothing
+  - else
+    - event_schedule = EventSchedule.find_by(schedule_id: @program.selected_schedule_id, event_id: event_id)
+    - if event_schedule && (event_schedule.event.state == 'canceled' || event_schedule.event.state == 'withdrawn') && !event_schedule.intersecting_events.confirmed.empty?
+      - replacement_event = event_schedule.intersecting_events.confirmed.first
+      - event_schedule = (replacement_event.start_time <= interval_start && replacement_event.end_time > interval_start) ? replacement_event : nil
+
+    - if event_schedule
+      = render partial: 'schedule_event', locals: {event: event_schedule.event, event_schedule: event_schedule, span: span, height: height}

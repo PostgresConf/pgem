@@ -1,0 +1,9 @@
+.container-fluid
+  .row
+    .col-md-2
+      = render 'layouts/portal_sidebar'
+    .col-md-10
+      #messages
+        =render 'layouts/messages'
+      #content
+        = yield

@@ -1,0 +1,32 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Sponsorship Information
+- if @sponsorship_info
+  .row
+    .col-md-8
+      %h3
+        Description
+      %p.text-muted
+        The description text will be displayed on the sponsors information page
+        -if @sponsorship_info.description.present?
+          = markdown(@sponsorship_info.description)
+  - if @sponsorship_info.prospectus?
+    .row
+      .col-md-8
+        %h3
+          Conference Prospectus
+        %p.text-muted
+          The prospectus file will be available for view and download on the sponsors information page
+        = link_to @sponsorship_info.prospectus.filename, conference_prospectus_path
+.row
+  .col-md-12.text-right
+    - if @sponsorship_info
+      - if can? :update, @sponsorship_info
+        = link_to 'Edit', edit_admin_conference_sponsorship_info_path, class: 'btn btn-primary'
+      - if can? :destroy, @sponsorship_info
+        = link_to 'Delete', admin_conference_sponsorship_info_path,
+        method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+    - else
+      - if can? :update, @conference
+        = link_to 'Create Sponsorship Information', new_admin_conference_sponsorship_info_path, class: 'btn btn-primary'

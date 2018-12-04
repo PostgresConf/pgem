@@ -1,0 +1,35 @@
+.row
+  .col-md-6
+    .page-header
+      %h1
+        Promo Codes
+      %p.text-muted
+        Promo Code Usage for the conference
+  .col-md-6
+    .btn-group.pull-right.export-buttons
+      = link_to 'Export PDF', admin_conference_reports_codes_path(@conference.short_title, @event, format: :pdf), class: 'btn btn-success'
+      = link_to 'Export CSV', admin_conference_reports_codes_path(@conference.short_title, @event, format: :csv), class: 'btn btn-success'
+      = link_to 'Export XLS', admin_conference_reports_codes_path(@conference.short_title, @event, format: :xlsx), class: 'btn btn-success'
+.row
+  .col-md-12
+    %table.table.table-hover.datatable
+      %thead
+        %th #
+        %th Name
+        %th Uses
+        %th Type
+        %th Sponsor
+      %tbody
+        - @codes.each_with_index do |code, index|
+          %tr
+            %td
+              = index + 1
+            %td
+              = code.name
+            %td
+              = TicketPurchase.get_code_usage(@conference, code)
+            %td
+              = code.code_type.title
+            %td
+              - unless code.sponsor.blank?
+                = code.sponsor.name

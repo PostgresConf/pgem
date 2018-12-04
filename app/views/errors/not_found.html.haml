@@ -1,0 +1,14 @@
+.container-fluid
+  .col-md-11.col-md-offset-1
+    .row
+      .col-md-12
+        %p.huge.secondary
+          404
+        %p.primary.h1 Oops!
+      .col-md-12.primary
+        %h3 The page you are looking for could not be found.
+        %p
+          %a{href: "javascript:history.back()"} Take me back!
+          - unless ENV['OSEM_MAINTAINER_EMAIL_ADDRESS'].blank?
+            \ or 
+            %a{href: "mailto: #{ENV['OSEM_MAINTAINER_EMAIL_ADDRESS']}"} Report a problem

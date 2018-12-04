@@ -1,0 +1,49 @@
+= content_for :splash_nav do
+  %li
+    = link_to conference_path(@conference.short_title) do
+      %span.fa.fa-chevron-left
+      Back To Conference
+
+= content_for :attempt_base do
+  %section#about-about
+    .container
+      .row.description
+        .col-md-8.col-md-offset-2
+          %h4
+            Thank you for taking our poll
+
+
+#splash
+  = yield :attempt_base
+
+- content_for :script_head do
+  :javascript
+
+    $(window).scroll(function () {
+        handleTopNavAnimation();
+    });
+
+    $(window).load(function () {
+        handleTopNavAnimation();
+    });
+
+    function handleTopNavAnimation() {
+        var top = $(window).scrollTop();
+
+        // skip if user clicked navbar-toggle and the menu is shown
+        if($('.navbar-custom.expanded').length === 0) {
+          if (top > 50) {
+              $('#site-nav').addClass('navbar-solid');
+          }
+          else {
+              $('#site-nav').removeClass('navbar-solid');
+          }
+        }
+    }
+
+    $('.navbar-toggle').click(function(){
+      var top = $(window).scrollTop();
+      if(top <= 50) {
+        $('#site-nav').toggleClass('navbar-solid expanded');
+      }
+    });

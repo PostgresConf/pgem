@@ -1,0 +1,22 @@
+%html{:xmlns => "http://www.w3.org/1999/html"}
+  /FIXME: nest this in body, convert partial to a proper bootstrap css
+  = render('/refinery/site_bar', :head => true)
+  %head
+    - unless Rails.application.secrets.google_analytics_id.blank?
+      %script{:async => '', :src => "https://www.googletagmanager.com/gtag/js?id=#{Rails.application.secrets.google_analytics_id}"}
+
+      :javascript
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '#{Rails.application.secrets.google_analytics_id}');
+
+    = render "/refinery/head"
+  %body.site-body
+    = render "/refinery/html_tag"
+    = render "/refinery/header"
+    = yield
+    %footer.navbar-static-bottom.site-footer
+      .container.text-center
+        .col-md-12
+          = render "/refinery/footer"

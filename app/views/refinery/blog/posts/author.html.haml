@@ -1,0 +1,29 @@
+- content_for :side_body do
+  = yield(:side_body_prepend)
+  = yield(:side_body_append)
+
+- content_for :body_content_title do
+  .container
+    = "#{@posts_author.name} Blog Posts"
+    = link_to refinery.blog_author_feed_url(format: :rss) do
+      %span.fa.fa-rss.icon-rss
+    = content_for :meta, auto_discovery_link_tag(:atom, refinery.blog_author_feed_url(format: :rss), :title => "#{@posts_author.name} RSS Feed")
+- content_for :body do
+  .container
+    = raw @page.content_for(Refinery::Pages.default_parts.first[:slug].to_sym) if Refinery::Pages.default_parts.any?
+    - if @posts.any?
+      .row
+        .col-md-12
+          = render :partial => '/refinery/blog/shared/post', collection: @posts
+        / Blog Sidebar Widgets Column
+      .row
+        .col-md-12.text-center
+          = will_paginate @posts, renderer: BootstrapPagination::Rails
+    - else
+      %p= t('.no_blog_articles_yet')
+- content_for :side_body_prepend do
+  = raw @page.content_for(Refinery::Pages.default_parts.second[:slug].to_sym)
+- end if Refinery::Pages.default_parts.many?
+
+= render '/refinery/content_page'
+- content_for :stylesheets, stylesheet_link_tag('refinery/blog/frontend')

@@ -1,0 +1,66 @@
+- content_for :body_content_title do
+  .container
+    Blog
+- content_for :body do
+  .container
+    = raw @page.content_for(Refinery::Pages.default_parts.first[:slug].to_sym) if Refinery::Pages.default_parts.any?
+    - if @posts.any?
+      .row
+        .col-md-8
+          = render :partial => '/refinery/blog/shared/post', collection: @posts
+        / Blog Sidebar Widgets Column
+        .col-md-4
+          / Blog Categories and Tags
+          - if @categories.any? || @tags.any?
+            .card
+              - if @categories.any?
+                .card-block
+                  %h4.card-title Blog Categories
+                  .row
+                    .col-lg-6
+                      - @categories.each do |category|
+                        = link_to refinery.blog_category_path(category) do
+                          = category.title.titleize 
+                          %span.badge
+                            =category.post_count
+                          &nbsp;
+              / Tags
+              - if @tags.any?
+                .card-block
+                  %h4.card-title Tags
+                  %nav#tags
+                    - tag_cloud(@tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class|
+                      = link_to tag.name, refinery.blog_tagged_posts_path(tag.id, tag.name.parameterize), class: 'label label-default'
+
+          / Latest Posts
+          - if @posts.many?
+            .card
+              .card-block
+                %h4.card-title
+                  %span
+                    Latest Posts
+                    = link_to refinery.blog_rss_feed_path do
+                      %span.fa.fa-rss.icon-rss
+                    = content_for :meta, auto_discovery_link_tag(:atom, refinery.blog_rss_feed_url, :title => 'RSS Feed')
+                .row
+                  .col-lg-12
+                    %ul.media-list
+                      - @posts[0..4].each do |blog_post|
+                        %li.media
+                          .media-body
+                            .h4.media-hading
+                              = link_to blog_post.title, refinery.blog_post_path(blog_post)
+                            .text-muted
+                              = truncate(strip_tags(blog_post.body), length: 200)
+          = blog_archive_widget
+      .row
+        .col-md-12.text-center
+          = will_paginate @posts, renderer: BootstrapPagination::Rails
+    - else
+      %p= t('.no_blog_articles_yet')
+- content_for :side_body_prepend do
+  = raw @page.content_for(Refinery::Pages.default_parts.second[:slug].to_sym)
+- end if Refinery::Pages.default_parts.many?
+
+= render '/refinery/content_page'
+- content_for :stylesheets, stylesheet_link_tag('refinery/blog/frontend')

@@ -1,0 +1,30 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Conference Groups
+      %p.text-muted
+        Conferences run in the same geography
+
+.row
+  .col-md-12
+    %table.table.table-hover#conference_groups
+      %thead
+        %th Name
+        %th Conferences
+        %th Actions
+      %tbody
+        - @conference_groups.each do |conference_group|
+          %tr
+            %td
+              = conference_group.name
+            %td
+              = conference_group.conference_count
+            %td
+              .btn-group
+                = link_to 'Edit', edit_admin_conference_group_path(conference_group),
+                method: :get, class: 'btn btn-primary'
+                = link_to 'Delete', admin_conference_group_path(conference_group),
+                method: :delete, class: 'btn btn-danger', data: { confirm: "Do you really want to delete the group #{conference_group.name}?" }
+.row
+  .col-md-12
+    = link_to 'Add Conference Group', new_admin_conference_group_path, class: 'btn btn-primary pull-right'

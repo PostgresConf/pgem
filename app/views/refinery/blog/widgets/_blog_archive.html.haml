@@ -1,0 +1,7 @@
+.card
+  .card-block
+    %h4.card-title= t('archives', :scope => 'refinery.blog.shared')
+    .row
+      .col-lg-6
+        - links.each do |link|
+          %li.list-unstyled= link

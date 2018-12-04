@@ -1,0 +1,37 @@
+.row
+  .col-md-6
+    .page-header
+      %h1
+        Duplicate Tickets
+      %p.text-muted
+        Purchased tickets for the conference that have not been assigned to another person
+  .col-md-6
+    .btn-group.pull-right.export-buttons
+      = link_to 'Export PDF', admin_conference_reports_duplicate_tickets_path(@conference.short_title, @event, format: :pdf), class: 'btn btn-success'
+      = link_to 'Export CSV', admin_conference_reports_duplicate_tickets_path(@conference.short_title, @event, format: :csv), class: 'btn btn-success'
+      = link_to 'Export XLS', admin_conference_reports_duplicate_tickets_path(@conference.short_title, @event, format: :xlsx), class: 'btn btn-success'
+.row
+  .col-md-12
+    %table.table.table-hover.datatable
+      %thead
+        %th #
+        %th Ticket Owner
+        %th Owner Email
+        %th Ticket
+        %th Quantity
+        %th Pending Assignments
+      %tbody
+        - @duplicates.each_with_index do |dup, index|
+          %tr
+            %td
+              = index + 1
+            %td
+              = dup.user.name
+            %td
+              = dup.user.email
+            %td
+              = dup.ticket.title
+            %td
+              = dup.ticket_count
+            %td
+              = dup.pending_assignments

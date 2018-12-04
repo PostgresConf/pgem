@@ -1,0 +1,19 @@
+= content_for :room_schedule do
+  .container
+
+    %h3.text-center{'style'=>"border-bottom: 4px solid #083550"}
+      = @day.strftime('%A, %b %-d')
+
+    .row
+      - @today_event_schedules.each do |event_schedule|
+        - event_end = event_schedule.end_time.in_time_zone(@conference.timezone)
+        .col-md-12
+          = render partial: 'event_listing', locals: { event: event_schedule.event, event_schedule: event_schedule, current_time: @current_time }
+
+= yield :room_schedule
+
+- content_for :script_head do
+  :javascript
+    setInterval(function(){
+       Turbolinks.visit(location.toString(),{action: "replace"});
+    }, 30000);

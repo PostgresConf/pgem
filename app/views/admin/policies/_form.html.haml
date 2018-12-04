@@ -1,0 +1,7 @@
+.row
+  .col-md-12
+    %legend Policy
+    = f.input :title
+    = f.input :global, label: 'Make Global',
+              hint: '(Global policies are available for selection to all conferences)'
+    = f.input :description, input_html: { rows: 5, cols: 20, data: { provide: 'markdown-editable' } }, hint: markdown_hint

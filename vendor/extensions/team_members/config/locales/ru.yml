@@ -1,0 +1,33 @@
+ru:
+  refinery:
+    plugins:
+      team_members:
+        title: Team Members
+    team_members:
+      admin:
+        team_members:
+          actions:
+            create_new: Добавить Team Member
+            reorder: Изменить порядок Team Members
+            reorder_done: Закончить изменять порядок Team Members
+          records:
+            title: Team Members
+            sorry_no_results: "Извините, поиск не дал результатов."
+            no_items_yet: Записей "Team Members" не найдено. Нажмите "Добавить Team Member" чтобы создать team member.
+          team_member:
+            view_live_html: Просмотреть team member вживую <br/><em>(в новом окне)</em>
+            edit: Редактировать team member
+            delete: Удалить team member навсегда
+      team_members:
+        show:
+          other: Другие Team Members
+  activerecord:
+    attributes:
+      'refinery/team_members/team_member':
+        firstname: Firstname
+        middlename: Middlename
+        lastname: Lastname
+        photo: Photo
+        description: Description
+        twitter: Twitter
+        linkedin: Linkedin

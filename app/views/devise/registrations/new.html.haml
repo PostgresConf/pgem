@@ -1,0 +1,22 @@
+.container
+  .row
+    .col-md-6.col-md-offset-3
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title
+            Sign Up
+        .panel-body
+          = semantic_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+            = f.input :first_name, :required => true, :label => "First Name"
+            = f.input :last_name, :required => true, :label => "Last Name"
+            = f.input :affiliation, :required => true, :hint => "This could be a company, a user group, or organization."
+            = f.input :title, :required => true, :label => "Job Title"
+            = f.input :mobile, :as => :phone, :label => "Phone Number (Optional)"
+            = f.input :email, :as => :email, :required => true
+            = f.input :password, :as => :password, :required => true, input_html: { required: 'required', autocomplete: 'off', id: 'password_inline' }
+            = f.input :password_confirmation, :as => :password, :required => true, :label => "Password Confirmation"
+            %p.text-right
+              = f.action :submit, as: :button, label: 'Sign Up', button_html: { class: 'btn btn-success' }
+
+          = render partial: 'devise/shared/openid'
+          = render partial: 'devise/shared/help'

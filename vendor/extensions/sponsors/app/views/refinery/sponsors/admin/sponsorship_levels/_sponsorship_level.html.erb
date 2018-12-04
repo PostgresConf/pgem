@@ -1,0 +1,15 @@
+<li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(sponsorship_level) -%>">
+  <span class='title'>
+    <%= sponsorship_level.name %>
+  </span>
+
+  <span class='preview'></span>
+
+  <span class='actions'>
+    
+    <%= action_icon(:edit,    refinery.edit_sponsors_admin_sponsorship_level_path(sponsorship_level), t('.edit') ) %>
+    <%= action_icon(:delete,  refinery.sponsors_admin_sponsorship_level_path(sponsorship_level), t('.delete'),
+      { class: "cancel confirm-delete",
+        data: {confirm: t('message',  scope: 'refinery.admin.delete', title: sponsorship_level.name)}}  ) %>
+  </span>
+</li>

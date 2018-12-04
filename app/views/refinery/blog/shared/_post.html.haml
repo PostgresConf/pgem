@@ -1,0 +1,39 @@
+- if post.live?
+  %article.card
+    -unless post.image.blank?
+      %img.img-responsive.card-img-top{alt: post.image.alt, src: post.image.url}
+
+    .card-block
+      %h2.card-title
+        = link_to post.title, refinery.blog_post_path(post)
+    .card-block
+      .card-text
+        - if post.custom_teaser.present?
+          = blog_post_teaser(post)
+          = link_to refinery.blog_post_path(post), class: 'btn btn-primary btn-outline btn-sm' do
+            = t('read_more', scope: 'refinery.blog.shared.posts')
+            %span.fa.fa-chevron-right
+        - else
+          %p
+            = post.body.html_safe
+    .card-header.text-muted
+      %span.fa.fa-user
+      = link_to post.author.name, refinery.blog_author_feed_url(post.author) if post.author.present?
+      &nbsp;&nbsp;&nbsp;
+      %span.fa.fa-clock-o
+      = post.published_at.strftime("%B %d, %Y")
+      - if post.categories.any?
+        &nbsp;&nbsp;&nbsp;
+        %span.fa.fa-folder-open
+        - post.categories.each_with_index do |category, index|
+          = link_to category.title, refinery.blog_category_path(category)
+          &nbsp;
+
+      - if post.tags.any?
+        &nbsp;&nbsp;&nbsp;
+        %span.fa.fa-tags
+        - post.tags.each_with_index do |tag, index|
+          = link_to tag.name, refinery.blog_tagged_posts_path(tag.id, tag.name.parameterize)
+
+
+

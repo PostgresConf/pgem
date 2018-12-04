@@ -1,0 +1,138 @@
+.container
+  .row
+    .col-md-12
+      .page-header
+        %h1
+          Registration for
+          = @conference.title
+        %p.text-muted
+          -if @conference.venue
+            at
+            %strong
+              = "#{@conference.venue.name},"
+            = "#{@conference.venue.street},"
+            = "#{@conference.venue.city} / #{@conference.venue.country_name}."
+          %small
+            = date_string(@conference.start_date, @conference.end_date)
+  - if @conference.require_itinerary
+    .row
+      .col-md-12
+        %h4
+          %span.fa-stack
+            %i.fa.fa-square-o.fa-stack-2x
+            %i.fa.fa-plane.fa-stack-1x
+          Travel Schedule
+        %ul
+          %li
+            - if @registration.arrival.present?
+              arrive at
+              %strong
+                = @registration.arrival.strftime('%A, %B %-d. %Y %H:%M')
+            - else
+              You haven't scheduled your arrival
+          %li
+            - if @registration.departure.present?
+              depart at
+              %strong
+                = @registration.departure.strftime('%A, %B %-d. %Y %H:%M')
+            - else
+              You haven't scheduled your departure
+  - if @conference.questions.any?
+    .row
+      .col-md-12
+        %h4
+          %span.fa-stack
+            %i.fa.fa-square-o.fa-stack-2x
+            %i.fa.fa-info.fa-stack-1x
+          Additional Info
+        %ul
+          - @conference.questions.each do |q|
+            %li
+              %strong
+                = q.title
+              - if @registration.qanswers.any?
+                - @registration.qanswers.where(:question_id => q.id).each do |qa|
+                  = qa.answer.title
+              - else
+                You haven't answered
+  - if @registration.events.any?
+    .row
+      .col-md-12
+        %h4
+          %span.fa-stack
+            %i.fa.fa-square-o.fa-stack-2x
+            %i.fa.fa-check.fa-stack-1x
+          Registered to the following event(s)
+        %ul
+          - @registration.events.each do |event|
+            %li
+              = link_to event.title, conference_program_proposal_path(@conference.short_title, event.id)
+
+  - if @registration.conference.program.events.remaining_for_registration(@registration).any?
+    .row
+      .col-md-12
+        %h4
+          %span.fa-stack
+            %i.fa.fa-square-o.fa-stack-2x
+            %i.fa.fa-question.fa-stack-1x
+          Events that require registration
+        %ul
+          - @registration.conference.program.events.remaining_for_registration(@registration).each do |event|
+            %li
+              = link_to event.title, conference_program_proposal_path(@conference.short_title, event.id)
+              - unless @conference.use_pg_flow
+                = '(' + registered_text(event) + ')'
+
+  .row
+    .col-md-4
+
+      - if @conference.tickets.any?
+        .col-md-12
+          -if @tickets.any?
+            %h4
+              %span.fa-stack
+                %i.fa.fa-square-o.fa-stack-2x
+                %i.fa.fa-ticket.fa-stack-1x
+              Tickets
+          %ul
+            .col-md-12
+              - @ticket_payments.each_pair do |ticket_id, tickets|
+                %li
+                  = @total_quantity[ticket_id]
+                  = tickets.first.title
+                  = word_pluralize(@total_quantity[ticket_id], 'Ticket')
+              %br
+
+    .col-md-4
+      - if @conference.payments.any?
+        .col-md-12
+          -if @payments.any?
+            %h4
+              %span.fa-stack
+                %i.fa.fa-square-o.fa-stack-2x
+                %i.fa.fa-money.fa-stack-1x
+              Payments
+          %ul
+            .col-md-12
+              %br
+                %li
+                  = @payment_quantity
+                  = word_pluralize(@payment_quantity, 'Payment')
+              %br
+
+  .row
+    .col-md-4
+      - if @conference.tickets.any?
+        .col-md-6.text-center
+          - if @tickets.any?
+            = link_to 'Tickets', conference_physical_ticket_index_path, class: "btn btn-default btn-info"
+          - else
+            You do not have a ticket.
+            = link_to 'Purchase tickets', conference_tickets_path(@conference.short_title)
+            %p
+              (Your participation won't be valid without getting a ticket)
+    .col-md-4
+      - if @conference.payments.any?
+        .col-md-6.text-center
+          - if @payments.any?
+            = link_to 'Payments', conference_purchases_path, class: "btn btn-default btn-info"

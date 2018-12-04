@@ -1,0 +1,11 @@
+<% content_for :body do %>
+  <ul id="team_members">
+    <% @team_members.each do |team_member| %>
+      <li>
+        <%= link_to team_member.firstname, refinery.team_members_team_member_path(team_member) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render '/refinery/content_page' %>

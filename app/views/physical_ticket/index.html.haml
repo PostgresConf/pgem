@@ -1,0 +1,73 @@
+.container
+  .row
+    .col-md-12.page-header
+      %h2
+        Tickets
+      .text-muted
+        Your tickets for the conference
+
+    .col-md-12
+      - if @physical_tickets.present?
+        %table.table.table-bordered.table-striped.table-hover#roles
+          %thead
+            %th Purchase Date
+            %th Type
+            %th Event
+            %th Ticket Holder
+            %th Actions
+          %tbody
+            - @physical_tickets.each do |physical_ticket|
+              %tr
+                %td= physical_ticket.created_at.strftime("%b %d, %Y")
+                %td= physical_ticket.ticket.title
+                %td
+                  - if physical_ticket.event.present?
+                    = physical_ticket.event.title
+                %td
+                  - if physical_ticket.pending_assignment.present?
+                    Pending (
+                    = physical_ticket.pending_assignment
+                    )
+                  - else
+                    = physical_ticket.user.name
+                %td
+                  - if physical_ticket.user_id == current_user.id
+                    .btn-group
+                      %a{ href: '#', class: 'btn btn-success', data: { toggle: 'modal', target: "#assign-ticket_#{physical_ticket.token}"} }
+                        Assign Ticket
+
+                      = link_to 'Show',
+                      conference_physical_ticket_path(@conference.short_title,
+                                                      physical_ticket.token),
+                      class: 'btn btn-primary'
+
+                      = link_to 'Download',
+                      conference_physical_ticket_path(@conference.short_title,
+                                                      physical_ticket.token,
+                                                      format: :pdf),
+                      class: 'button btn btn-default btn-info'
+
+              .modal.fade{ id: "assign-ticket_#{physical_ticket.token}", 'role' => 'dialog', 'aria-hidden' => 'true' }
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      %h3
+                        Assign the ticket to a different attendee
+                    .modal-body
+                      = semantic_form_for(physical_ticket, url: conference_physical_ticket_path(@conference.short_title, physical_ticket.token)) do |f|
+                        = render partial: 'assign_ticket', locals: {  f: f, physical_ticket: physical_ticket }
+                        %button{class: 'btn btn-primary'}
+                          Assign
+                        .pull-right
+                          %button{class: 'btn btn-danger', 'data-dismiss'=> 'modal', 'aria-hidden'=>'true'}
+                            Cancel
+
+      - else
+        %h5 No Tickets found!
+  .row
+    .col-md-12
+      - if @unpaid_ticket_purchases.any?
+        .h3
+          You have unpaid tickets!
+          %small
+            = link_to "Pay them here", conference_ticket_purchases_path

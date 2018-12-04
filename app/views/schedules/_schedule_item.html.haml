@@ -1,0 +1,22 @@
+- color = event.track.try(:color).present? ? event.track.try(:color) : '#dddddd'
+%td.event{ width: "#{ width * span }%" , |
+           style: "border-style: solid; box-shadow: inset 0px -5px 0px 0px #{color}", 
+           colspan: span, |
+           role: "button", |
+           data: { trackid: event.track.try(:id) } }
+  %a.unstyled-link{href: url_for(conference_program_proposal_path(@conference.short_title, event.id))}
+    %div{ class: "elipsis break-words event-title", |
+          style: "-webkit-line-clamp: #{ event_lines(@rooms) }; height: #{ event_height(@rooms) }px;"} |
+
+      - if event.state == 'canceled' || event.state == 'withdrawn'
+        %span.label.label-danger.schedule-label CANCELED
+      - elsif event.state == 'confirmed' && (!event_schedule.intersecting_events.canceled.empty? || !event_schedule.intersecting_events.withdrawn.empty?)
+        %span.label.label-info.schedule-label REPLACEMENT
+
+      = event.title
+
+    - event.speakers_ordered.each do |speaker|
+      = image_tag speaker.avatar_url(version: 'xsmall'), :class => "img-circle pull-right speaker-pic", |
+                                        :alt => speaker.name, |
+                                        :title => speaker.name, |
+                                        :style => "height: #{ speaker_height(@rooms) }px; width: #{ speaker_width(@rooms) }px;"

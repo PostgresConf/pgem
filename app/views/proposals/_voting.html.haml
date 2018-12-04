@@ -1,0 +1,39 @@
+
+.col-md-1
+  %b Rate this talk
+.col-md-11
+  - if @program.voting_period?
+    - @program.rating.times do |counter|
+      - if @event.voted?(current_user) && @event.user_rating(current_user) == counter+1
+        = link_to "", vote_conference_program_proposal_path(@conference.short_title, @event, :rating => counter+1), :remote => true, :id =>"label#{counter+1}", :class => "myrating", :voted => true
+      - else
+        = link_to "", vote_conference_program_proposal_path(@conference.short_title, @event, :rating => counter+1), :remote => true, :id =>"label#{counter+1}", :class => "myrating"
+    %br
+  - else
+    - @conference.program.rating.times do |counter|
+      - if @event.voted?(current_user) && @event.user_rating(current_user) == counter+1
+        = label_tag "label#{counter+1}", '', class: 'othersrating', voted: true
+        = javascript_tag "$('label[voted=true]').prevAll().andSelf().addClass('bright');"
+      - else
+        = label_tag "label#{counter+1}", '', class: 'othersrating'
+    (#{voting_open_or_close(@program)})
+
+:javascript
+  $(function () {
+    var checkedId = $("a[voted='true']").attr('id');
+    $('a[id=' + checkedId + ']').prevAll().andSelf().addClass('bright');
+  });
+
+  $(".myrating").hover(
+    function() {    // mouseover
+        $(this).prevAll().andSelf().addClass('glow');
+    },
+    function() {  // mouseout
+        $(this).siblings().andSelf().removeClass('glow');
+    }
+  );
+
+  $(".myrating").click(function() {
+    $(this).siblings().removeClass("bright");
+    $(this).prevAll().andSelf().addClass("bright");
+  });

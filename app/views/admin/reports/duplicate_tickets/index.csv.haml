@@ -1,0 +1,9 @@
+- headers = ['Ticket Owner',
+             'Owner Email',
+             'Ticket',
+             'Quantity',
+             'Pending Assignments']
+= CSV.generate_line headers
+- @duplicates.each do |dup|
+  = CSV.generate_line([dup.user.name, dup.user.email, dup.ticket.title,
+    dup.ticket_count, dup.pending_assignments]).html_safe

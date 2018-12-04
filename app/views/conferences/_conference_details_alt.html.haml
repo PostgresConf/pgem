@@ -1,0 +1,48 @@
+%div.col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1.conf-container
+  .panel.panel-default.conference-panel-alt
+    .panel-body
+      .row.equal
+        .col-md-4.leftblock
+          = image_tag(conference.picture_url, class: 'img-responsive center-block logo') if conference.picture?
+
+        .col-md-8.rightblock.grey
+          .row
+            .col-md-9
+              %h1
+                = conference.title
+              %p.lead
+                %span.fa.fa-calendar-o
+                = date_string(conference.start_date, conference.end_date)
+                - if conference.venue
+                  &nbsp;
+                  %span.fa.fa-map-marker
+                  = "#{conference.venue.city}/#{conference.venue.country_name}"
+
+            .col-md-3.register
+              - if conference.registration_open? && conference.tickets.any?
+                = link_to "Tickets", conference_tickets_path(conference.short_title), class: "btn btn-success btn-lg btn-block btn-cta pull-right", disabled: conference.tickets_sold_out?
+                - if conference.tickets_sold_out?
+                  Sorry, no places left
+          .row.description
+            .col-md-12
+              - unless conference.description.blank?
+                = markdown(conference.description)
+          .row.h5
+
+      .row
+        .col-md-4.visible-xs.grey
+          - if conference.splashpage
+            - if conference.splashpage.include_sponsors && !conference.ended?
+              = link_to "Become a sponsor!", conference_sponsorships_path(conference.short_title), class: 'btn btn-warning btn-block btn-outline'
+        .col-md-4.hidden-xs.padded
+          - if conference.splashpage
+            - if conference.splashpage.include_sponsors && !conference.ended?
+              = link_to "Become a sponsor!", conference_sponsorships_path(conference.short_title), class: 'btn btn-warning btn-block btn-outline'
+        .col-md-8.grey.padded
+          .btn-group.pull-right.hidden-xs
+            = render partial: 'conference_button_bar', locals: { conference: conference }
+
+          .btn-group-vertical.visible-xs
+            = render partial: 'conference_button_bar', locals: { conference: conference }
+
+

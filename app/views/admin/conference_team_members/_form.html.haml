@@ -1,0 +1,13 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        - if @team_member.new_record?
+          New
+        Team Member
+.row
+  .col-md-8
+    = semantic_form_for(@team_member, :url => (@team_member.new_record? ? admin_conference_conference_team_members_path : admin_conference_conference_team_member_path(@conference.short_title, @team_member))) do |f|
+      = f.input :refinery_team_member, :as => :select, :collection => Refinery::TeamMembers::TeamMember.pluck(Arel.sql("CONCAT(firstname, ' ', lastname)"), :id)
+      %p.text-right
+        = f.action :submit, as: :button, button_html: { class: 'btn btn-primary' }

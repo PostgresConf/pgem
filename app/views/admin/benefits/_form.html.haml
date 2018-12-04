@@ -1,0 +1,17 @@
+.row
+  .col-md-8
+    .page-header
+      %h1
+        -if @benefit.new_record?
+          New
+        = @benefit.name
+.row
+  .col-md-6
+    = semantic_form_for(@benefit, :url => (@benefit.new_record? ? admin_conference_benefits_path : admin_conference_benefit_path(@conference.short_title, @benefit))) do |f|
+      = f.input :name
+      = f.input :description, input_html: { rows: 5, data: { provide: "markdown-editable" } }
+      = f.input :category, as: :select, collection: Benefit.categories.keys
+      = f.input :value_type, as: :select, collection: Benefit.value_types.keys
+      = f.input :due_date, as: :string, input_html: { id: 'benefit-duedate-datepicker', required: 'required' }
+      %p.text-right
+        = f.action :submit, as: :button, button_html: { class: 'btn btn-primary' }

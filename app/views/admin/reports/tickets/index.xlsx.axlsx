@@ -1,0 +1,16 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Tickets for #{@conference.short_title}".truncate(31,omission:'')) do |sheet|
+  bold_style = wb.styles.add_style(b: true)
+  row = ['Purchase Date', 'Ticket', 'Buyer', 'Attendee', 'Purchase Price']
+  sheet.add_row row, style: bold_style
+
+  @physical_tickets.each do |pt|
+    row = []
+    row << pt.created_at.strftime("%b %d, %Y")
+    row << pt.ticket.title
+    row << pt.ticket_purchase.user.name
+    row << pt.user.name
+    row << humanized_money_with_symbol(pt.ticket_purchase.purchase_price)
+    sheet.add_row row
+  end
+end

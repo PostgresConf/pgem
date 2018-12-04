@@ -1,0 +1,16 @@
+= content_for :today_schedule do
+  .container
+
+    %h3.text-center{'style'=>"border-bottom: 4px solid #083550"}
+      = @day.strftime('%A, %b %-d')
+
+    .row
+      = render partial: 'layout', locals: { date: @day, current_time: @current_time }
+
+= yield :today_schedule
+
+- content_for :script_head do
+  :javascript
+    setInterval(function(){
+       Turbolinks.visit(location.toString(),{action: "replace"});
+    }, 300000);

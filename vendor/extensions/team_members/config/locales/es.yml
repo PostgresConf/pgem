@@ -1,0 +1,34 @@
+es:
+  refinery:
+    plugins:
+      team_members:
+        title: Team Members
+#        article: masculino/femenino
+    team_members:
+      admin:
+        team_members:
+          actions:
+            create_new: Crear nuevo team member
+            reorder: Reordenar team members
+            reorder_done: Reordenación de team members completada
+          records:
+            title: Team Members
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay team members todavía. Pulsa en "Crear nuevo Team Member" para crear tu primer team member.
+          team_member:
+            view_live_html: Ver este team member como abierto al público <br/><em>(abre en ventana nueva)</em>
+            edit: Editar este team member
+            delete: Borrar este team member para siempre
+      team_members:
+        show:
+          other: Otros team members
+  activerecord:
+    attributes:
+      'refinery/team_members/team_member':
+        firstname: Firstname
+        middlename: Middlename
+        lastname: Lastname
+        photo: Photo
+        description: Description
+        twitter: Twitter
+        linkedin: Linkedin

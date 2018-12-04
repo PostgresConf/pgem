@@ -1,0 +1,52 @@
+.container
+  .content_row
+    .col-md-8.col-md-offset-2
+      .page-header
+        %h1
+          Purchase Details for
+          = @payment.id
+
+  .col-md-8.col-md-offset-2
+    %table.table.table-bordered.table-striped.table-hover#roles
+      %thead
+        %tr
+          %th{:colspan => 5}
+            .text-right= @payment.created_at.strftime("%B %d, %Y")
+        %tr
+          %th Description
+          %th Quantity
+          %th Price
+          %th Discount
+          %th Amount
+      %tbody
+        - @lines.each do |line|
+          %tr
+            %td= line.title
+            %td= line.quantity
+            %td= humanized_money_with_symbol line.price
+            %td
+              - if line.code_id.present?
+                = Code.get_discount(line.code_id, line.ticket_id)
+            %td= humanized_money_with_symbol line.total_purchase_price
+        %tr{:border => "1px solid black"}
+          %td{:colspan => 3}
+          %td
+            %b
+              Total
+          %td= humanized_money_with_symbol @payment.amount_as_money
+
+  .content_row
+    .col-md-8.col-md-offset-2
+      .pull-right
+        .btn-group
+          = link_to 'Back',
+          conference_purchases_path(@conference.short_title),
+            class: 'btn btn-primary'
+
+          = link_to 'Receipt',
+          conference_purchase_path(@conference.short_title,
+                                   @payment.id,
+                                   format: :pdf),
+            class: 'button btn btn-default btn-info'
+
+

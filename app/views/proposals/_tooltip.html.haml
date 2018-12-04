@@ -1,0 +1,21 @@
+- progress_status = event.progress_status
+%ul.list-unstyled
+  %li{'class'=>class_for_todo(progress_status['registered'])}
+    %span{'class'=>icon_for_todo(progress_status['registered'])}
+      - if progress_status['registered']
+        = link_to 'Register to the conference', edit_conference_conference_registration_path(event.program.conference.short_title)
+      - else
+        = link_to 'Register to the conference', new_conference_conference_registration_path(event.program.conference.short_title)
+  %li{'class'=>class_for_todo(progress_status['biography'])}
+    %span{'class'=>icon_for_todo(progress_status['biography'])}
+      = link_to 'Fill out your biography', edit_user_path(event.submitter)
+  %li{'class'=>class_for_todo(progress_status['subtitle'])}
+    %span{'class'=>icon_for_todo(progress_status['subtitle'])}
+      = link_to 'Add a subtitle', edit_conference_program_proposal_path(event.program.conference.short_title, event)
+  - unless progress_status['track'].nil?
+    %li{'class'=>class_for_todo(progress_status['track'])}
+      %span{'class'=>icon_for_todo(progress_status['track'])}
+        = link_to 'Add a track', edit_conference_program_proposal_path(event.program.conference.short_title, event)
+  %li{'class'=>class_for_todo(progress_status['difficulty_level'])}
+    %span{'class'=>icon_for_todo(progress_status['difficulty_level'])}
+      = link_to 'Add a difficulty level', edit_conference_program_proposal_path(event.program.conference.short_title, event)

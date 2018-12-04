@@ -1,0 +1,44 @@
+= content_for :splash_nav do
+  %li
+    %a.smoothscroll{ href: '#registration' } Registration
+
+.container
+  .row
+    .col-md-12.text-center
+      - if @conference.registration_limit_exceeded?
+        %p
+          Sorry, the conference registration limit has exceeded
+      - else
+        - if @conference.tickets.empty?
+          %p.lead
+            Going to
+            = @conference.short_title
+            is free of charge.
+          %p
+            We only ask you to register yourself until
+            = @conference.registration_period.end_date.strftime('%A, %B %-d. %Y')
+            so we can plan for the right amount of people.
+            %p.cta-button
+        - else
+          %p
+            %h2 The registration period ends in
+          #wrapper.row
+            #reg-days.col-md-1.col-md-offset-4
+            #reg-hours.col-md-1
+            #reg-minutes.col-md-1
+            #reg-seconds.col-md-1
+
+          %p.cta-button
+            = link_to(new_conference_conference_registration_path(@conference.short_title), class: 'btn btn-lg btn-warning') do
+              Register Now
+
+- content_for :script_head do
+  :javascript
+    $(function () {
+      $('#wrapper').countdown('#{@conference.registration_period.end_date.strftime}', function(event) {
+        $('#reg-days').html(event.strftime('<h1>%D</h1> days'));
+        $('#reg-hours').html(event.strftime('<h1>%H</h1> hours'));
+        $('#reg-minutes').html(event.strftime('<h1>%M</h1> minutes'));
+        $('#reg-seconds').html(event.strftime('<h1>%S</h1> seconds'));
+      });
+    });

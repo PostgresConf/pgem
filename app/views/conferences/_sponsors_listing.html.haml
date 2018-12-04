@@ -1,0 +1,32 @@
+- @conference.sponsorship_levels.each do |sponsorship_level|
+  - if sponsorship_level.sponsorships.any?
+    .row.row-centered
+      -if sponsorship_level.position == 1
+        %h3.text-center
+          %strong #{sponsorship_level.title} Sponsor
+      -else
+        %h4.text-center
+          %strong #{sponsorship_level.title}
+
+      - sponsorship_level.sponsorships.each_slice(3) do |slice|
+        - slice.each do |sponsor|
+          .col-md-4.col-sm-4.col-centered.col-top
+            %a{ href: '#', data: { toggle: 'modal', target: "#modal_#{sponsor.id}" } }
+              = image_tag get_logo(sponsor), class: "img-responsive img-sponsor img-sponsor-#{sponsorship_level.position}"
+
+          .modal.fade{ id: "modal_#{sponsor.id}" }
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{ data: { dismiss: 'modal' } }
+                    x
+                  .modal-title
+                    = sponsor.name
+                .modal-body.text-center
+                  .logo
+                    = link_to sponsor.website_url, target: '_blank' do
+                      = image_tag get_logo(sponsor), class: "img-responsive img-sponsor img-sponsor-#{sponsorship_level.position}"
+                  .description
+                    = sponsor.description
+                .modal-footer
+                  = link_to nil, "#{sponsor.website_url}", target: '_blank'

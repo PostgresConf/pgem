@@ -1,0 +1,150 @@
+.container#program
+  -if @events_schedules.any?
+    = render partial: 'schedule_tabs',  locals: { active: 'program' }
+
+  .row.active-events
+
+  %h1.text-center
+    = @conference.title
+    Program
+
+  .row
+    .col-md-6
+      .dropdown.program-dropdown
+        %button{ type: "button", class: "btn btn-default dropdown-toggle", 'data-toggle' => "dropdown" }
+          %span.button-label
+            Dates
+          %span.caret
+        %ul.dropdown-menu
+          - @dates.each do |date|
+            %li.li-dropdown-program
+              = link_to date, "##{date}", class: "program-selector#{ ' no-events-day' unless @conference.program.any_event_for_this_date?(date) }"
+          - if @unscheduled_events.any?
+            %li.li-dropdown-program
+              = link_to('Unscheduled', "#unscheduled")
+
+    .col-md-6
+      .dropdown.schedule-dropdown.tracks-dropdown
+        %button{ type: "button", class: "btn btn-default dropdown-toggle tracks-dropdown-button", 'data-toggle' => "dropdown" }
+          %span.button-label
+            All Tracks
+          %span.caret
+        %ul.dropdown-menu
+          %li.li-dropdown-schedule-track.active
+            = link_to 'All Tracks', "#", "data-filter" => "", "class" => "track-filter-link"
+          - @tracks.each do |track|
+            %li.li-dropdown-schedule-track
+              = link_to track.name, "#", "data-filter" => "#{track.id}", "class" => "track-filter-link"
+
+  .row
+    / scheduled events
+    - date = nil
+    - time = nil
+    - @events_schedules_groups = @events_schedules.group_by { |el| el.start_time }
+    - @events_schedules_groups.each do |esg|
+      - unless esg.first.strftime('%Y-%m-%d').eql?(date)
+        .col-md-12
+          .date-content
+            %span{ class: 'date-title', id: "#{ esg.first.strftime('%Y-%m-%d') }" }
+              = date = esg.first.strftime('%Y-%m-%d')
+            %a{ title: "Go up", class: "pull-right", href: "#program" }
+              %i{ class: "fa fa-angle-double-up fa-lg", 'aria-hidden' => true }
+      .row.event-group
+        .col-xs-12.col-md-1
+          .start-time
+            = esg.first.in_time_zone(@conference.timezone).strftime('%H:%M')
+        .col-xs-12.col-md-11
+          .row
+            - esg.second.each do |event_schedule|
+              .col-xs-12.col-md-12.event-column{ data: { trackid: event_schedule.event.track.try(:id) } }
+                .new-time-event
+                  = render partial: 'event', locals: { event: event_schedule.event, event_schedule: event_schedule }
+
+
+    / confirmed events that are not scheduled
+    - if @unscheduled_events.any?
+      .col-xs-12.col-md-12
+        .date-content
+          %span.date-title#unscheduled
+            Unscheduled events
+          %a{ title: "Go up", class: "pull-right", href: "#program" }
+            %i{ class: "fa fa-angle-double-up fa-lg", 'aria-hidden' => true }
+      - @unscheduled_events.each do |event|
+        .col-xs-12.col-md-12.event-column
+          .unscheduled-event
+            = render partial: 'event', locals: { event: event, event_schedule: nil }
+
+
+:javascript
+  function filter_events(trackid) {
+    $(".event-column").show();
+    $(".event-group").show();
+
+    if(trackid) {
+      var event_selector = ".event-column:not([data-trackid='" + trackid + "'])"
+      var events = $(event_selector)
+      events.hide()
+
+      var empty_eventgroups = $('.event-group').filter(function(){
+        return $(this).find(".event-column:visible").length == 0;
+      })
+      empty_eventgroups.hide()
+    }
+  }
+
+  function fetch_active() {
+    $.get("#{today_events_conference_schedule_path}",function(data) {
+      $('.active-events').html(data)
+      $('.prettySocial').prettySocial();
+    })
+  }
+  // Go to current date and time
+  $(document).ready(function(){
+    var params = url_to_params(window.location.hash)
+
+    var today = document.getElementById("#{ @tag }");
+
+    if (today) {
+      // today.scrollIntoView()
+      fetch_active()
+      setInterval(fetch_active, 1000 * 60)
+    }
+
+    $("body").on('click', '.eventblock', function(e) {
+      url = this.dataset.link
+      if($(e.target).parents('.sharemenu').length || e.target.classList.contains('share')) {
+        return
+      }
+
+      if(e.ctrlKey)
+        window.open(url,'_blank');
+      else
+        window.location = url;
+    });
+
+    $('.track-filter-link').on('click', function(e) {
+        $('.li-dropdown-schedule-track').removeClass('active');
+        $('.tracks-dropdown').find('.button-label').text($(this).text());
+
+        var track_id = $(this).attr('data-filter')
+        filter_events(track_id)
+        params['day'] && $("a.program-selector[href='#" + params['day'] +"']").click()
+
+        params['track'] = track_id
+        window.location.hash = params_to_url(params['day'],params['track'])
+        // do not follow the link url to prevent overwriting of the locaiton hash we've just set
+        e.preventDefault()
+
+    });
+
+    $('.program-selector').on('click', function(e) {
+      $('.li-dropdown-program').removeClass('active');
+      params['day'] = $(this).text()
+      window.location.hash = params_to_url(params['day'],params['track'])
+      // do not follow the link url to prevent overwriting of the locaiton hash we've just set
+      e.preventDefault()
+    });
+
+    params['track'] && $("a.track-filter-link[data-filter='" + params['track'] +"']").click()
+    params['day'] && $("a.program-selector[href='#" + params['day'] +"']").click()
+  });

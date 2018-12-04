@@ -1,0 +1,8 @@
+.row.blog-body
+  .col-md-12
+    = @post.body.html_safe
+    - if Refinery::Blog::Post::ShareThis.enabled?
+      %span.st_sharethis{:displaytext => 'ShareThis'}
+    = render '/refinery/draft_page_message' unless @post.nil? or @post.live?
+
+

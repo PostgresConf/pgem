@@ -1,0 +1,83 @@
+= content_for :title do
+  = @conference.title
+  Tickets
+
+
+= content_for :splash_nav do
+  %li
+    = link_to conference_path(@conference.short_title) do
+      %span.fa.fa-chevron-left
+      Back To Conference
+
+= content_for :ticket_groups_base do
+  %section
+    .container
+      - if @primary_group.description
+        .row.description
+          .col-md-10.col-md-offset-1
+            %br
+            %h4
+              = @primary_group.description
+            %br
+
+            %section#conference-passes.pass-block
+              - @tickets.each do |ticket|
+                .pass
+                  .pass-type
+                    %h2
+                      = ticket.short_title
+                      %a.package_link{ href: url_for(conference_tickets_path(@conference.short_title)) }
+                        = ticket.current_price.symbol
+                        =  humanized_money ticket.current_price
+                        %span.cta
+                          Register Now
+                    - if @conference.early_bird_open? && ticket.current_price != ticket.price
+                      %p.deadline
+                        Early Price ends
+                        = @conference.registration_period.early_bird_date.strftime('%b %d')
+                  .pass-perks
+                    = ticket.description
+
+            %section
+              = markdown(@primary_group.additional_details)
+
+
+  - if @conference.contact.has_social_media? and @conference.splashpage.include_social_media
+    %section#social-media
+      = render 'conferences/social_media'
+
+
+#splash
+  = yield :ticket_groups_base
+
+- content_for :script_head do
+  :javascript
+
+    $(window).scroll(function () {
+        handleTopNavAnimation();
+    });
+
+    $(window).load(function () {
+        handleTopNavAnimation();
+    });
+
+    function handleTopNavAnimation() {
+        var top = $(window).scrollTop();
+
+        // skip if user clicked navbar-toggle and the menu is shown
+        if($('.navbar-custom.expanded').length === 0) {
+          if (top > 50) {
+              $('#site-nav').addClass('navbar-solid');
+          }
+          else {
+              $('#site-nav').removeClass('navbar-solid');
+          }
+        }
+    }
+
+    $('.navbar-toggle').click(function(){
+      var top = $(window).scrollTop();
+      if(top <= 50) {
+        $('#site-nav').toggleClass('navbar-solid expanded');
+      }
+    });

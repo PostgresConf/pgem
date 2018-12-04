@@ -1,0 +1,59 @@
+= content_for :splash_nav do
+  %li
+    = link_to conference_path(@conference.short_title) do
+      %span.fa.fa-chevron-left
+      Back To Conference
+
+= content_for :poll_base do
+  - if @poll.comment
+    %section#about-about
+      .container
+        .row.row-centered
+          .col-md-8.col-md-offset-2
+            .col-md-4.col-sm-4.col-centered.col-bottom
+              = image_tag('online_survey.png', class: "img-responsive img-rounded", style: "margin-bottom: 10px;")
+            .col-md-8.col-sm-8.col-centered.col-top
+              .description
+                %h4
+                  = markdown(@poll.comment)
+        .row.center
+          .col-md-8.col-md-offset-2
+            .col-md-12
+              = link_to "Take Poll", new_conference_poll_path(@conference.short_title), class: "btn btn-success btn-lg btn-block btn-cta"
+
+
+
+#splash
+  = yield :poll_base
+
+- content_for :script_head do
+  :javascript
+
+    $(window).scroll(function () {
+        handleTopNavAnimation();
+    });
+
+    $(window).load(function () {
+        handleTopNavAnimation();
+    });
+
+    function handleTopNavAnimation() {
+        var top = $(window).scrollTop();
+
+        // skip if user clicked navbar-toggle and the menu is shown
+        if($('.navbar-custom.expanded').length === 0) {
+          if (top > 50) {
+              $('#site-nav').addClass('navbar-solid');
+          }
+          else {
+              $('#site-nav').removeClass('navbar-solid');
+          }
+        }
+    }
+
+    $('.navbar-toggle').click(function(){
+      var top = $(window).scrollTop();
+      if(top <= 50) {
+        $('#site-nav').toggleClass('navbar-solid expanded');
+      }
+    });

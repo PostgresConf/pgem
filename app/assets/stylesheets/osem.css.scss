@@ -1,0 +1,464 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+
+body {
+  /* Margin bottom by 2 times the footer height */
+  // margin-bottom: 36px;
+  font-family: 'Roboto', sans-serif;
+  /* Margin bottom by navbar height */
+  // padding-top: 60px;
+}
+
+#content {
+  padding-bottom: 60px;
+}
+
+#sign {
+  background: image-url("sign-background.jpg") 0 0;
+  background-color: #2c5f7e;
+}
+
+#sign h1 {
+  color: #FFFFFF;
+}
+
+#sign h3 {
+  color: #FFFFFF;
+}
+
+#sign .past {
+  background-color: #194A67;
+  color: #022438;
+}
+
+#footer {
+  bottom: 0;
+  width: 100%;
+  color: grey;
+  .container {
+    padding: 5px;
+  }
+  padding-top: 20px;
+}
+
+#footer .policy {
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 30px;
+  transition: all 0.2s linear 0s;
+}
+
+#footer .policy a.policy {
+    border-bottom: 3px solid transparent;
+    text-shadow: 1px 1px 3px #000;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+// different color for the splashpage footer
+.splash-footer {
+  // position: absolute;
+  background-color: #2F2F2F;
+}
+
+.navbar-static-bottom {
+  background-color: #2F2F2F;
+}
+
+.container {
+  width: 90%;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+.navbar-custom {
+    // background-color: rgba(0,0,0,0.3);
+    border: 0 none;
+    margin: 0;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    transition: all 0.2s linear 0s;
+}
+.navbar-custom .navbar-nav li {
+    margin: 0;
+}
+.navbar-custom .navbar-nav > li > a {
+    border-bottom: 3px solid transparent;
+    text-shadow: 1px 1px 3px #000;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.navbar-custom .navbar-nav > li > a:focus, .navbar-custom .navbar-nav > li > a:hover {
+    outline: 0;
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.7);
+}
+.navbar-custom .navbar-nav > .active > a {
+    border-color: rgb(255, 255, 255);
+}
+
+.nav-tabs {
+  margin-bottom: 15px;
+}
+
+.navbar-brand {
+    color: white;
+    font-size: 30px;
+}
+
+.navbar-brand img {
+   max-height:50px;
+   margin-top: -14px;
+}
+
+.navbar-solid {
+    background-color: #fcfcfc;
+    padding: 0 !important;
+    transition: all 0.2s linear 0s;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.17);
+    -moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.17);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.17);
+}
+
+.navbar-solid a.navbar-brand {
+  color: grey !important;
+}
+
+.navbar-solid .navbar-toggle > span {
+  background-color: grey !important;
+}
+
+.navbar-solid .navbar-nav > li > a {
+    border-bottom: 2px solid transparent;
+    text-shadow: none;
+    color: #333333;
+}
+
+.navbar-solid .navbar-nav > li > a:focus, .navbar-solid .navbar-nav > li > a:hover {
+    background-color: whitesmoke;
+    border-bottom: 2px solid #ccc;
+}
+
+.navbar-solid .navbar-brand img {
+    filter: brightness(33%);
+}
+
+.navbar-solid .dropdown-menu > li > a {
+  color: #333333 !important;
+}
+
+// make the navbar pills width a litter smaller to prevents accidental clicks while filling in some form
+.nav.mySidebar > li > a {
+  width: 85%;
+}
+
+.nav.portal-sidebar {
+  height:100%;
+  background: #336691;
+}
+
+.nav.portal-sidebar > li > a {
+  width: 85%;
+}
+
+.nav.portal-sidebar a {
+  color: fff;
+}
+
+.qr-image{
+  margin-left: 120px;
+}
+
+.img-center {
+  margin: 0 auto;
+}
+
+.userpic {
+  padding-top: 10px !important;
+  padding-bottom: 8px !important;
+  img {
+    border-radius: 50%;
+  }
+}
+
+
+.social-share ul {
+    float: right;
+    list-style: none outside none;
+    margin: 0;
+    min-width: 20px;
+    padding: 0;
+}
+
+.social-share {
+    min-width: 50px;
+}
+
+.social-share li {
+    display: block;
+    font-size: 18px;
+    list-style: none outside none;
+    margin-bottom: 2px;
+    margin-left: 3px;
+    margin-top: 2px;
+}
+
+.social-share > li > a {
+  color: white
+}
+
+/* centered columns styles */
+.row-centered {
+  text-align:center;
+}
+.col-centered {
+  display:inline-block;
+  float:none;
+  /* reset the text-align */
+  // text-align:left;
+  /* inline-block space fix */
+  margin-right:-4px;
+}
+
+.col-top {
+  vertical-align:top;
+}
+
+fieldset {
+  margin: 20px 0 20px 0;
+}
+
+.bootstrap-switch {
+  height: 1.7em
+}
+
+.comment-reply{
+  padding-top: 40px;
+}
+
+p.comment-body {
+  padding-top: 20px;
+}
+
+.well.comment-section {
+  padding-bottom: 40px;
+}
+
+#account-already {
+  font-size: 0.6em;
+}
+
+/* comments views pane: use padding-bottom before next comment box */
+.panel.panel-default .panel-body .notifications {
+  padding-bottom: 20px;
+}
+
+/* comments views pane: use padding-bottom after each comment */
+.panel.panel-default .panel-body .notifications p {
+  padding-bottom: 20px;
+}
+
+.panel.panel-default.policyblock {
+  text-align: left;
+}
+
+#proposal-info div dt, #proposal-info div dd {
+  display: inline-block;
+  text-align: left;
+}
+
+#proposal-info dt, #proposal-info dd {
+  text-align: left;
+}
+
+.changeset{
+  display: none;
+}
+
+#inside_header {
+    margin-top: -20px;
+    padding-top: 20px;
+    border-bottom: 0;
+    background: repeating-linear-gradient(to bottom, #0E3E65, #0E3E65 5px, #1C5380 5px, #1C5380 6px, #0E3E65 6px, #0E3E65 10px );
+}
+
+#inside_header h2, #inside_header h3 {
+  color: #FFFFFF
+}
+
+#inside_nav {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0;
+    border-bottom: 0;
+    background: #336691;
+    transition: all 0.2s linear 0s;
+}
+
+#inside_nav li {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+
+}
+
+#inside_nav li > a {
+  border-bottom: 3px solid transparent;
+  text-shadow: 1px 1px 3px #000;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+}
+
+#inside_nav a:hover {
+    outline: 0;
+    background-color: #1C5380;
+}
+
+#logo_container {
+  background-color: #fff;
+  border-radius: 50%;
+  color: white;
+  display: table;
+  font-size: 1.6em;
+  height: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 150px;
+}
+
+#logo_container img {
+  display: table-cell;
+  vertical-align: middle;
+  max-width: 70%;
+  margin-top: 20px;
+}
+
+.content_row {
+    max-width: 910px;
+    width: 100%;
+    margin: 0px auto;
+    padding: 0 20px;
+}
+
+table.ticket {
+  table-layout: fixed;
+  width: 800px;
+}
+
+tr.ticket {
+  height: 220px;
+}
+
+td.ticket {
+  height: 220px;
+  width: 400px;
+}
+.calendar-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.simple-calendar {
+  .day {
+    background: #527FA4;
+    color: #fff;
+  }
+
+  .wday-0 {}
+  .wday-1 {}
+  .wday-2 {}
+  .wday-3 {}
+  .wday-4 {}
+  .wday-5 {}
+  .wday-6 {}
+
+  .today {
+    background: #346690;
+    color: #fff;
+  }
+  .past {}
+  .future {}
+
+  .start-date {}
+
+  .prev-month {
+    background: #1C5380;
+    color: #fff;
+  }
+
+  .next-month {
+    background: #1C5380;
+    color: #fff;
+  }
+
+  .current-month {}
+
+  .has-events {
+    background: #052D4E;
+  }
+}
+
+.calendar-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.simple-calendar {
+  .day {
+    background: #527FA4;
+    color: #fff;
+  }
+
+  .wday-0 {}
+  .wday-1 {}
+  .wday-2 {}
+  .wday-3 {}
+  .wday-4 {}
+  .wday-5 {}
+  .wday-6 {}
+
+  .today {
+    background: #346690;
+    color: #fff;
+  }
+  .past {}
+  .future {}
+
+  .start-date {}
+
+  .prev-month {
+    background: #1C5380;
+    color: #fff;
+  }
+
+  .next-month {
+    background: #1C5380;
+    color: #fff;
+  }
+
+  .current-month {}
+
+  .has-events {
+    background: #052D4E;
+  }
+}
+
+.export-buttons {
+  margin-bottom: 10px;
+}

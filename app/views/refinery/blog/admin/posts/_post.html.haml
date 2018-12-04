@@ -1,0 +1,26 @@
+- preview_url = refinery.blog_post_path(post)
+- edit_url = refinery.edit_blog_admin_post_path(post)
+- delete_url = refinery.blog_admin_post_path(post)
+- delete_options = { class: "cancel confirm-delete", data: {confirm: t('message',  scope: 'refinery.admin.delete', title: post.title)}}
+
+%li{:class => "clearfix record record-compact #{cycle("on", "on-hover")}", :id => "#{dom_id(post)}"}
+  .title
+    = post.title.presence || post.translations.detect {|t| t.title.present?}.title
+  .preview
+    - if Refinery::I18n.frontend_locales.many?
+      %span.locales
+        - post.translations.sort_by{ |t| Refinery::I18n.frontend_locales.index(t.locale)}.each do |translation|
+          - if translation.title.present?
+            = link_to refinery.edit_blog_admin_post_path(post, :switch_locale => translation.locale), :class => 'locale', title: translation.locale.upcase do
+              %div{:class => "#{translation.locale} locale_marker"}
+                = locale_text_icon(translation.locale.upcase)
+    = post.published_at.try(:strftime, '%b %d, %Y') || 'draft'
+    = " by #{post.author.username}" if post.author.present?
+    - if post.draft?
+      %span.label.notice= t('refinery.blog.admin.posts.post.draft')
+    - else
+      = post.published_at.strftime('%b %d, %Y')
+  %span.actions
+    = action_icon(:preview, preview_url, 'Preview this blog post (opens in new window)')
+    = action_icon(:edit, edit_url, t('.edit'))
+    = action_icon(:delete, delete_url, t('.delete' ), delete_options )

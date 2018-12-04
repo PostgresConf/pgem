@@ -1,0 +1,146 @@
+- content_for :head do
+  %meta{ property: "og:title", content: @event.title }
+  %meta{ property: "og:url", content: conference_program_proposal_url(@conference.short_title, @event) }
+  %meta{ property: "og:description", content: @event.abstract }
+  %meta{ property: "og:site_name", content: (ENV['OSEM_NAME'] || 'OSEM') }
+  %meta{ property: "og:image", content: asset_url(@speakers_ordered.first.avatar_url(version: 'medium')) }
+  %meta{ property: "og:image:secure_url", content: asset_url(@speakers_ordered.first.avatar_url(version: 'medium')) }
+
+.container
+  .row.page-header
+    .col-md-12
+      .row
+        %h2
+          = @event.title
+      - unless @event.subtitle.blank?
+        .row
+          %small
+            = @event.subtitle
+      .row.pull-right
+
+        - if @event.scheduled?
+          = render partial: 'proposals/share_menu', locals: { event: @event, event_url: request.original_url, button_classes: nil }
+        .btn-group
+          - if can? :update, @event
+            = link_to 'Registrations', registrations_conference_program_proposal_path(@conference.short_title, @event), class: 'btn btn-mini btn-success'
+          - if can? :edit, @event
+            = link_to "Edit", edit_conference_program_proposal_path(@conference.short_title, @event), :class => "btn btn-mini btn-primary"
+          - if can? :schedule, @conference
+            = link_to "Schedule", events_conference_schedule_path(@conference.short_title), :class =>"btn btn-success"
+
+      - if @event.state == 'canceled' || @event.state == 'withdrawn'
+        %span.label.label-danger CANCELED
+      - elsif @event.state == 'confirmed' && @event_schedule.present? && (!@event_schedule.intersecting_events.canceled.empty? || !@event_schedule.intersecting_events.withdrawn.empty?)
+        %span.label.label-info REPLACEMENT
+
+  .row
+    .col-md-3
+      .row
+        %h3
+          Presented by:
+        - @speakers_ordered.each do |speaker|
+          .speakerinfo.row
+            .col-md-3
+              = image_tag speaker.avatar_url(version: 'large'), class: "img-responsive img-rounded"
+            .col-md-9
+              %h4
+                = link_to speaker.name, user_path(speaker.id)
+              - if speaker.affiliation?
+                .text-muted
+                  = speaker.affiliation
+          -if speaker.biography?
+            .row.speakerbio
+              .col-md-12
+                = markdown(speaker.biography)
+    .col-md-9
+      .row
+        .col-md-12
+          -if @event_schedule.present?
+            .lead
+              - if @event.state == 'confirmed' && !@event_schedule.intersecting_events.withdrawn.empty?
+                = "Please note that this talk replaces"
+                = link_to @event_schedule.intersecting_events.withdrawn.first.event.title,
+                      conference_program_proposal_path(@conference.short_title, @event_schedule.intersecting_events.withdrawn.first.event.id)
+              - elsif @event.state == 'confirmed' && !@event_schedule.intersecting_events.canceled.empty?
+                = "Please note that this talk replaces"
+                = link_to @event_schedule.intersecting_events.canceled.first.title,
+                      conference_program_proposal_path(@conference.short_title, @event_schedule.intersecting_events.canceled.first.event.id)
+
+          - if @event.commercials.empty?
+            %h5.text-warning
+              No video of the event yet, sorry!
+              - unless @conference.commercials.empty?
+                Meanwhile...
+            - unless @conference.commercials.empty?
+              = render partial: 'shared/media_items', locals: { commercials: @conference.commercials }
+          - else
+            %p
+            = render partial: 'shared/media_items', locals: { commercials: @event.commercials }
+
+          - unless @event.document.blank?
+            .row
+              .col-md-2
+                %h5
+                  Download the Slides 
+              .col-md-2
+                = link_to @event.document_url do
+                  %i.fa.fa-file-pdf-o.fa-2x
+
+      .row
+        .col-md-12
+          %p
+            = markdown(@event.abstract)
+        .col-md-12
+          %dl.dl-horizontal#proposal-info
+            %dt Date:
+            %dd= @event_schedule.start_time.in_time_zone(@conference.timezone).strftime("%Y %B %e %H:%M") if @event_schedule
+            %dt Duration:
+            %dd= show_time(@event.event_type.length)
+            %dt Room:
+            %dd
+              - if @event.room
+                = @event.room.name
+            %dt Conference:
+            %dd= @event.program.conference.title
+            %dt Language:
+            %dd= @event.language if @event.language
+            %dt Track:
+            %dd
+              - if @event.track
+                %span.label{:style =>"background-color: #{@event.track.color}; color: #{ contrast_color(@event.track.color) }"}
+                  = @event.track.name
+            %dt Difficulty:
+            %dd
+              - if @event.difficulty_level
+                %span.label{:style =>"background-color: #{@event.difficulty_level.color}; color: #{ contrast_color(@event.difficulty_level.color) };"}
+                  = @event.difficulty_level.title
+
+            - if @event.require_registration
+              %dt Requires Registration:
+              %dd
+                = link_to "Yes (#{registered_text(@event)})", new_conference_conference_registration_path(@conference.short_title), class: 'btn btn-xs btn-danger', disabled: !@event.registration_possible?
+
+  - if can? :leave_feedback, @event
+    .row
+      .row.h3
+        Feedback
+        %hr
+      - if @conference.program && @conference.program.rating && @conference.program.rating > 0
+        .row
+          = render partial: 'voting'
+        .row
+          .col-md-12
+            = semantic_form_for :comment, url: comment_conference_program_proposal_path(@conference.short_title, @event.id), method: :post do |f|
+              = f.input :body, :label => "Comment"
+              = f.submit 'Add Comment', class: 'btn btn-primary pull-right'
+              .row
+                &nbsp;
+        .row
+          - @comments.each do |comment|
+            .col-md-12
+              = render partial: 'comment', locals: { comment: comment, padding: 0}
+
+:javascript
+  $(function () {
+    $('.prettySocial').prettySocial();
+  })

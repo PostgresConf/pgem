@@ -1,0 +1,52 @@
+.container
+  .row
+    .col-md-10.col-md-offset-1
+      = form_for(@attempt, url: conference_poll_attempts_path(@conference.short_title, @poll)) do |f|
+        = hidden_field_tag :survey_id, @survey.id
+
+        - get_attempt_questions(@attempt, false).each_slice(3) do |slice|
+          .row{ "style"=>"border-bottom: 2px solid;"}
+            - slice.each do |question|
+              .col-md-4.col-sm-4.col-centered.col-top
+                - answer_fields = Survey::Answer.new(question_id: question.id)
+                %p
+                  %h4
+                    = question.text
+
+                  %table{:style=>"border-spacing: 5; border-collapse: separate"}
+                    %tbody
+                      - question.options.each do |b|
+                        %tr
+                          %td
+                            %div.pretty.circle.success
+                              = radio_button_tag("survey_attempt[answers_attributes][#{question.id}]", b.id, false)
+                              = label_tag(nil, '<i class="fa fa-check"></i>'.html_safe)
+                          %td
+                            = b.text
+
+        - get_attempt_questions(@attempt, true).each_slice(3) do |slice|
+          .row{ "style"=>"border-bottom: 2px solid;"}
+            - slice.each do |question|
+              .col-md-4.col-sm-4.col-centered.col-top
+                - answer_fields = Survey::Answer.new(question_id: question.id)
+                %p
+                  %h4
+                    = question.text
+
+                  %table{:style=>"border-spacing: 5; border-collapse: separate"}
+                    %tbody
+                      - question.options.each do |b|
+                        %tr
+                          %td
+                            %div.pretty.circle.success
+                              = radio_button_tag("survey_attempt[answers_attributes][#{question.id}]", b.id, false)
+                              = label_tag(nil, '<i class="fa fa-check"></i>'.html_safe)
+                            %td
+                              = b.text
+
+        %br
+        .pull-left
+          .btn-group-vertical
+            = button_tag(type: 'submit', class: 'btn btn-success btn-lg') do
+              Submit
+              %i.fa.fa-check

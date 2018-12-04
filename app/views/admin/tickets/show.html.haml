@@ -1,0 +1,37 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        %div{"data-placement" => "left", "data-toggle" => "tooltip", :title => @ticket.description}
+          = @ticket.title
+          Ticket
+          %small
+            = humanized_money_with_symbol @ticket.price
+      %p.text-muted
+        People who bought this ticket
+.row
+  .col-md-12
+    %table.table.table-hover.datatable
+      %thead
+        %th #
+        %th Name
+        %th Quantity
+        %th E-Mail
+        %th Affiliation
+        %th Paid
+      %tbody
+        - @ticket.buyers.each_with_index do |buyer, index|
+          %tr
+            %td
+              = index + 1
+            %td
+              = buyer.name
+            %td
+              = buyer.ticket_purchases.where(ticket_id: @ticket.id).sum('quantity')
+            %td
+              = buyer.email
+            %td
+              = buyer.affiliation
+            %td
+              = @ticket.paid?(buyer)
+

@@ -1,0 +1,10 @@
+= content_for :splash_nav do
+  %li
+    %a.smoothscroll.hidden-xs{ href: '#resources' } Resources
+    %a.smoothscroll.visible-xs{ href: '#resources', data: {toggle: "collapse", target:".navbar-collapse" }} Resources
+
+.container#resources
+
+  .row
+    .col-md-12
+      = markdown(@venue_extra)

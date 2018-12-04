@@ -1,0 +1,14 @@
+.container-fluid
+  .col-md-11.col-md-offset-1
+    .row.message
+      .col-md-12
+        %p.huge.secondary
+          500
+        %p.primary.h1 Oh no...
+      .col-md-12.primary
+        %h3 There is a problem and we are aware of it. Please try again later.
+        %p
+          %a{href: 'javascript:history.back()'} Take me back!
+          - unless ENV['OSEM_MAINTAINER_EMAIL_ADDRESS'].blank?
+            \ or 
+            %a{href: "mailto: #{ENV['OSEM_MAINTAINER_EMAIL_ADDRESS']}"} Report a problem

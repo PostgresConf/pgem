@@ -1,0 +1,33 @@
+nl:
+  refinery:
+    plugins:
+      team_members:
+        title: Team Members
+    team_members:
+      admin:
+        team_members:
+          actions:
+            create_new: Nieuwe Team Member toevoegen
+            reorder: De volgorde van de Team Members wijzigen
+            reorder_done: Klaar met het wijzingen van de van de Team Member-volgorde
+          records:
+            title: Team Members
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Team Members. Druk op 'Nieuwe Team Member toevoegen' om de eerste toe te voegen.
+          team_member:
+            view_live_html: Deze team member op de website bekijken <br/><em>(opent in een nieuw venster)</em>
+            edit: Bewerk deze team member
+            delete: Deze team member definitief verwijderen
+      team_members:
+        show:
+          other: Andere Team Members
+  activerecord:
+    attributes:
+      'refinery/team_members/team_member':
+        firstname: Firstname
+        middlename: Middlename
+        lastname: Lastname
+        photo: Photo
+        description: Description
+        twitter: Twitter
+        linkedin: Linkedin

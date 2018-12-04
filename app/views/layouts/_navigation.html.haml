@@ -1,0 +1,198 @@
+- content_for :nav_base do
+  .container
+    .navbar-header
+      %button{"data-target"=>".navbar-collapse", "data-toggle"=>"collapse", :class=>"navbar-toggle", :type=>"button"}
+        %span.sr-only
+          Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      /- if content_for? :splash_nav
+      = link_to image_tag(ENV['OSEM_NAVBAR_LOGO'].presence || 'brand.png'), root_path, class: 'navbar-brand', title: 'PostgresConf'
+      /-else
+      /  = link_to (ENV['OSEM_NAME'] || 'OSEM'), root_path, class: 'navbar-brand', title: 'Open Source Event Manager'
+    .collapse.navbar-collapse
+      - if content_for? :splash_nav
+        %ul.nav.navbar-nav#splash-nav
+          = content_for :splash_nav
+      - if @conference and controller.class.name.split("::").first!="Admin" and !content_for? :splash_nav
+        %ul.nav.navbar-nav
+          %li
+            = link_to('Home', conference_path(@conference.short_title))
+          - if @conference.tickets.any? and @conference.registration_open?
+            %li
+              = link_to('Tickets', conference_buytickets_path(@conference.short_title))
+          - if @conference.splashpage.include_program and @conference.program.schedule_public
+            %li
+              = link_to('Schedule', events_conference_schedule_path(@conference.short_title))
+          - if @conference.sponsorships.any? and @conference.splashpage.include_sponsors
+            %li
+              = link_to('Sponsors', conference_path(@conference.short_title, :anchor => "sponsors"))
+          - if @conference.program.cfp_open? and @conference.splashpage.include_cfp
+            %li
+              = link_to('Call For Papers', conference_path(@conference.short_title, :anchor => "callforpapers"))
+          - if @conference.venue and @conference.splashpage.include_venue
+            %li
+              = link_to('Venue', conference_path(@conference.short_title, :anchor => "venue"))
+          %li
+            = link_to('About', conference_about_path(@conference.short_title))
+      -if user_signed_in?
+        %ul.nav.navbar-nav.navbar-right
+          - if can? :index, Comment
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                - if unread_notifications(current_user)
+                  Notifications (#{unread_notifications(current_user).length})
+                  %span.fa.fa-comment
+                  %b.caret
+                  %ul.dropdown-menu
+                    - if unread_notifications(current_user).length > 0
+                      %li.dropdown-header Last 5 Comments for:
+                      - unread_notifications(current_user).limit(5).group_by{ |comment| comment.commentable}.each do |event, comments|
+                        %li= link_to("#{event.title}(#{comments.count})", admin_conference_program_event_path(event.program.conference.short_title, event.id))
+                      %li.divider
+                      %li= link_to "See all unread Comments (#{unread_notifications(current_user).length})", admin_comments_path
+                    %li= link_to 'See all Comments', admin_comments_path(anchor: 'all_comments')
+          %li.dropdown
+            %a.dropdown-toggle.userpic{"data-toggle" => "dropdown", :href => "#", id: "current-user-detail"}
+              - if not current_user.name.blank?
+                #{current_user.name}
+              -else
+                #{current_user.email}
+              = image_tag(current_user.avatar_url(version: 'small'), title: "Yo #{current_user.name}!", :alt => '')
+              %b.caret
+            %ul.dropdown-menu
+              = render 'layouts/user_menu'
+
+      - else
+        %ul.nav.navbar-nav.navbar-right
+          - if ENV['OSEM_ICHAIN_ENABLED'] == 'true'
+            %li{:class=> "#{active_nav_li(new_ichain_registration_path('user'))}"}
+              = link_to(new_ichain_registration_path('user')) do
+                %span.fa.fa-heart
+                Sign Up
+          - else
+            %li{:class=> "#{active_nav_li(new_registration_path('user'))}"}
+              = link_to(new_registration_path('user')) do
+                %span.fa.fa-heart
+                Sign Up
+          %li.dropdown.visible-desktop
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              %span.fa.fa-user
+              Sign In
+              %span.caret
+            .dropdown-menu{:style => "padding: 17px; min-width: 225px;"}
+              - if ENV['OSEM_ICHAIN_ENABLED'] == 'true'
+                = form_tag User.ichain_login_url do
+                  = text_field_tag 'username', nil, id: 'user_ichain_email_dd', placeholder: 'Username'
+                  = password_field_tag 'password', nil, id: 'user_ichain_password_dd', placeholder: 'Password'
+                  %button.btn.btn-success.btn-block Sign in
+              - else
+                = form_tag new_user_session_path do
+                  = text_field_tag 'user[login]', nil, id: 'user_login_dd', placeholder: 'E-Mail'
+                  = password_field_tag 'user[password]', nil, id: 'user_password_dd', placeholder: 'Password'
+                  %p.text-right
+                    %small
+                      Remember me
+                      = check_box_tag 'user[remember_me]'
+                  %button.btn.btn-success.btn-block Sign in
+                  - unless omniauth_configured.empty?
+                    .divider
+                    %h6.text-center
+                      or
+                    = render 'devise/shared/openid_links'
+                  %p.text-right
+                    %br
+                    %a.small.btn.btn-xs.btn-default{"data-toggle" => "collapse", "data-target" =>  "#navbar-devise-help"}
+                      Need Help?
+                    #navbar-devise-help.collapse
+                      = render 'devise/shared/links'
+                  %li.hidden-lg
+                    = link_to('Sign In', new_user_session_path)
+
+- content_for :nav_extended do
+  - if @conference and @conference.short_title
+    - if controller.class.name.split("::").first!="Portal" and controller.class.name.split("::").first!="Admin"
+      #inside_header
+        .content_row
+          .row
+            .col-md-2
+              = image_tag(@conference.picture_url, class: 'img-responsive img-center', id: 'splash-logo') if @conference.picture?
+            .col-md-8
+              .row
+                .col-md-8
+                  %h2
+                    = @conference.title
+                  %h3
+                    - if @conference.venue
+                      = "#{@conference.venue.city} / #{@conference.venue.country_name}"
+                    - if @conference.start_date && @conference.end_date
+                      %br
+                      = date_string(@conference.start_date, @conference.end_date)
+      #inside_nav
+        .content_row
+          .row
+            %ul
+              %li
+                = link_to('Home', conference_path(@conference.short_title))
+              - if @conference.tickets.exists? and @conference.registration_open?
+                %li
+                  = link_to('Tickets', conference_tickets_path(@conference.short_title))
+              - if @conference.program and @conference.program.schedule_public
+                %li
+                  = link_to('Schedule', events_conference_schedule_path(@conference.short_title))
+              - if @conference.sponsorships.exists?
+                %li
+                  = link_to('Sponsors', conference_path(@conference.short_title, :anchor => "sponsors"))
+              - if @conference.program and @conference.program.cfp_open?
+                %li
+                  = link_to('Call For Papers', conference_path(@conference.short_title, :anchor => "callforpapers"))
+              - if @conference.venue
+                %li
+                  = link_to('Venue', conference_path(@conference.short_title, :anchor => "venue"))
+              %li
+                = link_to('About', conference_about_path(@conference.short_title))
+
+  - if controller.class.name.split("::").first=="Portal"
+    #inside_header
+      .content_row
+        .row
+          .col-md-2
+            #logo_container
+              = image_tag(@sponsor.picture.first.url, class: 'img-responsive img-center', id: 'splash-logo') if @sponsor.picture?
+          .col-md-1
+          .col-md-7
+            .row
+              .col-md-8
+                %center
+                  %h2
+                    = @sponsor.name
+                  %h3
+                    - if @sponsorship.blank?
+                      Sponsor Portal
+                    - else
+                      #{@conference.title}
+                      %br
+                      #{@sponsorship.title}
+
+- if content_for? :splash_nav
+  %nav.navbar.navbar-fixed-top.navbar-custom{:role=>"navigation", :id=>'site-nav'}
+    = yield :nav_base
+
+- elsif content_for? :conferences_nav
+  %nav.navbar.navbar-fixed-top.navbar-solid.navbar-custom{:role=>"navigation", :id=>'site-nav'}
+    = yield :nav_base
+
+- else
+  %nav.navbar.navbar-static-top.navbar-solid{:role=>"navigation", :id=>'site-nav'}
+    = yield :nav_base
+
+:javascript
+  $(function () {
+    $('.navbar-collapse .dropdown-toggle').click(function(e){
+      if ($('.dropdown.open').length > 0) {
+        // who needs coordinate calculations when its over 9000 ?
+        $('.navbar-collapse').scrollTop(9000)
+      }
+    })
+  })

@@ -1,0 +1,34 @@
+.row
+  .col-md-8
+    .page-header
+      %h1 Sponsorship Level Benefits
+      %p.text-muted
+        Details of benefits for conference sponsorships
+
+.row
+  .col-md-8
+    %table.table.table-hover#benefits
+      %thead
+        %th Level
+        %th Benefit
+        %th Code Type
+        %th Max Uses
+        %th Discount
+      %tbody
+        - @conference.sponsorship_levels_benefits.each do |slb|
+          %tr
+            %td
+              = slb.sponsorship_level.title
+            %td
+              = slb.benefit.name
+            %td
+              - unless slb.code_type.nil?
+                = slb.code_type.title
+            %td
+              = slb.max_uses
+            %td
+              = slb.discount
+            %td
+              .btn-group
+                = link_to 'Edit', edit_admin_conference_sponsorship_levels_benefit_path(@conference.short_title, slb),
+                method: :get, class: 'btn btn-primary'

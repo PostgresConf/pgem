@@ -1,0 +1,16 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        Sponsor
+        = @sponsor.name
+.row
+  .col-md-8
+    = semantic_form_for(@sponsor, :url => portal_sponsor_path(current_user.sponsor.short_name)) do |f|
+      = f.input :name
+      = f.input :description, :input_html=> { :rows => 5, :maxlength => 250 }
+      = image_tag f.object.picture.thumb.url if f.object.picture?
+      = f.input :picture
+      = f.input :website_url
+      %p.text-right
+        = f.action :submit, as: :button, button_html: { class: 'btn btn-primary' }

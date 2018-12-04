@@ -1,0 +1,175 @@
+.section-title {
+    font-weight: 300;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.center-pills {
+  display: flex;
+  justify-content: center;
+}
+
+
+.conference-panel {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.23);
+    border: none;
+    border-radius: 6px !important;
+}
+
+.conference-panel .panel-body p, .conference-panel .panel-body h3 {
+    color: #333333;
+}
+
+.conference-panel .panel-heading {
+    color: white;
+    border-radius: 4px !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    h3 {
+        margin-top: 0;
+        margin-bottom: 0px;
+    }
+}
+.conference-panel .btn-cta {
+    font-size: 26px;
+}
+.conference-upcoming .panel-heading {
+    background-color: #283593;
+}
+.conference-recent .panel-heading {
+    background-color: #5c6bc0;
+}
+.conference-archive .panel-heading {
+    background-color: #757575;
+}
+
+
+.conferences {
+  section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    color: #21313a;
+  }
+  section.active {
+    h1 {
+        color: white;
+    }
+    .register {
+      padding-top: 15px;
+    }
+
+    .conf-nav {
+      padding-bottom: 20px;
+
+      li > a{
+        color: white;
+      }
+
+      li > a:hover{
+       background-color: #546e7a;
+      }
+
+      li.active {
+        background-color: transparent;
+      }
+
+      li.active > a{
+        font-weight: 800;
+        background-color: #455a64;
+        text-decoration: underline;
+      }
+    }
+
+    .conference-panel-alt {
+        border-radius: none !important;
+        -webkit-box-shadow: 0 10px 20px 1px rgba(0,0,0,0.35) ;
+        box-shadow: 0 10px 20px 1px rgba(0,0,0,0.35);
+
+        .equal {
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        .logo {
+          padding-top: 20px;
+        }
+
+        .panel-body {
+            padding-top: 0px;
+            padding-bottom: 0px;
+            border: none;
+        }
+
+        .rightblock {
+            p, h1, h2, h3 {
+                color: #424242;
+            }
+            h1 {
+                font-size: 50px
+            }
+
+            .description p {
+              font-size: 17px;
+            }
+
+        }
+
+        .grey {
+          background-color: #eceff1;
+        }
+
+        .padded {
+          padding-top: 15px;
+          padding-bottom: 15px;
+        }
+    }
+
+    background-color: #607d8b;
+    padding-top: 100px;
+    padding-bottom: 80px;
+  }
+
+  section.recent {
+      background-color: #F9F9F9;
+  }
+
+  section.archive {
+      background-color: #F2F2F2;
+  }
+}
+
+
+.btn-outline {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
+}
+
+.btn-primary.btn-outline {
+    color: #428bca;
+}
+
+.btn-success.btn-outline {
+    color: #5cb85c;
+}
+
+.btn-info.btn-outline {
+    color: #5bc0de;
+}
+
+.btn-warning.btn-outline {
+    color: #f0ad4e;
+}
+
+.btn-danger.btn-outline {
+    color: #d9534f;
+}
+
+.btn-primary.btn-outline:hover,
+.btn-success.btn-outline:hover,
+.btn-info.btn-outline:hover,
+.btn-warning.btn-outline:hover,
+.btn-danger.btn-outline:hover {
+    color: #fff;
+}
+

@@ -1,0 +1,29 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        = @code.name
+      %p.text-muted
+        People who used this promotion code
+.row
+  .col-md-8
+    %table.table.table-hover.datatable
+      %thead
+        %th #
+        %th Name
+        %th Company
+        %th Title
+        %th E-Mail
+      %tbody
+        - @code.code_users.each_with_index do |user, index|
+          %tr
+            %td
+              = index + 1
+            %td
+              = user.name
+            %td
+              = user.affiliation
+            %td
+              = user.title
+            %td
+              = user.email

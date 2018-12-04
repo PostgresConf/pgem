@@ -1,0 +1,35 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Activities 
+      %p.text-muted
+        Things to do around your venue
+
+- @conference.activities.each_slice(3) do |slice|
+  .row
+    - slice.each do |activity|
+      .col-md-4
+        .thumbnail
+          - unless activity.picture?
+            %p.text-center
+              %i.fa.fa-map-marker.fa-5x
+          - else
+            -if activity.website_link.present?
+              = link_to(activity.website_link, class: 'thumbnail') do
+                = image_tag activity.picture.thumb, class: 'img-responsive img-activity'
+            - else
+              = image_tag activity.picture.thumb, class: 'img-responsive img-activity'
+          .caption
+            %h3.text-center
+              = activity.name
+            -if activity.description.present?
+              = markdown(activity.description)
+          .actions.text-right
+            = link_to 'Edit', edit_admin_conference_activity_path(@conference.short_title, activity), class: 'btn btn-primary'
+            = link_to 'Delete', admin_conference_activity_path(@conference.short_title, activity),
+                method: :delete, class: 'btn btn-danger', data: { confirm: "Do you really want to delete the activity #{activity.name}?" }
+
+
+.row
+  .col-md-12.text-right
+    = link_to 'Add Activity', new_admin_conference_activity_path(@conference.short_title), class: 'btn btn-primary'

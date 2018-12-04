@@ -1,0 +1,12 @@
+- headers = ['Name',
+             'Uses',
+             'Type',
+             'Sponsor']
+= CSV.generate_line headers
+- @codes.each do |code|
+  - if code.sponsor.blank?
+    - sponsor = ''
+  - else
+    - sponsor = code.sponsor.name
+  = CSV.generate_line([code.name, TicketPurchase.get_code_usage(@conference, code),
+  code.code_type.title, sponsor]).html_safe

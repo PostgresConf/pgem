@@ -1,0 +1,32 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Team Members
+      %p.text-muted
+        Members of your conference team
+- if @conference.conference_team_members.any?
+  .row
+    .col-md-12
+      %table.table.table-hover#sponsorship_levels
+        %thead
+          %th Name
+          %th Position
+          %th Actions
+        %tbody
+          - @conference.conference_team_members.each_with_index do |conference_team_member, index|
+            %tr
+              %td
+                = conference_team_member.fullname
+              %td
+                = conference_team_member.position
+                .btn-group-vertical{role: "group"}
+                  = link_to(up_admin_conference_conference_team_member_path(@conference.short_title, conference_team_member.id), method: :patch, class: 'btn btn-default btn-xs') do
+                    %i.fa.fa-chevron-up
+                  = link_to(down_admin_conference_conference_team_member_path(@conference.short_title, conference_team_member.id), method: :patch, class: 'btn btn-default btn-xs') do
+                    %i.fa.fa-chevron-down
+              %td
+                = link_to 'Delete', admin_conference_conference_team_member_path(@conference.short_title, conference_team_member.id),
+                method: :delete, class: 'btn btn-danger', data: { confirm: "Do you really want to delete the team member #{conference_team_member.fullname}?" }
+.row
+  .col-md-12
+    = link_to 'New Team Member', new_admin_conference_conference_team_member_path(@conference.short_title), class: 'btn btn-success pull-right'

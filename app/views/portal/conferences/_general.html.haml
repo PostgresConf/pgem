@@ -1,0 +1,26 @@
+.list-group
+  .row
+    .col-md-10
+      %h3
+        Sponsorship Information
+
+      
+      .list-group
+        %li.list-group-item
+          - unless @conference.sponsorship_info.liaison_email.blank?
+            .row
+              .col-md-8
+                Email the sponsor liason
+              .col-md-2
+                = mail_to "#{ @conference.sponsorship_info.liaison_email }" do
+                  %i.fa.fa-envelope-o.fa-2x
+
+        %li.list-group-item
+          - if @conference.sponsorship_info.manual?
+            .row
+              .col-md-8
+                Download the Sponsor Manual 
+              .col-md-2
+                = link_to @conference.sponsorship_info.manual_url do
+                  %i.fa.fa-file-pdf-o.fa-2x
+

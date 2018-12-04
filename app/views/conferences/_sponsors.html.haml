@@ -1,0 +1,18 @@
+= content_for :splash_nav do
+  %li
+    %a.smoothscroll.hidden-xs{ href: '#sponsors' } Sponsors
+    %a.smoothscroll.visible-xs{ href: '#sponsors', data: {toggle: "collapse", target:".navbar-collapse" }} Sponsors
+
+.container
+  .row.no-gutter
+    .col-md-12
+      %h2.text-center PostgresConf is thankful for support from our sponsors
+  -if @conference.contact and !@conference.contact.sponsor_email.blank?
+    .row
+      .col-md-12
+        %h4
+          %p.text-muted.text-center
+            = link_to "Become a Sponsor!", conference_sponsorships_path(@conference.short_title), class: 'btn btn-warning btn-outline'
+
+  = render 'conferences/sponsors_listing'
+

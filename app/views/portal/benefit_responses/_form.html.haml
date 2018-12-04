@@ -1,0 +1,21 @@
+.row
+  .col-md-6
+    .page-header
+      %h1
+        Response for
+        = @benefit.name
+.row
+  .col-md-6
+    = semantic_form_for(@benefit_response, :url => (@benefit_response.new_record? ? portal_sponsor_conference_benefit_responses_path : portal_sponsor_conference_benefit_response_path(@sponsor.short_name, @conference.short_title, @benefit_response))) do |f|
+      - if @benefit.value_type == 'text'
+        = f.input :text_response, label: @benefit.name, hint: markdown(@benefit.description), :input_html=> { :rows => 5, :maxlength => 500 }
+      - if @benefit.value_type == 'file'
+        = f.input :file_response, label: @benefit.name, hint: markdown(@benefit.description)
+        - if f.object.file_response?
+          Existing File:
+          = link_to @benefit_response.file_response.filename, @benefit_response.file_response_url
+      - if @benefit.value_type == 'boolean'
+        = f.input :bool_response, label: @benefit.name, hint: markdown(@benefit.description), :as => :select
+      = f.input :benefit_id, :as => :hidden, :required => true, :input_html => { :value => @benefit.id }
+      %p.text-right
+        = f.action :submit, as: :button, button_html: { class: 'btn btn-primary' }

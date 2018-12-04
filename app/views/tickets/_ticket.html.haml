@@ -1,0 +1,62 @@
+%tr
+  %td.col-sm-1.col-md-1{:align=>"left", :style=>"width: 5%"}
+    - if ticket.ticketed_events.present?
+      = hidden_field_tag("tickets[][#{ticket.id}]", 0,
+        type: 'number', min: 0, class: "form-control quantity", 'data-id' => ticket.id)
+      %div.styled-span.green.semi-square
+        %span{id: "ticket_label_#{ticket.id}"}
+          0
+    - else
+      %div.styled-select.green.semi-square
+        = select_tag("tickets[][#{ticket.id}]", options_for_select((0..ticket.purchase_quantity_available).to_a), class: "form-control quantity", 'data-id' => ticket.id)
+  %td.col-sm-8.col-md-6
+    .media
+      .media-body
+        %h4.media-heading
+          = ticket.title
+        %h5.media-heading
+        - unless ticket.description.blank?
+          = markdown(ticket.description)
+          - if ticket.ticketed_events.present?
+            .tickets
+              %table{:style=>"border-spacing: 5; border-collapse: separate"}
+                %tbody
+                  - ticket.ticketed_events.each do |event|
+                    %tr
+                      %td
+                        - available = event.purchase_quantity_available
+                        - if available > 0
+                          %div.styled-select.green.semi-square
+                            = select_tag("chosen_events[#{ticket.id}][#{event.id}]", options_for_select((0..available).to_a),
+                                onchange: "update_event(this, #{ticket.id});")
+                        - else
+                          %div.styled-span.green.semi-square
+                            %span{id: "ticket_label_#{ticket.id}"}
+                              0
+                      %td
+                        - if available <= 0
+                          %i
+                            (SOLD OUT)
+                          %s
+                            = event.title
+                        - else
+                          %a{ href: '#', data: { toggle: 'modal', target: "#modal_#{event.id}" } }
+                            = event.title
+
+                    .modal.fade{ id: "modal_#{event.id}" }
+                      .modal-dialog
+                        .modal-content
+                          .modal-header
+                            %button.close{ data: { dismiss: 'modal' } }
+                              x
+                          .modal-body.text-center
+                            = render partial: 'event_listing', locals: { event: event }
+
+  %td.col-sm-1.col-md-1.text-center
+    = ticket.current_price.symbol
+    %span{id: "price_#{ticket.id}"}
+      = humanized_money ticket.adjusted_price
+  %td.col-sm-1.col-md-1.text-center
+    %strong
+      %span.total_row{id: "total_row_#{ticket.id}"}
+        0

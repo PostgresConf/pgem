@@ -1,0 +1,61 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Revision History
+      %p.text-muted
+        Log of changes made to conferences and associated resources
+
+%table.table.table-striped.table-bordered.table-hover#versionstable
+  %thead
+    %td ID
+    %td Description
+    %td Actions
+  %tbody
+    - @versions.each do |version|
+      %tr
+        %td.col-md-1
+          = version.id
+        %td.col-md-9
+          %p
+            = link_to_user(version.whodunnit) unless version.item_type == 'User'
+
+            - case version.item_type
+            - when 'Event'
+              = event_change_description(version)
+
+            -when 'UsersRole'
+              = users_role_change_description(version)
+
+            - when 'Subscription'
+              = subscription_change_description(version)
+
+            - when 'Registration', 'EventsRegistration'
+              = registration_change_description(version)
+
+            - when 'Comment'
+              = comment_change_description(version)
+
+            - when 'Vote'
+              = vote_change_description(version)
+
+            - when 'User'
+              = user_change_description(version)
+
+            - when 'EventSchedule'
+              = event_schedule_change_description(version)
+
+            - else
+              = general_change_description(version)
+
+            =  render partial: 'object_desc_and_link', locals: { version: version }
+
+            %small.text-muted
+              = distance_of_time_in_words(Time.now,version.created_at) + ' ago'
+              %br
+              = "(#{version.created_at.strftime('%B %-d, %Y %H:%M')})"
+
+          %br
+          = render partial: 'shared/object_changes', locals: { version: version }
+
+        %td.col-md-2
+          = render partial: 'shared/changelog_actions', locals: { version: version }

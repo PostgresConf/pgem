@@ -1,0 +1,108 @@
+= content_for :title do
+  = @conference.title
+  About
+
+
+= content_for :splash_nav do
+  %li
+    = link_to conference_path(@conference.short_title) do
+      %span.fa.fa-chevron-left
+      Back To Conference
+
+= content_for :about_base do
+  - if @conference.extended_description
+    %section#about-about
+      .container
+        - unless @conference.sponsorship_info.blank?
+          - if @conference.sponsorship_info.description
+            .row.description
+              .col-md-8.col-md-offset-2
+                %h3
+                  = markdown(@conference.extended_description)
+
+    - if @conference.previous_conferences.any?
+      %section#about-previous
+        .container
+          .row.description
+            .h2.text-center
+              Previous Conferences
+
+          - @conference.previous_conferences.each_slice(3) do |slice|
+            .row.row-centered
+              - slice.each do |conf|
+                .col-md-4.col-centered.col-top.text-center
+                  .thumbnail
+                    - if conf.background?
+                      = link_to(conference_path(conf.short_title), class: 'thumbnail') do
+                        = image_tag conf.background.thumb.url, class: 'img-responsive img-lodging'
+                    .caption
+                      %h3.text-center
+                        = conf.title
+
+
+  %section.about-section.team
+    .h2.text-center
+      Our Team
+    - @team_members = @conference.conference_team_members
+      - @team_members.each_slice(3) do |slice|
+      .row.row-centered
+        - slice.each do |team_member|
+          .col-md-4.col-centered.col-top.team-member.text-center
+            .member-photo
+              -unless team_member.photo.blank?
+                =image_fu team_member.photo, '200x200'
+            .team-detail
+              %h4
+                =team_member.fullname
+              %span.text-muted
+                =team_member.role
+              .social
+                - if team_member.twitter.present?
+                  = link_to team_member.twitter, target: '_blank' do
+                    %i.fa.fa-twitter.fa-lg
+                &nbsp;&nbsp;
+                - if team_member.linkedin.present?
+                  = link_to team_member.linkedin, target: '_blank' do
+                    %i.fa.fa-linkedin.fa-lg
+              %span
+                =raw team_member.description
+
+    - if @conference.contact.has_social_media? and @conference.splashpage.include_social_media
+      %section#social-media
+        = render 'conferences/social_media'
+
+
+#splash
+  = yield :about_base
+
+- content_for :script_head do
+  :javascript
+
+    $(window).scroll(function () {
+        handleTopNavAnimation();
+    });
+
+    $(window).load(function () {
+        handleTopNavAnimation();
+    });
+
+    function handleTopNavAnimation() {
+        var top = $(window).scrollTop();
+
+        // skip if user clicked navbar-toggle and the menu is shown
+        if($('.navbar-custom.expanded').length === 0) {
+          if (top > 50) {
+              $('#site-nav').addClass('navbar-solid');
+          }
+          else {
+              $('#site-nav').removeClass('navbar-solid');
+          }
+        }
+    }
+
+    $('.navbar-toggle').click(function(){
+      var top = $(window).scrollTop();
+      if(top <= 50) {
+        $('#site-nav').toggleClass('navbar-solid expanded');
+      }
+    });

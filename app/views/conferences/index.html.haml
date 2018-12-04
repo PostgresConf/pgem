@@ -1,0 +1,55 @@
+- content_for :conferences_nav do
+  %br
+
+.conferences
+  %section.active.col-md-12
+    .row
+      .col-md-12
+        %h1.text-center.section-title Upcoming
+    - if @current.any?
+      .row
+        .col-md-6.col-md-offset-3
+          %ul.nav.nav-pills.center-pills.conf-nav
+            - @current.each_with_index do |conference, index|
+              %li{role: "presentation", class: ('active' if index == 0)}
+                %a{href: "##{conference.short_title}", data: {toggle: 'tab'}} #{conference.short_title}
+      .row.tab-content
+        - @current.each_with_index do |conference, index|
+          .tab-pane.fade{id: conference.short_title, class: ('in active' if index == 0)}
+            = render partial: 'conference_details_alt', locals: { conference: conference, conference_class: 'conference-upcoming' }
+
+    - else
+      .row
+        .col-md-8.col-md-offset-2
+          .panel.panel-default.conference-panel
+            .panel-heading
+              .row
+                .col-md-10.text-muted
+                  %h3 Nothing to show...
+            .panel-body
+              .row.text-center.h2.text-muted
+                There are no upcoming conferences for the moment
+                - if @recent.any?
+                  %br
+                  Perhaps you may want to check the recent conferences below
+  %section.recent.col-md-12
+    .row
+      .col-md-12
+        %h1.text-center.section-title Recent
+    - @recent.each do |conference|
+      = render partial: 'conference_details', locals: { conference: conference, conference_class: 'conference-recent' }
+  -if @antiquated and @antiquated.any?
+    %section.archive.col-md-12
+      .row
+        .col-md-12
+          %h1.text-center.section-title Archive
+          / %button{ type: 'button', class: 'btn btn-link btn-sm', 'data-toggle' => 'collapse', 'data-target' => '#antiquated', 'aria-expanded' => 'true', 'aria-controls' => 'antiquated'}
+          /     %span.notranslate
+          /       = "(#{@antiquated.count})"
+          /     %i.fa.fa-chevron-right
+          /     %i.fa.fa-chevron-down{ style: 'display: none' }
+      #antiquated
+        - @antiquated.each do |conference|
+          = render partial: 'conference_details', locals: { conference: conference, conference_class: 'conference-archive'}
+
+

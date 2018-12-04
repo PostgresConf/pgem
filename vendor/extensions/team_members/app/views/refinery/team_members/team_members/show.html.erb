@@ -1,0 +1,63 @@
+<% content_for :body_content_title do %>
+  <%= @team_member.firstname %>
+<% end %>
+
+<% content_for :body do %>
+  <section>
+    <h1>Firstname</h1>
+    <p>
+      <%=raw @team_member.firstname %>
+    </p>
+  </section>
+  <section>
+    <h1>Middlename</h1>
+    <p>
+      <%=raw @team_member.middlename %>
+    </p>
+  </section>
+  <section>
+    <h1>Lastname</h1>
+    <p>
+      <%=raw @team_member.lastname %>
+    </p>
+  </section>
+  <section>
+    <h1>Photo</h1>
+    <p>
+      <%= image_fu @team_member.photo, nil %>
+    </p>
+  </section>
+  <section>
+    <h1>Description</h1>
+    <p>
+      <%=raw @team_member.description %>
+    </p>
+  </section>
+  <section>
+    <h1>Twitter</h1>
+    <p>
+      <%=raw @team_member.twitter %>
+    </p>
+  </section>
+  <section>
+    <h1>Linkedin</h1>
+    <p>
+      <%=raw @team_member.linkedin %>
+    </p>
+  </section>
+<% end %>
+
+<% content_for :side_body do %>
+  <aside>
+    <h2><%= t('.other') %></h2>
+    <ul id="team_members">
+      <% @team_members.each do |team_member| %>
+        <li>
+          <%= link_to team_member.firstname, refinery.team_members_team_member_path(team_member) %>
+        </li>
+      <% end %>
+    </ul>
+  </aside>
+<% end %>
+
+<%= render '/refinery/content_page' %>

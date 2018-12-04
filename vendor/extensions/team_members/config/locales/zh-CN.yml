@@ -1,0 +1,35 @@
+zh-CN:
+  refinery:
+    plugins:
+      team_members:
+        title: Team Members
+    team_members:
+      admin:
+        team_members:
+          actions:
+            create_new: 建立新的 Team Member
+            reorder: 对 Team Members 重新排序
+            reorder_done: 对 Team Members 的重新排序结束
+          records:
+            title: Team Members
+            sorry_no_results: 对不起，未找到结果。 #Sorry! There are no results found.
+
+            # There are no Team Members yet. Click "Add New Team Member" to add your first team member.
+            no_items_yet: 目前没有 Team Members . 点击 "Add New Team Member" 创建一个team member.
+          team_member:
+            view_live_html: 查看 team member 的最新内容.<br/><em>(新窗口中打开)</em>
+            edit: 编辑 team member
+            delete: 永久删除 team member
+      team_members:
+        show:
+          other: 其他 Team Members
+  activerecord:
+    attributes:
+      'refinery/team_members/team_member':
+        firstname: Firstname
+        middlename: Middlename
+        lastname: Lastname
+        photo: Photo
+        description: Description
+        twitter: Twitter
+        linkedin: Linkedin

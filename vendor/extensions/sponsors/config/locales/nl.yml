@@ -1,0 +1,54 @@
+nl:
+  refinery:
+    plugins:
+      sponsorship_levels:
+        title: Sponsorship Levels
+      sponsors:
+        title: Sponsors
+    sponsors:
+      admin:
+        sponsorship_levels:
+          actions:
+            create_new: Nieuwe Sponsorship Level toevoegen
+            reorder: De volgorde van de Sponsorship Levels wijzigen
+            reorder_done: Klaar met het wijzingen van de van de Sponsorship Level-volgorde
+          records:
+            title: Sponsorship Levels
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Sponsorship Levels. Druk op 'Nieuwe Sponsorship
+              Level toevoegen' om de eerste toe te voegen.
+          sponsorship_level:
+            view_live_html: Deze sponsorship level op de website bekijken <br/><em>(opent
+              in een nieuw venster)</em>
+            edit: Bewerk deze sponsorship level
+            delete: Deze sponsorship level definitief verwijderen
+        sponsors:
+          actions:
+            create_new: Nieuwe Sponsor toevoegen
+            reorder: De volgorde van de Sponsors wijzigen
+            reorder_done: Klaar met het wijzingen van de van de Sponsor-volgorde
+          records:
+            title: Sponsors
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Sponsors. Druk op 'Nieuwe Sponsor toevoegen'
+              om de eerste toe te voegen.
+          sponsor:
+            view_live_html: Deze sponsor op de website bekijken <br/><em>(opent in
+              een nieuw venster)</em>
+            edit: Bewerk deze sponsor
+            delete: Deze sponsor definitief verwijderen
+      sponsorship_levels:
+        show:
+          other: Andere Sponsorship Levels
+      sponsors:
+        show:
+          other: Andere Sponsors
+  activerecord:
+    attributes:
+      refinery/sponsors/sponsorship_level:
+        name: Name
+      refinery/sponsors/sponsor:
+        name: Name
+        url: Url
+        logo: Logo
+        description: Description

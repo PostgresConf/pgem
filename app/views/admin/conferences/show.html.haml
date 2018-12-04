@@ -1,0 +1,131 @@
+%h1
+  %span.fa.fa-tachometer
+  Dashboard for #{@conference.title}
+%hr
+.row
+  .col-sm-4.col-xs-4
+    .dashbox.text-center
+      %span.fa.fa-user.fa-lg
+      %span.fa.fa-lg
+        = @total_reg
+      %p
+        %small
+          #{'Registration'.pluralize(@total_reg)}
+        - if @new_reg
+          %span.label.label-success{title: "+#{@new_reg} since you last logged in!"}
+            +
+            = @new_reg
+
+  .col-sm-4.col-xs-4
+    .dashbox.text-center
+      %span.fa.fa-check-square.fa-lg
+      %span.fa.fa-lg
+        = @total_submissions
+      %p
+        %small
+          #{'Submission'.pluralize(@total_submissions)}
+        - if @new_submissions
+          %span.label.label-success{title: "+#{@new_submissions} since you last logged in!"}
+            +
+            = @new_submissions
+
+  .col-sm-4.col-xs-4
+    .dashbox.text-center
+      %span.fa.fa-file-text.fa-lg
+      %span.fa.fa-lg
+        = @program_length
+      %p
+        %small
+          #{'Hour'.pluralize(@program_length)}
+        - if @new_reg
+          %span.label.label-success{title: "+#{@new_program_length} since you last logged in!"}
+            +
+            = @new_program_length
+
+.row
+  .col-md-12
+    .row
+      .col-md-8
+        .row#registrations
+          .col-md-12
+            = render partial: 'line_chart', locals: { title: 'Registrations over time',
+                                                       name: 'registrations',
+                                                       conferences: [@conference],
+                                                       active_conferences: [@conference],
+                                                       deactive_conferences: [],
+                                                       y: @registrations,
+                                                       x: @registration_weeks,
+                                                       unit: 'weeks' }
+        .row#submissions
+          .col-md-12
+            = render partial: 'line_chart', locals: { title: 'Submissions over time',
+                                                        name: 'submissions',
+                                                        conferences: @submissions,
+                                                        active_conferences: @submissions,
+                                                        deactive_conferences: [],
+                                                        y: @submissions_data,
+                                                        x: @cfp_weeks,
+                                                        unit: 'weeks' }
+      .col-md-4
+        = render partial: 'todo_list', locals: { conference_progress: @conference_progress,
+                                                 conference: @conference }
+.row
+  .col-md-12#doughnut
+    %ul.nav.nav-tabs#doughnut_tabs
+      %li.active
+        %a{:href=>"#distribution_all", "data-toggle"=>"tab"}
+          %span.fa.fa-star
+          All
+      %li
+        %a{:href=>"#distribution_confirmed", "data-toggle"=>"tab"}
+          %span.fa.fa-comment
+          Confirmed
+    .tab-content
+      .tab-pane.active#distribution_all
+        .row
+          .col-md-4
+            = render partial: 'doughnut_chart', locals: {title: 'Event types', data: @event_type_distribution}
+          .col-md-4
+            = render partial: 'doughnut_chart', locals: {title: 'Difficulty levels', data: @difficulty_levels_distribution}
+          .col-md-4
+            = render partial: 'doughnut_chart', locals: {title: 'Tracks', data: @tracks_distribution}
+      .tab-pane#distribution_confirmed
+        .row
+          .col-md-4
+            = render partial: 'doughnut_chart', locals: {title: 'Event types', data: @event_type_distribution_confirmed}
+          .col-md-4
+            = render partial: 'doughnut_chart', locals: {title: 'Difficulty levels', data: @difficulty_levels_distribution_confirmed}
+          .col-md-4
+            = render partial: 'doughnut_chart', locals: {title: 'Tracks', data: @tracks_distribution_confirmed}
+
+.row
+  .col-md-8
+    %ul.nav.nav-tabs#recentTable
+      %li.active
+        %a{:href=>"#recent_reg", "data-toggle"=>"tab"}
+          %span.fa.fa-user
+          Recent Registrations
+      %li
+        %a{:href=>"#recent_submissions", "data-toggle"=>"tab"}
+          %span.fa.fa-file-text
+          Recent Submissions
+    .tab-content
+      .tab-pane.active#recent_reg
+        = render partial: 'recent_registrations', locals: {recent_registrations: @recent_registrations}
+      .tab-pane#recent_submissions
+        = render partial: 'recent_submissions', locals: {recent_events: @recent_events}
+  .col-md-4
+    = render partial: 'top_submitter', locals: {top_submitter: @top_submitter}
+.row
+  .col-md-12
+    %h3
+      %span
+        %i.fa.fa-flag
+        Campaigns
+    = render partial: 'campaigns', locals: {campaigns: @campaigns, name: 'campaigns'}
+
+:javascript
+  $('#recentTable a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  })

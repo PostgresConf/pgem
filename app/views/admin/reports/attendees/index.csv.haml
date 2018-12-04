@@ -1,0 +1,10 @@
+- headers = ['Last Name',
+             'First Name',
+             'Affiliation',
+             'Job Title',
+             'Email',
+             'Type']
+= CSV.generate_line headers
+- @attendees.each do |attendee|
+  = CSV.generate_line([attendee.last_name, attendee.first_name, attendee.affiliation,
+  attendee.title, attendee.email, attendee.type]).html_safe

@@ -1,0 +1,81 @@
+.div
+  .col-md-12.table-responsive
+    %table.table.table-hover
+      %thead
+        %tr
+          %th Ticket
+          %th Quantity
+          %th Price
+          %th Total
+      %tbody
+      - @unpaid_ticket_purchases.each do |ticket|
+        %tr
+          %td
+            = ticket.title
+          %td
+            = ticket.quantity
+          %td
+            = humanized_money_with_symbol ticket.adjusted_price
+          %td
+            = humanized_money_with_symbol ticket.quantity * ticket.adjusted_price
+- if @conference.payment_method.gateway == 'stripe'
+  = form_tag conference_payments_path do
+    - if @total_amount_to_pay.cents > 0
+      %script.stripe-button{ src: "https://checkout.stripe.com/checkout.js",
+            data: { amount: @total_amount_to_pay.cents, label: "Pay #{humanized_money_with_symbol @total_amount_to_pay}",
+              email: current_user.email, currency: @total_amount_to_pay.currency, name: ENV['OSEM_NAME'] || 'OSEM',
+              description: "book your tickets", key: Rails.application.secrets.stripe_publishable_key, locale: "auto"}}
+    - else
+      .pull-right
+        = button_tag(type: 'submit', class: 'btn btn-success btn-lg') do
+          Confirm
+
+- elsif @conference.payment_method.gateway == 'braintree'
+  - @client_token = Braintree::ClientToken.generate
+  = form_tag conference_payments_path, id: 'payment-form' do
+    #dropin-container
+    = hidden_field_tag("payment_method_nonce", nil, :id => "nonce")
+    %button{id:'submit-button' ,class:'stripe-button-el',display:'none'} Pay #{humanized_money_with_symbol @total_amount_to_pay}
+
+    %script{src: "https://js.braintreegateway.com/web/dropin/1.6.1/js/dropin.min.js"}
+
+    :javascript
+      var form = document.querySelector('#payment-form');
+      var client_token = '#{@client_token}';
+
+      braintree.dropin.create({
+        authorization: client_token,
+        card: {
+            cardholderName: true
+        },
+        translations: {
+            payingWith: '',
+        },
+        container: '#dropin-container'
+      }, function (createErr, instance) {
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          instance.requestPaymentMethod(function (err, payload) {
+            if (err) {
+              console.log('Error', err);
+              return;
+            }
+            // Add the nonce to the form and submit
+            document.querySelector('#nonce').value = payload.nonce;
+            form.submit();
+          });
+        });
+      });
+- elsif @conference.payment_method.gateway == 'payu'
+  = form_tag conference_payments_path do
+    - if @total_amount_to_pay.cents > 0
+      .pull-right
+        = button_tag(type: 'submit', class: 'btn btn-success btn-lg',  data: {confirm: 'You will be redirected to our payment processor (PayU) to collect your payment information. Are you sure you wish to continue?'}) do
+          Pay #{humanized_money_with_symbol @total_amount_to_pay}
+    - else
+      .pull-right
+        = button_tag(type: 'submit', class: 'btn btn-success btn-lg') do
+          Confirm
+
+= link_to '	Edit', conference_tickets_path(@conference.short_title), class: 'btn btn-info btn-lg'
+

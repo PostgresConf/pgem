@@ -1,0 +1,33 @@
+en:
+  refinery:
+    plugins:
+      team_members:
+        title: Team Members
+    team_members:
+      admin:
+        team_members:
+          actions:
+            create_new: Add New Team Member
+            reorder: Reorder Team Members
+            reorder_done: Done Reordering Team Members
+          records:
+            title: Team Members
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Team Members yet. Click "Add New Team Member" to add your first team member.
+          team_member:
+            view_live_html: View this team member live <br/><em>(opens in a new window)</em>
+            edit: Edit this team member
+            delete: Remove this team member forever
+      team_members:
+        show:
+          other: Other Team Members
+  activerecord:
+    attributes:
+      'refinery/team_members/team_member':
+        firstname: Firstname
+        middlename: Middlename
+        lastname: Lastname
+        photo: Photo
+        description: Description
+        twitter: Twitter
+        linkedin: Linkedin

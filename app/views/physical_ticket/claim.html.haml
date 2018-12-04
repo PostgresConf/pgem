@@ -1,0 +1,32 @@
+.container
+  .row
+    .col-md-12
+      .page-header
+        %h1
+          Claim tickets for
+          = @conference.title
+  .row
+    .col-md-8
+      - unless current_user
+        %legend
+      .tab-content
+        .tab-pane.active{role: 'tabpanel', id: 'signup'}
+          = semantic_form_for(@physical_ticket, url: assign_conference_physical_ticket_path()) do |f|
+            = f.input :first_name, :required => true, :label => "First Name"
+            = f.input :last_name, :required => true, :label => "Last Name"
+            = f.input :title, :required => true
+            = f.input :affiliation, :required => true, :hint => "This could be a company, a user group, or organization."
+            = f.input :mobile, :as => :phone, :label => "Phone Number (Optional)"
+            = f.input :email, :as => :hidden, :required => true
+            = f.input :password, :as => :password, :required => true, input_html: { required: 'required', autocomplete: 'off', id: 'password_inline' }
+            = f.input :password_confirmation, :as => :password, :required => true, :label => "Password Confirmation"
+
+            .row
+              .col-md-12
+                %p.pull-right
+                  - if @conference.user_registered?(current_user)
+                    = f.action :submit, button_html: { value: 'Update Registration', class: 'btn btn-primary' }
+                  - else
+                    =f.action :submit, button_html: { value: 'Claim', class: 'btn btn-primary', id: 'register' }
+        .tab-pane{role: 'tabpanel', id: 'signin'}
+          = render partial: 'devise/shared/sign_in_form_embedded'

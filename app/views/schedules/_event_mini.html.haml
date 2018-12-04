@@ -1,0 +1,35 @@
+- event_url = url_for(conference_program_proposal_path(@conference.short_title, event.id))
+.panel.panel-default.eventblock{ data: { link: event_url, trackid: event.track.try(:id) } }
+  .panel-body.row
+    .col-md-11
+      %span.h4
+        = event.title
+        %br
+        %small
+          by #{event.speaker_names}
+        %br
+
+      - event_start = event_schedule.start_time.in_time_zone(@conference.timezone)
+      - event_end = event_schedule.end_time.in_time_zone(@conference.timezone)
+      - if @current_time.between?(event_start, event_end)
+        %span.label.label-success
+          live now!
+          %span.track
+            %span.fa.fa-clock-o
+            %span
+              #{event_schedule.start_time.in_time_zone(@conference.timezone).strftime('%H:%M')} - #{event_schedule.end_time.in_time_zone(@conference.timezone).strftime('%H:%M')}
+
+      - else
+        %span.track
+          %span.fa.fa-clock-o
+          %span
+            starts in
+            #{distance_of_time_in_words(@current_time, event_start)}
+            = event_schedule.start_time.in_time_zone(@conference.timezone).strftime('(%H:%M)')
+      %span.track
+        %span.fa.fa-map-marker
+        %span.label{ style: "background-color: grey" }
+          = event_schedule.room.name
+    .col-md-1
+      %span.pull-right
+        = render partial: 'proposals/share_menu', locals: { event: event, event_url: event_url, button_classes: 'btn-md' }

@@ -1,0 +1,65 @@
+.row
+  .col-md-6
+    .page-header
+      %h1
+        Poll Results
+      %p.text-muted
+        The collected answers to public poll
+  .col-md-6
+    .btn-group.pull-right.export-buttons
+      = link_to 'Export PDF', admin_conference_reports_poll_results_path(@conference.short_title, @event, format: :pdf), class: 'btn btn-success'
+      = link_to 'Export CSV', admin_conference_reports_poll_results_path(@conference.short_title, @event, format: :csv), class: 'btn btn-success'
+      = link_to 'Export XLS', admin_conference_reports_poll_results_path(@conference.short_title, @event, format: :xlsx), class: 'btn btn-success'
+.row
+  .col-md-12
+    %table.table.table-hover.datatable
+      %thead
+        %th #
+        %th Question
+        %th Answer 1
+        %th Answer 2
+        %th Answer 3
+        %th Answer 4
+        %th Answer 5
+      %tbody
+        - @poll_results.each_with_index do |result, index|
+          %tr
+            %td
+              = index + 1
+            %td
+              = result.text
+            %td
+              - unless result.answer1.blank?
+                .row.text-center
+                  = PollResult.option_result(result.survey_question_id, result.answer1)
+                %br
+                %small.text-muted
+                  = PollResult.option_text(result.answer1)
+            %td
+              - unless result.answer2.blank?
+                .row.text-center
+                  = PollResult.option_result(result.survey_question_id, result.answer2)
+                %br
+                %small.text-muted
+                  = PollResult.option_text(result.answer2)
+            %td
+              - unless result.answer3.blank?
+                .row.text-center
+                  = PollResult.option_result(result.survey_question_id, result.answer3)
+                %br
+                %small.text-muted
+                  = PollResult.option_text(result.answer3)
+            %td
+              - unless result.answer4.blank?
+                .row.text-center
+                  = PollResult.option_result(result.survey_question_id, result.answer4)
+                %br
+                %small.text-muted
+                  = PollResult.option_text(result.answer4)
+            %td
+              - unless result.answer5.blank?
+                .row.text-center
+                  = PollResult.option_result(result.survey_question_id, result.answer5)
+                %br
+                %small.text-muted
+                  = PollResult.option_text(result.answer5)

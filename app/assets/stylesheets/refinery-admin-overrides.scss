@@ -1,0 +1,27 @@
+.cta {
+  background-color: #DAFED8 !important;
+  border: 1px solid #65D85D !important
+}
+#admin_container {
+  width: 1200px;
+}
+
+#page_container {
+  width: 1080px;
+}
+
+.fa-plus-circle::before, .page_add_icon::before {
+    content: "";
+    font-family: FontAwesome;
+    margin-right: 0.1em;
+    color: #404650;
+    float: none;
+    font-size: 1.2em;
+    height: auto;
+    text-decoration: none;
+    width: auto;
+}
+
+.record-compact {
+  line-height: 24px !important;
+}

@@ -1,0 +1,9 @@
+.field
+  .row
+    .form-group.col-xs-4
+      = f.label :text, class: 'sr-only'
+      = f.text_field :text, placeholder: 'answer', class: 'form-control'
+
+    = render "input_poll", f: f
+    .col-xs-4
+      = link_to_remove_field "Remove", f
