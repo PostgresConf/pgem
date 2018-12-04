@@ -68,7 +68,12 @@ function restore_state () {
 }
 
 $( document ).ready(function() {
-    document.getElementById('tickets__' + tix).value = '1';
+    if (tix) {
+      var tixs = getElementById('tickets__' + tix)
+      if (tixs) {
+        tix.value = '1';
+      }
+    }
 
     $('.quantity').each(function() {
         update_price($(this));
