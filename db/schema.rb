@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181120225659) do
+ActiveRecord::Schema.define(version: 20181204194638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -212,9 +212,8 @@ ActiveRecord::Schema.define(version: 20181120225659) do
     t.datetime "updated_at"
   end
 
+  add_index "codes", ["conference_id", "name"], name: "index_codes_on_conference_id_and_name", unique: true, using: :btree
   add_index "codes", ["conference_id"], name: "index_codes_on_conference_id", using: :btree
-  add_index "codes", ["conference_id"], name: "index_codes_on_conference_id", using: :btree
-  add_index "codes", ["name"], name: "index_codes_on_name", unique: true, using: :btree
   add_index "codes", ["name"], name: "index_codes_on_name", unique: true, using: :btree
   add_index "codes", ["sponsor_id"], name: "index_codes_on_sponsor_id", using: :btree
   add_index "codes", ["sponsor_id"], name: "index_codes_on_sponsor_id", using: :btree
@@ -230,9 +229,8 @@ ActiveRecord::Schema.define(version: 20181120225659) do
     t.datetime "updated_at"
   end
 
+  add_index "codes", ["conference_id", "name"], name: "index_codes_on_conference_id_and_name", unique: true, using: :btree
   add_index "codes", ["conference_id"], name: "index_codes_on_conference_id", using: :btree
-  add_index "codes", ["conference_id"], name: "index_codes_on_conference_id", using: :btree
-  add_index "codes", ["name"], name: "index_codes_on_name", unique: true, using: :btree
   add_index "codes", ["name"], name: "index_codes_on_name", unique: true, using: :btree
   add_index "codes", ["sponsor_id"], name: "index_codes_on_sponsor_id", using: :btree
   add_index "codes", ["sponsor_id"], name: "index_codes_on_sponsor_id", using: :btree
@@ -1789,7 +1787,7 @@ ActiveRecord::Schema.define(version: 20181120225659) do
   create_table "ticket_group_benefits", force: :cascade do |t|
     t.integer  "ticket_group_id", null: false
     t.string   "name",            null: false
-    t.string   "description",     null: false
+    t.text     "description",     null: false
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
