@@ -82,7 +82,6 @@ module Admin
       short_title = @conference.short_title
       @conference.assign_attributes(conference_params)
       send_mail_on_conf_update = @conference.notify_on_dates_changed?
-      delete_event_schedules if @conference.start_hour_changed? || @conference.end_hour_changed?
 
       if @conference.update_attributes(conference_params)
         ConferenceDateUpdateMailJob.perform_later(@conference) if send_mail_on_conf_update
@@ -194,13 +193,5 @@ module Admin
                                          :conference_group_id)
     end
 
-    def delete_event_schedules
-      event_schedules = EventSchedule.select do |e|
-        e.start_time.strftime('%H').to_i < @conference.start_hour ||
-        e.end_time.strftime('%H').to_i > @conference.end_hour ||
-        (e.end_time.strftime('%H').to_i == @conference.end_hour && e.end_time.strftime('%M').to_i > 0)
-      end
-      event_schedules.each(&:destroy)
-    end
   end
 end
