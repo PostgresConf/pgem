@@ -141,6 +141,9 @@
         - if can? :update, @conference.ticket_groups.build
           %li{ class: active_nav_li(admin_conference_ticket_groups_path(@conference.short_title)) }
             = link_to 'Ticket Groups', admin_conference_ticket_groups_path(@conference.short_title)
+        - if can? :update, @conference.ticket_groups.build
+          %li{ class: active_nav_li(admin_conference_ticket_group_benefits_path(@conference.short_title)) }
+            = link_to 'Ticket Benefits', admin_conference_ticket_group_benefits_path(@conference.short_title)
         - if can? :update, @conference.tickets.build
           %li{ class: active_nav_li(admin_conference_tickets_path(@conference.short_title)) }
             = link_to 'Tickets', admin_conference_tickets_path(@conference.short_title)

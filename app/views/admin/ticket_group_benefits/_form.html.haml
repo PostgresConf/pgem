@@ -1,0 +1,17 @@
+.row
+  .col-md-8
+    .page-header
+      %h1
+        -if @ticket_group_benefit.new_record?
+          New
+        = @ticket_group_benefit.name
+.row
+  .col-md-6
+    = semantic_form_for(@ticket_group_benefit, :url => (@ticket_group_benefit.new_record? ? admin_conference_ticket_group_benefits_path : admin_conference_ticket_group_benefit_path(@conference.short_title, @ticket_group_benefit))) do |f|
+      = f.input :ticket_group_id, as: :select,
+                collection: @conference.ticket_groups.map {|ticket_group| ["#{ticket_group.name}", ticket_group.id] }
+      = f.input :name
+      = f.input :description, hint: markdown_hint('This will show on the tickets page.'), input_html: { rows: 3, data: { provide: 'markdown-editable' } }
+
+      %p.text-right
+        = f.action :submit, as: :button, button_html: { class: 'btn btn-primary' }

@@ -1,0 +1,40 @@
+.row
+  .col-md-8
+    .page-header
+      %h1 Ticket Benefits
+      %p.text-muted
+        Benefits for tickets (Displays on the public ticket page)
+
+.row
+  .col-md-12
+    %table.table.table-hover#benefits
+      %thead
+        %th Position
+        %th Ticket Group
+        %th Name
+        %th Description
+      %tbody
+        - @conference.ticket_group_benefits.each do |benefit|
+          %tr
+            %td
+              = benefit.position
+              .btn-group-vertical{role: "group"}
+                = link_to(up_admin_conference_ticket_group_benefit_path(@conference.short_title, benefit.id), method: :patch, class: 'btn btn-default btn-xs') do
+                  %i.fa.fa-chevron-up
+                = link_to(down_admin_conference_ticket_group_benefit_path(@conference.short_title, benefit.id), method: :patch, class: 'btn btn-default btn-xs') do
+                  %i.fa.fa-chevron-down
+            %td
+              = benefit.ticket_group_name
+            %td
+              = benefit.name
+            %td
+              = benefit.description
+            %td
+              .btn-group
+                = link_to 'Edit', edit_admin_conference_ticket_group_benefit_path(@conference.short_title, benefit),
+                method: :get, class: 'btn btn-primary'
+                = link_to 'Delete', admin_conference_ticket_group_benefit_path(@conference.short_title, benefit),
+                method: :delete, class: 'btn btn-danger', data: { confirm: "Do you really want to delete the benefit #{benefit.name}?" }
+.row
+  .col-md-8
+    = link_to 'Add Benefit', new_admin_conference_ticket_group_benefit_path, class: 'btn btn-primary pull-right'

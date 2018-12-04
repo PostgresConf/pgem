@@ -20,27 +20,62 @@
               = @primary_group.description
             %br
 
-            %section#conference-passes.pass-block
-              - @tickets.each do |ticket|
-                .pass
-                  .pass-type
-                    %h2
-                      = ticket.short_title
-                      %a.package_link{ href: url_for(conference_tickets_path(@conference.short_title)) }
-                        = ticket.current_price.symbol
-                        =  humanized_money ticket.current_price
-                        %span.cta
-                          Register Now
-                    - if @conference.early_bird_open? && ticket.current_price != ticket.price
-                      %p.deadline
-                        Early Price ends
-                        = @conference.registration_period.early_bird_date.strftime('%b %d')
-                  .pass-perks
+          %section#conference-passes.pass-block.active
+            - @tickets.each do |ticket|
+              .pass
+                .pass-type
+                  %h2
+                    = ticket.short_title
+                  %p
                     = ticket.description
+                    %a.package_link{ href: url_for(conference_tickets_path(@conference.short_title)), style: 'background: linear-gradient(to bottom, #5cb85c 0%,#369836 100%); display: block;'}
+                      = ticket.current_price.symbol
+                      =  humanized_money ticket.current_price
+                      %span.cta
+                        Register Now
+                  - if @conference.early_bird_open? && ticket.current_price != ticket.price
+                    %p.deadline
+                      Early Price ends
+                      = @conference.registration_period.early_bird_date.strftime('%b %d')
+                    %p.deadline
+                      Regularly
+                      = ticket.current_price.symbol
+                      =  humanized_money ticket.price
 
-            %section
-              = markdown(@primary_group.additional_details)
+                .pass-perks
+                  - @benefits.each do |benefit|
+                    - if ticket.has_benefit?(benefit)
+                      .pass-perk.yes
+                        = markdown(benefit.description)
+                    - else
+                      .pass-perk.no
+                        = markdown(benefit.description)
 
+  %section
+    .container
+
+  %section
+    .container
+
+  %section
+    .container
+
+  %section
+    .container
+      %h3
+        Cancellation Policy
+      %p
+        Cancellations within 14 days of the event are non-refundable. 
+        <a class='policy' data-target='#cancellation_policy' data-toggle='modal' href='#'>Read more</a>.
+
+      = markdown(@primary_group.additional_details)
+      %h3
+        Code of Conduct
+      %p
+        All participants must follow our Code of Conduct. 
+        <a class='policy' data-target='#code_of_conduct' data-toggle='modal' href='#'>Read more</a>.
+      %br
+      = link_to 'Register Now', conference_tickets_path(@conference.short_title), class: 'btn btn-success btn-lg'
 
   - if @conference.contact.has_social_media? and @conference.splashpage.include_social_media
     %section#social-media

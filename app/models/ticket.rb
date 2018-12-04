@@ -7,6 +7,7 @@ class Ticket < ActiveRecord::Base
   has_many :events
   has_many :buyers, -> { distinct }, through: :ticket_purchases, source: :user
   has_many :payments, through: :ticket_purchases
+  has_many :ticket_group_benefits, through: :ticket_group_benefits_tickets
 
   has_and_belongs_to_many :codes, :join_table => :codes_tickets
 
@@ -45,6 +46,10 @@ class Ticket < ActiveRecord::Base
     ticket_purchases.unpaid.by_user(user).present?
   end
 
+  def has_benefit?(benefit)
+    TicketGroupBenefitsTicket.where(ticket_group_benefit_id: benefit.id, ticket_id: self.id).exists?
+  end
+  
   def total_price(user, paid: false)
     quantity_bought_by(user, paid: paid) * adjusted_price
   end

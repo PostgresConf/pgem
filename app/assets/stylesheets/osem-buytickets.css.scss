@@ -1,100 +1,36 @@
+  .pass-block { width:100%; margin-bottom: 30px; }
+  .pass-block.inactive { display: none; }
+  .pass-block.active { display: block; }
+  .pass-block .pass { margin-top: 1rem; padding-bottom: 1rem; }
+  .pass-block .pass-type { width:50%; float:right; background-color:#ddd; padding: 20px 8px 8px 8px; background: #eee; background: linear-gradient(to bottom, #eee 0%, #ddd); font-weight: normal; text-align:center; }
+  .pass-block .pass-type h2 { color: #000; font-size: 1.8rem; line-height: 1.8rem; margin: 0; font-weight: bold; text-transform: uppercase; white-space:nowrap; }
+  .pass-block .pass-type p { font-size: 1.4rem; margin: 0; padding: 0; }
+  .pass-block .pass-type p.deadline { height:1.6rem; font-size: 1.2rem; line-height: 1.6rem; white-space: nowrap; }
+  .pass-block .pass-type a.package_link { text-decoration: none; padding: 1.2rem .3rem 1rem .3rem; display: block; width: 100%; border: 2px solid #fff; font-size: 2rem; line-height:1.8rem; margin: 2px 0; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; color: white; font-weight: bold; box-shadow: 0 0 6px rgba(0,0,0,.1); opacity:.9; }
+  .pass-block .pass-type a.package_link:hover { opacity:1; }
+  .pass-block .pass-type a.package_link .cta { display:block; font-size: 1.4rem; font-weight: normal; padding: 0; margin: 0; min-width: 0; width: auto; }
+  .pass-block .pass-perks { clear:both; border-top:1px solid #ddd; }
+  .pass-block .pass-perks .pass-perk { position:relative; display:block; overflow:visible; width:calc(50% + 1px); padding: 10px; color: #000; text-align: left; font-size: 1.4rem; border-bottom:1px solid #ddd; border-right:1px solid #ddd; }
+  .pass-block .pass-perks .pass-perk:after { content:""; position:absolute; left:100%; top:0; width:calc(100% - 1px); height:100%; border-bottom:1px solid #ddd; border-right:1px solid #ddd; text-align: center; color: #6e2b95; font-size: 3.2rem; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; }
+  .pass-block .pass-perks .pass-perk.yes:before { content:""; display:block; position:absolute; left:calc(150% - 4px); top:calc(50% - 4px); height:8px; width:8px; background-color:#0064a5; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius:50%; }
+  .pass-block .note { font-size:1.2rem; line-height:1.6rem; }
 
-.pass-block {
-  width:100%;
-  height: 450px;
-  margin-bottom: 30px;
-  display: block;
-}
+  .no-break { white-space:nowrap; }
 
-.pass-block .pass {
-  margin-top: 1rem;
-  padding-bottom: 1rem;
-  height: 500px;
-}
 
-.pass-block .pass-type {
-  width:100%;
-  height: 120px;
-  float:right;
-  background-color:#ddd;
-  padding: 20px 8px 8px 8px;
-  background: #eee;
-  background: linear-gradient(to bottom, #eee 0%, #ddd);
-  font-weight: normal;
-  text-align:center;
-}
+  @media screen and (min-width: 880px) {
+    .pass-block { position:relative; margin-top:1rem; }
+    .pass-block .pass { position:relative; margin-top:0; background-color:#fff; }
 
-.pass-block .pass-type h2 {
-  color: #000;
-  font-size: 1.8rem;
-  line-height: 1.8rem;
-  margin: 0;
-  font-weight: bold;
-  overflow-wrap: break-word;
-}
+    .pass-block .pass:first-of-type:nth-last-of-type(n + 2) { z-index:2; width:66.66%; top:0 }
+    .pass-block .pass:first-of-type:nth-last-of-type(n + 2) ~ .pass { z-index:1; width:66.66%; position:absolute; top:0; left:calc(33.33% - 1px); }
 
-.pass-block .pass-type p {
-   font-size: 1.4rem;
-   margin: 0;
-   padding: 0;
- }
+    .pass-block .pass:first-of-type:nth-last-of-type(n + 3) { z-index:3; width:50%; position:absolute; top:0 }
+    .pass-block .pass:first-of-type:nth-last-of-type(n + 3) ~ .pass { z-index:2; width:50%; position:absolute; top:0; left:calc(25% - 1px); }
+    .pass-block .pass:first-of-type:nth-last-of-type(n + 3) ~ .pass ~ .pass { z-index:1; width:50%; position:absolute; top:0; left:calc(50% - 2px); }
 
-.pass-block .pass-type p.deadline {
-  height:1.6rem;
-  font-size: 1.2rem;
-  line-height: 1.6rem;
-  white-space: nowrap;
-}
-
-.pass-block .pass-type a.package_link {
-  text-decoration: none;
-  padding: 1.2rem .3rem 1rem .3rem;
-  display: block; width: 100%;
-  border: 2px solid #fff;
-  font-size: 2rem;
-  line-height:1.8rem;
-  margin: 2px 0;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
-  box-shadow: 0 0 6px rgba(0,0,0,.1);
-  opacity:.9;
-  background: linear-gradient(to bottom, rgb(138,208,0) 0%,rgb(115,183,0) 100%);
-}
-
-.pass-block .pass-type a.package_link:hover { opacity:1; }
-.pass-block .pass-type a.package_link .cta { display:block; font-size: 1.4rem; font-weight: normal; padding: 0; margin: 0; min-width: 0; width: auto; }
-.pass-block .pass-perks {
-  clear:both;
-  border:1px solid #ddd;
-  height: 400px;
-  padding: 10px;
-}
-.pass-block .pass-perks .pass-perk { position:relative; display:block; overflow:visible; width:calc(50% + 1px); padding: 10px; color: #000; text-align: left; font-size: 1.4rem; border-bottom:1px solid #ddd; border-right:1px solid #ddd; }
-.pass-block .note { font-size:1.2rem; line-height:1.6rem; }
-
-@media screen and (min-width: 700px) {
-  .pass-block { position:relative; margin-top:1rem; }
-  .pass-block .pass { position:relative; margin-top:0; background-color:#fff; }
-
-  .pass-block .pass:first-of-type:nth-last-of-type(n + 2) { z-index:2; width:66.66% }
-  .pass-block .pass:first-of-type:nth-last-of-type(n + 2) ~ .pass { z-index:1; width:66.66%; position:absolute; top:0; left:calc(33.33% - 1px); }
-
-  .pass-block .pass:first-of-type:nth-last-of-type(n + 3) { z-index:3; width:50% }
-  .pass-block .pass:first-of-type:nth-last-of-type(n + 3) ~ .pass { z-index:2; width:50%; position:absolute; top:0; left:calc(25% - 1px); }
-  .pass-block .pass:first-of-type:nth-last-of-type(n + 3) ~ .pass ~ .pass { z-index:1; width:50%; position:absolute; top:0; left:calc(50% - 2px); }
-
-  .pass-block .pass:first-of-type:nth-last-of-type(n + 4) { z-index:4; width:40% }
-  .pass-block .pass:first-of-type:nth-last-of-type(n + 4) ~ .pass { z-index:3; width:40%; position:absolute; top:0; left:calc(20% - 1px); }
-  .pass-block .pass:first-of-type:nth-last-of-type(n + 4) ~ .pass ~ .pass { z-index:2; width:40%; position:absolute; top:0; left:calc(40% - 2px); }
-  .pass-block .pass:first-of-type:nth-last-of-type(n + 4) ~ .pass ~ .pass ~ .pass { z-index:1; width:40%; position:absolute; top:0; left:calc(60% - 3px); }
-
-  .pass-block .pass:first-of-type:nth-last-of-type(n + 5) { z-index:5; width:20%; position:absolute; top:0; left:0; }
-  .pass-block .pass:first-of-type:nth-last-of-type(n + 5) ~ .pass { z-index:4; width:20%; position:absolute; top:0; left:calc(20% - 1px); }
-  .pass-block .pass:first-of-type:nth-last-of-type(n + 5) ~ .pass ~ .pass { z-index:3; width:20%; position:absolute; top:0; left:calc(40% - 2px); }
-  .pass-block .pass:first-of-type:nth-last-of-type(n + 5) ~ .pass ~ .pass ~ .pass { z-index:2; width:20%; position:absolute; top:0; left:calc(60% - 3px); }
-  .pass-block .pass:first-of-type:nth-last-of-type(n + 5) ~ .pass ~ .pass ~ .pass ~ .pass { z-index:1; width:20%; position:absolute; top:0; left:calc(80% - 4px); }
-
-}
+    .pass-block .pass:first-of-type:nth-last-of-type(n + 4) { z-index:4; width:40%; top:0 }
+    .pass-block .pass:first-of-type:nth-last-of-type(n + 4) ~ .pass { z-index:3; width:40%; position:absolute; top:0; left:calc(20% - 1px); }
+    .pass-block .pass:first-of-type:nth-last-of-type(n + 4) ~ .pass ~ .pass { z-index:2; width:40%; position:absolute; top:0; left:calc(40% - 2px); }
+    .pass-block .pass:first-of-type:nth-last-of-type(n + 4) ~ .pass ~ .pass ~ .pass { z-index:1; width:40%; position:absolute; top:0; left:calc(60% - 3px); }
+  }

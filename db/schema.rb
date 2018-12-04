@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181108133341) do
+ActiveRecord::Schema.define(version: 20181120225659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1786,6 +1786,22 @@ ActiveRecord::Schema.define(version: 20181108133341) do
     t.datetime "updated_at"
   end
 
+  create_table "ticket_group_benefits", force: :cascade do |t|
+    t.integer  "ticket_group_id", null: false
+    t.string   "name",            null: false
+    t.string   "description",     null: false
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ticket_group_benefits_tickets", id: false, force: :cascade do |t|
+    t.integer "ticket_group_benefit_id", null: false
+    t.integer "ticket_id",               null: false
+  end
+
+  add_index "ticket_group_benefits_tickets", ["ticket_group_benefit_id", "ticket_id"], name: "tg_benefit_tix_idx", unique: true, using: :btree
+
   create_table "ticket_groups", force: :cascade do |t|
     t.integer  "conference_id"
     t.string   "name"
@@ -2257,6 +2273,9 @@ ActiveRecord::Schema.define(version: 20181108133341) do
   add_foreign_key "sponsorships", "public.sponsorship_levels", column: "sponsorship_level_id"
   add_foreign_key "sponsorships", "sponsors"
   add_foreign_key "sponsorships", "sponsorship_levels"
+  add_foreign_key "ticket_group_benefits", "ticket_groups"
+  add_foreign_key "ticket_group_benefits_tickets", "ticket_group_benefits"
+  add_foreign_key "ticket_group_benefits_tickets", "tickets"
   add_foreign_key "ticket_groups", "conferences"
   add_foreign_key "ticket_purchases", "codes"
   add_foreign_key "ticket_purchases", "events"
