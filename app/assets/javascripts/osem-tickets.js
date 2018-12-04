@@ -69,10 +69,7 @@ function restore_state () {
 
 $( document ).ready(function() {
     if (tix) {
-      var tixs = getElementById('tickets__' + tix)
-      if (tixs) {
-        tix.value = '1';
-      }
+      document.getElementById('tickets__' + tix).value = '1';
     }
 
     $('.quantity').each(function() {
