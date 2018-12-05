@@ -23,6 +23,17 @@ GIT
       refinerycms-core (~> 3.0.0)
 
 GIT
+  remote: https://github.com/randym/axlsx.git
+  revision: 776037c0fc799bb09da8c9ea47980bd3bf296874
+  ref: 776037c0fc799bb09da8c9ea47980bd3bf296874
+  specs:
+    axlsx (2.1.0.pre)
+      htmlentities (~> 4.3.4)
+      mimemagic (~> 0.3)
+      nokogiri (>= 1.6.6)
+      rubyzip (>= 1.2.1)
+
+GIT
   remote: https://github.com/refinery/refinerycms-blog
   revision: 76ee576e31945dde56ccf45f3715ccf9af631573
   branch: master
@@ -113,16 +124,12 @@ GEM
       gyoku (>= 0.4.0)
       nokogiri
     arel (6.0.4)
-    ast (2.2.0)
+    ast (2.4.0)
     autoprefixer-rails (9.1.3)
       execjs
     awesome_nested_set (3.0.3)
       activerecord (>= 4.0.0, < 5)
     aws_cf_signer (0.1.3)
-    axlsx (2.0.1)
-      htmlentities (~> 4.3.1)
-      nokogiri (>= 1.4.1)
-      rubyzip (~> 1.0.0)
     axlsx_rails (0.2.0)
       axlsx (>= 2.0.1)
       rails (>= 3.1)
@@ -301,7 +308,7 @@ GEM
       activesupport (>= 4.0.1)
       haml (>= 3.1, < 5.0)
       railties (>= 4.0.1)
-    hashie (2.1.1)
+    hashie (3.5.7)
     hoptoad_notifier (2.4.11)
       activesupport
       builder
@@ -319,6 +326,7 @@ GEM
       prawn
       prawn-layout
     iso-639 (0.2.5)
+    jaro_winkler (1.5.1)
     jquery-datatables-rails (2.2.3)
       jquery-rails
       sass-rails
@@ -358,6 +366,7 @@ GEM
       mini_mime (>= 0.1.1)
     method_source (0.8.2)
     mime-types (2.99.3)
+    mimemagic (0.3.2)
     mina (0.3.8)
       open4 (~> 1.3.4)
       rake
@@ -391,9 +400,9 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (~> 1.2)
-    omniauth (1.3.2)
-      hashie (>= 1.2, < 3)
-      rack (~> 1.0)
+    omniauth (1.8.1)
+      hashie (>= 3.4.6, < 3.6.0)
+      rack (>= 1.6.2, < 3)
     omniauth-facebook (1.6.0)
       omniauth-oauth2 (~> 1.1)
     omniauth-github (1.1.2)
@@ -416,8 +425,9 @@ GEM
       activerecord (>= 3.0, < 6.0)
       activesupport (>= 3.0, < 6.0)
       request_store (~> 1.1)
-    parser (2.3.0.3)
-      ast (~> 2.2)
+    parallel (1.12.1)
+    parser (2.5.3.0)
+      ast (~> 2.4.0)
     pbkdf2_password_hasher (0.2.0)
     pdf-core (0.4.0)
     pg (0.20.0)
@@ -431,7 +441,7 @@ GEM
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
-    powerpack (0.1.1)
+    powerpack (0.1.2)
     prawn (1.3.0)
       pdf-core (~> 0.4.0)
       ttfunk (~> 1.4.0)
@@ -502,7 +512,7 @@ GEM
       activesupport (= 4.2.10)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rainbow (2.1.0)
+    rainbow (3.0.0)
     rake (12.3.1)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.4)
@@ -602,15 +612,17 @@ GEM
       rspec-mocks (~> 3.0.0)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.2)
-    rubocop (0.49.0)
-      parser (>= 2.3.0.2, < 3.0)
+    rubocop (0.61.0)
+      jaro_winkler (~> 1.5.1)
+      parallel (~> 1.10)
+      parser (>= 2.5, != 2.5.1.1)
       powerpack (~> 0.1)
-      rainbow (>= 1.99.1, < 3.0)
+      rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (~> 0.3)
+      unicode-display_width (~> 1.4.0)
     ruby-oembed (0.8.14)
     ruby-openid (2.5.0)
-    ruby-progressbar (1.7.5)
+    ruby-progressbar (1.10.0)
     rubyzip (1.2.2)
     safe_yaml (1.0.4)
     sass (3.2.19)
@@ -652,7 +664,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.3.9)
     stringex (2.5.2)
     stripe (1.43.0)
       rest-client (~> 1.4)
@@ -683,7 +694,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
-    unicode-display_width (0.3.1)
+    unicode-display_width (1.4.0)
     unicode_utils (1.4.0)
     unobtrusive_flash (3.1.0)
       railties
@@ -725,6 +736,7 @@ DEPENDENCIES
   akami (~> 1.3, >= 1.3.1)
   autoprefixer-rails
   awesome_nested_set (~> 3.0.0)
+  axlsx!
   axlsx_rails
   bootstrap-sass (~> 3.3.4.1)
   bootstrap-social-rails
@@ -822,13 +834,13 @@ DEPENDENCIES
   rspec-rails
   rubocop
   ruby-oembed
+  rubyzip (>= 1.2.2)
   sass-rails (>= 4.0.2)
   seed_dump
   selectize-rails
   shoulda-matchers
   simple_calendar (~> 2.2, >= 2.2.7)
   spring-commands-rspec
-  sqlite3
   stripe
   stripe-ruby-mock
   survey
@@ -844,4 +856,4 @@ DEPENDENCIES
   yajl-ruby (~> 1.2, >= 1.2.1)
 
 BUNDLED WITH
-   1.16.4
+   1.17.1
