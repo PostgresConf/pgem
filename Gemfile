@@ -152,6 +152,10 @@ gem 'invoice_printer'
 
 # to render XLS spreadsheets
 gem 'axlsx_rails'
+gem 'axlsx',
+     git: 'https://github.com/randym/axlsx.git',
+     ref: '776037c0fc799bb09da8c9ea47980bd3bf296874'
+gem 'rubyzip', '>= 1.2.2'            # Rubyzip before 1.2.1 has a directory traversal vulnerability: CVE-2017-5946
 
 # as error catcher
 gem 'hoptoad_notifier', '~> 2.3'
@@ -252,7 +256,7 @@ group :development do
   gem 'quiet_assets'
   # as database
   group :development, :test do
-  gem 'sqlite3'
+  #gem 'sqlite3'
 end
   # to open mails
   gem 'letter_opener'
