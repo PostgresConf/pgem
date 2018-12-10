@@ -118,7 +118,7 @@
             - if @event.require_registration
               %dt Requires Registration:
               %dd
-                = link_to "Yes (#{registered_text(@event)})", new_conference_conference_registration_path(@conference.short_title), class: 'btn btn-xs btn-danger', disabled: !@event.registration_possible?
+                = link_to "Yes (#{registered_text(@event)})", conference_buytickets_path(@conference.short_title), class: 'btn btn-xs btn-danger', disabled: !@event.registration_possible?
 
   - if can? :leave_feedback, @event
     .row

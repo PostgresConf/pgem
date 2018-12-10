@@ -7,9 +7,8 @@ class TicketGroupsController < ApplicationController
       redirect_to conference_tickets_path(@conference.short_title)
     else
       @tickets = Ticket.visible_group_tickets(@conference, @primary_group).limit(4)
+      @benefits = @primary_group.ticket_group_benefits
     end
-
-    @benefits = @primary_group.ticket_group_benefits
   end
 
 

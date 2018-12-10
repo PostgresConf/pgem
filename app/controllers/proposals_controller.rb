@@ -159,7 +159,7 @@ class ProposalsController < ApplicationController
         redirect_to conference_program_proposals_path(@conference.short_title),
                     notice: 'The proposal was confirmed.'
       else
-        redirect_to new_conference_conference_registration_path(conference_id: @conference.short_title),
+        redirect_to conference_buytickets_path(conference_id: @conference.short_title),
                     alert: 'The proposal was confirmed. Please register to attend the conference.'
       end
     else

@@ -13,7 +13,7 @@
 
           .col-md-3
             - if conference.registration_open? && !conference.user_registered?(current_user)
-              = link_to "Register", new_conference_conference_registration_path(conference.short_title), class: "btn btn-success btn-lg btn-block btn-cta pull-right", disabled: conference.registration_limit_exceeded?
+              = link_to "Register", conference_buytickets_path(conference.short_title), class: "btn btn-success btn-lg btn-block btn-cta pull-right", disabled: conference.registration_limit_exceeded?
               - if conference.registration_limit_exceeded?
                 Sorry, no places left
       .panel-body

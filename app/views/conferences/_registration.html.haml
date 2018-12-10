@@ -29,7 +29,7 @@
             #reg-seconds.col-md-1
 
           %p.cta-button
-            = link_to(new_conference_conference_registration_path(@conference.short_title), class: 'btn btn-lg btn-warning') do
+            = link_to(conference_buytickets_path(@conference.short_title), class: 'btn btn-lg btn-warning') do
               Register Now
 
 - content_for :script_head do
