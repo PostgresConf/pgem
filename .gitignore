@@ -1,7 +1,6 @@
 /db/test.sqlite3-journal
 config/config.yml
 config/secrets.yml
-config/database.yml
 config/piwik.yml
 /vendor/cache
 /vendor/cache-old
