@@ -1,5 +1,4 @@
 /db/test.sqlite3-journal
-config/application.rb
 config/config.yml
 config/secrets.yml
 config/database.yml
