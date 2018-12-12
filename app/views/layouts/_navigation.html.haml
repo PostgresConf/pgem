@@ -19,9 +19,6 @@
         %ul.nav.navbar-nav
           %li
             = link_to('Home', conference_path(@conference.short_title))
-          - if @conference.tickets.any? and @conference.registration_open?
-            %li
-              = link_to('Tickets', conference_buytickets_path(@conference.short_title))
           - if @conference.splashpage.include_program and @conference.program.schedule_public
             %li
               = link_to('Schedule', events_conference_schedule_path(@conference.short_title))
@@ -34,6 +31,9 @@
           - if @conference.venue and @conference.splashpage.include_venue
             %li
               = link_to('Venue', conference_path(@conference.short_title, :anchor => "venue"))
+          - if @conference.tickets.any? and @conference.registration_open?
+            %li
+              = link_to('Register', conference_buytickets_path(@conference.short_title))
           %li
             = link_to('About', conference_about_path(@conference.short_title))
       -if user_signed_in?
@@ -135,9 +135,6 @@
             %ul
               %li
                 = link_to('Home', conference_path(@conference.short_title))
-              - if @conference.tickets.exists? and @conference.registration_open?
-                %li
-                  = link_to('Tickets', conference_tickets_path(@conference.short_title))
               - if @conference.program and @conference.program.schedule_public
                 %li
                   = link_to('Schedule', events_conference_schedule_path(@conference.short_title))
@@ -150,6 +147,9 @@
               - if @conference.venue
                 %li
                   = link_to('Venue', conference_path(@conference.short_title, :anchor => "venue"))
+              - if @conference.tickets.exists? and @conference.registration_open?
+                %li
+                  = link_to('Register', conference_buytickets_path(@conference.short_title))
               %li
                 = link_to('About', conference_about_path(@conference.short_title))
 
