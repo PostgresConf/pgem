@@ -12,14 +12,6 @@
     .collapse.navbar-collapse
       = navigation_menu.to_html
       %ul.nav.navbar-nav.navbar-right
-        %li
-          = form_tag refinery.search_root_path, method: 'get', class: 'navbar-form' do
-            .input-group
-              %input.form-control{name: 'query', type: 'search', placeholder: 'Search'}/
-              %span.input-group-btn
-                %button.btn.btn-default{type: 'submit'}
-                  Go!
-
         -if user_signed_in?
           %li.dropdown
             %a.dropdown-toggle.userpic{'data-toggle' => 'dropdown', :href => '#', id: 'current-user-detail'}

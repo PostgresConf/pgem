@@ -1,15 +1,19 @@
-.row
-  .huge
-    = conference.title
+%div.col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1.conf-container
+  .panel.panel-default.conference-panel-alt
+    .panel-body
 
-  .h4
-    %span.fa.fa-calendar-o
-    = date_string(conference.start_date, conference.end_date)
-  - if conference.venue
-    .h4
-      %span.fa.fa-map-marker
-      = conference.venue.city
-      = conference.venue.country_name
-.row.conference-buttons
-  = render partial: '/conferences/conference_button_bar', locals: { conference: conference }
+      .row.gray
+        .huge
+          = conference.title
+
+        .h4
+          %span.fa.fa-calendar-o
+          = date_string(conference.start_date, conference.end_date)
+        - if conference.venue
+          .h4
+            %span.fa.fa-map-marker
+            = conference.venue.city
+            = conference.venue.country_name
+      .row.conference-buttons
+        = render partial: '/conferences/conference_button_bar', locals: { conference: conference }
 

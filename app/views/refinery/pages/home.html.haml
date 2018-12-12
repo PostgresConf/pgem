@@ -7,15 +7,12 @@
           %ul.nav.center-pills.conf-nav.h4
             - @current.each_with_index do |conference, index|
               %li{role: "presentation", class: ('active' if index == 0)}
-                %a{href: "##{conference.short_title}", data: {toggle: 'tab'}} #{conference.short_title}
+                %a{href: "##{conference.short_title}", data: {toggle: 'tab'}} #{conference.title}
 
       .row.tab-content
         - @current.each_with_index do |conference, index|
           .tab-pane.fade.text-center{id: conference.short_title, class: ('in active' if index == 0)}
             = render partial: '/refinery/pages/shared/conference_block', locals: { conference: conference }
-      .row
-        %h2.text-center The International Conference for Postgres
-
   - else
     .row.conferences
       .h4.text-center
