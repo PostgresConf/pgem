@@ -34,8 +34,14 @@
               .col-md-2
                 = image_tag('postgresql_logo.png', class: "img-responsive img-rounded", style: "margin-bottom: 10px;")
               .col-md-8
-                %h4
+                %p.lead
+                  = @conference.title
+                %p
                   = markdown(@conference.description)
+
+    - if @conference.advantages.any? and @conference.splashpage.include_advantages
+      = render 'advantage'
+
     - if @conference.sponsorships.any? and @conference.splashpage.include_sponsors
       %section#sponsors
         = render 'sponsors'
@@ -62,12 +68,13 @@
     - if @conference.venue and @conference.splashpage.include_venue
       %section#venue
         = render 'venue'
-        - if @conference.activities.any? and @conference.splashpage.include_activities
-          = render 'activity'
 
     - if @conference.lodgings.any? and @conference.splashpage.include_lodgings
       %section#lodging
         = render 'lodging'
+
+    - if @conference.activities.any? and @conference.splashpage.include_activities
+      = render 'activity'
 
     - if @conference.tickets.any? and @conference.splashpage.include_tickets
       %section#tickets

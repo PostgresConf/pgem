@@ -238,6 +238,8 @@ gem 'survey'
 #for iCal schedules
 gem 'icalendar'
 
+gem 'humanize'
+
 #for REST calls to external sources
 gem 'rest-client'
 

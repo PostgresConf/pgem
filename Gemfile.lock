@@ -316,6 +316,7 @@ GEM
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     httpclient (2.8.3)
+    humanize (1.8.1)
     i18n (0.7.0)
     i18n_data (0.7.0)
     icalendar (2.4.1)
@@ -773,6 +774,7 @@ DEPENDENCIES
   haml-rails
   hoptoad_notifier (~> 2.3)
   httpclient (~> 2.8, >= 2.8.3)
+  humanize
   icalendar
   invoice_printer
   iso-639

@@ -62,6 +62,9 @@
         - if can? :update, @conference
           %li{:class=> active_nav_li(admin_conference_conference_team_members_path(@conference.short_title))}
             = link_to 'Team Members', admin_conference_conference_team_members_path(@conference.short_title)
+        - if can? :update, @conference.advantages.build
+          %li{ class: active_nav_li(admin_conference_advantages_path(@conference.short_title)) }
+            = link_to 'Advantages', admin_conference_advantages_path(@conference.short_title)
 
 
   - if can? :show, Venue.new(conference_id: @conference.id)
