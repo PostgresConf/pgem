@@ -106,6 +106,7 @@ Osem::Application.routes.draw do
       resources :sponsorships, except: [:show]
       resources :lodgings, except: [:show]
       resources :activities, except: [:show]
+      resources :advantages, except: [:show]
       resources :benefits, except: [:show]
       resources :sponsorship_levels_benefits, except: [:show]
       resources :targets, except: [:show]

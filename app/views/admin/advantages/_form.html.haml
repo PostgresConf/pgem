@@ -1,0 +1,18 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        - if @advantage.new_record?
+          New
+        Advantage
+        = @advantage.name
+.row
+  .col-md-8
+    = semantic_form_for(@advantage, :url => (@advantage.new_record? ? admin_conference_advantages_path : admin_conference_advantage_path(@conference.short_title, @advantage))) do |f|
+      = f.input :name
+      = f.input :description, input_html: { rows: 5, cols: 20, data: { provide: 'markdown-editable' } }, hint: markdown_hint
+      - if @advantage.picture?
+        = image_tag @advantage.picture.thumb.url
+      = f.input :picture
+      %p.text-right
+        = f.action :submit, as: :button, button_html: { class: 'btn btn-primary' }

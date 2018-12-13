@@ -1,0 +1,31 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Advantages 
+      %p.text-muted
+        Why would someone want to addend the conferenc over other conferences
+
+- @conference.advantages.each_slice(3) do |slice|
+  .row
+    - slice.each do |advantage|
+      .col-md-4
+        .thumbnail
+          - unless advantage.picture?
+            %p.text-center
+              %i.fa.fa-home.fa-5x
+          - else
+            = image_tag advantage.picture.thumb, class: 'img-responsive img-lodging'
+          .caption
+            %h3.text-center
+              = advantage.name
+            -if advantage.description.present?
+              = markdown(advantage.description)
+          .actions.text-right
+            = link_to 'Edit', edit_admin_conference_advantage_path(@conference.short_title, advantage), class: 'btn btn-primary'
+            = link_to 'Delete', admin_conference_advantage_path(@conference.short_title, advantage),
+                method: :delete, class: 'btn btn-danger', data: { confirm: "Do you really want to delete the advantage #{advantage.name}?" }
+
+
+.row
+  .col-md-12.text-right
+    = link_to 'Add Advanatge', new_admin_conference_advantage_path(@conference.short_title), class: 'btn btn-primary'
