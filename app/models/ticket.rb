@@ -30,6 +30,20 @@ class Ticket < ActiveRecord::Base
 
   scope :visible, -> { where(hidden: false) }
 
+  def day_range
+    dr = 'Attend the conference'
+
+    if self.ticket_type == 'day_pass'
+      dr = 'Choose your day'
+    elsif self.ticket_type == 'date_range'
+      if !self.end_date.blank? && !self.start_date.blank?
+        dr = self.start_date.strftime("%A") + ' - ' + self.end_date.strftime("%A")
+      end
+    end
+
+    dr
+  end
+
   def bought?(user)
     buyers.include?(user)
   end
