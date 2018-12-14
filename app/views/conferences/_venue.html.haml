@@ -4,7 +4,8 @@
     %a.smoothscroll.visible-xs{ href: '#venue', data: {toggle: "collapse", target:".navbar-collapse" }} Venue
 -if @conference.venue.location?
   = render '/conferences/venue_map'
--else
+
+-if !@conference.venue.location? or !@conference.splashpage.include_lodgings
   .container
     .row
       .col-md-6
@@ -24,13 +25,17 @@
               = markdown(@conference.venue.description)
       .col-md-6
         %h2
-          = "#{@conference.venue.city} / #{@conference.venue.country_name}"
+          - if @conference.venue.country_name == "United States"
+            = "#{@conference.venue.city}, #{@conference.venue.state}"
+          - else
+            = "#{@conference.venue.city} / #{@conference.venue.country_name}"
+        - if @conference.venue.website
+          %br
+          =link_to @conference.venue.name, @conference.venue.website
+
         %address
           = @conference.venue.street
           %br
           = "#{@conference.venue.city}, #{@conference.venue.state} #{@conference.venue.postalcode}"
           %br
           = @conference.venue.country_name
-          - if @conference.venue.website
-            %br
-            =link_to @conference.venue.website, @conference.venue.website
