@@ -298,6 +298,10 @@ end
 group :development, :test do
   # as debugger
   gem 'byebug'
+  gem "better_errors"
+  # dependency
+  gem "binding_of_caller"
+
 end
 
 group :production do
