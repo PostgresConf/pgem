@@ -1,0 +1,16 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        - if @boomset_ticket_config.new_record?
+          New
+        Boomset Ticket
+.row
+  .col-md-8
+    = semantic_form_for(@boomset_ticket_config, :url => (@boomset_ticket_config.new_record? ? admin_conference_boomset_ticket_configs_path : admin_conference_boomset_ticket_config_path(@conference.short_title, @boomset_ticket_config))) do |f|
+      = f.input :ticket, collection: @conference.tickets
+      = f.input :boomset_registration_type, as: :select, collection: @reg_types 
+
+
+      %p.text-right
+        = f.action :submit, as: :button, button_html: { class: 'btn btn-primary' }

@@ -108,6 +108,8 @@ Osem::Application.routes.draw do
       resources :activities, except: [:show]
       resources :advantages, except: [:show]
       resources :benefits, except: [:show]
+      resources :boomset_ticket_configs, except: [:show]
+      resources :integrations, except: [:show]
       resources :sponsorship_levels_benefits, except: [:show]
       resources :targets, except: [:show]
       resources :campaigns, except: [:show]

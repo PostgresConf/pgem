@@ -187,6 +187,14 @@
         %li{class: active_nav_li(admin_conference_reports_tickets_path(@conference.short_title))}
           = link_to 'Tickets', admin_conference_reports_tickets_path(@conference.short_title)
 
+  - if can? :show, @conference
+    %li{:class=> active_nav_li(admin_conference_integrations_path(@conference.short_title))}
+      = link_to(admin_conference_integrations_path(@conference.short_title)) do
+        %span.fa.fa-cloud-upload
+        Integrtions
+      %ul
+        / %li{class: active_nav_li(admin_conference_boomset_path(@conference.short_title))}
+        /  = link_to 'Boomset', admin_conference_boomset_path(@conference.short_title)
 
 
   - if can? :update, @conference.email_settings

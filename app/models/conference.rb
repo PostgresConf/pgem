@@ -38,6 +38,8 @@ class Conference < ActiveRecord::Base
   has_many :lodgings, dependent: :destroy
   has_many :activities, dependent: :destroy
   has_many :advantages, dependent: :destroy
+  has_many :boomset_ticket_configs, dependent: :destroy
+  has_many :integrations, dependent: :destroy
   has_many :registrations, dependent: :destroy
   has_many :participants, through: :registrations, source: :user
   has_many :vdays, dependent: :destroy

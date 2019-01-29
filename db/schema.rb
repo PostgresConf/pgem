@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181213171645) do
+ActiveRecord::Schema.define(version: 20190125210748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,31 @@ ActiveRecord::Schema.define(version: 20181213171645) do
 
   add_index "benefits", ["conference_id"], name: "index_benefits_on_conference_id", using: :btree
   add_index "benefits", ["conference_id"], name: "index_benefits_on_conference_id", using: :btree
+
+  create_table "boomset_guests", force: :cascade do |t|
+    t.integer  "conference_id"
+    t.integer  "integration_id"
+    t.integer  "registration_id"
+    t.integer  "boomset_guest"
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "boomset_guests", ["conference_id", "boomset_guest"], name: "index_boomset_guests_on_conference_id_and_boomset_guest", using: :btree
+  add_index "boomset_guests", ["conference_id", "registration_id"], name: "index_boomset_guests_on_conference_id_and_registration_id", unique: true, using: :btree
+  add_index "boomset_guests", ["conference_id", "token"], name: "index_boomset_guests_on_conference_id_and_token", using: :btree
+
+  create_table "boomset_ticket_configs", force: :cascade do |t|
+    t.integer  "conference_id"
+    t.integer  "integration_id"
+    t.integer  "ticket_id"
+    t.integer  "boomset_registration_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "boomset_ticket_configs", ["conference_id", "ticket_id", "integration_id"], name: "bs_conf_tix_int_idx", unique: true, using: :btree
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "conference_id"
@@ -839,6 +864,18 @@ ActiveRecord::Schema.define(version: 20181213171645) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "integrations", force: :cascade do |t|
+    t.integer  "conference_id"
+    t.integer  "integration_type"
+    t.string   "key"
+    t.string   "url"
+    t.string   "integration_config_key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "integrations", ["conference_id", "integration_type"], name: "index_integrations_on_conference_id_and_integration_type", unique: true, using: :btree
 
   create_table "lodgings", force: :cascade do |t|
     t.string   "name"
@@ -2683,6 +2720,12 @@ ActiveRecord::Schema.define(version: 20181213171645) do
   add_foreign_key "benefits", "public.conferences", column: "conference_id"
   add_foreign_key "benefits", "conferences"
   add_foreign_key "benefits", "public.conferences", column: "conference_id"
+  add_foreign_key "boomset_guests", "conferences"
+  add_foreign_key "boomset_guests", "integrations"
+  add_foreign_key "boomset_guests", "registrations"
+  add_foreign_key "boomset_ticket_configs", "conferences"
+  add_foreign_key "boomset_ticket_configs", "integrations"
+  add_foreign_key "boomset_ticket_configs", "tickets"
   add_foreign_key "codes", "code_types"
   add_foreign_key "codes", "conferences"
   add_foreign_key "codes", "public.code_types", column: "code_type_id"
@@ -2727,6 +2770,7 @@ ActiveRecord::Schema.define(version: 20181213171645) do
   add_foreign_key "events", "tickets"
   add_foreign_key "events", "public.tickets", column: "ticket_id"
   add_foreign_key "events", "tickets"
+  add_foreign_key "integrations", "conferences"
   add_foreign_key "payment_methods", "conferences"
   add_foreign_key "payment_methods", "public.conferences", column: "conference_id"
   add_foreign_key "payment_methods", "conferences"

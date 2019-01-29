@@ -241,6 +241,7 @@ gem 'icalendar'
 gem 'humanize'
 
 #for REST calls to external sources
+gem 'zapier_ruby'
 gem 'rest-client'
 
 #To make SOAP calls to the PayU API

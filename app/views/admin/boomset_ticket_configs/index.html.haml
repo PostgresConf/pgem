@@ -1,0 +1,30 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Boomset Tickets 
+      %p.text-muted
+        Map the tickets defined in PGEM to Boomset
+
+- if @boomset_ticket_configs.any?
+  .row
+    .col-md-12
+      %table.table.table-hover#rooms
+        %thead
+          %th PGEM Ticket 
+          %th Boomset Ticket ID
+        %tbody
+          - @boomset_ticket_configs.each_with_index do |boomset_ticket_config, index|
+            %tr
+              %td
+                = boomset_ticket_config.ticket.title
+              %td
+                = boomset_ticket_config.boomset_registration_type
+              %td
+                = link_to 'Edit', edit_admin_conference_boomset_ticket_config_path(@conference.short_title, boomset_ticket_config.id),
+                method: :get, class: 'btn btn-primary'
+                = link_to 'Delete', admin_conference_boomset_ticket_config_path(@conference.short_title, boomset_ticket_config.id),
+                method: :delete, class: 'btn btn-danger',
+                data: { confirm: "Do you really want to delete #{boomset_ticket_config.ticket.title}? Attention: This Boomset ticket will be removed"}
+.row
+  .col-md-12.text-right
+    = link_to 'Add Boomset ticket', new_admin_conference_boomset_ticket_config_path(@conference.short_title), class: 'btn btn-primary'
