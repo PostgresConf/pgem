@@ -18,11 +18,13 @@
         .row.row-centered
           - slice.each do |track|
             .col-md-4.col-sm-4.col-centered.col-top.track
-              %h4.text-center{'style'=>"border-bottom: 4px solid #{track.color}"}
+              %h4{'style'=>"border-bottom: 4px solid #{track.color}"}
                 = track.name
               - track.events.joins(:event_type).where(state: 'confirmed').each do |event|
-                %p
-                  = "#{event.title} by #{event.speakers_ordered.first.try(:name) || 'Unknown Speaker'}" unless event.event_type.internal_event?
+                - unless event.event_type.internal_event?
+                  %p.text-left
+                    = link_to event.title, conference_program_proposal_path(@conference.short_title, event.id)
+                    = "by #{event.speakers_ordered.first.try(:name) || 'Unknown Speaker'}"
 
   - if @conference.program and @conference.program.schedule_public
     .row
