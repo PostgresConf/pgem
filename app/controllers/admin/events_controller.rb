@@ -123,6 +123,11 @@ module Admin
       @languages = @program.languages_list
       @event.submitter = current_user
 
+      if @event.event_type.internal_event?
+        @event.update_state(:accept, 'Event accepted!', false, false, false)
+        @event.update_state(:confirm, 'Event confirmed!')
+      end
+
       if @event.save
         ahoy.track 'Event submission', title: 'New submission'
         redirect_to admin_conference_program_events_path(@conference.short_title), notice: 'Event was successfully submitted.'
@@ -142,6 +147,13 @@ module Admin
       send_mail = @event.program.conference.email_settings.send_on_accepted
       subject = @event.program.conference.email_settings.accepted_subject.blank?
       update_state(:accept, 'Event accepted!', true, subject, send_mail)
+    end
+
+    def accept_and_confirm
+      send_mail = @event.program.conference.email_settings.send_on_accepted
+      subject = @event.program.conference.email_settings.accepted_subject.blank?
+      @event.update_state(:accept, true, subject, send_mail, params[:send_mail].blank?)
+      update_state(:confirm, 'Event accepted and confirmed!')
     end
 
     def confirm
@@ -164,8 +176,7 @@ module Admin
 
     def vote
       @ratings = @event.votes.includes(:user)
-
-      if (votes = current_user.votes.find_by_event_id(params[:id]))
+      if (votes = current_user.votes.find_by_event_id(Event.find(params[:id]).id))
         votes.update_attributes(rating: params[:rating])
       else
         @myvote = @event.votes.build

@@ -107,8 +107,7 @@ class ProposalsController < ApplicationController
 
   def vote
     @ratings = @event.votes.includes(:user)
-
-    if (votes = current_user.votes.find_by_event_id(params[:id]))
+    if (votes = current_user.votes.find_by_event_id(Event.find(params[:id]).id))
       votes.update_attributes(rating: params[:rating])
     else
       @myvote = @event.votes.build

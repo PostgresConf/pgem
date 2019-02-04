@@ -19,5 +19,10 @@
         = f.input :include_social_media, label: 'Display social media on the splashpage?'
       = f.inputs name: 'Access' do
         = f.input :public, label: 'Make splash page public?'
+
+      = f.inputs name: 'Custom tags' do
+        = f.input :custom_tags, label: 'Custom HTML/JS to add to the splashpage'
+
+
       %p.text-right
         = f.submit 'Save Splashpage', class: 'btn btn-primary'

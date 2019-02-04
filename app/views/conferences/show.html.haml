@@ -84,6 +84,9 @@
       %section#social-media
         = render 'social_media'
 
+    - if @conference.splashpage.custom_tags?
+      = render 'custom_tags'
+
     = content_for :splash_nav do
       %li
         = link_to('About', conference_about_path(@conference.short_title), :class=>"smoothscroll hidden-xs")

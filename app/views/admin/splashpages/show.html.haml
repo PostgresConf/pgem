@@ -74,9 +74,17 @@
           - else
             No
         %dt
-          Public
+          Public:
         %dd
           - if @splashpage.public
+            Yes
+          - else
+            No
+
+        %dt
+          Has custom tags:
+        %dd
+          - if @splashpage.custom_tags?
             Yes
           - else
             No
