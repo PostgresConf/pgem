@@ -10,12 +10,16 @@
     .col-md-12
       %table.table.table-hover#rooms
         %thead
+          %th Location
           %th Name
           %th Size
           %th Actions
         %tbody
           - @rooms.each_with_index do |room, index|
             %tr
+              %td
+                - unless room.room_location.nil?
+                  = room.room_location.description
               %td
                 = room.name
               %td

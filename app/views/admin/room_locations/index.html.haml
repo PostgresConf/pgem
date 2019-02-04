@@ -1,0 +1,27 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Room Locations
+      %p.text-muted
+        The room locations in your venue
+
+- if @room_locations.any?
+  .row
+    .col-md-12
+      %table.table.table-hover#rooms
+        %thead
+          %th Description
+        %tbody
+          - @room_locations.each_with_index do |room_location, index|
+            %tr
+              %td
+                = room_location.description
+              %td
+                = link_to 'Edit', edit_admin_conference_venue_room_location_path(@conference.short_title, room_location.id),
+                method: :get, class: 'btn btn-primary'
+                = link_to 'Delete', admin_conference_venue_room_location_path(@conference.short_title, room_location.id),
+                method: :delete, class: 'btn btn-danger',
+                data: { confirm: "Do you really want to delete #{room_location.description}? "}
+.row
+  .col-md-12.text-right
+    = link_to 'Add Room Location', new_admin_conference_venue_room_location_path(@conference.short_title), class: 'btn btn-primary'

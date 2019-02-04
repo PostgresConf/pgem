@@ -74,6 +74,8 @@
         Venue
       %ul
         - if @conference.venue && @conference.venue.persisted? && (can? :update, @conference.venue.rooms.build)
+          %li{:class=> active_nav_li(admin_conference_venue_room_locations_path(@conference.short_title))}
+            = link_to 'Room Locations', admin_conference_venue_room_locations_path(@conference.short_title)
           %li{:class=> active_nav_li(admin_conference_venue_rooms_path(@conference.short_title))}
             = link_to 'Rooms', admin_conference_venue_rooms_path(@conference.short_title)
         - if can? :update, @conference.lodgings.build

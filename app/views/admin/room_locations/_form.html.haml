@@ -1,0 +1,14 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        - if @room_location.new_record?
+          New
+        Room Location
+        = @room_location.description
+.row
+  .col-md-8
+    = semantic_form_for(@room_location, :url => (@room_location.new_record? ? admin_conference_venue_room_locations_path : admin_conference_venue_room_location_path(@conference.short_title, @room_location))) do |f|
+      = f.input :description, input_html: { autofocus: true}
+      %p.text-right
+        = f.action :submit, as: :button, button_html: { class: 'btn btn-primary' }

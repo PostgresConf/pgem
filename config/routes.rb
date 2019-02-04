@@ -67,6 +67,7 @@ Osem::Application.routes.draw do
         get 'venue_commercial/render_commercial' => 'venue_commercials#render_commercial'
         resource :venue_commercial, only: [:create, :update, :destroy]
         resources :rooms, except: [:show]
+	resources :room_locations, except: [:show]
       end
       resource :registration_period
       resource :sponsorship_info

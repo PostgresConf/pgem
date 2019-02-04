@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190125210748) do
+ActiveRecord::Schema.define(version: 20190129164139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1891,18 +1891,29 @@ ActiveRecord::Schema.define(version: 20190125210748) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
+  create_table "room_locations", force: :cascade do |t|
+    t.integer  "venue_id"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "room_locations", ["venue_id"], name: "index_room_locations_on_venue_id", using: :btree
+
   create_table "rooms", force: :cascade do |t|
-    t.string  "guid",     null: false
-    t.string  "name",     null: false
+    t.string  "guid",             null: false
+    t.string  "name",             null: false
     t.integer "size"
-    t.integer "venue_id", null: false
+    t.integer "venue_id",         null: false
+    t.integer "room_location_id"
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string  "guid",     null: false
-    t.string  "name",     null: false
+    t.string  "guid",             null: false
+    t.string  "name",             null: false
     t.integer "size"
-    t.integer "venue_id", null: false
+    t.integer "venue_id",         null: false
+    t.integer "room_location_id"
   end
 
   create_table "schedules", force: :cascade do |t|
@@ -2801,6 +2812,9 @@ ActiveRecord::Schema.define(version: 20190125210748) do
   add_foreign_key "refinery_sponsors", "sponsorship_levels"
   add_foreign_key "refinery_sponsors", "public.sponsorship_levels", column: "sponsorship_level_id"
   add_foreign_key "refinery_sponsors", "sponsorship_levels"
+  add_foreign_key "room_locations", "venues"
+  add_foreign_key "rooms", "room_locations"
+  add_foreign_key "rooms", "room_locations"
   add_foreign_key "sponsors_users", "public.sponsors", column: "sponsor_id"
   add_foreign_key "sponsors_users", "sponsors"
   add_foreign_key "sponsors_users", "users"

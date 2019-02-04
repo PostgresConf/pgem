@@ -2,6 +2,7 @@ class Venue < ActiveRecord::Base
   belongs_to :conference
   has_one :commercial, as: :commercialable, dependent: :destroy
   has_many :rooms, dependent: :destroy
+  has_many :room_locations, dependent: :destroy
   before_create :generate_guid
 
   has_paper_trail ignore: [:updated_at, :guid], meta: { conference_id: :conference_id }
