@@ -50,7 +50,7 @@ module Admin
     private
 
     def room_params
-      params.require(:room).permit(:name, :size, :room_location_id)
+	    params.require(:room).permit(:name, :size, :room_location_id, :start_date, :end_date)
     end
   end
 end

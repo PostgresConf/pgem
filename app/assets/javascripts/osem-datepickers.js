@@ -117,6 +117,16 @@ $(function () {
       format: "YYYY-MM-DD"
   });
 
+  $(".room-start-date-datepicker").datetimepicker({
+      pickTime: false,
+      format: "YYYY-MM-DD"
+  });
+
+  $(".room-end-date-datepicker").datetimepicker({
+      pickTime: false,
+      format: "YYYY-MM-DD"
+  });
+
   $(".ticket-end-date-datepicker").datetimepicker({
       pickTime: false,
       format: "YYYY-MM-DD"
