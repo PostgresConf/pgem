@@ -45,6 +45,7 @@
 //= require osem-bootstrap
 //= require osem-revisionhistory
 //= require osem-commercials
+//= require osem-event-bulkops
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
 //= require accounting.min

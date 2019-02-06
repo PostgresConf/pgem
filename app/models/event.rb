@@ -146,7 +146,7 @@ class Event < ActiveRecord::Base
     self.class.state_machine.events_for(current_state).include?(transition)
   end
 
-  def process_confirmation
+  def process_confirmation(options = {})
     if program.conference.email_settings.send_on_confirmed_without_registration? &&
         program.conference.email_settings.confirmed_without_registration_body  &&
         program.conference.email_settings.confirmed_without_registration_subject

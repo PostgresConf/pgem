@@ -6,7 +6,7 @@ module Admin
     load_and_authorize_resource :events_registration, only: :toggle_attendance
     # load_and_authorize_resource :user, only: :new
 
-    before_action :get_event, except: [:index, :create, :new]
+    before_action :get_event, except: [:index, :create, :new, :bulk_state_change]
 
     # FIXME: The timezome should only be applied on output, otherwise
     # you get lost in timezone conversions...
@@ -150,10 +150,31 @@ module Admin
     end
 
     def accept_and_confirm
-      send_mail = @event.program.conference.email_settings.send_on_accepted
+      send_mail = @event.program.conference.email_settings.send_on_accpeted
       subject = @event.program.conference.email_settings.accepted_subject.blank?
       @event.update_state(:accept, true, subject, send_mail, params[:send_mail].blank?)
       update_state(:confirm, 'Event accepted and confirmed!')
+    end
+
+    def bulk_state_change
+      @events = Event.find(params[:event_ids])
+      @transition = params[:state].to_sym
+      @notice = 'Events updated'
+      @errors = []
+      @events.each do |event|
+        begin
+          event.send(@transition, send_mail: params[:send_mail].blank?)
+          event.save
+        rescue Transitions::InvalidTransition => e
+          @errors.push "Update state failed. #{e.message}"
+        end
+      end
+
+      @notice += ', there were some errors' unless @errors.blank?
+      flash[:notice] = @notice if @errors.size != @events.size
+      flash[:error] = 'Failed to update: ' + @errors.join(';') unless @errors.blank?
+
+      redirect_back_or_to(admin_conference_program_events_path(conference_id: @conference.short_title)) && return
     end
 
     def confirm
