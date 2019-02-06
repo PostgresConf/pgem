@@ -1,0 +1,33 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Integrations 
+      %p.text-muted
+        Configuration setting for different external integrations
+
+- if @integrations.any?
+  .row
+    .col-md-12
+      %table.table.table-hover#rooms
+        %thead
+          %th Type
+          %th Key
+          %th URL
+        %tbody
+          - @integrations.each_with_index do |integration, index|
+            %tr
+              %td
+                = integration.integration_type
+              %td
+                = integration.key
+              %td
+                = integration.url
+              %td
+                = link_to 'Edit', edit_admin_conference_integration_path(@conference.short_title, integration.id),
+                method: :get, class: 'btn btn-primary'
+                = link_to 'Delete', admin_conference_integration_path(@conference.short_title, integration.id),
+                method: :delete, class: 'btn btn-danger',
+                data: { confirm: "Do you really want to delete #{integration.integration_type}? Attention: This integration will be removed"}
+.row
+  .col-md-12.text-right
+    = link_to 'Add Integration', new_admin_conference_integration_path(@conference.short_title), class: 'btn btn-primary'

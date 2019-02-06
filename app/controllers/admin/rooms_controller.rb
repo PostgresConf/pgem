@@ -4,9 +4,13 @@ module Admin
     load_and_authorize_resource :venue, through: :conference, singleton: true
     load_and_authorize_resource through: :venue
 
-    def index; end
+    def index
+      @room_locations = @venue.room_locations
+    end
 
-    def edit; end
+    def edit
+      @room_locations = @venue.room_locations
+    end
 
     def new
       @room = @venue.rooms.new
@@ -46,7 +50,7 @@ module Admin
     private
 
     def room_params
-      params.require(:room).permit(:name, :size)
+	    params.require(:room).permit(:name, :size, :room_location_id, :start_date, :end_date)
     end
   end
 end
