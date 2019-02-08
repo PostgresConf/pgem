@@ -96,6 +96,9 @@ Osem::Application.routes.draw do
             patch :restart
             get :vote
           end
+          collection do
+            patch :bulk_state_change
+          end
         end
       end
 
