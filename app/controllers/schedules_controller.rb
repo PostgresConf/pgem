@@ -39,6 +39,7 @@ class SchedulesController < ApplicationController
       redirect_to events_conference_schedule_path(@conference.short_title)
     end
 
+    @schedule = @program.selected_schedule
     @events_schedules = schedules
     @events_xml = schedules.map(&:event).group_by{ |event| event.time.to_date } if schedules
     @dates = @conference.start_date..@conference.end_date

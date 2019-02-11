@@ -7,7 +7,11 @@
                      "data-interval" => "false" }
   / Wrapper for slides
   .carousel-inner
-    - start_time = "#{date} #{@conf_start}".in_time_zone(@conference.timezone)
+    - first_event = EventSchedule.first_event_time(@schedule, date)
+    - if first_event.present?
+      - start_time = "#{first_event} #{@conf_start}".in_time_zone(@conference.timezone)
+    - else 
+      - start_time = "#{date} #{@conf_start}".in_time_zone(@conference.timezone)
     - (0..carousel_number-1).each do |number|
       %div{ class: "#{ carousel_item_class(number, carousel_number, hrs_per_slide, @hour_column)}" }
         %table.table.table-bordered.schedule-table#schedule
@@ -23,12 +27,18 @@
               - td_start_time += @step_minutes
           - start_room_time = start_time
           - @rooms.each do |room|
+            - unless room.room_used_day(date)
+              - next
+
             - start_room_time = start_time
             - span = 1
             %tr
               %td.room{ style: "height: #{ td_height(@rooms) }px;" }
                 .room.elipsis.break-words{ style: "-webkit-line-clamp: #{ room_lines(@rooms, true) }; height: #{ room_size(@rooms, true) }px;" }
                   = room.name
+                  - if room.room_location.present?
+                    %br
+                    (#{room.room_location.description})
                 - event_schedules = room.event_schedules.select{ |e| (e.schedule_id == @conference.program.selected_schedule.id) && (e.end_time >= start_time) && (e.start_time <= (start_time + hrs_per_slide.hour)) }
                 - (1..intervals).each do |i|
                   - if span > 1

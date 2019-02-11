@@ -13,6 +13,10 @@ class Room < ActiveRecord::Base
 
   default_scope { order(room_location_id: :asc, name: :asc) }
 
+  def room_used_day(day)
+    EventSchedule.where('room_id = ? AND start_time::date = ?::date', self.id, day).exists?
+  end
+
   def self.day_rooms(conference_id, day)
     Room.find_by_sql("SELECT unnest(array_agg(room_id)) as room_id FROM day_rooms(#{conference_id}, '#{day}'::timestamp)")
   end

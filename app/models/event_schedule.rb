@@ -36,6 +36,10 @@ class EventSchedule < ActiveRecord::Base
     room.event_schedules.where('start_time >= ? and start_time < ?', at_time, interval_end).first
   end
 
+  def self.first_event_time(schedule, date)
+    EventSchedule.where('schedule_id = ? AND start_time::date = ?::date', schedule.id, date).minimum(:start_time)
+  end
+
   private
 
   def conference_id
