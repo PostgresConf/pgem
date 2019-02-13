@@ -150,7 +150,7 @@ module Admin
     end
 
     def accept_and_confirm
-      send_mail = @event.program.conference.email_settings.send_on_accpeted
+      send_mail = @event.program.conference.email_settings.send_on_accepted
       subject = @event.program.conference.email_settings.accepted_subject.blank?
       @event.update_state(:accept, true, subject, send_mail, params[:send_mail].blank?)
       update_state(:confirm, 'Event accepted and confirmed!')
