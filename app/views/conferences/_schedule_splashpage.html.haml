@@ -23,7 +23,7 @@
               - track.events.joins(:event_type).where(state: 'confirmed').each do |event|
                 - unless event.event_type.internal_event?
                   %p.text-left
-                    = link_to event.title, conference_program_proposal_path(@conference.short_title, event.id)
+                    = link_to event.title, conference_program_proposal_path(@conference.short_title, event)
                     = "by #{event.speakers_ordered.first.try(:name) || 'Unknown Speaker'}"
 
   - if @conference.program and @conference.program.schedule_public

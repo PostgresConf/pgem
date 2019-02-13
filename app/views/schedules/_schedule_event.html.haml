@@ -4,7 +4,7 @@
            rowspan: span, |
            role: "button", |
            data: { trackid: event.track.try(:id) } }
-  %a.unstyled-link{href: url_for(conference_program_proposal_path(@conference.short_title, event.id))}
+  %a.unstyled-link{href: url_for(conference_program_proposal_path(@conference.short_title, event))}
     %div{ class: "elipsis break-words event-title", |
           style: "-webkit-line-clamp: #{ event_lines(@rooms) }; width: #{ event_width_layout(@rooms) }px;"} |
 
