@@ -195,8 +195,9 @@
         %span.fa.fa-cloud-upload
         Integrtions
       %ul
-        / %li{class: active_nav_li(admin_conference_boomset_path(@conference.short_title))}
-        /  = link_to 'Boomset', admin_conference_boomset_path(@conference.short_title)
+        - if Integration.has_boomset?(@conference)
+          %li{class: active_nav_li(admin_conference_boomset_ticket_configs_path(@conference.short_title))}
+            = link_to 'Boomset Tickets', admin_conference_boomset_ticket_configs_path(@conference.short_title)
 
 
   - if can? :update, @conference.email_settings
