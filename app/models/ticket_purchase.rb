@@ -57,21 +57,23 @@ class TicketPurchase < ActiveRecord::Base
         price = prices[ticket.id.to_s].to_f
 
 	if quantity > 0
-  	  code = Code.find(code_id)
-	  if TicketPurchase.get_code_usage(conference, code) >= code.max_uses && code.max_uses != 0
-            errors.push( "The Promotional Code (" + code.name + ") has aleady been used")
-	  else
-            # if the user bought the ticket, just update the quantity
-            if ticket.bought?(user) && ticket.unpaid?(user)
-              purchase = update_quantity(conference, quantity, ticket, user)
-            else
-              purchase = purchase_ticket(conference, quantity, ticket, user, code_id, chosen_event_list, price)
-            end
-
-            if purchase && !purchase.save
-              errors.push(purchase.errors.full_messages)
-            end
+          code = Code.find_by(id: code_id)
+	  if code.present?
+	    if TicketPurchase.get_code_usage(conference, code) >= code.max_uses && code.max_uses != 0
+              errors.push( "The Promotional Code (" + code.name + ") has aleady been used")
+	    end
 	  end
+
+          # if the user bought the ticket, just update the quantity
+          if ticket.bought?(user) && ticket.unpaid?(user)
+            purchase = update_quantity(conference, quantity, ticket, user)
+          else
+            purchase = purchase_ticket(conference, quantity, ticket, user, code_id, chosen_event_list, price)
+          end
+
+          if purchase && !purchase.save
+            errors.push(purchase.errors.full_messages)
+          end
 	end 
       end
     end

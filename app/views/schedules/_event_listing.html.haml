@@ -1,4 +1,4 @@
-- event_url = url_for(conference_program_proposal_path(@conference.short_title, event.id))
+- event_url = url_for(conference_program_proposal_path(@conference.short_title, event))
 .panel.panel-default.eventblock{:class => ("past" if (event.end_time.in_time_zone(@conference.timezone) < current_time.in_time_zone(@conference.timezone)))}
   .panel-body.row
     .col-md-2

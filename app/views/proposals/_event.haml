@@ -4,7 +4,7 @@
 
   %td.col-md-7{style: "padding:20px 8px 20px 8px;"}
     - if @conference
-      = link_to event.title, conference_program_proposal_path(event.program.conference.short_title, event.id)
+      = link_to event.title, conference_program_proposal_path(event.program.conference.short_title, event)
     -else
       = link_to "#{event.title} (#{event.program.conference.short_title})", conference_program_proposal_path(event.program.conference.short_title, event.id)
     %br

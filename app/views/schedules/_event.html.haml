@@ -1,4 +1,4 @@
-.panel.panel-default.eventblock{ data: { link: url_for(conference_program_proposal_path(@conference.short_title, event.id)), trackid: event.track.try(:id) } }
+.panel.panel-default.eventblock{ data: { link: url_for(conference_program_proposal_path(@conference.short_title, event)), trackid: event.track.try(:id) } }
   .panel-body
     - event.speakers_ordered.each do |speaker|
       = image_tag speaker.avatar_url(version: 'medium'), :class => "img-circle pull-right all-speaker-pic", |
@@ -16,11 +16,11 @@
       - if event.commercials.present?
         %br
         %span.fa.fa-video-camera
-        = link_to 'video', conference_program_proposal_path(@conference.short_title, event.id)
+        = link_to 'video', conference_program_proposal_path(@conference.short_title, event)
     %p
       = markdown(truncate(event.abstract, :length => 400))
       - if !defined? signage
-        = link_to 'more', conference_program_proposal_path(@conference.short_title, event.id) if event.abstract.length > 400
+        = link_to 'more', conference_program_proposal_path(@conference.short_title, event) if event.abstract.length > 400
 
     - if event.state == 'canceled' || event.state == 'withdrawn'
       %span.label.label-danger CANCELED
