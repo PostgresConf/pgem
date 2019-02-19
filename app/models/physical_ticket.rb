@@ -56,6 +56,14 @@ class PhysicalTicket < ActiveRecord::Base
           Registration.destroy(remove_registration.id)
         end
 
+	##
+	# Check if there are any integrations that require an update
+	##
+        integrations = Integration.where(conference_id: ticket_purchase.conference_id)
+        integrations.each do |integration|
+	  integration.update_registration(registration)
+        end
+
       end
     end
 
@@ -103,6 +111,15 @@ class PhysicalTicket < ActiveRecord::Base
       end
 
       physical_ticket.save
+
+      ##
+      # Check if there are any integrations that require an update
+      ##
+      integrations = Integration.where(conference_id: ticket_purchase.conference_id)
+      integrations.each do |integration|
+        integration.update_registration(registration)
+      end
+
     end
 
 end

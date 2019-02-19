@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader, mount_on: :avatar_file_name
 
   before_create :setup_role
+  after_update :check_active_integrations
 
   # add scope
   scope :comment_notifiable, ->(conference) {joins(:roles).where('roles.name IN (?)', [:organizer, :cfp]).where('roles.resource_type = ? AND roles.resource_id = ?', 'Conference', conference.id)}
@@ -280,4 +281,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  ##
+  # Check if any active conferences have integrations that require us to send
+  # and update about the user change
+  ##
+  def check_active_integrations
+    integrations = Integration.joins(:conference).where('conferences.end_date >= CURRENT_DATE')
+    integrations.each do |integration|
+      if integration.integration_type == "boomset"
+        r = Registration.where(conference_id: integration.conference_id, user_id: self.id).first
+	BoomsetAttendeeRegisterJob.perform_later(r)
+      end
+    end
+  end
 end

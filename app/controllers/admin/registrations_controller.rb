@@ -55,8 +55,14 @@ module Admin
     def sync_all
       @registrations = @conference.registrations.includes(:user).order('registrations.created_at ASC')
 
-      @registrations.each do |r|
-        EventheroAttendeeRegisterJob.perform_later(r)
+      ##
+      # Check if there are any integrations that require an update
+      ##
+      integrations = Integration.where(conference_id: @conference.id)
+      integrations.each do |integration|
+	@registrations.each do |r|
+          integration.update_registration(r)
+	end
       end
 
       redirect_to admin_conference_registrations_path(@conference.short_title),

@@ -34,9 +34,10 @@ class Boomset
 
     if response.code == 201
         json = JSON.parse response.body
-        json["id"]
+        id = json["id"]
     end
 
+    id.to_i
     rescue RestClient::Exception
       -1
   end
@@ -47,15 +48,15 @@ class Boomset
 
     url = "https://api.boomset.com/events/" + event_id.to_s + "/guests/" + guest_id.to_s
 
-    RestClient.put url, guest, {content_type: content_type, authorization: auth}
+    response = RestClient.put url, guest, {content_type: content_type, authorization: auth}
 
     if response.code == 200
         json = JSON.parse response.body
-        json["id"]
+        id = json["id"]
     end
 
+    id.to_i
     rescue RestClient::BadRequest => e
-       puts e.response 
        -1
   end
 

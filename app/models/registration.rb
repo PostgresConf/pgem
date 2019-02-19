@@ -100,5 +100,14 @@ class Registration < ActiveRecord::Base
     unless Rails.application.secrets.eventhero_access_key.blank?
       EventheroAttendeeRegisterJob.perform_later(self)
     end
+
+    ##
+    # Check if there are any integrations that require an update
+    ##
+    integrations = Integration.where(conference_id: conference.id)
+    integrations.each do |integration|
+      integration.update_registration(self)
+    end
+
   end
 end
