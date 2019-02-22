@@ -7,6 +7,10 @@
       %p.text-muted
         Create the schedules for the conference
 
+        .btn-group.pull-right
+          - if Integration.has_sched?(@conference)
+            = link_to 'Sync All', sync_all_admin_conference_schedules_path(@conference.short_title), method: :patch, class: 'btn btn-success'
+
 - if @rooms.present?
   .row
     .col-md-2

@@ -37,6 +37,7 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :users
 
   before_create :generate_guid
+  after_update :sync_with_schedule_integration
 
   validate :abstract_limit
   validate :before_end_of_conference, on: :create
@@ -336,4 +337,19 @@ class Event < ActiveRecord::Base
   def conference_id
     program.conference_id
   end
+
+  def sync_with_schedule_integration
+    es = EventSchedule.where(event_id: self.id).first
+
+    unless es.blank?
+      ##
+      # Check if there are any integrations that require an update
+      ##
+      integrations = Integration.where(conference_id: program.conference_id)
+      integrations.each do |integration|
+        integration.update_event(self)
+      end
+    end
+  end
+
 end

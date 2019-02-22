@@ -38,5 +38,23 @@ module Admin
                     error: "Schedule couldn't be deleted. #{@schedule.errors.full_messages.join('. ')}."
       end
     end
+
+    def sync_all
+      @event_schedules = @selected_schedule.event_schedules 
+
+      ##
+      # Check if there are any integrations that require an update
+      ##
+      integrations = Integration.where(conference_id: @conference.id)
+      integrations.each do |integration|
+        @event_schedules.each do |es|
+		integration.update_event(es.event)
+        end
+      end
+
+      redirect_to admin_conference_schedule_path(@conference.short_title, @selected_schedule.id),
+                  notice: "All events queued to sync to the schedule service"
+
+    end
   end
 end

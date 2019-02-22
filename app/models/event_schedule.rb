@@ -17,6 +17,10 @@ class EventSchedule < ActiveRecord::Base
 
   delegate :guid, to: :room, prefix: true
 
+  after_create :sync_with_schedule_integration
+  after_update :sync_with_schedule_integration
+  after_destroy :sync_with_schedule_integration
+
   ##
   # Returns end of the event
   #
@@ -45,4 +49,15 @@ class EventSchedule < ActiveRecord::Base
   def conference_id
     schedule.program.conference_id
   end
+
+  def sync_with_schedule_integration
+    ##
+    # Check if there are any integrations that require an update
+    ##
+    integrations = Integration.where(conference_id: schedule.program.conference.id)
+    integrations.each do |integration|
+      integration.update_event(self.event)
+    end
+  end
+
 end

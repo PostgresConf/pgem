@@ -207,6 +207,15 @@ class SchedulesController < ApplicationController
     send_data @cal.to_ical, :filename => @conference.short_title + '.ics'
   end
 
+  def sched
+    unless Integration.has_sched?(@conference)
+      redirect_to events_conference_schedule_path(@conference.short_title)
+    end
+
+    integration = Integration.get_sched_integration(@conference)
+    @sched_url = integration.url
+  end
+
   private
 
   def respond_to_options

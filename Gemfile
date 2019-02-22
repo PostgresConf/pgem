@@ -240,9 +240,12 @@ gem 'icalendar'
 
 gem 'humanize'
 
+#for integration with Sched
+gem 'sched', '~> 0.1.13'
+
 #for REST calls to external sources
-gem 'zapier_ruby'
 gem 'rest-client'
+gem 'rest-client-logger'
 
 #To make SOAP calls to the PayU API
 gem 'httpclient', '~> 2.8', '>= 2.8.3'
