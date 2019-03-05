@@ -71,10 +71,14 @@ class SchedSessionSyncJob < ActiveJob::Base
       session.session_end = es.end_time.in_time_zone(conference.timezone).strftime('%Y-%m-%d %H:%M')
 
       session.session_type = event.event_type.title
-      session.session_subtype = event.track.name
+      unless event.track.blank?
+        session.session_subtype = event.track.name
+      end
 
-      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-      session.description = markdown.render(event.abstract)
+      unless event.abstract.blank?
+        markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+        session.description = markdown.render(event.abstract)
+      end
 
       session.venue = es.room.name
       session.address = es.room.room_location.description
