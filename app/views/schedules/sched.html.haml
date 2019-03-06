@@ -1,5 +1,6 @@
 = content_for :sched do
   .container
+    = render partial: 'schedule_tabs',  locals: { active: 'schedule' }
 
     .row.active-events
 
@@ -8,6 +9,7 @@
       Program
 
     .row
-      <a id="sched-embed" href="#{@sched_url}/">View the PostgresConf 2019 schedule &amp; directory.</a><script type="text/javascript" src="#{@sched_url}/js/embed.js"></script>
+      <a id="sched-embed" href="#{@sched_url}/grid/" data-sched-sidebar="no">View the PostgresConf 2019 schedule &amp; directory.</a><script type="text/javascript" src="#{@sched_url}/js/embed.js"></script>
+
 = yield :sched
 
