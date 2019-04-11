@@ -14,6 +14,7 @@ module Admin
 
     def new
       @room = @venue.rooms.new
+      @room_locations = @venue.room_locations
     end
 
     def create
