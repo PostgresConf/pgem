@@ -47,7 +47,7 @@ gem 'carrierwave-bombshelter'
 gem 'rails-i18n', '~> 4.0.0'
 
 # as authentification framework
-gem 'devise'
+gem 'devise',  '>= 4.6.0'
 gem 'devise_ichain_authenticatable'
 
 # for openID authentication
@@ -84,7 +84,7 @@ gem 'uglifier', '>= 1.3.0'
 
 # as the front-end framework
 gem 'mini_racer'
-gem 'bootstrap-sass', '~> 3.3.4.1'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'autoprefixer-rails'
 gem 'formtastic-bootstrap'
 gem 'formtastic', '~> 3.1.1'
