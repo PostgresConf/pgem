@@ -63,38 +63,38 @@ GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
   specs:
-    actionmailer (4.2.10)
-      actionpack (= 4.2.10)
-      actionview (= 4.2.10)
-      activejob (= 4.2.10)
+    actionmailer (4.2.11.1)
+      actionpack (= 4.2.11.1)
+      actionview (= 4.2.11.1)
+      activejob (= 4.2.11.1)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 1.0, >= 1.0.5)
-    actionpack (4.2.10)
-      actionview (= 4.2.10)
-      activesupport (= 4.2.10)
+    actionpack (4.2.11.1)
+      actionview (= 4.2.11.1)
+      activesupport (= 4.2.11.1)
       rack (~> 1.6)
       rack-test (~> 0.6.2)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionview (4.2.10)
-      activesupport (= 4.2.10)
+    actionview (4.2.11.1)
+      activesupport (= 4.2.11.1)
       builder (~> 3.1)
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
     active_model_serializers (0.9.4)
       activemodel (>= 3.2)
-    activejob (4.2.10)
-      activesupport (= 4.2.10)
+    activejob (4.2.11.1)
+      activesupport (= 4.2.11.1)
       globalid (>= 0.3.0)
-    activemodel (4.2.10)
-      activesupport (= 4.2.10)
+    activemodel (4.2.11.1)
+      activesupport (= 4.2.11.1)
       builder (~> 3.1)
-    activerecord (4.2.10)
-      activemodel (= 4.2.10)
-      activesupport (= 4.2.10)
+    activerecord (4.2.11.1)
+      activemodel (= 4.2.11.1)
+      activesupport (= 4.2.11.1)
       arel (~> 6.0)
-    activesupport (4.2.10)
+    activesupport (4.2.11.1)
       i18n (~> 0.7)
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
@@ -135,6 +135,10 @@ GEM
       rails (>= 3.1)
     babosa (1.0.2)
     bcrypt (3.1.12)
+    better_errors (2.5.1)
+      coderay (>= 1.0.0)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.3.4.1)
@@ -192,7 +196,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     columnize (0.8.9)
-    concurrent-ruby (1.0.5)
+    concurrent-ruby (1.1.5)
     countries (1.2.5)
       currencies (~> 0.4.2)
       i18n_data (~> 0.7.0)
@@ -208,6 +212,7 @@ GEM
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
+    curb (0.9.10)
     currencies (0.4.2)
     daemons (1.1.9)
     dante (0.2.0)
@@ -242,6 +247,7 @@ GEM
       addressable (~> 2.3)
       multi_json (~> 1.0)
       rack (>= 1.3.0)
+    erubi (1.8.0)
     erubis (2.7.0)
     exception_notification (4.2.1)
       actionmailer (>= 4.0, < 6)
@@ -279,7 +285,7 @@ GEM
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
     geocoder (1.2.2)
-    globalid (0.4.1)
+    globalid (0.4.2)
       activesupport (>= 4.2.0)
     globalize (5.0.1)
       activemodel (>= 4.2.0, < 4.3)
@@ -352,7 +358,6 @@ GEM
       letter_opener (~> 1.0)
       railties (>= 3.2)
     libv8 (6.7.288.46.1)
-    libv8 (6.7.288.46.1-x86_64-linux)
     listen (2.7.2)
       celluloid (>= 0.15.2)
       celluloid-io (>= 0.15.0)
@@ -365,7 +370,7 @@ GEM
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.5)
-    mail (2.7.0)
+    mail (2.7.1)
       mini_mime (>= 0.1.1)
     method_source (0.8.2)
     mime-types (2.99.3)
@@ -375,7 +380,7 @@ GEM
       rake
     mini_magick (4.5.1)
     mini_mime (1.0.1)
-    mini_portile2 (2.3.0)
+    mini_portile2 (2.4.0)
     mini_racer (0.2.4)
       libv8 (>= 6.3)
     minitest (5.11.3)
@@ -397,8 +402,8 @@ GEM
     nested_form (0.3.2)
     netrc (0.11.0)
     nio4r (1.2.1)
-    nokogiri (1.8.5)
-      mini_portile2 (~> 2.3.0)
+    nokogiri (1.10.2)
+      mini_portile2 (~> 2.4.0)
     oauth2 (0.9.4)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
@@ -469,16 +474,16 @@ GEM
       ruby-openid (>= 2.1.8)
     rack-test (0.6.3)
       rack (>= 1.0)
-    rails (4.2.10)
-      actionmailer (= 4.2.10)
-      actionpack (= 4.2.10)
-      actionview (= 4.2.10)
-      activejob (= 4.2.10)
-      activemodel (= 4.2.10)
-      activerecord (= 4.2.10)
-      activesupport (= 4.2.10)
+    rails (4.2.11.1)
+      actionmailer (= 4.2.11.1)
+      actionpack (= 4.2.11.1)
+      actionview (= 4.2.11.1)
+      activejob (= 4.2.11.1)
+      activemodel (= 4.2.11.1)
+      activerecord (= 4.2.11.1)
+      activesupport (= 4.2.11.1)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.2.10)
+      railties (= 4.2.11.1)
       sprockets-rails
     rails-assets-bootstrap (3.3.6)
       rails-assets-jquery (>= 1.9.1, < 3)
@@ -512,13 +517,13 @@ GEM
       activemodel (~> 4.0)
     rails_autolink (1.1.6)
       rails (> 3.1)
-    railties (4.2.10)
-      actionpack (= 4.2.10)
-      activesupport (= 4.2.10)
+    railties (4.2.11.1)
+      actionpack (= 4.2.11.1)
+      activesupport (= 4.2.11.1)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rainbow (3.0.0)
-    rake (12.3.1)
+    rake (12.3.2)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.4)
       ffi (>= 0.5.0)
@@ -587,6 +592,9 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rest-client-logger (0.0.1)
+      railties (>= 3.1)
+      rest-client (>= 1.6)
     rolify (5.0.0)
     routing-filter (0.6.1)
       actionpack (>= 4.2, < 5.2)
@@ -638,6 +646,8 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
     sax-machine (1.3.2)
+    sched (0.1.13)
+      curb (~> 0.9.3)
     seed_dump (3.2.4)
       activerecord (>= 4)
       activesupport (>= 4)
@@ -727,8 +737,6 @@ GEM
     xpath (2.0.0)
       nokogiri (~> 1.3)
     yajl-ruby (1.4.1)
-    zapier_ruby (0.1.1)
-      rest-client
     zilch-authorisation (0.0.1)
 
 PLATFORMS
@@ -745,6 +753,8 @@ DEPENDENCIES
   awesome_nested_set (~> 3.0.0)
   axlsx!
   axlsx_rails
+  better_errors
+  binding_of_caller
   bootstrap-sass (~> 3.3.4.1)
   bootstrap-social-rails
   bootstrap-switch-rails (~> 3.0.0)
@@ -812,7 +822,7 @@ DEPENDENCIES
   prawn-qrcode (~> 0.2.2.1)
   prawn_rails
   quiet_assets
-  rails (~> 4.2.10)
+  rails (~> 4.2.11.1)
   rails-assets-bootstrap-markdown!
   rails-assets-date.format!
   rails-assets-holderjs!
@@ -837,6 +847,7 @@ DEPENDENCIES
   refinerycms-tinymce!
   responders (~> 2.0)
   rest-client
+  rest-client-logger
   rolify
   rqrcode
   rspec-activemodel-mocks
@@ -845,6 +856,7 @@ DEPENDENCIES
   ruby-oembed
   rubyzip (>= 1.2.2)
   sass-rails (>= 4.0.2)
+  sched (~> 0.1.13)
   seed_dump
   selectize-rails
   shoulda-matchers
@@ -863,7 +875,6 @@ DEPENDENCIES
   whenever
   will_paginate-bootstrap
   yajl-ruby (~> 1.2, >= 1.2.1)
-  zapier_ruby
 
 BUNDLED WITH
    1.17.1
