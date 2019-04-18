@@ -51,6 +51,7 @@
 //= require accounting.min
 //= require selectize
 //= require jquery.slick
+//= require color-picker
 
 $(document).ready(function() {
     $('a[disabled=disabled]').click(function(event){

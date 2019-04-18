@@ -2,7 +2,7 @@
   .panel.panel-default.conference-panel-alt
     .panel-body
       .row.equal
-        .col-md-4.leftblock
+        .col-md-4.leftblock{style: "background-color: #{conference.color}"}
           = image_tag(conference.picture_url, class: 'img-responsive center-block logo') if conference.picture?
 
         .col-md-8.rightblock.grey
@@ -29,7 +29,7 @@
                 = markdown(conference.description)
           .row.h5
 
-      .row
+      .row{style: "background-color: #{conference.color}"}
         .col-md-4.visible-xs.grey
           - if conference.splashpage
             - if conference.splashpage.include_sponsors && !conference.ended?

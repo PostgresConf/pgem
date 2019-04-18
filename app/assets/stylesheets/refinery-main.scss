@@ -83,11 +83,33 @@
   }
 }
 
+.conference-card {
+  border-radius: 0px;
+  border: none;
+  .card-img-top {
+    padding: 10px;
+    width: 100%;
+    height: 15vw;
+    object-fit: contain;
+  }
+  .card-block {
+    min-height: 100px;
+  }
+  .card-footer {
+    border: inherit;
+    border-radius: inherit;
+    background-color: inherit;
+  }
+  .btn {
+    border-radius: inherit;
+  }
+}
+
 .home-banner {
-  height: 450px;
-  border-bottom-color: #eeeeee;
-  border-bottom-style: solid;
-  margin-bottom: 30px;
+  height: auto;
+  // border-bottom-color: #eeeeee;
+  // border-bottom-style: solid;
+  // margin-bottom: 30px;
 
   color: whitesmoke;
 

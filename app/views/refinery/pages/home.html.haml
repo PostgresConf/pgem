@@ -2,17 +2,10 @@
 %section.home-banner
   - if @current.any?
     .container.conferences
-      .row
-        .col-md-6.col-md-offset-3
-          %ul.nav.center-pills.conf-nav.h4
-            - @current.each_with_index do |conference, index|
-              %li{role: "presentation", class: ('active' if index == 0)}
-                %a{href: "##{conference.short_title}", data: {toggle: 'tab'}} #{conference.title}
-
-      .row.tab-content
-        - @current.each_with_index do |conference, index|
-          .tab-pane.fade.text-center{id: conference.short_title, class: ('in active' if index == 0)}
-            = render partial: '/refinery/pages/shared/conference_block', locals: { conference: conference }
+      .row.row-centered
+        - @current[0..2].each_with_index do |conference, index|
+          .col-lg-4.col-sm-8.col-centered
+            = render partial: '/refinery/pages/shared/conference_block_tile', locals: { conference: conference }
   - else
     .row.conferences
       .h4.text-center
