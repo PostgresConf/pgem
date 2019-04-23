@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'securerandom'
 
 class BackgroundUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
@@ -27,7 +28,8 @@ class BackgroundUploader < CarrierWave::Uploader::Base
 
   # compatibility with our paperclip storage paths..
   def extra_store_dir
-    'backgrounds'
+    return 'backgrounds' if mounted_as == :background
+    'tile_backgrounds'
   end
 
   # Returns the id of the instance in a split path form. e.g. returns
