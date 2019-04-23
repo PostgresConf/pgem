@@ -1114,11 +1114,10 @@ class Conference < ActiveRecord::Base
 
   def get_color
     %w(
-        #000000 #0000FF #00FF00 #FF0000 #FFFF00 #9900CC
-        #CC0066 #00FFFF #FF00FF #C0C0C0 #00008B #FFD700
-        #FFA500 #FF1493 #FF00FF #F0FFFF #EE82EE #D2691E
-        #C0C0C0 #A52A2A #9ACD32 #9400D3 #8B008B #8B0000
-        #87CEEB #808080 #800080 #008B8B #006400
+      #000000 #ffffff #d32f2f #c2185b #7b1fa2 #512da8
+      #303f9f #1976d2 #0288d1 #0097a7 #00796b #388e3c
+      #689f38 #afb42b #fbc02d #ffa000 #f57c00 #e64a19
+      #5d4037 #616161 #455a64
       ).sample
   end
 

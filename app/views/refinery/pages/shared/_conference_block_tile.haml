@@ -1,7 +1,7 @@
 - card_style = conference.tile_background? ? "background: url(#{conference.tile_background.url})  no-repeat scroll 0px 0px / cover;" : "background-color: #{conference.color};"
 .card.conference-card.text-white{style: "#{card_style}"}
     %img.card-img-top{src: "#{conference.picture? ? conference.picture.url : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}"}
-    .card-block
+    .card-block{style: "color: #{conference.tile_font_color}"}
         .card-text.h3
             = date_string(conference.start_date, conference.end_date)
         .card-text.h4
