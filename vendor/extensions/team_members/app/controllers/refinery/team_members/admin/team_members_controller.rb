@@ -10,7 +10,7 @@ module Refinery
 
         # Only allow a trusted parameter "white list" through.
         def team_member_params
-          params.require(:team_member).permit(:firstname, :middlename, :lastname, :role, :photo_id, :description, :twitter, :linkedin)
+          params.require(:team_member).permit(:firstname, :middlename, :lastname, :role, :photo_id, :description, :twitter, :linkedin, :show_on_homepage)
         end
       end
     end

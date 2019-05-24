@@ -7,7 +7,7 @@
   %section.about-section.team
     .h2.text-center
       Our Team
-    - @team_members = Refinery::TeamMembers::TeamMember.order('position ASC')
+    - @team_members = Refinery::TeamMembers::TeamMember.where(show_on_homepage: true).order('position ASC')
     - @team_members.each_slice(3) do |slice|
       .row.row-centered
         - slice.each do |team_member|

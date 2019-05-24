@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190204150218) do
+ActiveRecord::Schema.define(version: 20190524095931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -366,12 +366,12 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   add_index "conference_team_members", ["conference_id"], name: "index_conference_team_members_on_conference_id", using: :btree
 
   create_table "conferences", force: :cascade do |t|
-    t.string   "guid",                                       null: false
-    t.string   "title",                                      null: false
-    t.string   "short_title",                                null: false
-    t.string   "timezone",                                   null: false
-    t.date     "start_date",                                 null: false
-    t.date     "end_date",                                   null: false
+    t.string   "guid",                                           null: false
+    t.string   "title",                                          null: false
+    t.string   "short_title",                                    null: false
+    t.string   "timezone",                                       null: false
+    t.date     "start_date",                                     null: false
+    t.date     "end_date",                                       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "logo_file_name"
@@ -394,15 +394,18 @@ ActiveRecord::Schema.define(version: 20190204150218) do
     t.integer  "ticket_layout",              default: 0
     t.text     "extended_description"
     t.integer  "conference_group_id"
+    t.string   "tile_overlay_file_name"
+    t.string   "tile_background_file_name"
+    t.string   "tile_font_color",            default: "#ffffff"
   end
 
   create_table "conferences", force: :cascade do |t|
-    t.string   "guid",                                       null: false
-    t.string   "title",                                      null: false
-    t.string   "short_title",                                null: false
-    t.string   "timezone",                                   null: false
-    t.date     "start_date",                                 null: false
-    t.date     "end_date",                                   null: false
+    t.string   "guid",                                           null: false
+    t.string   "title",                                          null: false
+    t.string   "short_title",                                    null: false
+    t.string   "timezone",                                       null: false
+    t.date     "start_date",                                     null: false
+    t.date     "end_date",                                       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "logo_file_name"
@@ -425,6 +428,9 @@ ActiveRecord::Schema.define(version: 20190204150218) do
     t.integer  "ticket_layout",              default: 0
     t.text     "extended_description"
     t.integer  "conference_group_id"
+    t.string   "tile_overlay_file_name"
+    t.string   "tile_background_file_name"
+    t.string   "tile_font_color",            default: "#ffffff"
   end
 
   create_table "conferences_codes", id: false, force: :cascade do |t|
@@ -662,26 +668,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   add_index "event_schedules", ["room_id"], name: "index_event_schedules_on_room_id", using: :btree
   add_index "event_schedules", ["schedule_id"], name: "index_event_schedules_on_schedule_id", using: :btree
   add_index "event_schedules", ["schedule_id"], name: "index_event_schedules_on_schedule_id", using: :btree
-
-  create_table "event_schedules_bak", id: false, force: :cascade do |t|
-    t.integer  "id"
-    t.integer  "event_id"
-    t.integer  "schedule_id"
-    t.integer  "room_id"
-    t.datetime "start_time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "event_schedules_load", id: false, force: :cascade do |t|
-    t.integer  "id"
-    t.integer  "event_id"
-    t.integer  "schedule_id"
-    t.integer  "room_id"
-    t.datetime "start_time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "event_types", force: :cascade do |t|
     t.string  "title",                                   null: false
@@ -945,31 +931,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "payment_methods", ["conference_id", "environment"], name: "index_payment_methods_on_conference_id_and_environment", unique: true, using: :btree
-  add_index "payment_methods", ["conference_id", "environment"], name: "index_payment_methods_on_conference_id_and_environment", unique: true, using: :btree
-
-  create_table "payment_methods", force: :cascade do |t|
-    t.integer  "conference_id",              null: false
-    t.string   "environment",                null: false
-    t.string   "gateway",                    null: false
-    t.string   "braintree_environment"
-    t.string   "braintree_merchant_id"
-    t.string   "braintree_public_key"
-    t.string   "braintree_private_key"
-    t.string   "braintree_merchant_account"
-    t.string   "payu_store_name"
-    t.string   "payu_store_id"
-    t.string   "payu_webservice_name"
-    t.string   "payu_webservice_password"
-    t.string   "payu_signature_key"
-    t.string   "payu_service_domain"
-    t.string   "stripe_publishable_key"
-    t.string   "stripe_secret_key"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "payment_methods", ["conference_id", "environment"], name: "index_payment_methods_on_conference_id_and_environment", unique: true, using: :btree
-  add_index "payment_methods", ["conference_id", "environment"], name: "index_payment_methods_on_conference_id_and_environment", unique: true, using: :btree
 
   create_table "payments", force: :cascade do |t|
     t.string   "last4"
@@ -984,7 +945,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "payments", ["reference"], name: "index_payments_on_reference", unique: true, using: :btree
-  add_index "payments", ["reference"], name: "index_payments_on_reference", unique: true, using: :btree
 
   create_table "payments", force: :cascade do |t|
     t.string   "last4"
@@ -998,7 +958,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
     t.string   "reference"
   end
 
-  add_index "payments", ["reference"], name: "index_payments_on_reference", unique: true, using: :btree
   add_index "payments", ["reference"], name: "index_payments_on_reference", unique: true, using: :btree
 
   create_table "physical_tickets", force: :cascade do |t|
@@ -1063,18 +1022,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
     t.datetime "updated_at"
   end
 
-  add_index "polls", ["conference_id"], name: "index_polls_on_conference_id", using: :btree
-  add_index "polls", ["conference_id"], name: "index_polls_on_conference_id", using: :btree
-
-  create_table "polls", force: :cascade do |t|
-    t.integer  "conference_id"
-    t.integer  "survey_id"
-    t.text     "comment"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "polls", ["conference_id"], name: "index_polls_on_conference_id", using: :btree
   add_index "polls", ["conference_id"], name: "index_polls_on_conference_id", using: :btree
 
   create_table "programs", force: :cascade do |t|
@@ -1215,20 +1162,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "refinery_blog_categories", ["id"], name: "index_refinery_blog_categories_on_id", using: :btree
-  add_index "refinery_blog_categories", ["id"], name: "index_refinery_blog_categories_on_id", using: :btree
-  add_index "refinery_blog_categories", ["slug"], name: "index_refinery_blog_categories_on_slug", using: :btree
-  add_index "refinery_blog_categories", ["slug"], name: "index_refinery_blog_categories_on_slug", using: :btree
-
-  create_table "refinery_blog_categories", force: :cascade do |t|
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "slug"
-  end
-
-  add_index "refinery_blog_categories", ["id"], name: "index_refinery_blog_categories_on_id", using: :btree
-  add_index "refinery_blog_categories", ["id"], name: "index_refinery_blog_categories_on_id", using: :btree
-  add_index "refinery_blog_categories", ["slug"], name: "index_refinery_blog_categories_on_slug", using: :btree
   add_index "refinery_blog_categories", ["slug"], name: "index_refinery_blog_categories_on_slug", using: :btree
 
   create_table "refinery_blog_categories_blog_posts", force: :cascade do |t|
@@ -1236,15 +1169,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
     t.integer "blog_post_id"
   end
 
-  add_index "refinery_blog_categories_blog_posts", ["blog_category_id", "blog_post_id"], name: "index_blog_categories_blog_posts_on_bc_and_bp", using: :btree
-  add_index "refinery_blog_categories_blog_posts", ["blog_category_id", "blog_post_id"], name: "index_blog_categories_blog_posts_on_bc_and_bp", using: :btree
-
-  create_table "refinery_blog_categories_blog_posts", force: :cascade do |t|
-    t.integer "blog_category_id"
-    t.integer "blog_post_id"
-  end
-
-  add_index "refinery_blog_categories_blog_posts", ["blog_category_id", "blog_post_id"], name: "index_blog_categories_blog_posts_on_bc_and_bp", using: :btree
   add_index "refinery_blog_categories_blog_posts", ["blog_category_id", "blog_post_id"], name: "index_blog_categories_blog_posts_on_bc_and_bp", using: :btree
 
   create_table "refinery_blog_category_translations", force: :cascade do |t|
@@ -1257,22 +1181,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "refinery_blog_category_translations", ["locale"], name: "index_refinery_blog_category_translations_on_locale", using: :btree
-  add_index "refinery_blog_category_translations", ["locale"], name: "index_refinery_blog_category_translations_on_locale", using: :btree
-  add_index "refinery_blog_category_translations", ["refinery_blog_category_id"], name: "index_a0315945e6213bbe0610724da0ee2de681b77c31", using: :btree
-  add_index "refinery_blog_category_translations", ["refinery_blog_category_id"], name: "index_a0315945e6213bbe0610724da0ee2de681b77c31", using: :btree
-
-  create_table "refinery_blog_category_translations", force: :cascade do |t|
-    t.integer  "refinery_blog_category_id", null: false
-    t.string   "locale",                    null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.string   "title"
-    t.string   "slug"
-  end
-
-  add_index "refinery_blog_category_translations", ["locale"], name: "index_refinery_blog_category_translations_on_locale", using: :btree
-  add_index "refinery_blog_category_translations", ["locale"], name: "index_refinery_blog_category_translations_on_locale", using: :btree
-  add_index "refinery_blog_category_translations", ["refinery_blog_category_id"], name: "index_a0315945e6213bbe0610724da0ee2de681b77c31", using: :btree
   add_index "refinery_blog_category_translations", ["refinery_blog_category_id"], name: "index_a0315945e6213bbe0610724da0ee2de681b77c31", using: :btree
 
   create_table "refinery_blog_comments", force: :cascade do |t|
@@ -1287,24 +1195,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "refinery_blog_comments", ["blog_post_id"], name: "index_refinery_blog_comments_on_blog_post_id", using: :btree
-  add_index "refinery_blog_comments", ["blog_post_id"], name: "index_refinery_blog_comments_on_blog_post_id", using: :btree
-  add_index "refinery_blog_comments", ["id"], name: "index_refinery_blog_comments_on_id", using: :btree
-  add_index "refinery_blog_comments", ["id"], name: "index_refinery_blog_comments_on_id", using: :btree
-
-  create_table "refinery_blog_comments", force: :cascade do |t|
-    t.integer  "blog_post_id"
-    t.boolean  "spam"
-    t.string   "name"
-    t.string   "email"
-    t.text     "body"
-    t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "refinery_blog_comments", ["blog_post_id"], name: "index_refinery_blog_comments_on_blog_post_id", using: :btree
-  add_index "refinery_blog_comments", ["blog_post_id"], name: "index_refinery_blog_comments_on_blog_post_id", using: :btree
-  add_index "refinery_blog_comments", ["id"], name: "index_refinery_blog_comments_on_id", using: :btree
   add_index "refinery_blog_comments", ["id"], name: "index_refinery_blog_comments_on_id", using: :btree
 
   create_table "refinery_blog_post_translations", force: :cascade do |t|
@@ -1320,25 +1210,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "refinery_blog_post_translations", ["locale"], name: "index_refinery_blog_post_translations_on_locale", using: :btree
-  add_index "refinery_blog_post_translations", ["locale"], name: "index_refinery_blog_post_translations_on_locale", using: :btree
-  add_index "refinery_blog_post_translations", ["refinery_blog_post_id"], name: "index_refinery_blog_post_translations_on_refinery_blog_post_id", using: :btree
-  add_index "refinery_blog_post_translations", ["refinery_blog_post_id"], name: "index_refinery_blog_post_translations_on_refinery_blog_post_id", using: :btree
-
-  create_table "refinery_blog_post_translations", force: :cascade do |t|
-    t.integer  "refinery_blog_post_id", null: false
-    t.string   "locale",                null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.text     "body"
-    t.text     "custom_teaser"
-    t.string   "custom_url"
-    t.string   "slug"
-    t.string   "title"
-  end
-
-  add_index "refinery_blog_post_translations", ["locale"], name: "index_refinery_blog_post_translations_on_locale", using: :btree
-  add_index "refinery_blog_post_translations", ["locale"], name: "index_refinery_blog_post_translations_on_locale", using: :btree
-  add_index "refinery_blog_post_translations", ["refinery_blog_post_id"], name: "index_refinery_blog_post_translations_on_refinery_blog_post_id", using: :btree
   add_index "refinery_blog_post_translations", ["refinery_blog_post_id"], name: "index_refinery_blog_post_translations_on_refinery_blog_post_id", using: :btree
 
   create_table "refinery_blog_posts", force: :cascade do |t|
@@ -1359,45 +1230,8 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "refinery_blog_posts", ["access_count"], name: "index_refinery_blog_posts_on_access_count", using: :btree
-  add_index "refinery_blog_posts", ["access_count"], name: "index_refinery_blog_posts_on_access_count", using: :btree
-  add_index "refinery_blog_posts", ["id"], name: "index_refinery_blog_posts_on_id", using: :btree
   add_index "refinery_blog_posts", ["id"], name: "index_refinery_blog_posts_on_id", using: :btree
   add_index "refinery_blog_posts", ["slug"], name: "index_refinery_blog_posts_on_slug", using: :btree
-  add_index "refinery_blog_posts", ["slug"], name: "index_refinery_blog_posts_on_slug", using: :btree
-
-  create_table "refinery_blog_posts", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.boolean  "draft"
-    t.datetime "published_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-    t.string   "custom_url"
-    t.text     "custom_teaser"
-    t.string   "source_url"
-    t.string   "source_url_title"
-    t.integer  "access_count",     default: 0
-    t.string   "slug"
-    t.integer  "image_id"
-  end
-
-  add_index "refinery_blog_posts", ["access_count"], name: "index_refinery_blog_posts_on_access_count", using: :btree
-  add_index "refinery_blog_posts", ["access_count"], name: "index_refinery_blog_posts_on_access_count", using: :btree
-  add_index "refinery_blog_posts", ["id"], name: "index_refinery_blog_posts_on_id", using: :btree
-  add_index "refinery_blog_posts", ["id"], name: "index_refinery_blog_posts_on_id", using: :btree
-  add_index "refinery_blog_posts", ["slug"], name: "index_refinery_blog_posts_on_slug", using: :btree
-  add_index "refinery_blog_posts", ["slug"], name: "index_refinery_blog_posts_on_slug", using: :btree
-
-  create_table "refinery_dynamicfields_dynamicfields", force: :cascade do |t|
-    t.string   "criteria",    default: "page_layout"
-    t.string   "page_layout"
-    t.string   "page_id"
-    t.string   "model_title"
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "refinery_dynamicfields_dynamicfields", force: :cascade do |t|
     t.string   "criteria",    default: "page_layout"
@@ -1412,21 +1246,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   create_table "refinery_dynamicfields_dynamicform_associations", force: :cascade do |t|
     t.integer "dynamicfield_id"
     t.integer "page_id"
-  end
-
-  create_table "refinery_dynamicfields_dynamicform_associations", force: :cascade do |t|
-    t.integer "dynamicfield_id"
-    t.integer "page_id"
-  end
-
-  create_table "refinery_dynamicfields_dynamicform_fields", force: :cascade do |t|
-    t.integer  "dynamicfield_id"
-    t.string   "field_id"
-    t.string   "field_label"
-    t.string   "field_type"
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "refinery_dynamicfields_dynamicform_fields", force: :cascade do |t|
@@ -1448,15 +1267,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
     t.string  "string_value"
   end
 
-  create_table "refinery_dynamicfields_dynamicform_values", force: :cascade do |t|
-    t.integer "dynamicform_field_id"
-    t.integer "dynamicform_association_id"
-    t.text    "text_value"
-    t.integer "resource_id"
-    t.integer "image_id"
-    t.string  "string_value"
-  end
-
   create_table "refinery_image_translations", force: :cascade do |t|
     t.integer  "refinery_image_id", null: false
     t.string   "locale",            null: false
@@ -1467,36 +1277,7 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "refinery_image_translations", ["locale"], name: "index_refinery_image_translations_on_locale", using: :btree
-  add_index "refinery_image_translations", ["locale"], name: "index_refinery_image_translations_on_locale", using: :btree
   add_index "refinery_image_translations", ["refinery_image_id"], name: "index_refinery_image_translations_on_refinery_image_id", using: :btree
-  add_index "refinery_image_translations", ["refinery_image_id"], name: "index_refinery_image_translations_on_refinery_image_id", using: :btree
-
-  create_table "refinery_image_translations", force: :cascade do |t|
-    t.integer  "refinery_image_id", null: false
-    t.string   "locale",            null: false
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.string   "image_alt"
-    t.string   "image_title"
-  end
-
-  add_index "refinery_image_translations", ["locale"], name: "index_refinery_image_translations_on_locale", using: :btree
-  add_index "refinery_image_translations", ["locale"], name: "index_refinery_image_translations_on_locale", using: :btree
-  add_index "refinery_image_translations", ["refinery_image_id"], name: "index_refinery_image_translations_on_refinery_image_id", using: :btree
-  add_index "refinery_image_translations", ["refinery_image_id"], name: "index_refinery_image_translations_on_refinery_image_id", using: :btree
-
-  create_table "refinery_images", force: :cascade do |t|
-    t.string   "image_mime_type"
-    t.string   "image_name"
-    t.integer  "image_size"
-    t.integer  "image_width"
-    t.integer  "image_height"
-    t.string   "image_uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "image_title"
-    t.string   "image_alt"
-  end
 
   create_table "refinery_images", force: :cascade do |t|
     t.string   "image_mime_type"
@@ -1520,21 +1301,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "refinery_page_part_translations", ["locale"], name: "index_refinery_page_part_translations_on_locale", using: :btree
-  add_index "refinery_page_part_translations", ["locale"], name: "index_refinery_page_part_translations_on_locale", using: :btree
-  add_index "refinery_page_part_translations", ["refinery_page_part_id"], name: "index_refinery_page_part_translations_on_refinery_page_part_id", using: :btree
-  add_index "refinery_page_part_translations", ["refinery_page_part_id"], name: "index_refinery_page_part_translations_on_refinery_page_part_id", using: :btree
-
-  create_table "refinery_page_part_translations", force: :cascade do |t|
-    t.integer  "refinery_page_part_id", null: false
-    t.string   "locale",                null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.text     "body"
-  end
-
-  add_index "refinery_page_part_translations", ["locale"], name: "index_refinery_page_part_translations_on_locale", using: :btree
-  add_index "refinery_page_part_translations", ["locale"], name: "index_refinery_page_part_translations_on_locale", using: :btree
-  add_index "refinery_page_part_translations", ["refinery_page_part_id"], name: "index_refinery_page_part_translations_on_refinery_page_part_id", using: :btree
   add_index "refinery_page_part_translations", ["refinery_page_part_id"], name: "index_refinery_page_part_translations_on_refinery_page_part_id", using: :btree
 
   create_table "refinery_page_parts", force: :cascade do |t|
@@ -1548,23 +1314,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "refinery_page_parts", ["id"], name: "index_refinery_page_parts_on_id", using: :btree
-  add_index "refinery_page_parts", ["id"], name: "index_refinery_page_parts_on_id", using: :btree
-  add_index "refinery_page_parts", ["refinery_page_id"], name: "index_refinery_page_parts_on_refinery_page_id", using: :btree
-  add_index "refinery_page_parts", ["refinery_page_id"], name: "index_refinery_page_parts_on_refinery_page_id", using: :btree
-
-  create_table "refinery_page_parts", force: :cascade do |t|
-    t.integer  "refinery_page_id"
-    t.string   "slug"
-    t.text     "body"
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "title"
-  end
-
-  add_index "refinery_page_parts", ["id"], name: "index_refinery_page_parts_on_id", using: :btree
-  add_index "refinery_page_parts", ["id"], name: "index_refinery_page_parts_on_id", using: :btree
-  add_index "refinery_page_parts", ["refinery_page_id"], name: "index_refinery_page_parts_on_refinery_page_id", using: :btree
   add_index "refinery_page_parts", ["refinery_page_id"], name: "index_refinery_page_parts_on_refinery_page_id", using: :btree
 
   create_table "refinery_page_translations", force: :cascade do |t|
@@ -1579,24 +1328,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "refinery_page_translations", ["locale"], name: "index_refinery_page_translations_on_locale", using: :btree
-  add_index "refinery_page_translations", ["locale"], name: "index_refinery_page_translations_on_locale", using: :btree
-  add_index "refinery_page_translations", ["refinery_page_id"], name: "index_refinery_page_translations_on_refinery_page_id", using: :btree
-  add_index "refinery_page_translations", ["refinery_page_id"], name: "index_refinery_page_translations_on_refinery_page_id", using: :btree
-
-  create_table "refinery_page_translations", force: :cascade do |t|
-    t.integer  "refinery_page_id", null: false
-    t.string   "locale",           null: false
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.string   "title"
-    t.string   "custom_slug"
-    t.string   "menu_title"
-    t.string   "slug"
-  end
-
-  add_index "refinery_page_translations", ["locale"], name: "index_refinery_page_translations_on_locale", using: :btree
-  add_index "refinery_page_translations", ["locale"], name: "index_refinery_page_translations_on_locale", using: :btree
-  add_index "refinery_page_translations", ["refinery_page_id"], name: "index_refinery_page_translations_on_refinery_page_id", using: :btree
   add_index "refinery_page_translations", ["refinery_page_id"], name: "index_refinery_page_translations_on_refinery_page_id", using: :btree
 
   create_table "refinery_pages", force: :cascade do |t|
@@ -1620,45 +1351,9 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "refinery_pages", ["depth"], name: "index_refinery_pages_on_depth", using: :btree
-  add_index "refinery_pages", ["depth"], name: "index_refinery_pages_on_depth", using: :btree
-  add_index "refinery_pages", ["id"], name: "index_refinery_pages_on_id", using: :btree
   add_index "refinery_pages", ["id"], name: "index_refinery_pages_on_id", using: :btree
   add_index "refinery_pages", ["lft"], name: "index_refinery_pages_on_lft", using: :btree
-  add_index "refinery_pages", ["lft"], name: "index_refinery_pages_on_lft", using: :btree
   add_index "refinery_pages", ["parent_id"], name: "index_refinery_pages_on_parent_id", using: :btree
-  add_index "refinery_pages", ["parent_id"], name: "index_refinery_pages_on_parent_id", using: :btree
-  add_index "refinery_pages", ["rgt"], name: "index_refinery_pages_on_rgt", using: :btree
-  add_index "refinery_pages", ["rgt"], name: "index_refinery_pages_on_rgt", using: :btree
-
-  create_table "refinery_pages", force: :cascade do |t|
-    t.integer  "parent_id"
-    t.string   "path"
-    t.string   "slug"
-    t.string   "custom_slug"
-    t.boolean  "show_in_menu",        default: true
-    t.string   "link_url"
-    t.string   "menu_match"
-    t.boolean  "deletable",           default: true
-    t.boolean  "draft",               default: false
-    t.boolean  "skip_to_first_child", default: false
-    t.integer  "lft"
-    t.integer  "rgt"
-    t.integer  "depth"
-    t.string   "view_template"
-    t.string   "layout_template"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "refinery_pages", ["depth"], name: "index_refinery_pages_on_depth", using: :btree
-  add_index "refinery_pages", ["depth"], name: "index_refinery_pages_on_depth", using: :btree
-  add_index "refinery_pages", ["id"], name: "index_refinery_pages_on_id", using: :btree
-  add_index "refinery_pages", ["id"], name: "index_refinery_pages_on_id", using: :btree
-  add_index "refinery_pages", ["lft"], name: "index_refinery_pages_on_lft", using: :btree
-  add_index "refinery_pages", ["lft"], name: "index_refinery_pages_on_lft", using: :btree
-  add_index "refinery_pages", ["parent_id"], name: "index_refinery_pages_on_parent_id", using: :btree
-  add_index "refinery_pages", ["parent_id"], name: "index_refinery_pages_on_parent_id", using: :btree
-  add_index "refinery_pages", ["rgt"], name: "index_refinery_pages_on_rgt", using: :btree
   add_index "refinery_pages", ["rgt"], name: "index_refinery_pages_on_rgt", using: :btree
 
   create_table "refinery_resource_translations", force: :cascade do |t|
@@ -1670,32 +1365,7 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "refinery_resource_translations", ["locale"], name: "index_refinery_resource_translations_on_locale", using: :btree
-  add_index "refinery_resource_translations", ["locale"], name: "index_refinery_resource_translations_on_locale", using: :btree
   add_index "refinery_resource_translations", ["refinery_resource_id"], name: "index_refinery_resource_translations_on_refinery_resource_id", using: :btree
-  add_index "refinery_resource_translations", ["refinery_resource_id"], name: "index_refinery_resource_translations_on_refinery_resource_id", using: :btree
-
-  create_table "refinery_resource_translations", force: :cascade do |t|
-    t.integer  "refinery_resource_id", null: false
-    t.string   "locale",               null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.string   "resource_title"
-  end
-
-  add_index "refinery_resource_translations", ["locale"], name: "index_refinery_resource_translations_on_locale", using: :btree
-  add_index "refinery_resource_translations", ["locale"], name: "index_refinery_resource_translations_on_locale", using: :btree
-  add_index "refinery_resource_translations", ["refinery_resource_id"], name: "index_refinery_resource_translations_on_refinery_resource_id", using: :btree
-  add_index "refinery_resource_translations", ["refinery_resource_id"], name: "index_refinery_resource_translations_on_refinery_resource_id", using: :btree
-
-  create_table "refinery_resources", force: :cascade do |t|
-    t.string   "file_mime_type"
-    t.string   "file_name"
-    t.integer  "file_size"
-    t.string   "file_uid"
-    t.string   "file_ext"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "refinery_resources", force: :cascade do |t|
     t.string   "file_mime_type"
@@ -1721,23 +1391,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "refinery_settings", ["name"], name: "index_refinery_settings_on_name", using: :btree
-  add_index "refinery_settings", ["name"], name: "index_refinery_settings_on_name", using: :btree
-
-  create_table "refinery_settings", force: :cascade do |t|
-    t.string   "name"
-    t.text     "value"
-    t.boolean  "destroyable",     default: true
-    t.string   "scoping"
-    t.boolean  "restricted",      default: false
-    t.string   "form_value_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "slug"
-    t.string   "title"
-  end
-
-  add_index "refinery_settings", ["name"], name: "index_refinery_settings_on_name", using: :btree
-  add_index "refinery_settings", ["name"], name: "index_refinery_settings_on_name", using: :btree
 
   create_table "refinery_sponsors", force: :cascade do |t|
     t.string   "name"
@@ -1751,28 +1404,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "refinery_sponsors", ["sponsorship_level_id"], name: "index_refinery_sponsors_on_sponsorship_level_id", using: :btree
-  add_index "refinery_sponsors", ["sponsorship_level_id"], name: "index_refinery_sponsors_on_sponsorship_level_id", using: :btree
-
-  create_table "refinery_sponsors", force: :cascade do |t|
-    t.string   "name"
-    t.string   "url"
-    t.integer  "logo_id"
-    t.text     "description"
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "sponsorship_level_id"
-  end
-
-  add_index "refinery_sponsors", ["sponsorship_level_id"], name: "index_refinery_sponsors_on_sponsorship_level_id", using: :btree
-  add_index "refinery_sponsors", ["sponsorship_level_id"], name: "index_refinery_sponsors_on_sponsorship_level_id", using: :btree
-
-  create_table "refinery_sponsors_sponsorship_levels", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "refinery_sponsors_sponsorship_levels", force: :cascade do |t|
     t.string   "name"
@@ -1793,20 +1424,7 @@ ActiveRecord::Schema.define(version: 20190204150218) do
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "refinery_team_members", force: :cascade do |t|
-    t.string   "firstname"
-    t.string   "middlename"
-    t.string   "lastname"
-    t.string   "role"
-    t.integer  "photo_id"
-    t.text     "description"
-    t.string   "twitter"
-    t.string   "linkedin"
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.boolean  "show_on_homepage", default: false
   end
 
   create_table "registration_periods", force: :cascade do |t|
@@ -1948,22 +1566,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "seo_meta", ["id"], name: "index_seo_meta_on_id", using: :btree
-  add_index "seo_meta", ["id"], name: "index_seo_meta_on_id", using: :btree
-  add_index "seo_meta", ["seo_meta_id", "seo_meta_type"], name: "id_type_index_on_seo_meta", using: :btree
-  add_index "seo_meta", ["seo_meta_id", "seo_meta_type"], name: "id_type_index_on_seo_meta", using: :btree
-
-  create_table "seo_meta", force: :cascade do |t|
-    t.integer  "seo_meta_id"
-    t.string   "seo_meta_type"
-    t.string   "browser_title"
-    t.text     "meta_description"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "seo_meta", ["id"], name: "index_seo_meta_on_id", using: :btree
-  add_index "seo_meta", ["id"], name: "index_seo_meta_on_id", using: :btree
-  add_index "seo_meta", ["seo_meta_id", "seo_meta_type"], name: "id_type_index_on_seo_meta", using: :btree
   add_index "seo_meta", ["seo_meta_id", "seo_meta_type"], name: "id_type_index_on_seo_meta", using: :btree
 
   create_table "splashpages", force: :cascade do |t|
@@ -1986,6 +1588,7 @@ ActiveRecord::Schema.define(version: 20190204150218) do
     t.boolean  "include_cfp",               default: false
     t.boolean  "include_activities",        default: false
     t.boolean  "include_advantages",        default: false
+    t.text     "custom_tags"
   end
 
   create_table "splashpages", force: :cascade do |t|
@@ -2008,6 +1611,7 @@ ActiveRecord::Schema.define(version: 20190204150218) do
     t.boolean  "include_cfp",               default: false
     t.boolean  "include_activities",        default: false
     t.boolean  "include_advantages",        default: false
+    t.text     "custom_tags"
   end
 
   create_table "sponsors", force: :cascade do |t|
@@ -2182,25 +1786,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
 
   add_index "survey_answers", ["question_id", "option_id"], name: "survey_answers_question_option_id_idx", using: :btree
 
-  create_table "survey_answers", force: :cascade do |t|
-    t.integer  "attempt_id"
-    t.integer  "question_id"
-    t.integer  "option_id"
-    t.boolean  "correct"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "survey_answers", ["question_id", "option_id"], name: "survey_answers_question_option_id_idx", using: :btree
-
-  create_table "survey_attempts", force: :cascade do |t|
-    t.integer "participant_id"
-    t.string  "participant_type"
-    t.integer "survey_id"
-    t.boolean "winner"
-    t.integer "score"
-  end
-
   create_table "survey_attempts", force: :cascade do |t|
     t.integer "participant_id"
     t.string  "participant_type"
@@ -2218,39 +1803,12 @@ ActiveRecord::Schema.define(version: 20190204150218) do
     t.datetime "updated_at"
   end
 
-  create_table "survey_options", force: :cascade do |t|
-    t.integer  "question_id"
-    t.integer  "weight",      default: 0
-    t.string   "text"
-    t.boolean  "correct"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "survey_questions", force: :cascade do |t|
     t.integer  "survey_id"
     t.string   "text"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "imported",   default: false
-  end
-
-  create_table "survey_questions", force: :cascade do |t|
-    t.integer  "survey_id"
-    t.string   "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "imported",   default: false
-  end
-
-  create_table "survey_surveys", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "attempts_number", default: 0
-    t.boolean  "finished",        default: false
-    t.boolean  "active",          default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "survey_surveys", force: :cascade do |t|
@@ -2274,35 +1832,12 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
-
-  create_table "taggings", force: :cascade do |t|
-    t.integer  "tag_id"
-    t.integer  "taggable_id"
-    t.string   "taggable_type"
-    t.integer  "tagger_id"
-    t.string   "tagger_type"
-    t.string   "context"
-    t.datetime "created_at"
-  end
-
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string  "name"
     t.integer "taggings_count", default: 0
   end
 
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
-
-  create_table "tags", force: :cascade do |t|
-    t.string  "name"
-    t.integer "taggings_count", default: 0
-  end
-
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "targets", force: :cascade do |t|
@@ -2352,20 +1887,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "ticket_groups", ["conference_id"], name: "index_ticket_groups_on_conference_id", using: :btree
-  add_index "ticket_groups", ["conference_id"], name: "index_ticket_groups_on_conference_id", using: :btree
-
-  create_table "ticket_groups", force: :cascade do |t|
-    t.integer  "conference_id"
-    t.string   "name"
-    t.string   "description"
-    t.integer  "position"
-    t.text     "additional_details"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "ticket_groups", ["conference_id"], name: "index_ticket_groups_on_conference_id", using: :btree
-  add_index "ticket_groups", ["conference_id"], name: "index_ticket_groups_on_conference_id", using: :btree
 
   create_table "ticket_purchases", force: :cascade do |t|
     t.integer  "ticket_id"
@@ -2437,7 +1958,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   end
 
   add_index "tickets", ["ticket_group_id"], name: "index_tickets_on_ticket_group_id", using: :btree
-  add_index "tickets", ["ticket_group_id"], name: "index_tickets_on_ticket_group_id", using: :btree
 
   create_table "tickets", force: :cascade do |t|
     t.integer "conference_id"
@@ -2456,7 +1976,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
     t.date    "end_date"
   end
 
-  add_index "tickets", ["ticket_group_id"], name: "index_tickets_on_ticket_group_id", using: :btree
   add_index "tickets", ["ticket_group_id"], name: "index_tickets_on_ticket_group_id", using: :btree
 
   create_table "tracks", force: :cascade do |t|
@@ -2787,9 +2306,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   add_foreign_key "events", "tickets"
   add_foreign_key "integrations", "conferences"
   add_foreign_key "payment_methods", "conferences"
-  add_foreign_key "payment_methods", "public.conferences", column: "conference_id"
-  add_foreign_key "payment_methods", "conferences"
-  add_foreign_key "payment_methods", "public.conferences", column: "conference_id"
   add_foreign_key "physical_tickets", "events"
   add_foreign_key "physical_tickets", "public.events", column: "event_id"
   add_foreign_key "physical_tickets", "public.registrations", column: "registration_id"
@@ -2805,16 +2321,7 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   add_foreign_key "policies", "conferences"
   add_foreign_key "policies", "public.conferences", column: "conference_id"
   add_foreign_key "polls", "conferences"
-  add_foreign_key "polls", "public.conferences", column: "conference_id"
-  add_foreign_key "polls", "public.survey_surveys", column: "survey_id"
   add_foreign_key "polls", "survey_surveys", column: "survey_id"
-  add_foreign_key "polls", "conferences"
-  add_foreign_key "polls", "public.conferences", column: "conference_id"
-  add_foreign_key "polls", "public.survey_surveys", column: "survey_id"
-  add_foreign_key "polls", "survey_surveys", column: "survey_id"
-  add_foreign_key "refinery_sponsors", "public.sponsorship_levels", column: "sponsorship_level_id"
-  add_foreign_key "refinery_sponsors", "sponsorship_levels"
-  add_foreign_key "refinery_sponsors", "public.sponsorship_levels", column: "sponsorship_level_id"
   add_foreign_key "refinery_sponsors", "sponsorship_levels"
   add_foreign_key "room_locations", "venues"
   add_foreign_key "rooms", "room_locations"
@@ -2855,9 +2362,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   add_foreign_key "ticket_group_benefits_tickets", "ticket_group_benefits"
   add_foreign_key "ticket_group_benefits_tickets", "tickets"
   add_foreign_key "ticket_groups", "conferences"
-  add_foreign_key "ticket_groups", "public.conferences", column: "conference_id"
-  add_foreign_key "ticket_groups", "conferences"
-  add_foreign_key "ticket_groups", "public.conferences", column: "conference_id"
   add_foreign_key "ticket_purchases", "codes"
   add_foreign_key "ticket_purchases", "events"
   add_foreign_key "ticket_purchases", "public.codes", column: "code_id"
@@ -2866,8 +2370,6 @@ ActiveRecord::Schema.define(version: 20190204150218) do
   add_foreign_key "ticket_purchases", "events"
   add_foreign_key "ticket_purchases", "public.codes", column: "code_id"
   add_foreign_key "ticket_purchases", "public.events", column: "event_id"
-  add_foreign_key "tickets", "public.ticket_groups", column: "ticket_group_id"
   add_foreign_key "tickets", "ticket_groups"
-  add_foreign_key "tickets", "public.ticket_groups", column: "ticket_group_id"
   add_foreign_key "tickets", "ticket_groups"
 end

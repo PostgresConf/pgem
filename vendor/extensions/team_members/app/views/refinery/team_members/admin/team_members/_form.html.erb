@@ -49,6 +49,11 @@
     <%= f.text_field :linkedin -%>
   </div>
 
+  <div class='field'>
+    <%= f.label :show_on_homepage-%>
+    <%= f.check_box :show_on_homepage -%>
+  </div>
+
   <%= render '/refinery/admin/form_actions', :f => f,
              :continue_editing => false,
              :delete_title => t('delete', :scope => 'refinery.team_members.admin.team_members.team_member'),
