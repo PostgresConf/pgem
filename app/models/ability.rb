@@ -193,6 +193,7 @@ class Ability
     can :manage, SponsorshipInfo, conference_id: conf_ids_for_organizer
     can :manage, PaymentMethod, conference_id: conf_ids_for_organizer
     can :manage, Ticket, conference_id: conf_ids_for_organizer
+    can :manage, Integration, conference_id: conf_ids_for_organizer
     can :index, Comment, commentable_type: 'Event',
                          commentable_id: Event.where(program_id: Program.where(conference_id: conf_ids_for_organizer).pluck(:id)).pluck(:id)
 

@@ -189,11 +189,11 @@
         %li{class: active_nav_li(admin_conference_reports_tickets_path(@conference.short_title))}
           = link_to 'Tickets', admin_conference_reports_tickets_path(@conference.short_title)
 
-  - if can? :show, @conference
+  - if can? :manage, @conference.integrations.build
     %li{:class=> active_nav_li(admin_conference_integrations_path(@conference.short_title))}
       = link_to(admin_conference_integrations_path(@conference.short_title)) do
         %span.fa.fa-cloud-upload
-        Integrtions
+        Integrations
       %ul
         - if Integration.has_boomset?(@conference)
           %li{class: active_nav_li(admin_conference_boomset_ticket_configs_path(@conference.short_title))}
