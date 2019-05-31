@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
   has_paper_trail on: [:create, :update], ignore: [:updated_at, :guid, :week], meta: { conference_id: :conference_id }
 
   acts_as_commentable
+  acts_as_taggable
 
   after_create :set_week
 

@@ -247,6 +247,9 @@ gem 'sched', '~> 0.1.13'
 gem 'rest-client'
 gem 'rest-client-logger'
 
+# event tags
+gem 'acts-as-taggable-on'
+
 #To make SOAP calls to the PayU API
 gem 'httpclient', '~> 2.8', '>= 2.8.3'
 gem 'lolsoap', '~> 0.9.0'

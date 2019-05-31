@@ -17,7 +17,13 @@ module Admin
     end
 
     def index
-      @events = @program.events
+      @tag_name = params[:tag]
+      if @tag_name
+        @events = @program.events.tagged_with(@tag_name)
+      else
+        @events = @program.events
+      end
+
       @tracks = @program.tracks
       @difficulty_levels = @program.difficulty_levels
       @event_types = @program.event_types
@@ -27,6 +33,7 @@ module Admin
       @file_name = "events_for_#{@conference.short_title}"
       @event_export_option = params[:event_export_option]
       @tickets = @conference.tickets
+      @tags = Event.tag_counts_on(:tags)
 
       respond_to do |format|
         format.html
@@ -231,7 +238,7 @@ module Admin
     def event_params
       params.require(:event).permit(
                                     # Set also in proposals controller
-                                    :title, :subtitle, :event_type_id, :abstract, :description, :require_registration, :difficulty_level_id, :document,
+                                    :tag_list, :title, :subtitle, :event_type_id, :abstract, :description, :require_registration, :difficulty_level_id, :document,
                                     # Set only in admin/events controller
                                     :track_id, :state, :language, :is_highlight, :max_attendees, :ticket_id,
                                     # Not used anymore?

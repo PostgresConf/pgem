@@ -3,6 +3,7 @@
     .page-header
       %h1
         Events
+        = "tagged with #{@tag_name}" if @tag_name
         = "(#{@events.length})" if @events.any?
 
         .pull-right
@@ -47,12 +48,14 @@
       %p.text-muted
         All the submissions of your speakers
 .row
-  .col-md-4
+  .col-md-3
     = render partial: 'admin/conferences/doughnut_chart', locals: {title: 'Events state', data: @event_distribution}
-  .col-md-4
+  .col-md-3
     = render partial: 'admin/conferences/doughnut_chart', locals: {title: 'Confirmed events scheduled', data: @scheduled_event_distribution}
-  .col-md-4
+  .col-md-3
     = render partial: 'admin/conferences/doughnut_chart', locals: {title: 'Tracks of confirmed events', data: @tracks_distribution_confirmed}
+  .col-md-3
+    = render partial: 'admin/events/tag_cloud', locals: {title: 'Tags', data: @tags}
 .row
   .col-md-12
     %div.margin-event-table

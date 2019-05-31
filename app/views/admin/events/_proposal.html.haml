@@ -14,6 +14,13 @@
     %table.table
       %tr
         %td.col-md-2
+          %b Tags
+        %td
+          - @event.tag_list.each do |tag|
+            = link_to tag, tagged_admin_conference_program_events_path(tag: tag), class: 'badge'
+
+      %tr
+        %td.col-md-2
           %b Type
         %td
           .dropdown

@@ -101,6 +101,7 @@ Osem::Application.routes.draw do
             get :vote
           end
           collection do
+            get 'tagged_with/:tag' => 'events#index', as: 'tagged'
             patch :bulk_state_change
           end
         end

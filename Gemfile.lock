@@ -748,6 +748,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   activeuuid
+  acts-as-taggable-on
   acts_as_commentable_with_threading
   acts_as_list
   ahoy_matey

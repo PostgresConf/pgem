@@ -1,6 +1,8 @@
 = semantic_form_for(@event, url: @url) do |f|
   = f.inputs name: 'Proposal Information' do
     = f.input :title, as: :string, required: true
+    - if current_user.has_any_role? :admin, { name: :cfp, resource: @conference }
+      = f.input :tag_list, as: :string, input_html: {value: f.object.tag_list.to_s}, :hint => "Comma separated list"
 
     = f.input :subtitle, as: :string
 

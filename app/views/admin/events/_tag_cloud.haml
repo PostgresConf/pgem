@@ -1,0 +1,5 @@
+.text-center
+  %h4 #{title}
+  - if data
+    - tag_cloud(data, %w(css1 css2 css3 css4)) do |tag, css_class|
+      = link_to tag.name, tagged_admin_conference_program_events_path(tag: tag.name)
