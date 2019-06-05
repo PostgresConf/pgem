@@ -17,6 +17,14 @@ class PictureUploader < CarrierWave::Uploader::Base
     end
   end
 
+  after :store, :try_deinterlace
+
+  def try_deinterlace(file)
+    manipulate! do |img|
+      img.interlace('none')
+    end
+  end
+
   def paperclip_path
     "system/#{object_class_name}/#{extra_store_dir}/#{id_partition}/:style/:basename.:extension"
   end
