@@ -5,8 +5,9 @@
         .card-text.h3
             = date_string(conference.start_date, conference.end_date)
         .card-text.h4
-            = conference.venue.city
-            = conference.venue.country_name
+            - if conference.venue
+                = conference.venue.city
+                = conference.venue.country_name
     .card-footer
         .row.col-center
             .col-md-6
