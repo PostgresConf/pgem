@@ -10,10 +10,13 @@
                 = conference.venue.country_name
     .card-footer
         .row.col-center
-            .col-md-6
-                - if conference.splashpage
-                    - if conference.splashpage.include_sponsors && !conference.ended?
+            - if conference.splashpage && conference.splashpage.public
+                .col-md-6
+                    - if conference.registration_open? && conference.tickets.any?
+                        = link_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn btn-success btn-block", disabled: conference.registration_limit_exceeded?
+                    - elsif conference.splashpage.include_sponsors && !conference.ended?
                         = link_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), :class =>"btn btn-warning btn-block"
-            .col-md-6
-                - if conference.splashpage && conference.splashpage.public
+                        
+
+                .col-md-6
                     = link_to "Learn More", main_app.conference_path(conference.short_title), :class =>"btn btn-info btn-block"
