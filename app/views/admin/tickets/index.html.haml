@@ -46,5 +46,8 @@
                   data: { confirm: "Do you really want to delete the Ticket for #{ticket.title}? Attention: All ticket purchases will be also deleted!" }
 .row
   .col-md-12
-    = link_to 'Add Ticket', new_admin_conference_ticket_path, class: 'btn btn-success pull-right'
+    - if @conference.payment_method.present?
+      = link_to 'Add Ticket', new_admin_conference_ticket_path, class: 'btn btn-success pull-right'
+    - else
+      = link_to 'Set up a Payment Method First!', admin_conference_payment_method_path(@conference.short_title), class: 'btn btn-warning pull-right'
 

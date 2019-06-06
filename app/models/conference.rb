@@ -318,7 +318,9 @@ class Conference < ActiveRecord::Base
       tracks: tracks_set?,
       event_types: event_types_set?,
       difficulty_levels: difficulty_levels_set?,
-      splashpage: splashpage && splashpage.public?
+      splashpage: splashpage && splashpage.public?,
+      payment_method: payment_method_set?,
+      tickets: tickets_set?
     }
 
     result.update(
@@ -912,8 +914,28 @@ class Conference < ActiveRecord::Base
   # ====Returns
   # * +True+ -> One track or more
   # * +False+ -> No track
+  def payment_method_set?
+    payment_method.present?
+  end
+
+  ##
+  # Checks if there is a track.
+  #
+  # ====Returns
+  # * +True+ -> One track or more
+  # * +False+ -> No track
   def tracks_set?
     program.tracks.count > 0
+  end
+
+  ##
+  # Checks if there is a ticket.
+  #
+  # ====Returns
+  # * +True+ -> One ticket or more
+  # * +False+ -> No tickets
+  def tickets_set?
+    tickets.count > 0
   end
 
   ##
