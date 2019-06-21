@@ -28,8 +28,6 @@ class SchedulesController < ApplicationController
     return unless @current_day
     # the schedule takes you to the current time if it is beetween the start and the end time.
     @hour_column = @conference.hours_from_start_time(@conf_start, @conference.end_hour)
-
-    @tzname = Time.now.in_time_zone(@conference.timezone).strftime('%Z')
   end
 
   def mobile
@@ -56,8 +54,6 @@ class SchedulesController < ApplicationController
     return unless @current_day
     # the schedule takes you to the current time if it is beetween the start and the end time.
     @hour_column = @conference.hours_from_start_time(@conf_start, @conference.end_hour)
-
-    @tzname = Time.now.in_time_zone(@conference.timezone).strftime('%Z')
   end
 
   def today_events

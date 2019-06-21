@@ -26,7 +26,6 @@ module Admin
       @unscheduled_events = @program.events.confirmed - @schedule.events
       @dates = @conference.start_date..@conference.end_date
       @rooms = @conference.venue.rooms if @conference.venue
-      @tzname = Time.now.in_time_zone(@conference.timezone).strftime('%Z')
     end
 
     def destroy

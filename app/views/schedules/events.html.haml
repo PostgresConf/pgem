@@ -42,11 +42,11 @@
     - time = nil
     - @events_schedules_groups = @events_schedules.group_by { |el| el.start_time }
     - @events_schedules_groups.each do |esg|
-      - unless esg.first.strftime('%Y-%m-%d').eql?(date)
+      - unless esg.first.in_time_zone(@conference.timezone).strftime('%Y-%m-%d').eql?(date)
         .col-md-12
           .date-content
-            %span{ class: 'date-title', id: "#{ esg.first.strftime('%Y-%m-%d') }" }
-              = date = esg.first.strftime('%Y-%m-%d')
+            %span{ class: 'date-title', id: "#{ esg.first.in_time_zone(@conference.timezone).strftime('%Y-%m-%d') }" }
+              = date = esg.first.in_time_zone(@conference.timezone).strftime('%Y-%m-%d')
             %a{ title: "Go up", class: "pull-right", href: "#program" }
               %i{ class: "fa fa-angle-double-up fa-lg", 'aria-hidden' => true }
       .row.event-group

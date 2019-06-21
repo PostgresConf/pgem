@@ -1,8 +1,9 @@
 - compact_grid = EventType::LENGTH_STEP < 15
 / use smaller cell heights for more compact grids
 - cell_height = compact_grid ? 32 : 58
-- d_start = DateTime.strptime("#{date.to_s} #{@conference.start_hour} #{@tzname}", "%Y-%m-%d %H %Z")
-- d_end = DateTime.strptime("#{date.to_s} #{@conference.end_hour} #{@tzname}", "%Y-%m-%d %H %Z")
+- Time.zone = @conference.timezone
+- d_start = Time.zone.parse("#{date.to_s} #{@conference.start_hour}").to_datetime
+- d_end = Time.zone.parse("#{date.to_s} #{@conference.end_hour}").to_datetime
 - drange = (d_start.to_i..d_end.to_i).step(EventType::LENGTH_STEP.minutes)
 - slots = drange.map {|t| Time.at(t).to_datetime.in_time_zone(@conference.timezone)}
 - date_event_schedules = @event_schedules.where(start_time: d_start..d_end)
