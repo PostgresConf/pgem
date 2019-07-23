@@ -381,8 +381,8 @@ class Conference < ActiveRecord::Base
   # * +hash+ -> hash
   def scheduled_event_distribution
     confirmed_events = program.events.where(state: 'confirmed')
-    scheduled_count = program.selected_event_schedules.count
-    scheduled_value =  { 'value' => program.selected_event_schedules.count, 'color' => 'green' }
+    scheduled_count = program.selected_event_schedules.try(:count) || 0
+    scheduled_value =  { 'value' => scheduled_count, 'color' => 'green' }
     unscheduled_value =  { 'value' => confirmed_events.count - scheduled_count, 'color' => 'red' }
     { 'Scheduled' => scheduled_value, 'Unscheduled' => unscheduled_value }
   end
