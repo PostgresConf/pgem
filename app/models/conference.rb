@@ -1187,7 +1187,7 @@ class Conference < ActiveRecord::Base
       tz_new = ActiveSupport::TimeZone.new(tzchanges[1])
       tzdiff = tz_old.utc_offset - tz_new.utc_offset
       if tzdiff != 0 
-        program.selected_schedule.event_schedules.destroy_all
+        program.selected_schedule.event_schedules.destroy_all if program.selected_schedule
       end
     end
     true
