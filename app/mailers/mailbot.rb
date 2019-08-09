@@ -20,10 +20,22 @@ class Mailbot < ActionMailer::Base
     pdf = ReceiptPdf.new(@conference, @user, @payment, @lines)
     attachments[filename] = InvoicePrinter.render(document: pdf, logo: File.expand_path('app/assets/images/PPD_logo.png'))
 
+    body = @conference.email_settings.expand_payment_template(
+      @conference,
+      @user,
+      @conference.email_settings.purchase_confirmation_body,
+      @payment)
+
+    subject = @conference.email_settings.expand_payment_template(
+      @conference,
+      @user,
+      @conference.email_settings.purchase_confirmation_subject,
+      @payment)
+
     mail(to: @user.email,
-         from: @conference.contact.email,
-         template_name: 'purchase_confirmation_template.text.erb',
-         subject: "#{@conference.title} | Purchase Confirmation")
+      from: @conference.contact.email,
+      subject: subject,
+      body: body)
   end
 
   def ticket_confirmation_mail(ticket_purchase)
@@ -31,15 +43,27 @@ class Mailbot < ActionMailer::Base
     @conference = ticket_purchase.conference
     @user = ticket_purchase.user
 
+    # FIXME: possible race condition here !!!
     PhysicalTicket.last(ticket_purchase.quantity).each do |physical_ticket|
       pdf = TicketPdf.new(@conference, @user, physical_ticket, @conference.ticket_layout.to_sym, "ticket_for_#{@conference.short_title}_#{physical_ticket.id}")
       attachments["ticket_for_#{@conference.short_title}_#{physical_ticket.id}.pdf"] = pdf.render
     end
 
+    body = @conference.email_settings.expand_ticket_purchase_template(
+      @conference,
+      @user,
+      @conference.email_settings.ticket_confirmation_body,
+      @ticket_purchase)
+    subject = @conference.email_settings.expand_ticket_purchase_template(
+      @conference,
+      @user,
+      @conference.email_settings.ticket_confirmation_subject,
+      @ticket_purchase)
+
     mail(to: @user.email,
-         from: @conference.contact.email,
-         template_name: 'ticket_confirmation_template',
-         subject: "#{@conference.title} | Ticket Confirmation and PDF!")
+      from: @conference.contact.email,
+      subject: subject,
+      body: body)
   end
 
   def assign_ticket_mail(physical_ticket, to_user)
@@ -53,11 +77,23 @@ class Mailbot < ActionMailer::Base
     pdf = TicketPdf.new(@conference, @to_user, @physical_ticket, @conference.ticket_layout.to_sym, "ticket_for_#{@conference.short_title}_#{@physical_ticket.id}")
     attachments["ticket_for_#{@conference.short_title}_#{@physical_ticket.id}.pdf"] = pdf.render
 
+    body = @conference.email_settings.expand_assign_ticket_template(
+      @conference,
+      @to_user,
+      @conference.email_settings.assign_ticket_body,
+      @physical_ticket)
+
+    subject = @conference.email_settings.expand_assign_ticket_template(
+      @conference,
+      @to_user,
+      @conference.email_settings.assign_ticket_subject,
+      @physical_ticket)
+
     mail(to: @to_user.email,
-         cc: @from_user.email,
-         from: @conference.contact.email,
-         template_name: 'ticket_assign_template.text.erb',
-         subject: "#{@conference.title} | Ticket Assignment")
+      cc: @from_user.email,
+      from: @conference.contact.email,
+      subject: subject,
+      body: body)
   end
 
   def pending_assign_ticket_mail(physical_ticket, to_user)
@@ -66,14 +102,24 @@ class Mailbot < ActionMailer::Base
     @conference = @physical_ticket.conference
     @ticket = @physical_ticket.ticket
     @event = @physical_ticket.event
-    @reg_link = Rails.application.routes.url_helpers.claim_conference_physical_ticket_url(
-                            @conference.short_title, host: (ENV['OSEM_HOSTNAME'] || 'localhost:3000'), id: @physical_ticket.token ) 
+
+    body = @conference.email_settings.expand_assign_ticket_template(
+      @conference,
+      @from_user,
+      @conference.email_settings.pending_assign_ticket_body,
+      @physical_ticket)
+
+    subject = @conference.email_settings.expand_assign_ticket_template(
+      @conference,
+      @from_user,
+      @conference.email_settings.pending_assign_ticket_subject,
+      @physical_ticket)
 
     mail(to: to_user,
-         cc: @from_user.email,
-         from: @conference.contact.email,
-         template_name: 'pending_ticket_assign_template.text.erb',
-         subject: "#{@conference.title} | Ticket Assignment")
+      cc: @from_user.email,
+      from: @conference.contact.email,
+      subject: subject,
+      body: body)
   end
 
   def acceptance_mail(event, recipient)

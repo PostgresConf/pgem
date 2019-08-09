@@ -12,6 +12,7 @@
       = f.input :title
       = f.input :short_title, :input_html => { :maxlength => 18 }
       = f.input :description, input_html: { rows: 5, data: { provide: "markdown-editable" } }
+      = f.input :extra_info, input_html: { rows: 5}, hint: 'This text can be inserted ticket notification email templates using the {ticket_extra} macro'
       = f.input :price, label: 'Price (' + @conference.default_currency + ')'
       = f.input :price_currency, as: :hidden, :input_html => { :value => @conference.default_currency }
       = f.input :early_bird_price, label: 'Early Bird Price (' + @conference.default_currency + ')'

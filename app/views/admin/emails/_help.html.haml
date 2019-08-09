@@ -17,6 +17,25 @@
       %tr
         %td {eventtitle}
         %td The title of an accepted or rejected proposal
+    - if show_ticket_variables
+      %tr
+        %td {assigner_name}
+        %td Name of the user who assigned the ticket to another user
+      %tr
+        %td {ticket_purchase_id}
+        %td Ticket purchase ID
+      %tr
+        %td {ticket_title}
+        %td Ticket title
+      %tr
+        %td {ticket_quantity}
+        %td Quantity of purchased tickets
+      %tr
+        %td {ticket_claim_link}
+        %td Ticket claim link (allows unregistered user to claim assigned ticket)
+      %tr
+        %td {ticket_extra}
+        %td Ticket extra information (e.g. instructions, rules etc). Can be set in ticket properties.
     %tr
       %td {conference_start_date}
       %td The start date of the conference

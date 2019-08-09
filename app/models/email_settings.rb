@@ -3,7 +3,7 @@ class EmailSettings < ActiveRecord::Base
 
   has_paper_trail on: [:update], ignore: [:updated_at], meta: { conference_id: :conference_id }
 
-  def get_values(conference, user, event = nil)
+  def get_values(conference, user, event = nil, **kwargs )
     h = {
       'email' => user.email,
       'name' => user.name,
@@ -45,6 +45,38 @@ class EmailSettings < ActiveRecord::Base
       h['proposalslink'] = Rails.application.routes.url_helpers.conference_program_proposals_url(
                            conference.short_title, host: (ENV['OSEM_HOSTNAME'] || 'localhost:3000'))
     end
+
+
+    if kwargs[:ticket]
+      ticket = kwargs[:ticket]
+      h['ticket_extra'] = ticket.extra_information
+      h['ticket_title'] = ticket.title
+    end
+
+    if kwargs[:purchase]
+      purchase = kwargs[:purchase]
+      h['assigner_name'] = purchase.user.name
+      h['ticket_purchase_id'] = purchase.id.to_s
+      h['ticket_quantity'] = purchase.quantity.to_s
+      h['ticket_title'] = purchase.ticket.title
+      h['ticket_extra'] = purchase.ticket.extra_info || ' '
+    end
+
+    if kwargs[:payment]
+      payment = kwargs[:payment]
+      h['payment_id'] = payment.id.to_s
+    end
+
+    if kwargs[:physical_ticket]
+      physical_ticket = kwargs[:physical_ticket]
+      h['assigner_name'] = physical_ticket.ticket_purchase.user.name
+      h['ticket_purchase_id'] = physical_ticket.ticket_purchase.id.to_s
+      h['ticket_quantity'] = physical_ticket.ticket_purchase.quantity.to_s
+      h['ticket_title'] = physical_ticket.ticket.title
+      h['ticket_extra'] = physical_ticket.ticket.extra_info || ' '
+      h['ticket_claim_link'] = Rails.application.routes.url_helpers.claim_conference_physical_ticket_url(
+        conference.short_title, host: (ENV['OSEM_HOSTNAME'] || 'localhost:3000'), id: physical_ticket.token )
+    end
     h
   end
 
@@ -59,12 +91,30 @@ class EmailSettings < ActiveRecord::Base
     parse_template(template, values)
   end
 
+  def expand_payment_template(conference, user, template, payment)
+    values = get_values(conference, user, payment: payment)
+    parse_template(template, values)
+  end
+
+  def expand_ticket_purchase_template(conference, user, template, ticket_purchase)
+    values = get_values(conference, user, purchase: ticket_purchase)
+    parse_template(template, values)
+  end
+
+  def expand_assign_ticket_template(conference, user, template, physical_ticket)
+    values = get_values(conference, user, physical_ticket: physical_ticket)
+    parse_template(template, values)
+  end
+
+
   private
 
   def parse_template(text, values)
     values.each do |key, value|
       if value.kind_of?(Date)
         text = text.gsub "{#{key}}", value.strftime('%Y-%m-%d') unless text.blank?
+      elsif value.kind_of?(String)
+        text = text.gsub "{#{key}}", value unless text.blank? || value.empty?
       else
         text = text.gsub "{#{key}}", value unless text.blank? || value.blank?
       end

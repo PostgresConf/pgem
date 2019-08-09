@@ -1112,8 +1112,60 @@ class Conference < ActiveRecord::Base
   ##
   # Creates a EmailSettings association proxy. Used as before_create.
   #
+  EMAIL_SETTINGS_DEFAULTS = {
+    purchase_confirmation_subject: "{conference} - Purchase Confirmation",
+    purchase_confirmation_body: "Dear {name},
+
+Thanks! You have successfully purchased tickets for the event {conference}. Your payment id is {payment_id}.
+
+Please, find the receipt attached.
+
+{ticket_extra}
+
+Best wishes
+
+{conference} Team",
+    ticket_confirmation_subject: "{conference} - Ticket Confirmation and PDF!",
+    ticket_confirmation_body: "Dear {name},
+
+Thanks!  You have successfully booked {ticket_quantity} {ticket_title} ticket(s) for the event {conference}. Your transaction id is {ticket_purchase_id}.
+
+Please, find the ticket(s) pdf attached.
+
+{ticket_extra}
+
+Best wishes
+
+{conference} Team",
+    assign_ticket_subject: "{conference} - Ticket Assignment",
+    assign_ticket_body: "Hello {name},
+
+{assigner_name} has booked {ticket_title} ticket for the event {conference} and assigned it to your account.
+
+Please, find the ticket attached.
+
+{ticket_extra}
+
+Best wishes
+
+{conference} Team",
+    pending_assign_ticket_subject: "{conference} - Ticket Assignment",
+    pending_assign_ticket_body: "Hello,
+
+{assigner_name} has booked a {ticket_title} ticket for the event {conference} and is attempting to assign it to you. To claim the ticket, you must complete your registration at the link below.
+
+{ticket_claim_link}
+
+{ticket_extra}
+
+Best wishes
+
+{conference} Team"
+  }
+
+
   def create_email_settings
-    build_email_settings
+    build_email_settings(EMAIL_SETTINGS_DEFAULTS) 
     true
   end
 

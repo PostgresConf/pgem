@@ -30,7 +30,9 @@ module Admin
                                              :send_on_conference_registration_dates_updated, :conference_registration_dates_updated_subject, :conference_registration_dates_updated_body,
                                              :send_on_venue_updated, :venue_updated_subject, :venue_updated_body,
                                              :send_on_cfp_dates_updated, :cfp_dates_updated_subject, :cfp_dates_updated_body,
-                                             :send_on_program_schedule_public, :program_schedule_public_subject, :program_schedule_public_body)
+                                             :send_on_program_schedule_public, :program_schedule_public_subject, :program_schedule_public_body,
+                                             :purchase_confirmation_subject, :purchase_confirmation_body, :ticket_confirmation_subject, :ticket_confirmation_body,
+                                             :assign_ticket_subject, :assign_ticket_body, :pending_assign_ticket_subject, :pending_assign_ticket_body)
     end
   end
 end
