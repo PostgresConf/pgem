@@ -54,6 +54,7 @@ class Mailbot < ActionMailer::Base
       @user,
       @conference.email_settings.ticket_confirmation_body,
       @ticket_purchase)
+
     subject = @conference.email_settings.expand_ticket_purchase_template(
       @conference,
       @user,
