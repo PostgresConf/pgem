@@ -9,6 +9,8 @@ class Cfp < ActiveRecord::Base
   validate :before_end_of_conference
   validate :start_after_end_date
 
+  after_save :create_reminders
+
   ##
   # Checks whether cfp date is updated
   #
@@ -63,6 +65,9 @@ class Cfp < ActiveRecord::Base
 
     errors.
     add(:start_date, "can't be after the conference end date (#{program.conference.end_date})") if program.conference && program.conference.end_date && start_date && (start_date > program.conference.end_date)
+
+    errors.
+    add(:reg_reminder_end, "can't be after the conference end date (#{program.conference.end_date})") if program.conference && program.conference.end_date && start_date && (reg_reminder_end > program.conference.end_date)
   end
 
   def start_after_end_date
@@ -72,5 +77,12 @@ class Cfp < ActiveRecord::Base
 
   def conference_id
     program.conference_id
+  end
+
+  # create registration reminder job to nag unregistered speakers
+  def create_reminders
+    queue = "reminders_#{program.conference.guid}"
+    # create recurring reminder job, ONLY ONE per conference/cfp
+    SpeakerRegistrationReminderJob.set(queue: queue).perform_later(program.conference) if Delayed::Job.where(queue: queue).size == 0
   end
 end

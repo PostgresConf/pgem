@@ -54,7 +54,7 @@ module Admin
     private
 
     def cfp_params
-      params.require(:cfp).permit(:start_date, :end_date)
+      params.require(:cfp).permit(:start_date, :end_date, :speaker_registration_deadline)
     end
   end
 end

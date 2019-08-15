@@ -85,6 +85,14 @@ $(function () {
        maxDate : $("#registration-period-start-datepicker").attr('end_date'),
    });
 
+   $("#speaker-registration-deadline-datepicker").datetimepicker({
+       pickTime: false,
+       useCurrent: false,
+       format: "YYYY-MM-DD",
+       minDate: today,
+       maxDate : $("#registration-period-start-datepicker").attr('end_date'),
+    });
+
    $("#registration-period-early-bird-datepicker").datetimepicker({
        pickTime: false,
        useCurrent: false,
