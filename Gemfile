@@ -40,7 +40,7 @@ gem 'paper_trail'
 
 # for upload management
 gem 'carrierwave'
-gem 'mini_magick'
+gem 'mini_magick', '>= 4.9.4'
 gem 'carrierwave-bombshelter'
 
 # for internationalizing
