@@ -20,10 +20,11 @@
           Days Left:
         %dd
           = pluralize(@cfp.remaining_days, 'day')
-        %dt
-          Reg Reminder End
-        %dd#speaker_registration_deadline
-          = @cfp.reg_reminder_end.strftime('%A, %B %-d. %Y')  
+        - if @cfp.reg_reminder_end
+          %dt
+            Reg Reminder End
+          %dd#speaker_registration_deadline
+            = @cfp.reg_reminder_end.strftime('%A, %B %-d. %Y')  
         %dt
           Event types:
         %dd
