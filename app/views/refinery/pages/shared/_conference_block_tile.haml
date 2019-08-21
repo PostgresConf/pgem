@@ -9,7 +9,7 @@
                 = conference.venue.city
                 = conference.venue.country_name
     .card-footer
-        .row.col-center
+        .row
             - if conference.splashpage && conference.splashpage.public
                 .col-md-6
                     - if conference.registration_open? && conference.tickets.any?
