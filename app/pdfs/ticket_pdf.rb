@@ -50,7 +50,7 @@ class TicketPdf < Prawn::Document
     end
     move_down 70
     draw_text @conference.title.to_s, at: [@mid_horizontal + 30, cursor - 30], size: 12
-    draw_text @conference.venue.name.to_s, at: [@mid_horizontal + 30, cursor - 70]
+    draw_text @conference.venue.name.to_s, at: [@mid_horizontal + 30, cursor - 70] unless conference.venue.blank?
     move_up 130
     move_down @mid_vertical
   end
