@@ -67,7 +67,7 @@ class Cfp < ActiveRecord::Base
     add(:start_date, "can't be after the conference end date (#{program.conference.end_date})") if program.conference && program.conference.end_date && start_date && (start_date > program.conference.end_date)
 
     errors.
-    add(:reg_reminder_end, "can't be after the conference end date (#{program.conference.end_date})") if program.conference && program.conference.end_date && start_date && (reg_reminder_end > program.conference.end_date)
+    add(:reg_reminder_end, "can't be after the conference end date (#{program.conference.end_date})") if program.conference && program.conference.end_date && reg_reminder_end && (reg_reminder_end > program.conference.end_date)
   end
 
   def start_after_end_date
