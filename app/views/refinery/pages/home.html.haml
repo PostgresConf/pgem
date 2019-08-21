@@ -4,7 +4,7 @@
     .container.conferences
       .row.row-centered
         - @current[0..2].each_with_index do |conference, index|
-          .col-lg-4.col-sm-10.col-xs-10.col-centered
+          .col-lg-4.col-sm-10.col-xs-10
             = render partial: '/refinery/pages/shared/conference_block_tile', locals: { conference: conference }
   - else
     .row.conferences
