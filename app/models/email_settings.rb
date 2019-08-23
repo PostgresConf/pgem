@@ -49,7 +49,7 @@ class EmailSettings < ActiveRecord::Base
 
     if kwargs[:ticket]
       ticket = kwargs[:ticket]
-      h['ticket_extra'] = ticket.extra_information
+      h['ticket_extra'] = ticket.extra_info
       h['ticket_title'] = ticket.title
     end
 
