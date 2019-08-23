@@ -93,7 +93,7 @@
         .col-md-12
           %dl.dl-horizontal#proposal-info
             %dt Date:
-            %dd= @event_schedule.start_time.strftime("%Y %B %e %H:%M") if @event_schedule
+            %dd= @event_schedule.start_time.in_time_zone(@conference.timezone).strftime("%Y %B %e %H:%M") if @event_schedule
             %dt Duration:
             %dd= show_time(@event.event_type.length)
             %dt Room:
