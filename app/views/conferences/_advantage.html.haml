@@ -1,4 +1,4 @@
-.container
+%section.container
   .row
     .col-md-12.text-center
       %h2
@@ -8,18 +8,17 @@
   .row.row-centered
     %div.slider.advantages
       - @conference.advantages.each do |advantage|
-        .col-md-4.col-sm-4.col-centered.col-top
-          .thumbnail
-            - unless advantage.picture?
-              %p.text-center
-                %i.fa.fa-map-marker.fa-5x
-            - else
-              = image_tag advantage.picture.large.url, class: 'img-responsive img-activity'
-            .caption
-              %h3.text-center
-              -if advantage.description.present?
-                = markdown(advantage.description)
-
+        .container
+          .card.flex-maxheight
+            .card-block
+              - unless advantage.picture?
+                %i.fa.fa-map-marker.fa-5x.img-responsive.img-center
+              - else
+                = image_tag advantage.picture.thumb.url, class: 'img-responsive img-center'
+            .card-block
+              %h4
+                -if advantage.description.present?
+                  = markdown(advantage.description)
 :javascript
   $('.advantages').slick({
     slidesToShow: 3,
