@@ -1,85 +1,68 @@
-.container
-  .content_row
-    .col-md-8.col-md-offset-2
-      .page-header
-        %h1
-          Ticket for
-          = @conference.title
-        %p.text-muted
-          - if @conference.venue
-            at
-            %strong
-              #{@conference.venue.name},
-            #{@conference.venue.street},
-            #{@conference.venue.city} / #{@conference.venue.country_name}.
-          %small
-            = date_string(@conference.start_date, @conference.end_date)
-  .content_row
-    %table.ticket
-      %tr.ticket
-        %td.ticket
-          .col-md-12.well
-            %h3.text-center
-              Ticket Holder
-            %p.text-left
-              %strong
-                Name
-              %br
-              = @user.name
-              %br
-              %br
-              %strong
-                Email
-              %br
-              = @user.email
-        %td.ticket
-          .col-md-12.well
-            - if @conference.picture?
-              - width = @conference.picture.image[:width]
-              - height = @conference.picture.image[:height]
-              - if 10 * width > 15 * height
-                = image_tag(@conference.picture_url, width: '150')
-              - else
-                = image_tag(@conference.picture_url, height: '100')
+.container.ticket
+  .col-md-8.col-md-offset-2
+    .page-header.text-center
+      %h1
+        Ticket for
+        = @conference.title
+      %p.text-muted
+        - if @conference.venue
+          %strong
+            #{@conference.venue.name},
+          #{@conference.venue.street},
+          #{@conference.venue.city} / #{@conference.venue.country_name}.
+        %small
+          = date_string(@conference.start_date, @conference.end_date)
+  .col-md-8.col-md-offset-2
+    .row
+      .col-md-6.text-left
+        .well
+          %h3.text-center
+            Ticket Holder
+          %strong
+            Name
+          %p
+            = @user.name
+          %strong
+            Email
+          %p
+            = @user.email
+      .col-md-6
+        .well
+          %h3.text-center
+            Organization
+          - if @conference.picture?
+            - width = @conference.picture.image[:width]
+            - height = @conference.picture.image[:height]
+            - if 10 * width > 15 * height
+              = image_tag(@conference.picture_url, width: '150', class: 'img-responsive img-center')
             - else
-              = image_tag('/img/osem-logo.png', class: 'img-responsive')
-            %p.text-left
-              %br
-              %strong
-                Organization
-              %br
-      %tr.ticket
-        %td.ticket
-          .col-md-12.box.well
-            %p.text-left
-              %strong
-                Event
-              %br
-              = @conference.title
-              %br
-              = @conference.start_date.strftime('%B %d, %Y')
-              %br
-              %br
-              %strong
-                Ticket
-              %br
-              = @physical_ticket.ticket.title
-              %br
-              %br
-              %strong
-                Ticket Ref.
-              %br
-              = @physical_ticket.ticket_purchase.id
-              %br
-        %td.ticket
-          .col-md-12.box.well
-            = image_tag(@qrcode_image.to_data_url, class: 'img-responsive qr-image')
+              = image_tag(@conference.picture_url, height: '100', class: 'img-responsive img-center')
+          - else
+            = image_tag('/img/osem-logo.png', class: 'img-responsive img-center')
+    .row
+      .col-md-6.text-left
+        .well
+          %strong
+            Event
+          %p
+            = @conference.title
+          %p
+            = @conference.start_date.strftime('%B %d, %Y')
+          %strong
+            Ticket
+          %p
+            = @physical_ticket.ticket.title
+          %strong
+            Ticket Ref.
+          %p
+            = @physical_ticket.ticket_purchase.id
+      .col-md-6.box
+        .well
+          = image_tag(@qrcode_image.to_data_url, class: 'img-responsive img-center')
 
-  .content_row
-    .col-md-8.col-md-offset-2
-      %p.text-left
-        = link_to 'Generate PDF',
+      .col-md-1.col-md-offset-5
+        = link_to 'Download PDF',
         conference_physical_ticket_path(@conference.short_title,
                                         @physical_ticket.token,
                                         format: :pdf),
-        class: 'button btn btn-default btn-info'
+        class: 'button btn btn-default btn-info btn-lg'

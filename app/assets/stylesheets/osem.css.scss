@@ -356,18 +356,8 @@ p.comment-body {
     padding: 0 20px;
 }
 
-table.ticket {
-  table-layout: fixed;
-  width: 800px;
-}
-
-tr.ticket {
+.ticket .well {
   height: 220px;
-}
-
-td.ticket {
-  height: 220px;
-  width: 400px;
 }
 .calendar-title {
   font-size: 18px;
