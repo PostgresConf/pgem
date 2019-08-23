@@ -11,114 +11,109 @@ class Mailbot < ActionMailer::Base
   end
 
   def purchase_confirmation_mail(payment)
-    @payment = payment
-    @lines = TicketPurchase.where(payment_id: @payment.id)
-    @user = payment.user
-    @conference = payment.conference
+    lines = payment.ticket_purchases
+    user = payment.user
+    conference = payment.conference
 
-    filename = @conference.short_title + '_payment-' + @payment.id.to_s + '.pdf'
-    pdf = ReceiptPdf.new(@conference, @user, @payment, @lines)
+    filename = "#{conference.short_title}_payment-#{payment.id}.pdf"
+    pdf = ReceiptPdf.new(conference, user, payment, lines)
+    # TODO: make logo path configurable
     attachments[filename] = InvoicePrinter.render(document: pdf, logo: File.expand_path('app/assets/images/PPD_logo.png'))
 
-    body = @conference.email_settings.expand_payment_template(
-      @conference,
-      @user,
-      @conference.email_settings.purchase_confirmation_body,
-      @payment)
+    body = conference.email_settings.expand_payment_template(
+      conference,
+      user,
+      conference.email_settings.purchase_confirmation_body,
+      payment)
 
-    subject = @conference.email_settings.expand_payment_template(
-      @conference,
-      @user,
-      @conference.email_settings.purchase_confirmation_subject,
-      @payment)
+    subject = conference.email_settings.expand_payment_template(
+      conference,
+      user,
+      conference.email_settings.purchase_confirmation_subject,
+      payment)
 
-    mail(to: @user.email,
-      from: @conference.contact.email,
+    mail(to: user.email,
+      from: conference.contact.email,
       subject: subject,
       body: body)
   end
 
   def ticket_confirmation_mail(ticket_purchase)
-    @ticket_purchase = ticket_purchase
-    @conference = ticket_purchase.conference
-    @user = ticket_purchase.user
+    conference = ticket_purchase.conference
+    user = ticket_purchase.user
 
-    # FIXME: possible race condition here !!!
-    PhysicalTicket.last(ticket_purchase.quantity).each do |physical_ticket|
-      pdf = TicketPdf.new(@conference, @user, physical_ticket, @conference.ticket_layout.to_sym, "ticket_for_#{@conference.short_title}_#{physical_ticket.id}")
-      attachments["ticket_for_#{@conference.short_title}_#{physical_ticket.id}.pdf"] = pdf.render
+    ticket_purchase.physical_tickets.each do |physical_ticket|
+      pdf = TicketPdf.new(conference, user, physical_ticket, conference.ticket_layout.to_sym, "ticket_for_#{conference.short_title}_#{physical_ticket.id}")
+      attachments["ticket_for_#{conference.short_title}_#{physical_ticket.id}.pdf"] = pdf.render
     end
 
-    body = @conference.email_settings.expand_ticket_purchase_template(
-      @conference,
-      @user,
-      @conference.email_settings.ticket_confirmation_body,
-      @ticket_purchase)
+    body = conference.email_settings.expand_ticket_purchase_template(
+      conference,
+      user,
+      conference.email_settings.ticket_confirmation_body,
+      ticket_purchase)
 
-    subject = @conference.email_settings.expand_ticket_purchase_template(
-      @conference,
-      @user,
-      @conference.email_settings.ticket_confirmation_subject,
-      @ticket_purchase)
+    subject = conference.email_settings.expand_ticket_purchase_template(
+      conference,
+      user,
+      conference.email_settings.ticket_confirmation_subject,
+      ticket_purchase)
 
-    mail(to: @user.email,
-      from: @conference.contact.email,
+    mail(to: user.email,
+      from: conference.contact.email,
       subject: subject,
       body: body)
   end
 
   def assign_ticket_mail(physical_ticket, to_user)
-    @physical_ticket = physical_ticket
-    @from_user = @physical_ticket.ticket_purchase.user
-    @to_user = to_user
-    @conference = @physical_ticket.conference
-    @ticket = @physical_ticket.ticket
-    @event = @physical_ticket.event
+    from_user = physical_ticket.ticket_purchase.user
+    conference = physical_ticket.conference
+    ticket = physical_ticket.ticket
+    event = physical_ticket.event
 
-    pdf = TicketPdf.new(@conference, @to_user, @physical_ticket, @conference.ticket_layout.to_sym, "ticket_for_#{@conference.short_title}_#{@physical_ticket.id}")
-    attachments["ticket_for_#{@conference.short_title}_#{@physical_ticket.id}.pdf"] = pdf.render
+    pdf = TicketPdf.new(conference, to_user, physical_ticket, conference.ticket_layout.to_sym, "ticket_for_#{conference.short_title}_#{physical_ticket.id}")
+    attachments["ticket_for_#{conference.short_title}_#{physical_ticket.id}.pdf"] = pdf.render
 
-    body = @conference.email_settings.expand_assign_ticket_template(
-      @conference,
-      @to_user,
-      @conference.email_settings.assign_ticket_body,
-      @physical_ticket)
+    body = conference.email_settings.expand_assign_ticket_template(
+      conference,
+      to_user,
+      conference.email_settings.assign_ticket_body,
+      physical_ticket)
 
-    subject = @conference.email_settings.expand_assign_ticket_template(
-      @conference,
-      @to_user,
-      @conference.email_settings.assign_ticket_subject,
-      @physical_ticket)
+    subject = conference.email_settings.expand_assign_ticket_template(
+      conference,
+      to_user,
+      conference.email_settings.assign_ticket_subject,
+      physical_ticket)
 
-    mail(to: @to_user.email,
-      cc: @from_user.email,
-      from: @conference.contact.email,
+    mail(to: to_user.email,
+      cc: from_user.email,
+      from: conference.contact.email,
       subject: subject,
       body: body)
   end
 
   def pending_assign_ticket_mail(physical_ticket, to_user)
-    @physical_ticket = physical_ticket
-    @from_user = @physical_ticket.ticket_purchase.user
-    @conference = @physical_ticket.conference
-    @ticket = @physical_ticket.ticket
-    @event = @physical_ticket.event
+    from_user = physical_ticket.ticket_purchase.user
+    conference = physical_ticket.conference
+    ticket = physical_ticket.ticket
+    event = physical_ticket.event
 
-    body = @conference.email_settings.expand_assign_ticket_template(
-      @conference,
-      @from_user,
-      @conference.email_settings.pending_assign_ticket_body,
-      @physical_ticket)
+    body = conference.email_settings.expand_assign_ticket_template(
+      conference,
+      from_user,
+      conference.email_settings.pending_assign_ticket_body,
+      physical_ticket)
 
-    subject = @conference.email_settings.expand_assign_ticket_template(
-      @conference,
-      @from_user,
-      @conference.email_settings.pending_assign_ticket_subject,
-      @physical_ticket)
+    subject = conference.email_settings.expand_assign_ticket_template(
+      conference,
+      from_user,
+      conference.email_settings.pending_assign_ticket_subject,
+      physical_ticket)
 
     mail(to: to_user,
-      cc: @from_user.email,
-      from: @conference.contact.email,
+      cc: from_user.email,
+      from: conference.contact.email,
       subject: subject,
       body: body)
   end
@@ -198,14 +193,12 @@ class Mailbot < ActionMailer::Base
   end
 
   def event_comment_mail(comment, user)
-    @comment = comment
-    @event = @comment.commentable
-    @conference = @event.program.conference
-    @user = user
+    event = comment.commentable
+    conference = event.program.conference
 
-    mail(to: @user.email,
-         from: @conference.contact.email,
+    mail(to: user.email,
+         from: conference.contact.email,
          template_name: 'comment_template',
-         subject: "New comment has been posted for #{@event.title}")
+         subject: "New comment has been posted for #{event.title}")
   end
 end
