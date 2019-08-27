@@ -52,11 +52,14 @@
                           .modal-body.text-center
                             = render partial: 'event_listing', locals: { event: event }
 
-  %td.col-sm-1.col-md-1.text-center
+  %td.col-sm-1.col-md-1.text-center{class: ('hidden' if ticket.current_price.zero?) }
     = ticket.current_price.symbol
     %span{id: "price_#{ticket.id}"}
       = humanized_money ticket.adjusted_price
-  %td.col-sm-1.col-md-1.text-center
+  %td.col-sm-1.col-md-1.text-center{class: ('hidden' if ticket.current_price.zero?) }
     %strong
       %span.total_row{id: "total_row_#{ticket.id}"}
         0
+  %td.col-sm-1.col-md-1.text-center{class: (ticket.current_price.zero? ? 'visible' : 'hidden') }
+    %strong
+      Free
