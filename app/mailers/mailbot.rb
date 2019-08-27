@@ -42,9 +42,11 @@ class Mailbot < ActionMailer::Base
     conference = ticket_purchase.conference
     user = ticket_purchase.user
 
-    ticket_purchase.physical_tickets.each do |physical_ticket|
-      pdf = TicketPdf.new(conference, user, physical_ticket, conference.ticket_layout.to_sym, "ticket_for_#{conference.short_title}_#{physical_ticket.id}")
-      attachments["ticket_for_#{conference.short_title}_#{physical_ticket.id}.pdf"] = pdf.render
+    if conference.email_settings.send_ticket_pdf
+      ticket_purchase.physical_tickets.each do |physical_ticket|
+        pdf = TicketPdf.new(conference, user, physical_ticket, conference.ticket_layout.to_sym, "ticket_for_#{conference.short_title}_#{physical_ticket.id}")
+        attachments["ticket_for_#{conference.short_title}_#{physical_ticket.id}.pdf"] = pdf.render
+      end
     end
 
     body = conference.email_settings.expand_ticket_purchase_template(

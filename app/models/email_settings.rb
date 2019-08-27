@@ -16,7 +16,9 @@ class EmailSettings < ActiveRecord::Base
                                   conference.short_title, host: (ENV['OSEM_HOSTNAME'] || 'localhost:3000')),
 
       'schedule_link' => Rails.application.routes.url_helpers.conference_schedule_url(
-                         conference.short_title, host: (ENV['OSEM_HOSTNAME'] || 'localhost:3000'))
+                         conference.short_title, host: (ENV['OSEM_HOSTNAME'] || 'localhost:3000')),
+      'my_tickets_link' => Rails.application.routes.url_helpers.conference_physical_ticket_index_url(
+                          conference.short_title, host: (ENV['OSEM_HOSTNAME'] || 'localhost:3000'))
     }
 
     if conference.program.cfp
