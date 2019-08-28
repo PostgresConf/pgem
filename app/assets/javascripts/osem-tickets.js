@@ -68,7 +68,7 @@ function restore_state () {
 }
 
 $( document ).ready(function() {
-    if (tix) {
+    if (typeof(tix) !== 'undefined' && tix) {
       document.getElementById('tickets__' + tix).value = '1';
     }
 
