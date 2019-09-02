@@ -52,6 +52,7 @@
 //= require selectize
 //= require jquery.slick
 //= require color-picker
+//= require bootstrap-select
 
 $(document).ready(function() {
     $('a[disabled=disabled]').click(function(event){

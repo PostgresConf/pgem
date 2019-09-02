@@ -1,9 +1,8 @@
 function update_price($this){
     var id = $this.data('id');
-
     // Calculate price for row
     var value = $this.val();
-    var price = $('#price_' + id).text();
+    var price = $('#price_' + id).data().price;
     var row_total = accounting.formatMoney(value * price, parent.currency_symbol, 0, parent.currency_delimiter, parent.currency_separator);
     $('#total_row_' + id).text(row_total);
 
@@ -38,8 +37,6 @@ function update_event(sb, ticket_id){
     }
 
     document.getElementById('tickets__' + ticket_id).value = tt;
-    $('#ticket_label_' + ticket_id).text(tt);
-
     document.getElementById('tickets__' + ticket_id).dispatchEvent(new Event('change'));
 }
 
@@ -51,7 +48,6 @@ function save_state() {
     });
     sessionStorage.setItem('input_states', JSON.stringify(input_states));
 }
-
 
 function restore_state () {
     var input_states = sessionStorage.getItem('input_states')
