@@ -186,9 +186,15 @@ class PaymentsController < ApplicationController
       else
         success = true
         pmu = ret.fetch("paymentMethodsUsed")
-        last4 = pmu[0].fetch("cardNumber").last(4)
+        last4 = nil
+        if pmu[0]['cardNumber']
+          last4 = pmu[0].fetch("cardNumber").last(4)
+        end
         amt = pmu[0].fetch("amountInCents")
-        auth_code = pmu[0].fetch("gatewayReference")
+        auth_code = nil
+        if pmu[0]['gatewayReference']
+          auth_code = pmu[0].fetch("gatewayReference")
+        end
       end
     end
 
