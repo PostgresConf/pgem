@@ -17,6 +17,7 @@
       = f.input :price_currency, as: :hidden, :input_html => { :value => @conference.default_currency }
       = f.input :early_bird_price, label: 'Early Bird Price (' + @conference.default_currency + ')'
       = f.input :early_bird_price_currency, as: :hidden, :input_html => { :value => @conference.default_currency }
+      = f.input :max_per_purchase, hint: 'Number of tickets that can be bought within one purchase'
       = f.input :hidden
       = f.input :ticket_group
       = f.input :ticket_type, as: :select, collection: Ticket.ticket_types.keys
