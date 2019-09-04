@@ -62,7 +62,7 @@ module Admin
                                      :conference_id, :price_cents, :price_currency, :price, 
                                      :hidden, :ticket_group_id, :early_bird_price_cents, 
                                      :early_bird_price_currency, :early_bird_price, :ticket_type,
-                                     :start_date, :end_date, :extra_info)
+                                     :start_date, :end_date, :extra_info, :max_per_purchase)
     end
   end
 end

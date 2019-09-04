@@ -132,18 +132,17 @@ class Ticket < ActiveRecord::Base
     events.where(ticket_id: id)
   end
 
-  # This will return the maximum number of tickets available for a select box maxing out at 10
-  # TODO: The max should be configurable at the ticket level
+  # This will return the maximum number of tickets available within one purchase, maxing out at max_per_purchase
   def purchase_quantity_available
-    available = 10
+    available = max_per_purchase
     if applied_code.present?
       if Ticket.where(id: id).joins(:codes).where("codes.id = ?", applied_code.id).count > 0
-	if applied_code.max_uses != 0
+	      if applied_code.max_uses != 0
           available = applied_code.max_uses - TicketPurchase.get_code_usage(conference, applied_code)
-	  if available < 0
-	    available = 0
-	  end
-	end
+          if available < 0
+            available = 0
+          end
+	      end
       end
     end
     available

@@ -274,8 +274,7 @@ class Event < ActiveRecord::Base
     t + (event_type.length * 60)
   end
 
-  # This will return the maximum number of tickets available for a select box maxing out at 10
-  # TODO: The max should be configurable at the ticket level
+  # This will return the maximum number of tickets available within one purchase
   def purchase_quantity_available
     if max_attendees.blank?
       10
