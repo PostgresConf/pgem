@@ -25,6 +25,7 @@ class Ticket < ActiveRecord::Base
   validate :tickets_of_conference_have_same_currency
 
   validates :price_cents, :price_currency, :title, presence: true
+  validates :max_per_purchase, numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 100}
 
   validates_numericality_of :price_cents, greater_than_or_equal_to: 0
 
