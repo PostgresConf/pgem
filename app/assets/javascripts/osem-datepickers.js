@@ -91,6 +91,7 @@ $(function () {
        format: "YYYY-MM-DD",
        minDate: today,
        maxDate : $("#registration-period-start-datepicker").attr('end_date'),
+       showClear: true
     });
 
    $("#registration-period-early-bird-datepicker").datetimepicker({

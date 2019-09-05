@@ -1,18 +1,12 @@
-.container
-  .row
-    .col-md-12.text-left
-      = link_to 'Enter Promotional Code','#', 'data-toggle' => 'modal',
-      'data-target' => '#apply-code', class: 'btn btn-success pull-right'
-
-    .modal.fade{id: 'apply-code', 'role' => 'dialog', 'aria-hidden' => 'true'}
-      .modal-dialog
-        .modal-content
-          .modal-header
-            %h3{id: 'apply-code-header'}
-              Enter Promotional Code
-          .modal-body
-            = semantic_form_for('promo_code', url: conference_tickets_path(@conference.short_title), method: :get) do |f|
-              = f.input :pcode, :label => false
-              = f.actions do
-                = f.action :submit, label: 'Apply', :button_html => {class: 'btn btn-primary', id: 'apply_code'}
-                = f.action :cancel, label: 'Cancel', :button_html => {class: 'btn btn-danger', 'data-dismiss'=> 'modal', 'aria-hidden'=>'true'}
+.modal.fade{id: 'apply-code', 'role' => 'dialog', 'aria-hidden' => 'true'}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h3{id: 'apply-code-header'}
+          Enter Promotional Code
+      .modal-body
+        = semantic_form_for('promo_code', url: conference_tickets_path(@conference.short_title), method: :get) do |f|
+          = f.input :pcode, :label => false
+          = f.actions do
+            = f.action :submit, label: 'Apply', :button_html => {class: 'btn btn-primary', id: 'apply_code'}
+            = f.action :cancel, label: 'Cancel', :button_html => {class: 'btn btn-danger', 'data-dismiss'=> 'modal', 'aria-hidden'=>'true'}

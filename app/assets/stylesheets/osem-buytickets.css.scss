@@ -34,3 +34,17 @@
     .pass-block .pass:first-of-type:nth-last-of-type(n + 4) ~ .pass ~ .pass { z-index:2; width:40%; position:absolute; top:0; left:calc(40% - 2px); }
     .pass-block .pass:first-of-type:nth-last-of-type(n + 4) ~ .pass ~ .pass ~ .pass { z-index:1; width:40%; position:absolute; top:0; left:calc(60% - 3px); }
   }
+
+.products {
+  .product {
+    min-height: 75px;
+    .product-description {
+      font-size: 16px;
+    }
+  }
+  .promocode {
+    margin-top: 15px;
+  }
+}
+
+

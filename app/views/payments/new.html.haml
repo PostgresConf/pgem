@@ -1,12 +1,13 @@
 .container
   .row
-    .col-xs-6.col-xs-offset-3
-      %h1
-        Payment Summary :
-        - if @unpaid_quantity > 0 && @total_amount_to_pay == 0
-          No Charge
-        -else
-          = humanized_money_with_symbol @total_amount_to_pay
+    .col-xs-8.col-xs-offset-2
+      .page-header
+        %h1
+          Payment Summary :
+          - if @unpaid_quantity > 0 && @total_amount_to_pay == 0
+            No Charge
+          -else
+            = humanized_money_with_symbol @total_amount_to_pay
     .col-xs-8.col-xs-offset-2.well
       = render partial: 'payment'
   .row

@@ -6,50 +6,55 @@
 
 .container
   .row
-    .col-md-8.col-md-offset-2
+    .col-md-12
       .page-header
         %h1
           Register
-      %p.lead
-        Please choose your tickets for
-        %strong
-          = @conference.title
-        here*
 
-        - if @conference.codes.any?
-          = render 'code'
+  .row
+    - if @conference.codes.any?  
+      = render 'code'
 
-      =form_tag(conference_ticket_purchases_path, method: :post) do |f|
-        - if @conference.tickets.applied_code.present?
-          = hidden_field_tag 'code_id', @conference.tickets.applied_code.id
-        %table.table.table-hover
-          %thead
-            %tr
-              %th Quantity
-              %th Ticket
-              %th Price
-              %th Total
-          %tbody
-          - @conference.tickets.visible_tickets.each do |ticket|
-            = render partial: 'ticket', f: f, locals: {ticket: ticket}
-            = hidden_field_tag "purchase_prices[][#{ticket.id}]", ticket.adjusted_price
-          %tr
-            %td
-            %td
-            %td.col-sm-1.col-md-1
-              %h4
-                Total
-            %td.col-sm-1.col-md-1
-              %h4
-                %strong
-                  %span{id: 'total_price'}
-                    0
-        .pull-right
-          .btn-group-vertical
-            = button_tag(type: 'submit', class: 'btn btn-success btn-lg') do
-              Continue
-              %i.fa.fa-shopping-cart
+    = form_tag(conference_ticket_purchases_path, method: :post) do |f|
+      .col-md-12
+        .panel.panel-default.products
+          .panel-heading
+            .panel-title
+              .row
+                .col-md-12
+                  Please choose your tickets for
+                  %strong
+                    = @conference.title
+                  here*
+          .panel-body
+            - visible_tickets = @conference.tickets.visible_tickets
+            - event_ticket_ids = @conference.program.events.where.not(ticket_id: nil).pluck(:ticket_id)
+            - event_tickets = visible_tickets.where(id: event_ticket_ids)
+            - general_tickets = visible_tickets - event_tickets
+            - general_tickets.each do |ticket|
+              = render partial: 'ticket', f: f, locals: {ticket: ticket, event: nil}
+              = hidden_field_tag "purchase_prices[][#{ticket.id}]", ticket.adjusted_price
 
+            - event_tickets.each do |ticket|
+              = hidden_field_tag "purchase_prices[][#{ticket.id}]", ticket.adjusted_price
+              = hidden_field_tag("tickets[][#{ticket.id}]", 0, type: 'number', min: 0, class: "form-control quantity", 'data-id' => ticket.id)
+              - ticket.ticketed_events.each do |event|
+                = render partial: 'ticket', f: f, locals: {ticket: ticket, event: event}
+
+            - if @conference.codes.any?  
+              = link_to 'Apply Promo Code!','#', 'data-toggle' => 'modal', 'data-target' => '#apply-code', class: 'btn btn-info pull-right'
+
+          .panel-footer
+            .row.text-center
+              .col-md-9
+                %h4.text-right
+                  Total
+                  %strong#total_price
+                    $0
+              .col-md-3
+                = button_tag(type: 'submit', class: 'btn btn-success btn-block') do
+                  Checkout
+                  %i.fa.fa-shopping-cart
   .row
     .col-md-13
       %p.text-muted.text-center

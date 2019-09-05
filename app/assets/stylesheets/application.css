@@ -29,4 +29,5 @@
  *= require pretty.min
  *= require refinery-main
  *= require color-picker
+ *= require bootstrap-select.min
 */
