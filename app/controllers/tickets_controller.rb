@@ -23,11 +23,14 @@ class TicketsController < ApplicationController
           @applied_code = code
         end
       else
-        flash.now[:notice] = "The Promotional Code (#{applied_code}) is not valid."
+        flash.now[:warning] = "The Promotional Code (#{applied_code}) is not valid."
       end
     end
 
     Ticket.applied_code = code
+  end
+
+  def complete
   end
 
   def check_load_resource

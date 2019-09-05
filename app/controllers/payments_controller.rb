@@ -47,7 +47,7 @@ class PaymentsController < ApplicationController
         if @payment.save
           update_purchased_ticket_purchases
           Mailbot.purchase_confirmation_mail(@payment).deliver_later
-          redirect_to conference_physical_ticket_index_path,
+          redirect_to complete_conference_tickets_path,
                      notice: 'Thanks! Your ticket is booked successfully.'
         end
       else
@@ -140,7 +140,7 @@ class PaymentsController < ApplicationController
      if @payment.purchase && @payment.save
        update_purchased_ticket_purchases
        Mailbot.purchase_confirmation_mail(@payment).deliver_later
-       redirect_to conference_physical_ticket_index_path, 
+       redirect_to complete_conference_tickets_path,
                    notice: 'Thanks! Your ticket is booked successfully.'
      else
        @total_amount_to_pay = Ticket.total_price(@conference, current_user, paid: false)
@@ -214,7 +214,7 @@ class PaymentsController < ApplicationController
      if @payment.save
        update_purchased_ticket_purchases
        Mailbot.purchase_confirmation_mail(@payment).deliver_later
-       redirect_to conference_physical_ticket_index_path,
+       redirect_to complete_conference_tickets_path,
                 notice: 'Thanks! Your ticket is booked successfully.'
      end
    end
