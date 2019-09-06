@@ -61,7 +61,7 @@ class EmailSettings < ActiveRecord::Base
       h['ticket_purchase_id'] = purchase.id.to_s
       h['ticket_quantity'] = purchase.quantity.to_s
       h['ticket_title'] = purchase.ticket.title
-      h['ticket_extra'] = purchase.ticket.extra_info || ' '
+      h['ticket_extra'] = purchase.ticket.extra_info.presence || ' '
     end
 
     if kwargs[:payment]
