@@ -21,7 +21,6 @@
             = humanized_money ticket.adjusted_price
             %span.hidden.total_row{id: "total_row_#{ticket.id}"}
               0
-          %span.text-muted x
     .col-md-6.col-sm-2.col-xs-4
       - if event.present?
         - available = event.purchase_quantity_available
