@@ -29,7 +29,7 @@
           .panel-body
             - visible_tickets = @conference.tickets.visible_tickets
             - event_ticket_ids = @conference.program.events.where.not(ticket_id: nil).pluck(:ticket_id)
-            - event_tickets = visible_tickets.where(id: event_ticket_ids)
+            - event_tickets = visible_tickets.to_a.select { |t| event_ticket_ids.include? t.id }
             - general_tickets = visible_tickets - event_tickets
             - general_tickets.each do |ticket|
               = render partial: 'ticket', f: f, locals: {ticket: ticket, event: nil}

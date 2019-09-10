@@ -120,7 +120,7 @@ class Ticket < ActiveRecord::Base
   def self.visible_tickets
     if applied_code.present?
       if applied_code.code_type.title == 'Access'
-        where(hidden: [true, false]).joins(:codes).where("codes.id = ?", applied_code.id)
+        where(hidden: true).joins(:codes).where("codes.id = ?", applied_code.id) | where(hidden: false)
       else
         where(hidden: false)
       end
