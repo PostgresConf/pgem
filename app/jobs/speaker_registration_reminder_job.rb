@@ -14,7 +14,7 @@ class SpeakerRegistrationReminderJob < ActiveJob::Base
 
                 unregistered_speakers = EventUser.where(event: conference.program.events.where(state: 'confirmed'), event_role: 'speaker').where.not(user_id: registered_user_ids).map(&:user)
                 unregistered_speakers.each do |speaker|
-                    Rails.logger.info "#{self.class}@#{conference.short_title} Sending registration reminder to #{recipient.name}"
+                    Rails.logger.info "#{self.class}@#{conference.short_title} Sending registration reminder to #{speaker.name}"
                     Mailbot.confirm_reminder_mail(self, speaker).deliver_later
                 end
             end
