@@ -16,6 +16,8 @@
       = render 'code'
 
     = form_tag(conference_ticket_purchases_path, method: :post) do |f|
+      - if @conference.tickets.applied_code.present?
+        = hidden_field_tag 'code_id', @conference.tickets.applied_code.id
       .col-md-12
         .panel.panel-default.products
           .panel-heading
