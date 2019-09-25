@@ -47,7 +47,7 @@ gem 'carrierwave-bombshelter'
 gem 'rails-i18n', '~> 4.0.0'
 
 # as authentification framework
-gem 'devise',  '>= 4.6.0'
+gem 'devise',  '>= 4.7.1'
 gem 'devise_ichain_authenticatable'
 
 # for openID authentication
@@ -249,6 +249,9 @@ gem 'rest-client-logger'
 
 # event tags
 gem 'acts-as-taggable-on'
+
+# used by many dependencies, enforce reasonably fresh version
+gem "nokogiri", ">= 1.10.4"
 
 #To make SOAP calls to the PayU API
 gem 'httpclient', '~> 2.8', '>= 2.8.3'
