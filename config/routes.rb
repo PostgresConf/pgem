@@ -261,6 +261,7 @@ Osem::Application.routes.draw do
         resources :tracks, only: :index
         resources :speakers, only: :index
         resources :events, only: :index
+        resources :schedule, only: :index
       end
       resources :rooms, only: :index
       resources :tracks, only: :index

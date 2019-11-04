@@ -1,16 +1,14 @@
 class EventSerializer < ActiveModel::Serializer
   include ActionView::Helpers::TextHelper
 
-  attributes :guid, :title, :length, :scheduled_date, :language, :abstract, :speaker_ids, :type, :room, :track
+  attributes :guid, :title, :length, :scheduled_date, :language, :abstract, :speakers, :type, :room, :track
+  has_many :speakers, serializer: SpeakerSerializer
+  has_one :room, serializer: RoomSerializer
+  has_one :track, serializer: TrackSerializer
 
   def scheduled_date
     t = object.time
-    t.blank? ? '' : %( #{I18n.l t, format: :short}#{t.formatted_offset(false)} )
-  end
-
-  def speaker_ids
-    speakers = object.event_users.select { |i| i.event_role == 'speaker' }
-    speakers.map { |i| i.user.id }
+    t.blank? ? '' : %(#{I18n.l t, format: :short}#{t.formatted_offset(false)})
   end
 
   def type
@@ -18,11 +16,11 @@ class EventSerializer < ActiveModel::Serializer
   end
 
   def room
-    object.room.try(:guid)
+    object.try(:room)
   end
 
   def track
-    object.track.try(:guid)
+    object.try(:track)
   end
 
   def length
