@@ -1,4 +1,4 @@
-- @current = Conference.where('end_date >= ?', Date.current).reorder(start_date: :asc)
+- @current = Conference.where('end_date >= ?', Date.current).reorder(sticky: :desc, start_date: :asc)
 %section.home-banner
   - if @current.any?
     .container.conferences
