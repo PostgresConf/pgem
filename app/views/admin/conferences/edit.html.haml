@@ -12,6 +12,7 @@
       = f.input :description, hint: markdown_hint('A description of the conference.'), input_html: { rows: 5, data: { provide: 'markdown-editable' } }
       = f.input :extended_description, hint: markdown_hint('An extended description of the conference that will show up on the About page.'), input_html: { rows: 8, data: { provide: 'markdown-editable' } }
       = f.input :color, :hint => "The color will be used for the conference tile background and for the dashboard graphs in the admin UI.", :input_html => {:size => 6, :type => "color", :class => 'color-picker'}
+      = f.input :sticky, :hint => "Keep this conference shown first in the conference list (has precedence over conference start date)"
       = f.input :conference_group, include_blank: true
       = f.label 'Conference Logo'
       %br
