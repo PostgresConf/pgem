@@ -5,7 +5,7 @@ class ConferencesController < ApplicationController
   load_resource :program, through: :conference, singleton: true, except: [:index, :redirect_to_current]
 
   def index
-    @current = Conference.where('end_date >= ?', Date.current).reorder(start_date: :asc)
+    @current = Conference.where('end_date >= ?', Date.current).reorder(sticky: :desc, start_date: :asc)
     @recent =  Conference.where('end_date >= ?', Date.current - 12.months).
                           where('end_date <= ?', Date.current)
     @antiquated = @conferences - @current - @recent
