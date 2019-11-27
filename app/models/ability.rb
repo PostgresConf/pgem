@@ -70,6 +70,7 @@ class Ability
     end
 
     can [:claim, :assign], PhysicalTicket
+    can :index, Ticket
   end
 
   # Abilities for signed in users
@@ -86,7 +87,6 @@ class Ability
       conference.registration_open? && !conference.registration_limit_exceeded?
     end
 
-    can :index, Ticket
     can :manage, TicketPurchase, user_id: user.id
     can [:new, :create, :cancel, :confirm], Payment, user_id: user.id
     can [:index, :show, :update], PhysicalTicket, user_id: user.id

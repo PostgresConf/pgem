@@ -1,19 +1,18 @@
 class TicketPurchasesController < ApplicationController
-  before_filter :authenticate_user!
   load_resource :conference, find_by: :short_title
+  before_action :persist_purchase_params, only: :create
+  before_filter :authenticate_user!
   authorize_resource :conference_registrations, class: Registration
 
   def create
-    if params[:tickets].nil?
-        tkts = Array.new
-    else
-        tkts = params[:tickets]
-    end
+    tkts = params[:tickets] || []
+    prices = params[:purchase_prices] || []
+    code_id = params[:code_id] || ''
+    chosen_events = params[:chosen_events] || []
     
-    if params[:purchase_prices].nil?
-      prices = Array.new
-    else
-      prices = params[:purchase_prices]
+    if tkts[0].blank?
+      return redirect_to conference_tickets_path(@conference.short_title),
+      error: 'Please get at least one ticket to continue.'
     end
 
     max_qty = 0
@@ -22,21 +21,8 @@ class TicketPurchasesController < ApplicationController
         max_qty = qty
       end
     end
-    
+
     current_user.ticket_purchases.by_conference(@conference).unpaid.destroy_all
-
-    if params[:code_id].nil?
-        code_id = ''
-    else
-        code_id = params[:code_id]
-    end
-
-    if params[:chosen_events].nil?
-        chosen_events = nil 
-    else
-        chosen_events = params[:chosen_events]
-    end
-
     message = TicketPurchase.purchase(@conference, current_user, tkts[0],
                                       code_id, chosen_events, prices[0])
     if message.blank?
@@ -56,9 +42,31 @@ class TicketPurchasesController < ApplicationController
     end
   end
 
+  def recreate
+    render layout: false
+  end
+
   private
 
   def ticket_purchase_params
     params.require(:ticket_purchase).permit(:ticket_id, :user_id, :conference_id, :quantity, :code_id, :event_id)
+  end
+
+  def persist_purchase_params
+    # user signed in, restore form params while user was not signed in (if any)
+    if user_signed_in?
+      params[:tickets] ||= session.delete(:purchase_params_tickets)
+      params[:purchase_prices] ||= session.delete(:purchase_params_purchase_prices)
+      params[:chosen_events] ||= session.delete(:purchase_params_chosen_events)
+      params[:code_id] ||= session.delete(:purchase_params_code_id)
+
+    # for anonymous user store ticket choics and prices
+    else
+      session[:purchase_params_tickets] = params[:tickets]
+      session[:purchase_params_purchase_prices] = params[:purchase_prices]
+      session[:purchase_params_chosen_events] = params[:chosen_events]
+      session[:purchase_params_code_id] = params[:code_id] if params[:code_id]
+      session[:return_to] = conference_ticket_purchases_recreate_path(@conference.short_title)
+    end
   end
 end

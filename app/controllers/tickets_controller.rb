@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
   before_action :store_user_location!
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:index]
   load_resource :conference, find_by: :short_title
   load_resource :ticket, through: :conference
   authorize_resource :conference_registrations, class: Registration
@@ -9,8 +9,7 @@ class TicketsController < ApplicationController
   def index
   @tix = params['ticket']
 
-  if ticket_params.present?
-
+    if ticket_params.present?
       applied_code = ticket_params[:promo_code][:pcode]
       code = @conference.get_valid_code(applied_code)
       @discount_pct = 0.0

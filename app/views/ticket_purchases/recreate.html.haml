@@ -1,0 +1,14 @@
+%html{:xmlns => "http://www.w3.org/1999/html"}
+  %head
+    
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application"
+
+    = csrf_meta_tags
+
+  %body
+    = form_tag(conference_ticket_purchases_path, method: :post, id: 'proxyform')
+    :javascript
+      $(document).ready(function(){
+        $('#proxyform').submit()
+      })
