@@ -216,6 +216,8 @@ Osem::Application.routes.draw do
       end
     end
     resources :ticket_purchases, only: [:create, :destroy]
+
+    get 'ticket_purchases/recreate' => 'ticket_purchases#recreate'
     resources :payments, only: [:index, :new, :create] do
       collection do
         get :cancel

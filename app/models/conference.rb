@@ -696,8 +696,7 @@ class Conference < ActiveRecord::Base
   # ====Returns
   # * +code+ -> the code
   def get_valid_code(applied_code)
-    code = codes.where(name: applied_code).first
-    code
+    codes.where(name: applied_code).first
   end
 
   def available_currency_codes
