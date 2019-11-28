@@ -9,11 +9,17 @@
           = semantic_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
             = f.input :login
             = f.input :password
-            - if devise_mapping.rememberable?
-              %p.text-right.small
-                = f.label 'Remember me'
-                = f.check_box :remember_me
-            %p.text-right
-              = f.action :submit, as: :button, label: 'Sign In', button_html: {class: 'btn btn-success'}
+            .row
+              .col-md-9
+                %p.text-left
+                  Don't have an account?
+                  = link_to 'Sign Up', new_registration_path('user')
+              .col-md-3
+                %p.text-right
+                  = f.action :submit, as: :button, label: '  Sign In  ', button_html: {class: 'btn btn-success btn-block'}
+                %p.text-right
+                  - if devise_mapping.rememberable?
+                    = f.label 'Remember me'
+                    = f.check_box :remember_me              
           = render partial: 'devise/shared/openid'
           = render partial: 'devise/shared/help'
