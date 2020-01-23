@@ -30,7 +30,7 @@
                   here*
           .panel-body
             - event_ticket_ids = @conference.program.events.where.not(ticket_id: nil).pluck(:ticket_id)
-            - visible_tickets = @conference.tickets.visible_tickets.reorder(:position)
+            - visible_tickets = @conference.tickets.visible_tickets.sort_by{|t| t.position}
             - visible_tickets.each do |ticket|
               - unless event_ticket_ids.include? ticket.id
                 = render partial: 'ticket', f: f, locals: {ticket: ticket, event: nil}
