@@ -29,19 +29,17 @@
                     = @conference.title
                   here*
           .panel-body
-            - visible_tickets = @conference.tickets.visible_tickets
             - event_ticket_ids = @conference.program.events.where.not(ticket_id: nil).pluck(:ticket_id)
-            - event_tickets = visible_tickets.to_a.select { |t| event_ticket_ids.include? t.id }
-            - general_tickets = visible_tickets - event_tickets
-            - general_tickets.each do |ticket|
-              = render partial: 'ticket', f: f, locals: {ticket: ticket, event: nil}
-              = hidden_field_tag "purchase_prices[][#{ticket.id}]", ticket.adjusted_price
-
-            - event_tickets.each do |ticket|
-              = hidden_field_tag "purchase_prices[][#{ticket.id}]", ticket.adjusted_price
-              = hidden_field_tag("tickets[][#{ticket.id}]", 0, type: 'number', min: 0, class: "form-control quantity", 'data-id' => ticket.id)
-              - ticket.ticketed_events.each do |event|
-                = render partial: 'ticket', f: f, locals: {ticket: ticket, event: event}
+            - visible_tickets = @conference.tickets.visible_tickets.reorder(:position)
+            - visible_tickets.each do |ticket|
+              - unless event_ticket_ids.include? ticket.id
+                = render partial: 'ticket', f: f, locals: {ticket: ticket, event: nil}
+                = hidden_field_tag "purchase_prices[][#{ticket.id}]", ticket.adjusted_price
+              - else
+                = hidden_field_tag "purchase_prices[][#{ticket.id}]", ticket.adjusted_price
+                = hidden_field_tag("tickets[][#{ticket.id}]", 0, type: 'number', min: 0, class: "form-control quantity", 'data-id' => ticket.id)
+                - ticket.ticketed_events.each do |event|
+                  = render partial: 'ticket', f: f, locals: {ticket: ticket, event: event}
 
             - if @conference.codes.any?  
               = link_to 'Apply Promo Code!','#', 'data-toggle' => 'modal', 'data-target' => '#apply-code', class: 'btn btn-info pull-right'
