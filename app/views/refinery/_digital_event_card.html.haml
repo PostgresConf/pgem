@@ -2,10 +2,10 @@
   .card-body
     - if type == 'upcoming'
       .wrapper-img-upcoming.border
-        %img.img-responsive.img-upcoming.border{:src => "images/04-conf-img.png"}/
+        %img.img-responsive.img-upcoming.border{:src => "#{conference.picture_url}"}/
     - else
       .wrapper-img-future.border
-        %img.img-responsive.img-future.border{:src => "images/04-conf-img.png"}/
+        %img.img-responsive.img-future.border{:src => "#{conference.picture_url}"}/
     %h3.bold
       = conference.title
     %p.date-place

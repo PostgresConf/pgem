@@ -11,7 +11,7 @@
         .row
           - @meetups = Refinery::Meetups::Meetup.upcoming(10)
           - @current = Conference.where('end_date >= ?', Date.current-1.year).reorder(sticky: :desc, start_date: :asc)
-          - @digital_events = @current.limit(5)
+          - @digital_events = @current.where({digital: true}).limit(5)
           - @main_conference = @current.first
           -# calculate replacements
           - @top_card = @current.second || @digital_events.first
