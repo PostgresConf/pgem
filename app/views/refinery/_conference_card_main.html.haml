@@ -6,9 +6,9 @@
         .card-footer.hidden-sm
           - if conference.splashpage && conference.splashpage.public
             - if conference.registration_open? && conference.tickets.any?
-              = button_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn register-btn bold uppercase", disabled: conference.registration_limit_exceeded?
+              = button_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn register-btn bold uppercase", disabled: conference.registration_limit_exceeded?, method: :get
             - elsif conference.splashpage.include_sponsors && !conference.ended?
-              = button_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), class: "btn register-btn bold uppercase"
+              = button_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), class: "btn register-btn bold uppercase", method: :get
 
     .col-md-7.col-md-pull-5.h-100
       %h1.bold
@@ -24,6 +24,6 @@
       .card-footer.visible-sm
         - if conference.splashpage && conference.splashpage.public
           - if conference.registration_open? && conference.tickets.any?
-            = button_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn register-btn bold uppercase", disabled: conference.registration_limit_exceeded?
+            = button_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn register-btn bold uppercase", disabled: conference.registration_limit_exceeded?, method: :get
           - elsif conference.splashpage.include_sponsors && !conference.ended?
-            = button_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), class: "btn register-btn bold uppercase"
+            = button_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), class: "btn register-btn bold uppercase", method: :get
