@@ -1,0 +1,31 @@
+ru:
+  refinery:
+    plugins:
+      community_events:
+        title: Community Events
+    community_events:
+      admin:
+        community_events:
+          actions:
+            create_new: Добавить Community Event
+            reorder: Изменить порядок Community Events
+            reorder_done: Закончить изменять порядок Community Events
+          records:
+            title: Community Events
+            sorry_no_results: "Извините, поиск не дал результатов."
+            no_items_yet: Записей "Community Events" не найдено. Нажмите "Добавить Community Event" чтобы создать community event.
+          community_event:
+            view_live_html: Просмотреть community event вживую <br/><em>(в новом окне)</em>
+            edit: Редактировать community event
+            delete: Удалить community event навсегда
+      community_events:
+        show:
+          other: Другие Community Events
+  activerecord:
+    attributes:
+      'refinery/community_events/community_event':
+        title: Title
+        body: Body
+        url: Url
+        published_at: Published At
+        author: Author

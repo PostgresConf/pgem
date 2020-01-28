@@ -1,0 +1,33 @@
+nb:
+  refinery:
+    plugins:
+      meetups:
+        title: Meetups
+    meetups:
+      admin:
+        meetups:
+          actions:
+            create_new: Lag en ny Meetup
+            reorder: Endre rekkefølgen på Meetups
+            reorder_done: Ferdig å endre rekkefølgen Meetups
+          records:
+            title: Meetups
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Meetups enda. Klikk på "Lag en ny Meetup" for å legge til din første meetup.
+          meetup:
+            view_live_html: Vis hvordan denne meetup ser ut offentlig <br/><em>(åpner i et nytt vindu)</em>
+            edit: Rediger denne meetup
+            delete: Fjern denne meetup permanent
+      meetups:
+        show:
+          other: Andre Meetups
+  activerecord:
+    attributes:
+      'refinery/meetups/meetup':
+        external_id: External
+        title: Title
+        description: Description
+        url: Url
+        start: Start
+        end: End
+        location: Location

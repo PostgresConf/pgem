@@ -1,0 +1,31 @@
+nl:
+  refinery:
+    plugins:
+      community_events:
+        title: Community Events
+    community_events:
+      admin:
+        community_events:
+          actions:
+            create_new: Nieuwe Community Event toevoegen
+            reorder: De volgorde van de Community Events wijzigen
+            reorder_done: Klaar met het wijzingen van de van de Community Event-volgorde
+          records:
+            title: Community Events
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Community Events. Druk op 'Nieuwe Community Event toevoegen' om de eerste toe te voegen.
+          community_event:
+            view_live_html: Deze community event op de website bekijken <br/><em>(opent in een nieuw venster)</em>
+            edit: Bewerk deze community event
+            delete: Deze community event definitief verwijderen
+      community_events:
+        show:
+          other: Andere Community Events
+  activerecord:
+    attributes:
+      'refinery/community_events/community_event':
+        title: Title
+        body: Body
+        url: Url
+        published_at: Published At
+        author: Author

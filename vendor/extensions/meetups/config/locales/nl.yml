@@ -1,0 +1,33 @@
+nl:
+  refinery:
+    plugins:
+      meetups:
+        title: Meetups
+    meetups:
+      admin:
+        meetups:
+          actions:
+            create_new: Nieuwe Meetup toevoegen
+            reorder: De volgorde van de Meetups wijzigen
+            reorder_done: Klaar met het wijzingen van de van de Meetup-volgorde
+          records:
+            title: Meetups
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Meetups. Druk op 'Nieuwe Meetup toevoegen' om de eerste toe te voegen.
+          meetup:
+            view_live_html: Deze meetup op de website bekijken <br/><em>(opent in een nieuw venster)</em>
+            edit: Bewerk deze meetup
+            delete: Deze meetup definitief verwijderen
+      meetups:
+        show:
+          other: Andere Meetups
+  activerecord:
+    attributes:
+      'refinery/meetups/meetup':
+        external_id: External
+        title: Title
+        description: Description
+        url: Url
+        start: Start
+        end: End
+        location: Location

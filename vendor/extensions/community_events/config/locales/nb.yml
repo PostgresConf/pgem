@@ -1,0 +1,31 @@
+nb:
+  refinery:
+    plugins:
+      community_events:
+        title: Community Events
+    community_events:
+      admin:
+        community_events:
+          actions:
+            create_new: Lag en ny Community Event
+            reorder: Endre rekkefølgen på Community Events
+            reorder_done: Ferdig å endre rekkefølgen Community Events
+          records:
+            title: Community Events
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Community Events enda. Klikk på "Lag en ny Community Event" for å legge til din første community event.
+          community_event:
+            view_live_html: Vis hvordan denne community event ser ut offentlig <br/><em>(åpner i et nytt vindu)</em>
+            edit: Rediger denne community event
+            delete: Fjern denne community event permanent
+      community_events:
+        show:
+          other: Andre Community Events
+  activerecord:
+    attributes:
+      'refinery/community_events/community_event':
+        title: Title
+        body: Body
+        url: Url
+        published_at: Published At
+        author: Author

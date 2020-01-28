@@ -1,0 +1,33 @@
+tr:
+  refinery:
+    plugins:
+      meetups:
+        title: Meetups
+    meetups:
+      admin:
+        meetups:
+          actions:
+            create_new: Yeni Ekle Meetup
+            reorder: Tekrar sirala Meetups
+            reorder_done: Tekrar siralama tamamlandiMeetups
+          records:
+            title: Meetups
+            sorry_no_results: Uzgunum! Herhangi bir sonuc bulunamadi.
+            no_items_yet: Herhangi bir Meetups yok henuz.  Tikla "Yeni Ekle Meetup" eklemek senin ilk meetup.
+          meetup:
+            view_live_html: Bunu canlu meetup goruntule <br/><em>(yeni bir pencerede acar)</em>
+            edit: Bunu Duzenle meetup
+            delete: Bunu Sil meetup sonsuza dek
+      meetups:
+        show:
+          other: Diger Meetups
+  activerecord:
+    attributes:
+      'refinery/meetups/meetup':
+        external_id: External
+        title: Title
+        description: Description
+        url: Url
+        start: Start
+        end: End
+        location: Location

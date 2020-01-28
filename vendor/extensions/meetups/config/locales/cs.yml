@@ -1,0 +1,33 @@
+cs:
+  refinery:
+    plugins:
+      meetups:
+        title: Meetups
+    meetups:
+      admin:
+        meetups:
+          actions:
+            create_new: Přidat Meetup
+            reorder: Řadit Meetups
+            reorder_done: Konec řazení Meetups
+          records:
+            title: Meetups
+            sorry_no_results: Litujeme, ale nebyly nalezny žádné výsledky.
+            no_items_yet: Zatím nebyly vytvořeny žádné Meetups. Zvolte "Přidat Meetup" pro přidání prvního meetup.
+          meetup:
+            view_live_html: Zobrazit náhled meetup<br/><em>(otevře se v novém okně)</em>
+            edit: Upravit meetup
+            delete: Smazat meetup
+      meetups:
+        show:
+          other: Další Meetups
+  activerecord:
+    attributes:
+      'refinery/meetups/meetup':
+        external_id: External
+        title: Title
+        description: Description
+        url: Url
+        start: Start
+        end: End
+        location: Location

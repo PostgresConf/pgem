@@ -1,0 +1,14 @@
+%div{class: "main-card border meetup"}
+  .row.h-100
+    .col-md-4.col-md-push-8.h-100
+      .poster-button-wrapper.h-100
+        %img.img-responsive.poster-small{:alt => "Meetup poster", :src => "#{item.picture_url}"}
+        .card-footer.hidden-sm.hidden-sm
+
+    .col-md-8.col-md-pull-4
+      %h4.bold.mt-0
+        = item.title
+
+      %p
+        = date_string(item.start, item.end)
+      .card-footer.visible-sm.visible-sm

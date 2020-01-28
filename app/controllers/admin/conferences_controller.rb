@@ -191,7 +191,7 @@ module Admin
                                          :targets, :targets_attributes,
                                          :campaigns, :campaigns_attributes, :registration_limit, :require_itinerary,
                                          :code_ids, :default_currency, :braintree_merchant_account, :ticket_layout,
-                                         :conference_group_id, :sticky)
+                                         :conference_group_id, :sticky, :digital)
     end
 
   end

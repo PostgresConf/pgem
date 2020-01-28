@@ -1,0 +1,115 @@
+!!!
+%html{:lang => "en"}
+  %head
+    = render "/refinery/newhead"
+  %body
+    = render "/refinery/newheader"
+    %section.central-blocks
+      .jumbotron
+        %h1.text-center.uppercase.bold Postgres Conference
+      .container-fluid
+        .row
+          - @meetups = Refinery::Meetups::Meetup.upcoming(10)
+          - @current = Conference.where('end_date >= ?', Date.current-1.year).reorder(sticky: :desc, start_date: :asc)
+          - @digital_events = @current.limit(5)
+          - @main_conference = @current.first
+          -# calculate replacements
+          - @top_card = @current.second || @digital_events.first
+          - @bottom_card = @meetups.first || @current.third
+          .col-md-10.col-md-offset-1
+            .row.wrapper-main-cards
+              .col-md-7.col-sm-12.h-100
+                = render partial: "/refinery/conference_card_main", locals: { conference: @main_conference }
+              .col-md-5.col-sm-12.h-100
+                = render partial: "/refinery/#{@top_card.class.name.demodulize.underscore}_card_mini", locals: { item: @top_card } if @top_card
+                = render partial: "/refinery/#{@bottom_card.class.name.demodulize.underscore}_card_mini", locals: { item: @bottom_card } if @bottom_card
+
+      %a.hidden-sm{:href => "#Conferences"}
+        .angle-down.floating
+          %i.fa.fa-angle-down.fa-4x{"aria-hidden" => "true"}
+    / Conferences
+    %section#Conferences.conferences
+      .container-fluid
+        .row
+          .col-md-10.col-md-offset-1
+            %h2.bold.section-title Conferences
+            - @current.each do |conference|
+              = render partial: '/refinery/conference_item', locals: { conference: conference }
+
+    / Digital Events
+    %section.digital-events{:id => "Digital Events"}
+      - @digital_first = @digital_events.first
+      - @digital_others = @digital_events[1..3]
+      .container-fluid
+        .col-md-10.col-md-offset-1
+          %h2.bold.section-title Digital Events
+        .row
+          .col-lg-4.col-md-6.col-lg-offset-4.col-md-offset-3
+            - if @digital_first
+              = render partial: '/refinery/digital_event_card', locals: { conference: @digital_first, type: 'upcoming' }
+
+        .row.future-events
+          .col-lg-10.col-md-10.col-lg-offset-1.col-md-offset-1
+            - if @digital_others
+              .future-events-wrapper
+                - @digital_others.each do |digital_event|
+                  = render partial: '/refinery/digital_event_card', locals: { conference: digital_event, type: 'future' }
+
+    / Meetups
+    %section#Meetups.meetups
+      .container-fluid
+        .row
+          .col-md-10.col-md-offset-1
+            %h2.bold.section-title Meetups
+            #carousel-meetups.carousel.slide.meetup-carousel.hidden-sm.visible-md.visible-lg{"data-ride" => "carousel"}
+              / Wrapper for slides
+              .carousel-inner
+                - @meetups.each_slice(4).with_index do |slice, idx|
+                  .col-md-12.item{:class => ('active' if idx == 0)}
+                    .row.row-flex
+                      - slice.each do |meetup|
+                        .col-md-3
+                          %a.meetup-link{:href => "#{meetup.url}"}
+                            = render partial: '/refinery/meetup_item', locals: { item: meetup }
+
+              / Controls
+              %a.left.carousel-control{"data-slide" => "prev", :href => "#carousel-meetups"}
+                %span.glyphicon.glyphicon-chevron-left
+              %a.right.carousel-control{"data-slide" => "next", :href => "#carousel-meetups"}
+                %span.glyphicon.glyphicon-chevron-right
+            .container-fluid.visible-xs.visible-sm.hidden-md.hidden-lg
+              .row
+                %ul.meetup-wrapper
+                  - @meetups.each do |meetup|
+                    %li.meetup-link
+                      %a{:href => "#{meetup.url}"}
+                        = render partial: '/refinery/meetup_item', locals: { item: meetup }
+
+    / News
+    %section#Blog.blog
+      .container-fluid
+        .col-lg-10.col-md-10.col-md-offset-1.col-lg-offset-1
+          .row
+            .col-md-8.col-sm-12.no-gutter
+              %h2.bold.section-title Blog
+              .blog-wrapper.border-custom
+                - @blog_posts = Refinery::Blog::Post.recent(4)
+                - @blog_posts.each do |item|
+                  = render partial: '/refinery/blog_post', locals: { item: item }
+            .col-md-4.col-sm-12.no-gutter
+              %h2.bold.section-title.community-title Community Events
+              - @community_events = Refinery::CommunityEvents::CommunityEvent.recent(7)
+              - @community_events.each do |item|
+                = render partial: '/refinery/community_event', locals: { item: item }
+
+    %footer.footer
+      .container-fluid
+        .row
+          .col-lg-4.col-sm-12.col-lg-offset-4
+            .copyright-wrapper
+              %p.text-muted
+                = "Copyright © #{Date.today.year} Postgres Conference"
+
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"}
+    %script{:crossorigin => "anonymous", :integrity => "sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", :src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
+      :cdata

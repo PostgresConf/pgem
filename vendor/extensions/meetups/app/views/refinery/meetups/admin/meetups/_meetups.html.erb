@@ -1,0 +1,2 @@
+<%= will_paginate @meetups if Refinery::Meetups::Admin::MeetupsController.pageable? %>
+<%= render 'sortable_list' %>

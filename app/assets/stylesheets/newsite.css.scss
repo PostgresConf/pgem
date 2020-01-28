@@ -1,0 +1,1087 @@
+$light_background: #F3F3F3;
+$main_color: #001970;
+$background_color: #111e34;
+$background: linear-gradient(110deg, #002297 60%, #3c4dbc 60%);
+$button_color: #ffffff;
+$font_button_color: #ffffff;
+$font_button_color_hover: #001970;
+$color_central_blocks: #ffffff;
+$shadow: 0 6px 12px rgba(0, 0, 0, .175);
+$secondary_font_color: #757575;
+
+body {
+    font-family: 'Muli', sans-serif;
+    padding-right: 0 !important;
+    font-size: 1rem;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+section {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+h1 {
+    margin: 0 0 15px;
+    font-size: 5rem;
+}
+
+h2 {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    font-size: 4rem;
+}
+
+h3 {
+    margin: 10px 0;
+    font-size: 3rem;
+}
+
+h4 {
+    // margin: 20px 0px;
+    font-size: 2rem;
+}
+
+p {
+    font-size: 16px;
+}
+
+.no-gutter {
+    padding-right: 0;
+    padding-left: 0;
+}
+.mt-0{
+    margin-top: 0;
+}
+.row-custom {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.row-flex {
+    display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.border {
+    border-radius: 5px;
+}
+
+.p-left-custom {
+    padding-left: 0;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+}
+
+.icon-margin {
+    margin-right: 5px;
+}
+
+.date-place {
+    color: $secondary_font_color;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.learn-more {
+    color: $main_color;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.link-effect {
+    position: relative;
+    display: inline-block;
+    padding: 0 0 3px;
+    outline: none;
+
+    &:hover {
+        outline: none;
+        color: $main_color;
+
+        &:after {
+            height: 2px;
+            opacity: 1;
+            -webkit-transform: translateY(0px);
+            -moz-transform: translateY(0px);
+            transform: translateY(0px);
+        }
+    }
+
+    &:after {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: $main_color;
+        content: '';
+        opacity: 0;
+        -webkit-transition: height 0.3s, opacity 0.3s, -webkit-transform 0.3s;
+        -moz-transition: height 0.3s, opacity 0.3s, -moz-transform 0.3s;
+        transition: height 0.3s, opacity 0.3s, transform 0.3s;
+        -webkit-transform: translateY(-10px);
+        -moz-transform: translateY(-10px);
+        transform: translateY(-10px);
+    }
+}
+
+#nav-top {
+    margin-bottom: 0;
+    background-color: $background_color;
+    border: 0;
+
+    .navbar-brand {
+        padding: 0;
+
+        .logo {
+            width: 50px;
+            height: 51px;
+            margin-top: 4px;
+        }
+    }
+}
+
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
+    background-color: transparent;
+}
+.navbar-custom {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    li {
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+    a {
+        color: white;
+        &:focus,
+        &:hover,
+        &:active {
+            background-color: transparent !important;
+        }
+    }
+
+    .link-effect:after {
+        background: #ffffff;
+    }
+}
+
+.hamburger-icon {
+    color: white;
+}
+
+.hamburger-button {
+    margin-right: 0;
+}
+
+.userpic {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    img {
+      border-radius: 50%;
+    }
+}
+
+.modal-custom{
+    overflow-y: auto;
+	padding-right: 0px !important;
+    .modal-dialog-custom {
+        width: 400px;
+        .modal-header {
+            h4 {
+                text-align: center;
+                color: $main_color;
+            }
+        }
+        input {
+            font-size: 2rem;
+        }
+        .subscribe-form {
+            display: block;
+            width: 100%;
+            height: 40px;
+            margin-bottom: 15px;
+            padding: 6px 12px;
+            color: #555;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        }
+    }
+}
+
+.modal-backdrop {
+    z-index: 1;
+}
+.modal-open {
+	overflow: auto;
+	padding-right: 0px !important;
+}
+
+.sign-in-form {
+    width: 340px;
+    padding: 20px;
+    line-height: 23px;
+    a {
+        color: $main_color;
+        &:hover, &:focus, &:active{
+            background-color: #ffffff;
+        }
+    }
+    .clearfix {
+        line-height: 20px;
+    }
+}
+
+.pass {
+    margin: 10px 0;
+}
+
+.central-blocks,
+.digital-events,
+.blog,
+.footer {
+    background-color: $background_color;
+    .section-title {
+        margin-bottom: 3rem !important;
+        margin-top: 0px;
+    }
+}
+.conferences,
+.meetups {
+    background-color: $light-background;
+}
+.central-blocks {
+    padding-top: 53px;
+    height: 100vh;
+
+    .jumbotron {
+        margin-bottom: 0;
+        padding: 30px 0;
+        background-color: transparent;
+        height: 20vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .jumbotron h1 {
+        color: white;
+        font-size: 5rem;
+    }
+
+    .wrapper-main-cards {
+        height: 63vh;
+    }
+
+    .main-card {
+        padding: 4vh;
+        background: -webkit-linear-gradient($background);
+        background: -o-linear-gradient($background);
+        background: -moz-linear-gradient($background);
+        background: $background;
+        color: $color_central_blocks;
+
+        h3 {
+            margin-top: 0px;
+        }
+    }
+
+    .poster {
+        margin: 0px 0px 20px;
+        max-height: 49vh
+    }
+
+    .poster-small {
+        margin: 0 0 20px;
+    }
+
+    .conference {
+        width: 100%;
+        height: 100%;
+    }
+
+    .digital-event,
+    .meetup {
+        width: 100%;
+        height: calc((100% - 30px)/2);
+    }
+
+    .digital-event {
+        margin-bottom: 30px;
+    }
+
+    .poster-button-wrapper {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    .angle-down {
+        display: flex;
+        justify-content: center;
+        color: white;
+    }
+    
+    .floating {
+        animation-name: floating;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    
+    }
+}
+
+@keyframes floating {
+    from {
+        transform: translate(0, 0px);
+    }
+
+    65% {
+        transform: translate(0, 15px);
+    }
+
+    to {
+        transform: translate(0, -0px);
+    }
+}
+
+.register-btn {
+    width: 100%;
+    border: 2px solid $button_color;
+    color: $font_button_color;
+    background: none;
+    cursor: pointer;
+    padding: 10px 0;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    z-index: 1;
+    &:after{
+        content: '';
+        position: absolute;
+        z-index: -5;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+        width: 0%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: $button_color;
+    }
+    &:hover, &:active, &:focus{
+        color: $font_button_color_hover;
+        outline: none !important;
+        &:after{
+            width: 100%;
+        }
+    }
+}
+.register-btn-small {
+    color: $font_button_color;
+    &:hover, &:focus{
+        color: $main-color;
+        background-color: $main_color;
+        background-color: $button_color;
+        outline: none !important;
+    }
+}
+.register-btn-other {
+    background-color: $main_color;
+    color: $button_color;
+    width: 100%;
+    border: 2px solid $main_color;
+    transition: 0.2s all linear 0s;
+    &:hover, &:focus{
+      background-color: transparent;
+      color: $main_color;  
+      transition: 0.2s all ease-in 0s;
+    }
+}
+.conferences {
+    h2 {
+        margin-bottom: 2rem;
+        margin-top: 0;
+    }
+
+    .conference-main {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .conference-item {
+        box-shadow: $shadow;
+        margin-bottom: 35px;
+        background-color: #ffffff;
+    }
+
+    .conference-item h2 {
+        color: $main_color;
+    }
+
+    .poster-conference {
+        width: 100%;
+    }
+
+    .conference-info {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .conference-footer {
+        position: absolute;
+        width: 100%;
+    }
+
+    .info i {
+        margin-right: 5px;
+    }
+}
+
+.digital-events{
+    h2 {
+        color: white;
+    }
+    h3 {
+        color: $main_color; 
+    }
+    .card {
+        display: flex;
+        flex-direction: row;
+        flex-basis: 31.5%;
+        width: 345px;
+        position: relative;
+        background-color: white;
+        color: black;
+        padding: 25px;
+        border-radius: 5px;
+        margin-right: 30px;
+        margin-top: 70px;
+        &:nth-child(3){
+            margin-right: 0;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            position: relative;
+        
+            h3 {
+                margin-top: 4vh;
+            }
+        }
+        .card-footer {
+            margin-top: auto;
+        }
+    }
+    .card-upcoming{
+        width: 100%;
+        margin-right: 0;
+       
+        .wrapper-img-upcoming {
+            margin-top: -10vh;
+        }
+        
+        .img-upcoming {
+            box-shadow: $shadow;
+            left: 50%;
+            width: 70%;
+            height: 100%;
+            z-index: 5;
+            margin: 0 auto;
+        }
+    }
+    .future-events {  
+    
+        .future-events-wrapper {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            .wrapper-img-future {
+                margin-top: -10vh;
+                .img-future {
+                    box-shadow: $shadow;
+                    left: 50%;
+                    width: 70%;
+                    height: 100%;
+                    z-index: 5;
+                    margin: 0 auto;
+                    border-radius: 3px;
+                }
+            }
+        }
+    }
+    .button-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.meetup-carousel {
+    .carousel-inner {
+        height: 350px;
+    }
+
+    .carousel-control {
+        color: $main_color !important;
+        opacity: 0.5;
+    }
+
+    .left,
+    .right {
+        background-image: none !important;
+        height: 220px;
+    }
+
+    .left {
+        left: -10%;
+    }
+
+    .right {
+        right: -10% !important;
+    }
+
+    .item,
+    .active {
+        height: 250px;
+    }
+
+    .meetup-link {
+        color: black;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        margin: 15px 0;
+
+        &:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: all 0.3s ease-in;
+            color: inherit;
+        }
+
+        &:not(:hover) {
+            transition: 0.3s;
+        }
+
+        .meetup-item {
+            width: 100%;
+            height: 100%;
+            padding: 15px;
+            background-color: white;
+            box-shadow: $shadow;
+            display: flex;
+            flex-direction: column;
+
+            h4 {
+                color: $main_color;
+                flex-grow: 1;
+
+            }
+        }
+    }
+}
+
+.community-title{
+    margin-left: 30px;
+}
+
+.blog {
+
+    h2,
+    h3,
+    p,
+    a {
+        color: white;
+    }
+
+    a.link-effect:after {
+        top: 90%;
+        background: #ffffff;
+    }
+
+    .border-custom {
+        border-right: 1px solid #ffffff;
+    }
+
+    h4 {
+        margin-top: 0;
+    }
+
+    .blog-wrapper {
+        padding-right: 20px;
+    }
+
+    .rss-wrapper {
+        margin: 45px 30px;
+
+        &:first-of-type {
+            margin-top: 20px;
+        }
+        a.link-effect{
+            &:hover {
+            color: #ffffff
+            }
+        }    
+            &:after {
+            top: 75%;
+        }
+        .rss-author {
+            font-size: 1.2rem;
+        }
+    }
+}
+
+.footer {
+    h2 {
+        color: #ffffff;
+    }
+    .copyright-wrapper {
+        text-align: center;
+    }
+}
+
+@media (min-width: 1600px) {
+    h1 {
+        font-size: 6rem;
+    }
+
+    h2 {
+        font-size: 5rem;
+    }
+
+    h3 {
+        font-size: 4rem;
+    }
+
+    h4 {
+        font-size: 3rem;
+    }
+
+    p {
+        font-size: 2rem;
+    }
+
+    .navbar-custom li {
+        font-size: 1.8rem;
+    }
+
+    .jumbotron>h1 {
+        font-size: 8rem !important;
+    }
+
+    .learn-more {
+        font-size: 2rem;
+    }
+
+    .wrapper-main-cards {
+        height: 65vh;
+    }
+
+    .angle-down {
+        margin-top: 2.5vh;
+    }
+
+    .wrapper-img-upcoming {
+        // height: 45%;
+    }
+
+    .wrapper-img-future {
+        // height: 40%;
+    }
+
+    .poster-conference {
+        min-width: 320px;
+    }
+
+    .digital-events{
+        .card {
+            flex: 0 0 32%;
+            margin-top: 90px;
+        }
+    }
+}
+
+@media (max-width: 1300px) {
+    h1 {
+        font-size: 4rem !important;
+    }
+
+    h3 {
+        font-size: 2.5rem !important;
+    }
+
+    h2 {
+        font-size: 3rem;
+    }
+
+    p {
+        font-size: 1.5rem;
+    }
+
+    .date-place {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 1300px) and (min-width: 992px) {
+    .col-4-custom {
+        width: 30%;
+    }
+
+    .col-8-custom {
+        width: 70%
+    }
+
+    .poster-conference {
+        min-width: 270px
+    }
+}
+
+@media (max-width: 1100px) and (min-width: 992px) {
+    .col-8-custom {
+        margin-left: 30px;
+    }
+}
+
+@media (max-width: 991px) {
+    .link-effect:after {
+        display: none;
+    }
+
+    .navbar-header {
+        float: none;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+
+    .navbar-nav {
+        float: none !important;
+        margin-top: 7.5px;
+    }
+
+    .navbar-nav>li {
+        float: none;
+    }
+
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .collapse.in {
+        display: block !important;
+    }
+
+    .navbar-fixed-top .navbar-collapse {
+        .link-effect:after {
+            display: none;
+        }
+
+        .navbar-custom {
+            display: flex;
+            flex-direction: column;
+            flex-basis: 100%;
+            flex-grow: 1;
+            align-items: flex-start;
+            li{
+                width: 100%;
+            }
+        }
+    }
+
+    .modal-dialog {
+        width: 350px;
+        margin: 0 auto;
+        margin-top: 15px;
+
+        input {
+            font-size: 1.5rem;
+        }
+    }
+
+    .navbar-collapse {
+        max-height: 350px;
+        overflow-y: auto;
+    }
+
+    .sign-in-form {
+        max-height: 370px;
+        overflow-y: scroll;
+        a {
+            &:hover, &:focus, &:active{
+                background-color: transparent;
+            }
+        }
+    }
+
+    .sign-in-form>form>h2,
+    .sign-in-form>form>div.clearfix>label,
+    .sign-in-form>form>div.clearfix>a {
+        color: white;
+    }
+
+    .pass {
+        a {
+            color: white;
+        }
+    }
+
+    .btn {
+        font-size: 1.3rem;
+    }
+
+    .central-blocks {
+        height: 100%;
+
+        .poster {
+            max-height: none;
+        }
+    }
+
+    .section-title {
+        margin-bottom: 2rem !important;
+    }
+
+    .jumbotron h1 {
+        margin-top: 1.5rem;
+    }
+
+    .main-card {
+        padding: 20px !important;
+        height: auto !important;
+
+        h1 {
+            font-size: 4.5rem;
+        }
+    }
+
+    .wrapper-main-cards {
+        height: 100% !important;
+    }
+
+    .digital-event,
+    .meetup {
+        height: auto !important;
+
+        p {
+            margin-bottom: 2rem;
+        }
+    }
+
+    .digital-event {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .future-events-wrapper {
+        margin-bottom: 2rem;
+    }
+
+    .row-custom {
+        flex-direction: column;
+    }
+
+    .p-left-custom {
+        padding-left: 15px;
+        padding-top: 15px;
+    }
+
+    .conferences,
+    .digital-events,
+    .meetups,
+    .blog {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .conferences {
+        h2 {
+            margin-top: 0;
+            margin-bottom: 2rem;
+        }
+
+        .conference-item {
+            margin-bottom: 2rem;
+        }
+    }
+
+    .card {
+        flex: 1 0 100%;
+        padding: 2rem;
+        margin: 0;
+    }
+
+    .main-event {
+        padding: 0;
+    }
+
+    .img-upcoming,
+    .img-future {
+        --width: 90%;
+    }
+
+    .digital-events {
+        h2 {
+            margin-top: 0;
+            margin-bottom: 2rem;
+        }
+    }
+
+    .card-default {
+        margin-top: 10rem;
+    }
+
+    .card {
+        margin-top: 8rem;
+    }
+
+    .upcoming {
+        margin-top: 6rem;
+    }
+    .meetup-wrapper{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+    }
+    .meetup-link {
+        color: black;
+        width: 200px;
+        height: 180px;
+        margin-top: 10px;
+        a{
+            display: inline-block;
+            width: 100%;
+        }
+        &:hover {
+            transform: none;
+            transition: none;
+        }
+
+        &focus {
+            .meetup-item {
+                box-shadow: 0 6px 12px rgba(0, 0, 0, .375);
+            }
+        }
+
+        .meetup-item {
+            width: 100%;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background-color: white;
+            box-shadow: $shadow;
+
+            h4 {
+                color: $main_color;
+            }
+        }
+    }
+
+    .blog {
+        .blog-wrapper {
+            padding-right: 0;
+            margin-bottom: 2rem;
+
+            h3:first-child {
+                margin-top: 0;
+            }
+
+            .news-item-wrapper {
+                margin-bottom: 2rem;
+            }
+        }
+
+        .border-custom {
+            border-right: 0;
+        }
+
+        .rss-wrapper {
+            margin: 3rem 0;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            h4 {
+                margin-bottom: 1.5rem;
+            }
+        }
+    }
+} 
+@media(max-width: 767px){
+}
+@media(max-width: 575px){
+    .digital-events{
+        .card{
+            margin-right: 0;
+            flex: 1 1 auto;
+        }
+    }
+    .meetup-link{
+        flex: 1 1 auto;
+    }
+}
+@media screen and (orientation: landscape) {
+    .navbar-collapse.in {
+        max-height: 220px;
+        overflow-y: auto;
+    }
+}

@@ -322,3 +322,5 @@ end
 gem 'refinerycms-team_members', path: 'vendor/extensions'
 gem 'refinerycms-sponsors', path: 'vendor/extensions'
 
+gem 'refinerycms-meetups', path: 'vendor/extensions'
+gem 'refinerycms-community_events', path: 'vendor/extensions'

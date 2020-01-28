@@ -1,0 +1,33 @@
+ru:
+  refinery:
+    plugins:
+      meetups:
+        title: Meetups
+    meetups:
+      admin:
+        meetups:
+          actions:
+            create_new: Добавить Meetup
+            reorder: Изменить порядок Meetups
+            reorder_done: Закончить изменять порядок Meetups
+          records:
+            title: Meetups
+            sorry_no_results: "Извините, поиск не дал результатов."
+            no_items_yet: Записей "Meetups" не найдено. Нажмите "Добавить Meetup" чтобы создать meetup.
+          meetup:
+            view_live_html: Просмотреть meetup вживую <br/><em>(в новом окне)</em>
+            edit: Редактировать meetup
+            delete: Удалить meetup навсегда
+      meetups:
+        show:
+          other: Другие Meetups
+  activerecord:
+    attributes:
+      'refinery/meetups/meetup':
+        external_id: External
+        title: Title
+        description: Description
+        url: Url
+        start: Start
+        end: End
+        location: Location

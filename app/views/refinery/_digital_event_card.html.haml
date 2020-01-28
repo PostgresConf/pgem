@@ -1,0 +1,25 @@
+.card{:class => ( 'card-upcoming' if type == 'upcoming')}
+  .card-body
+    - if type == 'upcoming'
+      .wrapper-img-upcoming.border
+        %img.img-responsive.img-upcoming.border{:src => "images/04-conf-img.png"}/
+    - else
+      .wrapper-img-future.border
+        %img.img-responsive.img-future.border{:src => "images/04-conf-img.png"}/
+    %h3.bold
+      = conference.title
+    %p.date-place
+      = date_string(conference.start_date, conference.end_date)
+    %p
+      - unless conference.description.blank?
+        = conference.description.truncate(350)
+
+    .card-footer
+      .row
+        .container-fluid.button-group
+          .col-sm-5.no-gutter
+            = link_to "Learn more", main_app.conference_path(conference.short_title), class: 'learn-more link-effect'
+          .col-sm-5.col-sm-offset-2.no-gutter
+            - if conference.splashpage && conference.splashpage.public
+              - if conference.registration_open? && conference.tickets.any?
+                = button_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn register-btn-other bold uppercase", disabled: conference.registration_limit_exceeded?

@@ -1,0 +1,31 @@
+cs:
+  refinery:
+    plugins:
+      community_events:
+        title: Community Events
+    community_events:
+      admin:
+        community_events:
+          actions:
+            create_new: Přidat Community Event
+            reorder: Řadit Community Events
+            reorder_done: Konec řazení Community Events
+          records:
+            title: Community Events
+            sorry_no_results: Litujeme, ale nebyly nalezny žádné výsledky.
+            no_items_yet: Zatím nebyly vytvořeny žádné Community Events. Zvolte "Přidat Community Event" pro přidání prvního community event.
+          community_event:
+            view_live_html: Zobrazit náhled community event<br/><em>(otevře se v novém okně)</em>
+            edit: Upravit community event
+            delete: Smazat community event
+      community_events:
+        show:
+          other: Další Community Events
+  activerecord:
+    attributes:
+      'refinery/community_events/community_event':
+        title: Title
+        body: Body
+        url: Url
+        published_at: Published At
+        author: Author

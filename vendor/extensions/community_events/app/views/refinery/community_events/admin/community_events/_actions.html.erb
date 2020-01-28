@@ -1,0 +1,20 @@
+<ul>
+  <% if ::Refinery::CommunityEvents::Admin::CommunityEventsController.searchable? %>
+    <li>
+      <%= render '/refinery/admin/search', :url => refinery.community_events_admin_community_events_path %>
+    </li>
+  <% end %>
+  <li>
+    <%= action_label :add, refinery.new_community_events_admin_community_event_path, t('.create_new') %>
+  </li>
+<% if !searching? && ::Refinery::CommunityEvents::Admin::CommunityEventsController.sortable? && ::Refinery::CommunityEvents::CommunityEvent.many? %>
+  <li>
+    <%= action_label :reorder,
+                     refinery.community_events_admin_community_events_path,
+                     t('.reorder', what:  "Community Events"), id: 'reorder_action'%>
+    <%= action_label :reorder_done,
+                     refinery.community_events_admin_community_events_path,
+                      t('.reorder_done', what: "Community Events"), id: 'reorder_action_done', class: 'hidden'%>
+  </li>
+<% end %>
+</ul>

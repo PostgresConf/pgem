@@ -1,0 +1,33 @@
+zh-CN:
+  refinery:
+    plugins:
+      community_events:
+        title: Community Events
+    community_events:
+      admin:
+        community_events:
+          actions:
+            create_new: 建立新的 Community Event
+            reorder: 对 Community Events 重新排序
+            reorder_done: 对 Community Events 的重新排序结束
+          records:
+            title: Community Events
+            sorry_no_results: 对不起，未找到结果。 #Sorry! There are no results found.
+
+            # There are no Community Events yet. Click "Add New Community Event" to add your first community event.
+            no_items_yet: 目前没有 Community Events . 点击 "Add New Community Event" 创建一个community event.
+          community_event:
+            view_live_html: 查看 community event 的最新内容.<br/><em>(新窗口中打开)</em>
+            edit: 编辑 community event
+            delete: 永久删除 community event
+      community_events:
+        show:
+          other: 其他 Community Events
+  activerecord:
+    attributes:
+      'refinery/community_events/community_event':
+        title: Title
+        body: Body
+        url: Url
+        published_at: Published At
+        author: Author

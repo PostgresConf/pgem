@@ -1,0 +1,33 @@
+en:
+  refinery:
+    plugins:
+      meetups:
+        title: Meetups
+    meetups:
+      admin:
+        meetups:
+          actions:
+            create_new: Add New Meetup
+            reorder: Reorder Meetups
+            reorder_done: Done Reordering Meetups
+          records:
+            title: Meetups
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Meetups yet. Click "Add New Meetup" to add your first meetup.
+          meetup:
+            view_live_html: View this meetup live <br/><em>(opens in a new window)</em>
+            edit: Edit this meetup
+            delete: Remove this meetup forever
+      meetups:
+        show:
+          other: Other Meetups
+  activerecord:
+    attributes:
+      'refinery/meetups/meetup':
+        external_id: External
+        title: Title
+        description: Description
+        url: Url
+        start: Start
+        end: End
+        location: Location

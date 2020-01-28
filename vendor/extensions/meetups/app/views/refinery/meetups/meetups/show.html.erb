@@ -1,0 +1,63 @@
+<% content_for :body_content_title do %>
+  <%= @meetup.title %>
+<% end %>
+
+<% content_for :body do %>
+  <section>
+    <h1>External</h1>
+    <p>
+      <%=raw @meetup.external_id %>
+    </p>
+  </section>
+  <section>
+    <h1>Title</h1>
+    <p>
+      <%=raw @meetup.title %>
+    </p>
+  </section>
+  <section>
+    <h1>Description</h1>
+    <p>
+      <%=raw @meetup.description %>
+    </p>
+  </section>
+  <section>
+    <h1>Url</h1>
+    <p>
+      <%=raw @meetup.url %>
+    </p>
+  </section>
+  <section>
+    <h1>Start</h1>
+    <p>
+      <%=raw @meetup.start %>
+    </p>
+  </section>
+  <section>
+    <h1>End</h1>
+    <p>
+      <%=raw @meetup.end %>
+    </p>
+  </section>
+  <section>
+    <h1>Location</h1>
+    <p>
+      <%=raw @meetup.location %>
+    </p>
+  </section>
+<% end %>
+
+<% content_for :side_body do %>
+  <aside>
+    <h2><%= t('.other') %></h2>
+    <ul id="meetups">
+      <% @meetups.each do |meetup| %>
+        <li>
+          <%= link_to meetup.title, refinery.meetups_meetup_path(meetup) %>
+        </li>
+      <% end %>
+    </ul>
+  </aside>
+<% end %>
+
+<%= render '/refinery/content_page' %>

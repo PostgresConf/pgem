@@ -1,0 +1,32 @@
+es:
+  refinery:
+    plugins:
+      community_events:
+        title: Community Events
+#        article: masculino/femenino
+    community_events:
+      admin:
+        community_events:
+          actions:
+            create_new: Crear nuevo community event
+            reorder: Reordenar community events
+            reorder_done: Reordenación de community events completada
+          records:
+            title: Community Events
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay community events todavía. Pulsa en "Crear nuevo Community Event" para crear tu primer community event.
+          community_event:
+            view_live_html: Ver este community event como abierto al público <br/><em>(abre en ventana nueva)</em>
+            edit: Editar este community event
+            delete: Borrar este community event para siempre
+      community_events:
+        show:
+          other: Otros community events
+  activerecord:
+    attributes:
+      'refinery/community_events/community_event':
+        title: Title
+        body: Body
+        url: Url
+        published_at: Published At
+        author: Author

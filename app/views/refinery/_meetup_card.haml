@@ -1,0 +1,13 @@
+.col-md-3
+  %a.meetup-link{:href => "#{item.url}"}
+    .meetup-item
+      %p.date-place
+        %i.fa.fa-calendar.icon-margin{"aria-hidden" => "true"}>
+        = date_string(item.start, item.end)
+      %h3
+        = item.title
+      %h4
+        = item.description
+      %p.date-place
+        %i.fa.fa-map-marker.icon-margin{"aria-hidden" => "true"}>
+        = item.location

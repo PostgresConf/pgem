@@ -1,0 +1,55 @@
+<%= form_for [refinery, :meetups_admin, @meetup] do |f| -%>
+  <%= render '/refinery/admin/error_messages',
+              :object => @meetup,
+              :include_object_name => true %>
+
+  <div class='field'>
+    <%= f.label :external_id -%>
+    <%= f.text_field :external_id -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :title -%>
+    <%= f.text_field :title -%>
+  </div>
+
+  <div class='field'>
+    <%= render '/refinery/admin/wysiwyg',
+                :f => f,
+                :fields => [:description],
+                :object => "meetups/meetup" -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :url -%>
+    <%= f.text_field :url -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :start -%>
+    <%= f.datetime_select :start -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :end -%>
+    <%= f.datetime_select :end -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :location -%>
+    <%= f.text_field :location -%>
+  </div>
+
+  <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :delete_title => t('delete', :scope => 'refinery.meetups.admin.meetups.meetup'),
+             :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @meetup.title) -%>
+<% end -%>
+
+<% content_for :javascripts do -%>
+  <script>
+    $(document).ready(function(){
+      page_options.init(false, '', '');
+    });
+  </script>
+<% end -%>

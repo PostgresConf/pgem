@@ -1,0 +1,11 @@
+<% content_for :body do %>
+  <ul id="community_events">
+    <% @community_events.each do |community_event| %>
+      <li>
+        <%= link_to community_event.title, refinery.community_events_community_event_path(community_event) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render '/refinery/content_page' %>

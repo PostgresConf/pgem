@@ -1,0 +1,31 @@
+it:
+  refinery:
+    plugins:
+      community_events:
+        title: Community Events
+    community_events:
+      admin:
+        community_events:
+          actions:
+            create_new: Aggiungi Nuovo Community Event
+            reorder: Riordina Community Events
+            reorder_done: Termina il Riordino di Community Events
+          records:
+            title: Community Events
+            sorry_no_results: "Spiacenti! Nessun risultato trovato"
+            no_items_yet: Non ci sono ancora Community Events. Clicca "Aggiungi Nuovo Community Event" per aggiungere il tuo primo community event.
+          community_event:
+            view_live_html: Guarda live questo community event <br/><em>(apre una nuova finestra)</em>
+            edit: Modifica questo community event
+            delete: Rimuovi per sempre questo community event
+      community_events:
+        show:
+          other: Altri Community Events
+  activerecord:
+    attributes:
+      'refinery/community_events/community_event':
+        title: Title
+        body: Body
+        url: Url
+        published_at: Published At
+        author: Author

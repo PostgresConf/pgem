@@ -52,6 +52,12 @@ GIT
 PATH
   remote: vendor/extensions
   specs:
+    refinerycms-community_events (1.0)
+      acts_as_indexed (~> 0.8.0)
+      refinerycms-core (~> 3.0.6)
+    refinerycms-meetups (1.0)
+      acts_as_indexed (~> 0.8.0)
+      refinerycms-core (~> 3.0.6)
     refinerycms-sponsors (1.0)
       acts_as_indexed (~> 0.8.0)
       refinerycms-core (~> 3.0.5)
@@ -849,7 +855,9 @@ DEPENDENCIES
   redcarpet
   refinerycms (~> 3.0.0)
   refinerycms-blog!
+  refinerycms-community_events!
   refinerycms-dynamicfields!
+  refinerycms-meetups!
   refinerycms-search!
   refinerycms-sponsors!
   refinerycms-team_members!

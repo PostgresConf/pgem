@@ -1,0 +1,11 @@
+.meetup-item
+  %p.date-place
+    %i.fa.fa-calendar.icon-margin{"aria-hidden" => "true"}>
+    = date_string(item.start, item.end)
+
+  %h4.bold
+    = item.title
+
+  %p.date-place
+    %i.fa.fa-map-marker.icon-margin{"aria-hidden" => "true"}>
+    = item.location

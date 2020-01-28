@@ -1,0 +1,32 @@
+.conference-item
+  .row.row-custom
+    .col-sm-12.col-md-3.col-4-custom.p-left-custom
+      %img.img-responsive.pull-left.poster-conference{:alt => "Conference poster", :src => "images/WorldsDatabaseSmallerSV.png"}/
+    .col-sm-12.col-md-9.col-8-custom.conference-main
+      .conference-info
+        %h2.bold
+          = conference.title
+        %p.info.date-place
+          %i.fa.fa-calendar{"aria-hidden" => "true"}>
+          = date_string(conference.start_date, conference.end_date)
+
+        - if conference.venue
+          %p.info.date-place
+            %i.fa.fa-map-marker{"aria-hidden" => "true"}>
+            = conference.venue.city
+            = '/'
+            = conference.venue.country_name
+        %p.conference-description
+          - unless conference.description.blank?
+            = conference.description.truncate(350)
+
+      .row
+        .container-fluid.button-group
+          .col-md-3.col-sm-4.no-gutter
+            = link_to "Learn more", main_app.conference_path(conference.short_title), class: 'learn-more link-effect'
+          .col-md-3.col-md-offset-6.col-sm-4.col-sm-offset-4.no-gutter
+            - if conference.splashpage && conference.splashpage.public
+              - if conference.registration_open? && conference.tickets.any?
+                = button_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn register-btn-other bold uppercase", disabled: conference.registration_limit_exceeded?
+              - elsif conference.splashpage.include_sponsors && !conference.ended?
+                = button_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), class: "btn register-btn-other bold uppercase"

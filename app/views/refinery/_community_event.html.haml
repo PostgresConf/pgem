@@ -1,0 +1,9 @@
+.rss-wrapper
+  = link_to item.url, class: 'rss_title link-effect' do
+    %h4
+      = item.title
+  %p.rss-author
+    Posted by
+    = item.author
+    on
+    = item.published_at.strftime("%B %d, %Y")

@@ -1,0 +1,34 @@
+es:
+  refinery:
+    plugins:
+      meetups:
+        title: Meetups
+#        article: masculino/femenino
+    meetups:
+      admin:
+        meetups:
+          actions:
+            create_new: Crear nuevo meetup
+            reorder: Reordenar meetups
+            reorder_done: Reordenación de meetups completada
+          records:
+            title: Meetups
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay meetups todavía. Pulsa en "Crear nuevo Meetup" para crear tu primer meetup.
+          meetup:
+            view_live_html: Ver este meetup como abierto al público <br/><em>(abre en ventana nueva)</em>
+            edit: Editar este meetup
+            delete: Borrar este meetup para siempre
+      meetups:
+        show:
+          other: Otros meetups
+  activerecord:
+    attributes:
+      'refinery/meetups/meetup':
+        external_id: External
+        title: Title
+        description: Description
+        url: Url
+        start: Start
+        end: End
+        location: Location

@@ -1,0 +1,31 @@
+tr:
+  refinery:
+    plugins:
+      community_events:
+        title: Community Events
+    community_events:
+      admin:
+        community_events:
+          actions:
+            create_new: Yeni Ekle Community Event
+            reorder: Tekrar sirala Community Events
+            reorder_done: Tekrar siralama tamamlandiCommunity Events
+          records:
+            title: Community Events
+            sorry_no_results: Uzgunum! Herhangi bir sonuc bulunamadi.
+            no_items_yet: Herhangi bir Community Events yok henuz.  Tikla "Yeni Ekle Community Event" eklemek senin ilk community event.
+          community_event:
+            view_live_html: Bunu canlu community event goruntule <br/><em>(yeni bir pencerede acar)</em>
+            edit: Bunu Duzenle community event
+            delete: Bunu Sil community event sonsuza dek
+      community_events:
+        show:
+          other: Diger Community Events
+  activerecord:
+    attributes:
+      'refinery/community_events/community_event':
+        title: Title
+        body: Body
+        url: Url
+        published_at: Published At
+        author: Author

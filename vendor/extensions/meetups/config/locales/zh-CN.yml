@@ -1,0 +1,35 @@
+zh-CN:
+  refinery:
+    plugins:
+      meetups:
+        title: Meetups
+    meetups:
+      admin:
+        meetups:
+          actions:
+            create_new: 建立新的 Meetup
+            reorder: 对 Meetups 重新排序
+            reorder_done: 对 Meetups 的重新排序结束
+          records:
+            title: Meetups
+            sorry_no_results: 对不起，未找到结果。 #Sorry! There are no results found.
+
+            # There are no Meetups yet. Click "Add New Meetup" to add your first meetup.
+            no_items_yet: 目前没有 Meetups . 点击 "Add New Meetup" 创建一个meetup.
+          meetup:
+            view_live_html: 查看 meetup 的最新内容.<br/><em>(新窗口中打开)</em>
+            edit: 编辑 meetup
+            delete: 永久删除 meetup
+      meetups:
+        show:
+          other: 其他 Meetups
+  activerecord:
+    attributes:
+      'refinery/meetups/meetup':
+        external_id: External
+        title: Title
+        description: Description
+        url: Url
+        start: Start
+        end: End
+        location: Location
