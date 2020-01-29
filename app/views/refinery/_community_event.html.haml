@@ -1,5 +1,5 @@
 .rss-wrapper
-  = link_to item.url, class: 'rss_title link-effect' do
+  = link_to item.url, class: 'rss_title link-effect', target: '_blank' do
     %h4
       = item.title
   %p.rss-author
