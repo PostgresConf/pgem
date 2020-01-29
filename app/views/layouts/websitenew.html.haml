@@ -35,14 +35,16 @@
             %h2.bold.section-title Conferences
             - @current.each do |conference|
               = render partial: '/refinery/conference_item', locals: { conference: conference }
+            = link_to "All Conferences", main_app.conferences_path, class: 'learn-more link-effect'
 
     / Digital Events
     %section.digital-events{:id => "Digital Events"}
       - @digital_first = @digital_events.first
       - @digital_others = @digital_events[1..3]
       .container-fluid
-        .col-md-10.col-md-offset-1
-          %h2.bold.section-title Digital Events
+        .row
+          .col-md-10.col-md-offset-1
+            %h2.bold.section-title Digital Events
         .row
           .col-lg-4.col-md-6.col-lg-offset-4.col-md-offset-3
             - if @digital_first
@@ -90,13 +92,14 @@
       .container-fluid
         .col-lg-10.col-md-10.col-md-offset-1.col-lg-offset-1
           .row
-            .col-md-8.col-sm-12.no-gutter
+            .col-md-8.col-xs-12.no-gutter
               %h2.bold.section-title Blog
               .blog-wrapper.border-custom
                 - @blog_posts = Refinery::Blog::Post.recent(4)
                 - @blog_posts.each do |item|
                   = render partial: '/refinery/blog_post', locals: { item: item }
-            .col-md-4.col-sm-12.no-gutter
+                = link_to "All Blog Posts", refinery.blog_root_path, class: 'learn-more link-effect'
+            .col-md-4.col-xs-12.no-gutter
               %h2.bold.section-title.community-title Community Events
               - @community_events = Refinery::CommunityEvents::CommunityEvent.recent(7)
               - @community_events.each do |item|
