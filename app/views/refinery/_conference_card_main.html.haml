@@ -3,12 +3,12 @@
     .col-md-5.col-md-push-7.h-100
       .poster-button-wrapper.h-100
         %img.img-responsive.poster{:alt => "Conference poster", :src => "#{conference.picture.url}"}
-        .card-footer.hidden-sm
+        .card-footer.hidden-xs.hidden-sm
           - if conference.splashpage && conference.splashpage.public
             - if conference.registration_open? && conference.tickets.any?
-              = button_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn register-btn bold uppercase", disabled: conference.registration_limit_exceeded?, method: :get
+              = link_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn register-btn bold uppercase", disabled: conference.registration_limit_exceeded?
             - elsif conference.splashpage.include_sponsors && !conference.ended?
-              = button_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), class: "btn register-btn bold uppercase", method: :get
+              = link_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), class: "btn register-btn bold uppercase"
 
     .col-md-7.col-md-pull-5.h-100
       %h1.bold
@@ -21,9 +21,9 @@
           = '/'
           = conference.venue.country_name
 
-      .card-footer.visible-sm
+      .card-footer.visible-xs.visible-sm
         - if conference.splashpage && conference.splashpage.public
           - if conference.registration_open? && conference.tickets.any?
-            = button_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn register-btn bold uppercase", disabled: conference.registration_limit_exceeded?, method: :get
+            = link_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn register-btn bold uppercase", disabled: conference.registration_limit_exceeded?
           - elsif conference.splashpage.include_sponsors && !conference.ended?
-            = button_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), class: "btn register-btn bold uppercase", method: :get
+            = link_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), class: "btn register-btn bold uppercase"

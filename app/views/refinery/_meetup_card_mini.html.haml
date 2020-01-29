@@ -7,8 +7,11 @@
 
     .col-md-8.col-md-pull-4
       %h4.bold.mt-0
-        = item.title
+        = link_to item.title, item.url, target: '_blank'
 
       %p
         = date_string(item.start, item.end)
+
+      %span
+        %i.fa.fa-meetup.fa-4x
       .card-footer.visible-sm.visible-sm

@@ -27,6 +27,6 @@
           .col-md-3.col-md-offset-6.col-sm-4.col-sm-offset-4.no-gutter
             - if conference.splashpage && conference.splashpage.public
               - if conference.registration_open? && conference.tickets.any?
-                = button_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn register-btn-other bold uppercase", disabled: conference.registration_limit_exceeded?, method: :get
+                = link_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn register-btn-other bold uppercase", disabled: conference.registration_limit_exceeded?
               - elsif conference.splashpage.include_sponsors && !conference.ended?
-                = button_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), class: "btn register-btn-other bold uppercase", method: :get
+                = link_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), class: "btn register-btn-other bold uppercase"
