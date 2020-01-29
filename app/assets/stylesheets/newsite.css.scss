@@ -330,6 +330,9 @@ a:focus {
     .meetup {
         width: 100%;
         height: calc((100% - 30px)/2);
+        a {
+            color: inherit;
+        }
     }
 
     .digital-event {
@@ -339,7 +342,9 @@ a:focus {
     .poster-button-wrapper {
         display: flex;
         flex-direction: column;
-        flex-grow: 1;
+        .card-footer{
+            margin-top: auto;
+        }
     }
     .angle-down {
         display: flex;
@@ -626,7 +631,8 @@ a:focus {
     h2,
     h3,
     p,
-    a {
+    a,
+    a:hover {
         color: white;
     }
 
@@ -1051,6 +1057,11 @@ a:focus {
 
         .border-custom {
             border-right: 0;
+        }
+
+        .community-title{
+            margin-left: 0;
+            margin-top: 20px;
         }
 
         .rss-wrapper {
