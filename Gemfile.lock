@@ -443,7 +443,7 @@ GEM
       ast (~> 2.4.0)
     pbkdf2_password_hasher (0.2.0)
     pdf-core (0.4.0)
-    pg (0.20)
+    pg (0.20.0)
     phantomjs (2.1.1.0)
     piwik_analytics (1.0.2)
       actionpack
@@ -640,7 +640,7 @@ GEM
     ruby-oembed (0.8.14)
     ruby-openid (2.5.0)
     ruby-progressbar (1.10.0)
-    rubyzip (1.2.2)
+    rubyzip (2.2.0)
     safe_yaml (1.0.4)
     sass (3.4.25)
     sass-rails (5.0.7)
