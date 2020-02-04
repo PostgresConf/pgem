@@ -92,7 +92,8 @@ class Conference < ActiveRecord::Base
   before_create :add_color
   before_create :create_email_settings
 
-  after_update :timezone_change_handler
+  after_update :handle_timezone_change
+  after_update :handle_date_change
 
   enum ticket_layout: [:portrait, :landscape]
 
@@ -1230,7 +1231,7 @@ Best wishes
     result
   end
 
-  def timezone_change_handler
+  def handle_timezone_change
     # unschedule events if conference timezone changed
     if self.timezone_changed?
       tzchanges = self.changes[:timezone]
@@ -1241,7 +1242,14 @@ Best wishes
         program.selected_schedule.event_schedules.destroy_all if program.selected_schedule
       end
     end
-    true
+  end
+
+  def handle_date_change
+    # unschedule events if the new conference date range does not fit the existing schedule
+    program.selected_schedule.event_schedules.each do |es|
+      fits = es.start_time.between?(self.start_date, self.end_date)
+      es.destroy unless fits
+    end
   end
 
 end
