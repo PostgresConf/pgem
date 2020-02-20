@@ -1245,10 +1245,15 @@ Best wishes
   end
 
   def handle_date_change
-    # unschedule events if the new conference date range does not fit the existing schedule
-    program.selected_schedule.event_schedules.each do |es|
-      fits = es.start_time.between?(self.start_date, self.end_date)
-      es.destroy unless fits
+    # unschedule events schedules which do not fit within conference start/end range
+    if self.start_date_changed? || self.end_date_changed?
+      if program.selected_schedule
+        sched_start = DateTime.parse("#{self.start_date.to_s} #{self.start_hour}")
+        sched_end = DateTime.parse("#{self.end_date.to_s} #{self.end_hour}")
+        program.selected_schedule.event_schedules.each do |es|
+          fits = es.start_time >= sched_start && es.end_time <= sched_end
+        end
+      end
     end
   end
 
