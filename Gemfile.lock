@@ -405,7 +405,7 @@ GEM
     nested_form (0.3.2)
     netrc (0.11.0)
     nio4r (1.2.1)
-    nokogiri (1.10.4)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     oauth2 (0.9.4)
       faraday (>= 0.8, < 0.10)
@@ -443,7 +443,7 @@ GEM
       ast (~> 2.4.0)
     pbkdf2_password_hasher (0.2.0)
     pdf-core (0.4.0)
-    pg (0.20)
+    pg (0.20.0)
     phantomjs (2.1.1.0)
     piwik_analytics (1.0.2)
       actionpack
