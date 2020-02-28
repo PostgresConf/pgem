@@ -11,6 +11,7 @@
       %thead
         %th Logo
         %th Name
+        %th Short Name
         %th Description
         %th URL
         %th Actions
@@ -21,6 +22,8 @@
               = image_tag(sponsor.picture.thumb.url, width: '20%')
             %td
               = sponsor.name
+            %td
+              = sponsor.short_name
             %td
               = truncate(sponsor.description)
             %td
