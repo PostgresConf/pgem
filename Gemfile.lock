@@ -443,7 +443,7 @@ GEM
       ast (~> 2.4.0)
     pbkdf2_password_hasher (0.2.0)
     pdf-core (0.4.0)
-    pg (0.20)
+    pg (0.20.0)
     phantomjs (2.1.1.0)
     piwik_analytics (1.0.2)
       actionpack
@@ -720,7 +720,7 @@ GEM
     unicode_utils (1.4.0)
     unobtrusive_flash (3.1.0)
       railties
-    user_agent_parser (2.1.5)
+    user_agent_parser (2.6.0)
     uuidtools (2.1.5)
     warden (1.2.7)
       rack (>= 1.0)
