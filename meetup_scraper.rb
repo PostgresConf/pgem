@@ -52,7 +52,7 @@ def scrape_groups
                 meetup.picture_url = event['pic_url']
                 meetup.start = DateTime.parse(event['startDate'])
                 meetup.end = DateTime.parse(event['endDate'])
-                meetup.location = "#{event['location']['address']['addressLocality']} / #{event['location']['address']['addressCountry']}"
+                meetup.location = "#{event['location']['address']['addressLocality']} / #{event['location']['address']['addressCountry']}" if event['location'].present?
                 meetup.save
             end            
         end            
