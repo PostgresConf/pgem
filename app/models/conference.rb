@@ -88,11 +88,13 @@ class Conference < ActiveRecord::Base
   # This validation is needed since a conference with a start date greater than the end date is not possible
   validate :valid_date_range?
   validate :valid_times_range?
+  validate :schedule_ok?
+
   before_create :generate_guid
   before_create :add_color
   before_create :create_email_settings
 
-  after_update :timezone_change_handler
+  after_update :handle_timezone_change
 
   enum ticket_layout: [:portrait, :landscape]
 
@@ -1230,7 +1232,7 @@ Best wishes
     result
   end
 
-  def timezone_change_handler
+  def handle_timezone_change
     # unschedule events if conference timezone changed
     if self.timezone_changed?
       tzchanges = self.changes[:timezone]
@@ -1241,7 +1243,26 @@ Best wishes
         program.selected_schedule.event_schedules.destroy_all if program.selected_schedule
       end
     end
-    true
+  end
+
+  ##
+  # Verifies that there are no event_schedules beyound the new conference date/time range
+  #
+  # Reports a list of orphans if found
+  def schedule_ok?
+    if self.start_date_changed? || self.end_date_changed? || self.start_hour_changed? || self.end_hour_changed?
+      if program.selected_schedule
+        sched_start = DateTime.parse("#{self.start_date.to_s} #{self.start_hour}")
+        sched_end = DateTime.parse("#{self.end_date.to_s} #{self.end_hour}")
+        bad_schedules = []
+        program.selected_schedule.event_schedules.each do |es|
+          fits = es.start_time >= sched_start && es.end_time <= sched_end
+          bad_schedules.push(es.event.title) unless fits
+        end
+        errors.add(:base, 'The following events will end up beyound of new conference start/end time boundaries. Please unschedule them first') unless bad_schedules.empty?
+        errors.add(:base, bad_schedules.join(', '))
+      end
+    end
   end
 
 end

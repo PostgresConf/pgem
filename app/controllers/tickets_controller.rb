@@ -33,6 +33,11 @@ class TicketsController < ApplicationController
   end
 
   def check_load_resource
+    if @conference.ended?
+      redirect_to conference_path(id: @conference.short_title), notice: "Cannot buy tickets for ended conference: #{@conference.title}!"
+      return
+    end
+
     if @tickets.empty?
       redirect_to root_path, notice: "There are no tickets available for #{@conference.title}!"
     end

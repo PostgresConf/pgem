@@ -290,7 +290,7 @@ class User < ActiveRecord::Base
     integrations.each do |integration|
       if integration.integration_type == "boomset"
         r = Registration.where(conference_id: integration.conference_id, user_id: self.id).first
-	BoomsetAttendeeRegisterJob.perform_later(r)
+	      BoomsetAttendeeRegisterJob.perform_later(r)
       end
     end
   end

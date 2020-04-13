@@ -195,12 +195,14 @@ class Mailbot < ActionMailer::Base
   end
 
   def event_comment_mail(comment, user)
-    event = comment.commentable
-    conference = event.program.conference
+    @event = comment.commentable
+    @conference = @event.program.conference
+    @user=user
+    @comment = comment
 
     mail(to: user.email,
-         from: conference.contact.email,
+         from: @conference.contact.email,
          template_name: 'comment_template',
-         subject: "New comment has been posted for #{event.title}")
+         subject: "New comment has been posted for #{@event.title}")
   end
 end

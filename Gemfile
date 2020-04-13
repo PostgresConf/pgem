@@ -267,10 +267,6 @@ group :development do
   gem 'rubocop', require: false
   # to silence rack assests messages
   gem 'quiet_assets'
-  # as database
-  group :development, :test do
-  #gem 'sqlite3'
-end
   # to open mails
   gem 'letter_opener'
   # to open mails in browser
@@ -312,7 +308,7 @@ group :development, :test do
   gem "better_errors"
   # dependency
   gem "binding_of_caller"
-
+  #gem 'sqlite3'
 end
 
 group :production do
