@@ -19,7 +19,7 @@
           .col-md-10.col-md-offset-1
             .row.wrapper-main-cards
               .col-md-7.col-sm-12.h-100
-                = render partial: "/refinery/conference_card_main", locals: { conference: @main_conference }
+                = render partial: "/refinery/conference_card_main", locals: { conference: @main_conference } if @main_conference
               .col-md-5.col-sm-12.h-100
                 = render partial: "/refinery/#{@top_card.class.name.demodulize.underscore}_card_mini", locals: { item: @top_card } if @top_card
                 = render partial: "/refinery/#{@bottom_card.class.name.demodulize.underscore}_card_mini", locals: { item: @bottom_card } if @bottom_card
@@ -100,7 +100,7 @@
                   = render partial: '/refinery/blog_post', locals: { item: item }
                 = link_to "All Blog Posts", refinery.blog_root_path, class: 'learn-more link-effect'
             .col-md-4.col-xs-12.no-gutter
-              %h2.bold.section-title.community-title Community Events
+              %h2.bold.section-title.community-title Community Content
               - @community_events = Refinery::CommunityEvents::CommunityEvent.recent(7)
               - @community_events.each do |item|
                 = render partial: '/refinery/community_event', locals: { item: item }
