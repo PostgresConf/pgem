@@ -3,15 +3,14 @@ module Refinery
     class Meetup < Refinery::Core::BaseModel
       self.table_name = 'refinery_meetups'
 
-
       validates :url, :presence => true, :uniqueness => true
       class << self
-        def newest_first
-          order("start DESC")
+        def earliest
+          where('start > ?', DateTime.now)
         end
 
         def upcoming(count)
-          newest_first.limit(count)
+          earliest.order('start ASC').limit(count)
         end
       end
 
