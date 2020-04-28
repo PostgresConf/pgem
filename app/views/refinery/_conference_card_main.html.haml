@@ -12,7 +12,10 @@
 
     .col-md-7.col-md-pull-5.h-100
       %h1.bold
-        = conference.title
+        - if conference.splashpage && conference.splashpage.public
+          = link_to conference.title, main_app.conference_path(conference.short_title)
+        - else
+          = conference.title
       %h4
         = date_string(conference.start_date, conference.end_date)
       %h4
