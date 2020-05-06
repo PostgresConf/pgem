@@ -1259,8 +1259,10 @@ Best wishes
           fits = es.start_time >= sched_start && es.end_time <= sched_end
           bad_schedules.push(es.event.title) unless fits
         end
-        errors.add(:base, 'The following events will end up beyound of new conference start/end time boundaries. Please unschedule them first') unless bad_schedules.empty?
-        errors.add(:base, bad_schedules.join(', '))
+        if bad_schedules.present?
+          errors.add(:base, 'The following events will end up beyound of new conference start/end time boundaries, please unschedule them first: ')
+          errors.add(:base, bad_schedules.join(', '))
+        end
       end
     end
   end
