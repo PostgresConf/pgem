@@ -21,7 +21,7 @@ GROUP_URLS=[
         ]
 
 def get_group_event_ids(url)
-    doc = Nokogiri::HTML(open("#{url}/events"))
+    doc = Nokogiri::HTML(open("#{url}/events/"))
     event_ids = []
     res = doc.css('.eventCard--link').each do |link|
         eid = link.attribute('href').value.split('/').last
@@ -44,18 +44,26 @@ def scrape_groups
         eids = get_group_event_ids(gurl)
         eids.each do |event_id|
             event = get_event_info(gurl, event_id)
-
-            Refinery::Meetups::Meetup.find_or_initialize_by({external_id: event_id}) do |meetup|
-                meetup.title = event['name']
-                meetup.description = event['description']
-                meetup.url = event['url']
-                meetup.picture_url = event['pic_url']
-                meetup.start = DateTime.parse(event['startDate'])
-                meetup.end = DateTime.parse(event['endDate'])
-                meetup.location = "#{event['location']['address']['addressLocality']} / #{event['location']['address']['addressCountry']}" if event['location'].present?
-                meetup.save
-            end            
-        end            
+            meetup = Refinery::Meetups::Meetup.find_or_initialize_by({external_id: event_id})
+            meetup.title = event['name']
+            meetup.description = event['description']
+            meetup.url = event['url']
+            meetup.picture_url = event['pic_url']
+            meetup.start = DateTime.parse(event['startDate'])
+            if event['endDate']
+                   meetup.end = DateTime.parse(event['endDate'])
+            end
+            meetup.location = 'N/A'
+            if event['location'].present?
+                meetup.location = "#{event['location']['address']['addressLocality']} / #{event['location']['address']['addressCountry']}" unless event['location']['@type'] == "VirtualLocation"
+            end
+            if meetup.new_record?
+                p("Creating new meetup record from #{event_id}: #{meetup.title}")
+            else
+                p("Updating meetup record from #{event_id}: #{meetup.title}")
+            end
+            meetup.save
+        end
     end
 end
 
