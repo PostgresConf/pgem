@@ -4,7 +4,6 @@ $background_color: #111e34;
 $background: linear-gradient(110deg, #002297 60%, #3c4dbc 60%);
 $button_color: #ffffff;
 $font_button_color: #ffffff;
-$font_button_color_hover: #001970;
 $color_central_blocks: #ffffff;
 $shadow: 0 6px 12px rgba(0, 0, 0, .175);
 $secondary_font_color: #757575;
@@ -118,7 +117,6 @@ a:focus {
 
     &:hover {
         outline: none;
-        color: $main_color;
 
         &:after {
             height: 2px;
@@ -135,7 +133,6 @@ a:focus {
         left: 0;
         width: 100%;
         height: 1px;
-        background: $main_color;
         content: '';
         opacity: 0;
         -webkit-transition: height 0.3s, opacity 0.3s, -webkit-transform 0.3s;
@@ -145,6 +142,11 @@ a:focus {
         -moz-transform: translateY(-10px);
         transform: translateY(-10px);
     }
+}
+
+:target {
+    padding-top: 53px;
+    margin-top: -53px;
 }
 
 #nav-top {
@@ -310,9 +312,13 @@ a:focus {
         h3 {
             margin-top: 0px;
         }
-        a {
-            color: inherit;
+
+        h1, h4 {
+            a {
+                color: inherit;
+            }
         }
+
     }
 
     .poster {
@@ -327,28 +333,34 @@ a:focus {
     .conference {
         width: 100%;
         height: 100%;
+        .link-effect {
+            &::after {
+                background-color: white;
+            }
+        }
     }
 
     .digital-event,
     .meetup {
         width: 100%;
         height: calc((100% - 30px)/2);
-        a {
-            color: inherit;
-        }
     }
 
     .digital-event {
         margin-bottom: 30px;
     }
 
-    .poster-button-wrapper {
+    .col-flex {
         display: flex;
         flex-direction: column;
-        .card-footer{
-            margin-top: auto;
-        }
+        height: 100%;
     }
+
+    .btn-wrapper-bottom {
+        margin-top: auto;
+        width: 50%;
+    }
+
     .angle-down {
         display: flex;
         justify-content: center;
@@ -409,7 +421,7 @@ a:focus {
         background: $button_color;
     }
     &:hover, &:active, &:focus{
-        color: $font_button_color_hover;
+        color: $main_color;
         outline: none !important;
         &:after{
             width: 100%;
@@ -447,6 +459,15 @@ a:focus {
         display: flex;
         flex-direction: column;
         padding: 20px;
+
+        .link-effect {
+            &:hover{
+                color: $main_color;
+            }
+            &::after {
+                background-color: $main_color;
+            }
+        }
     }
 
     .conference-item {
@@ -530,6 +551,14 @@ a:focus {
             height: 100%;
             z-index: 5;
             margin: 0 auto;
+        }
+        .link-effect{
+            &:hover{
+                color: $main_color;
+            }
+            &::after{
+                background-color: $main_color;
+            }
         }
     }
     .future-events {  
@@ -639,9 +668,9 @@ a:focus {
         color: white;
     }
 
-    a.link-effect:after {
-        top: 90%;
-        background: #ffffff;
+    .link-effect:after {
+        top: 95%;
+        background: white;
     }
 
     .border-custom {
@@ -900,6 +929,10 @@ a:focus {
 
         .poster {
             max-height: none;
+        }
+
+        .btn-wrapper-bottom {
+            width: 100%;
         }
     }
 

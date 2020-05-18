@@ -1,7 +1,7 @@
 .rss-wrapper
-  = link_to item.url, class: 'rss_title link-effect', target: '_blank' do
-    %h4
-      = item.title
+  %h4.link-effect
+    = link_to item.title, item.url, class: 'rss_title', target: '_blank'
+
   %p.rss-author
     Posted by
     = item.author

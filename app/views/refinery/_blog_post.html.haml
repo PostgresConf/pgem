@@ -1,7 +1,7 @@
 .news-item-wrapper
-  = link_to refinery.blog_post_path(item), class: 'link-effect' do
-    %h3
-      = item.title
+  %h3.link-effect
+    = link_to item.title, refinery.blog_post_path(item)
+
   %p
     = item.published_at.strftime("%B %d, %Y")
   %p

@@ -3,22 +3,16 @@
     .col-md-4.col-md-push-8.h-100
       .poster-button-wrapper.h-100
         %img.img-responsive.poster-small{:alt => "Conference poster", :src => "#{item.picture.url}"}
-        .card-footer.hidden-sm.hidden-sm
+        .card-footer.hidden-sm
+
+    .col-md-8.col-md-pull-4.col-flex
+      %h4.bold.mt-0
+        = item.title
+      %p
+        = date_string(item.start_date, item.end_date)
+        .btn-wrapper-bottom
           - if item.splashpage && item.splashpage.public
             - if item.registration_open? && item.tickets.any?
               = link_to "Register", main_app.conference_buytickets_path(item.short_title), class: "btn register-btn bold uppercase", disabled: item.registration_limit_exceeded?
             - elsif item.splashpage.include_sponsors && !item.ended?
               = link_to "Sponsor!", main_app.conference_sponsorships_path(item.short_title), class: "btn register-btn bold uppercase"
-
-    .col-md-8.col-md-pull-4
-      %h4.bold.mt-0
-        = item.title
-
-      %p
-        = date_string(item.start_date, item.end_date)
-      .card-footer.visible-sm.visible-sm
-        - if item.splashpage && item.splashpage.public
-          - if item.registration_open? && item.tickets.any?
-            = link_to "Register", main_app.conference_buytickets_path(item.short_title), class: "btn register-btn bold uppercase", disabled: item.registration_limit_exceeded?
-          - elsif item.splashpage.include_sponsors && !item.ended?
-            = link_to "Sponsor!", main_app.conference_sponsorships_path(item.short_title), class: "btn register-btn bold uppercase"
