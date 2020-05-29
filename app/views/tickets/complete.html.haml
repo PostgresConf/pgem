@@ -22,7 +22,7 @@
               .row.product
                 .col-md-11
                   %h4
-                    = event.active_schedule.start_time.in_time_zone(@conference.timezone).strftime("%Y %B %e %H:%M") if event.active_schedule
+                    = event.ticket.title
                   .product-description
                     %a{ href: '#', data: { toggle: 'modal', target: "#modal_#{event.id}" } }
                       = event.title
