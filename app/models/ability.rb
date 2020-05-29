@@ -74,7 +74,7 @@ class Ability
 
     # quickbuy aka RSVP is only available for ticketet events in active digital conferences
     can :quickbuy, Event do |event|
-      event.ticket && event.scheduled? && event.conference.registration_open? && event.conference.digital?
+      event.ticket && event.scheduled? && event.program.conference.registration_open? && event.program.conference.digital?
     end
   end
 
