@@ -17,6 +17,8 @@
           %small
             = @event.subtitle
       .row.pull-right
+        - if can? :quickbuy, @event
+          = link_to "RSVP Today", conference_event_quickbuy_path(@conference.short_title, @event), :class => "btn btn-mini btn-primary"
 
         - if @event.scheduled?
           = render partial: 'proposals/share_menu', locals: { event: @event, event_url: request.original_url, button_classes: nil }

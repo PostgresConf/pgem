@@ -218,6 +218,7 @@ Osem::Application.routes.draw do
     resources :ticket_purchases, only: [:create, :destroy]
 
     get 'ticket_purchases/recreate' => 'ticket_purchases#recreate'
+    get 'ticket_purchases/quickbuy/:event_id' => 'ticket_purchases#quickbuy', as: :event_quickbuy
     resources :payments, only: [:index, :new, :create] do
       collection do
         get :cancel

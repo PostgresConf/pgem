@@ -46,6 +46,23 @@ class TicketPurchasesController < ApplicationController
     render layout: false
   end
 
+  def quickbuy
+    event = Event.find(params[:event_id])
+
+    if event
+      if event.ticket
+        tid = event.ticket.id.to_s
+        session[:purchase_params_tickets] = [{tid => "1"}]
+        session[:purchase_params_purchase_prices] = [{tid =>"0.00"}]
+        session[:purchase_params_chosen_events] = {tid => {event.id.to_s =>"1"}}
+        redirect_to conference_ticket_purchases_recreate_path(@conference.short_title) and return
+      end
+    end
+
+    redirect_to conference_tickets_path(@conference.short_title),
+                  error: 'Please get at least one ticket to continue.'
+  end
+
   private
 
   def ticket_purchase_params
@@ -60,7 +77,7 @@ class TicketPurchasesController < ApplicationController
       params[:chosen_events] ||= session.delete(:purchase_params_chosen_events)
       params[:code_id] ||= session.delete(:purchase_params_code_id)
 
-    # for anonymous user store ticket choics and prices
+    # for anonymous user store ticket choices and prices
     else
       session[:purchase_params_tickets] = params[:tickets]
       session[:purchase_params_purchase_prices] = params[:purchase_prices]

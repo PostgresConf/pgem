@@ -274,6 +274,10 @@ class Event < ActiveRecord::Base
     t + (event_type.length * 60)
   end
 
+  def active_schedule
+    event_schedules.find_by(schedule_id: program.selected_schedule_id)
+  end
+
   # This will return the maximum number of tickets available within one purchase
   def purchase_quantity_available
     if max_attendees.blank?
