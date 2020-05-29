@@ -2,6 +2,8 @@ require 'nokogiri'
 require 'open-uri'
 require 'json'
 
+@logger = Logger.new(STDOUT)
+
 GROUP_URLS=[
             'https://www.meetup.com/postgres-nyc/',
             'https://www.meetup.com/postgres-philly/',
@@ -58,13 +60,14 @@ def scrape_groups
                 meetup.location = "#{event['location']['address']['addressLocality']} / #{event['location']['address']['addressCountry']}" unless event['location']['@type'] == "VirtualLocation"
             end
             if meetup.new_record?
-                p("Creating new meetup record from #{event_id}: #{meetup.title}")
+                @logger.info("Creating new meetup record from #{event_id}: #{meetup.title}")
             else
-                p("Updating meetup record from #{event_id}: #{meetup.title}")
+                @logger.info("Updating meetup record from #{event_id}: #{meetup.title}")
             end
             meetup.save
         end
     end
 end
 
+@logger.info('Meetup scraper starting')
 scrape_groups

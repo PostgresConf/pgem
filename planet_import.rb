@@ -1,11 +1,14 @@
 require 'feedjira'
 include ActionView::Helpers::SanitizeHelper
-require 'byebug'
+
+@logger = Logger.new(STDOUT)
 
 url = 'https://planet.postgresql.org/rss20_short.xml'
 rss = open(url).read
 feed = Feedjira::Feed.parse rss
 posts = feed.entries
+
+@logger.info('Planet importer starting')
 
 posts.each do |post|
     Refinery::CommunityEvents::CommunityEvent.find_or_initialize_by({url: post.url}) do |post_record|
@@ -24,6 +27,6 @@ posts.each do |post|
         post_record.body = post.summary
         post_record.author = post_author
         post_record.save
-        p "creating new record: #{post_record.title}"
+        @logger.info "creating new record: #{post_record.title}"
     end
 end
