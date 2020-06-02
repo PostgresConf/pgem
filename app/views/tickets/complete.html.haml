@@ -19,22 +19,23 @@
           .panel-body
             - ticketed_events = @conference.program.events.where.not(ticket_id: nil)
             - ticketed_events.each do |event|
-              .row.product
-                .col-md-11
-                  %h4
-                    = event.ticket.title
-                  .product-description
-                    %a{ href: '#', data: { toggle: 'modal', target: "#modal_#{event.id}" } }
-                      = event.title
-                .col-md-1
-                  - if can? :quickbuy, @event
-                    = link_to "RSVP Today", conference_event_quickbuy_path(@conference.short_title, event), :class => "btn btn-xs btn-success pull-right"
+              - unless event.ticket.hidden?
+                .row.product
+                  .col-md-11
+                    %h4
+                      = event.ticket.title
+                    .product-description
+                      %a{ href: '#', data: { toggle: 'modal', target: "#modal_#{event.id}" } }
+                        = event.title
+                  .col-md-1
+                    - if can? :quickbuy, @event
+                      = link_to "RSVP Today", conference_event_quickbuy_path(@conference.short_title, event), :class => "btn btn-xs btn-success pull-right"
 
-                .modal.fade{ id: "modal_#{event.id}" }
-                  .modal-dialog
-                    .modal-content
-                      .modal-header
-                        %button.close{ data: { dismiss: 'modal' } }
-                          x
-                      .modal-body.text-center
-                        = render partial: 'event_listing', locals: { event: event }
+                  .modal.fade{ id: "modal_#{event.id}" }
+                    .modal-dialog
+                      .modal-content
+                        .modal-header
+                          %button.close{ data: { dismiss: 'modal' } }
+                            x
+                        .modal-body.text-center
+                          = render partial: 'event_listing', locals: { event: event }
