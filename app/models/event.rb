@@ -278,6 +278,11 @@ class Event < ActiveRecord::Base
     event_schedules.find_by(schedule_id: program.selected_schedule_id)
   end
 
+  def ended?
+    return false unless self.end_time
+    self.end_time < Date.today
+  end
+
   # This will return the maximum number of tickets available within one purchase
   def purchase_quantity_available
     if max_attendees.blank?
