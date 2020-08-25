@@ -7,11 +7,7 @@ end
 
 # as web framework
 gem 'rails', '~> 4.2.11.1'
-gem 'refinerycms', '~> 3.0.0'
-gem 'refinerycms-search', github: 'refinery/refinerycms-search', branch: 'master'
-gem 'refinerycms-blog', git: 'https://github.com/refinery/refinerycms-blog', branch: 'master'
-gem 'refinerycms-dynamicfields', :git => 'https://github.com/jfalameda/refinerycms-dynamicfields.git'
-gem 'refinerycms-tinymce', git: 'https://github.com/ghoppe/refinerycms-tinymce'
+
 gem 'braintree'
 gem 'gon', '~> 5.1.2'
 # enables serving assets in production and setting your logger to standard out
@@ -179,8 +175,9 @@ gem 'yajl-ruby', '~> 1.2', '>= 1.2.1'
 gem 'rdoc-generator-fivefish', '~> 0.4.0'
 
 # for visitor tracking
-gem 'ahoy_matey'
-gem 'activeuuid'
+gem 'ahoy_matey', '~> 2'
+# gem 'activeuuid'
+gem 'uuidtools'
 gem 'piwik_analytics', '~> 1.0.1'
 
 # for recurring jobs
@@ -314,6 +311,13 @@ end
 group :production do
   gem 'exception_notification'
 end
+
+# IMPORTANT - refinery stuff should come last in gemfile
+gem 'refinerycms', '~> 3.0.0'
+gem 'refinerycms-search', github: 'refinery/refinerycms-search', branch: 'master'
+gem 'refinerycms-blog', git: 'https://github.com/refinery/refinerycms-blog', branch: 'master'
+gem 'refinerycms-dynamicfields', :git => 'https://github.com/jfalameda/refinerycms-dynamicfields.git'
+gem 'refinerycms-tinymce', git: 'https://github.com/ghoppe/refinerycms-tinymce'
 
 gem 'refinerycms-team_members', path: 'vendor/extensions'
 gem 'refinerycms-sponsors', path: 'vendor/extensions'
