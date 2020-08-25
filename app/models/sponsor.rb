@@ -7,6 +7,7 @@ class Sponsor < ActiveRecord::Base
   has_many :sponsors_users
   has_many :users, through: :sponsors_users, dependent: :destroy
   has_many :sponsorship_events
+  has_many :campaigns
 
   mount_uploader :picture, PictureUploader, mount_on: :logo_file_name
 

@@ -3,9 +3,11 @@ class Campaign < ActiveRecord::Base
 
   has_many :targets, dependent: :nullify
   belongs_to :conference
+  belongs_to :sponsor
 
   has_paper_trail ignore: [:updated_at], meta: { conference_id: :conference_id }
 
+  before_create :set_start
   ##
   # Returns the utm parameters formatted as url.
   #
@@ -25,7 +27,7 @@ class Campaign < ActiveRecord::Base
   # ====Returns
   # * +Fixnum+ -> visits
   def visits_count
-    Visit.where(get_parameters).where('started_at > ?', created_at).count
+    Ahoy::Visit.where(get_parameters).where('started_at > ?', created_at).count
   end
 
   ##
@@ -56,7 +58,7 @@ class Campaign < ActiveRecord::Base
   def events_by_name(event_name)
     parameters = get_parameters
     parameters['ahoy_events.name'] = event_name
-    Visit.joins(:ahoy_events).where(parameters).where('started_at > ?', created_at).count
+    Ahoy::Visit.joins(:ahoy_events).where(parameters).where('started_at > ?', created_at).count
   end
 
   ##
@@ -72,5 +74,9 @@ class Campaign < ActiveRecord::Base
     conditions[:utm_content] = self[:utm_content] unless self[:utm_content].blank?
     conditions[:utm_campaign] = self[:utm_campaign] unless self[:utm_campaign].blank?
     conditions
+  end
+
+  def set_start
+    self.started_at = Date.current
   end
 end

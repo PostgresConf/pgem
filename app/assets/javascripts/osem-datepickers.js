@@ -67,6 +67,13 @@ $(function () {
        format: "YYYY-MM-DD",
    });
 
+   $("#campaign-start-datepicker").datetimepicker({
+    pickTime: false,
+    useCurrent: false,
+    format: "YYYY-MM-DD",
+    });
+
+
    //   end_date_conference >= registration-period-Start_date >= Current_date
    //   registration-period-Start_date <= registration-period-End_date <= End_date (of conference)
    $("#registration-period-start-datepicker").datetimepicker({

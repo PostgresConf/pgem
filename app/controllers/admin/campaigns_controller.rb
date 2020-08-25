@@ -48,7 +48,14 @@ module Admin
     private
 
     def campaign_params
-      params.require(:campaign).permit(:name, :utm_source, :utm_medium, :utm_term, :utm_content, :utm_campaign, :target_ids, :conference_id)
+      params.require(:campaign).permit(:name, :utm_source, :utm_medium, :utm_term, :utm_content,
+        :utm_campaign, 
+        :conference_id,
+        :sponsor_id,
+        :description,
+        :started_at,
+        :target_ids => [],
+      )
     end
   end
 end
