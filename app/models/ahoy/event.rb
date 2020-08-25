@@ -1,10 +1,8 @@
-module Ahoy
-  class Event < ActiveRecord::Base
-    self.table_name = 'ahoy_events'
+class Ahoy::Event < ActiveRecord::Base
+  include Ahoy::QueryMethods
 
-    belongs_to :visit
-    belongs_to :user
+  self.table_name = "ahoy_events"
 
-    serialize :properties, JSON
-  end
+  belongs_to :visit
+  belongs_to :user
 end
