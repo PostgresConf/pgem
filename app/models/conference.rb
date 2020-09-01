@@ -88,7 +88,7 @@ class Conference < ActiveRecord::Base
   # This validation is needed since a conference with a start date greater than the end date is not possible
   validate :valid_date_range?
   validate :valid_times_range?
-  validate :schedule_ok?
+  validate :schedule_ok?, on: :update
 
   before_create :generate_guid
   before_create :add_color
