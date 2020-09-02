@@ -59,7 +59,7 @@
         - if can? :update, @conference
           %li{:class=> active_nav_li(admin_conference_sponsorship_info_path(@conference.short_title))}
             = link_to 'Sponsorship Information', admin_conference_sponsorship_info_path(@conference.short_title)
-        - if can? :update, @conference
+        - if can? :manage, @conference.conference_team_members.build
           %li{:class=> active_nav_li(admin_conference_conference_team_members_path(@conference.short_title))}
             = link_to 'Team Members', admin_conference_conference_team_members_path(@conference.short_title)
         - if can? :update, @conference.advantages.build
