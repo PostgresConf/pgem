@@ -46,7 +46,7 @@
             %td
               = user.name
             %td
-              = user.registrations.where(attended: true).count
+              = user.regcount
             %td
               - unless user.get_roles.blank?
                 = show_roles(user.get_roles.first(2))
