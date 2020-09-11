@@ -39,6 +39,10 @@ Osem::Application.routes.draw do
         patch :toggle_confirmation
       end
     end
+    namespace :reports do
+      get '/visits' => 'visits#index'
+      post '/visits' => 'visits#index'
+    end
     resources :conference_groups
     resources :sponsors
     resources :comments, only: [:index]

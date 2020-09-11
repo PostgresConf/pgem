@@ -74,6 +74,7 @@ $(function () {
     });
 
 
+
    //   end_date_conference >= registration-period-Start_date >= Current_date
    //   registration-period-Start_date <= registration-period-End_date <= End_date (of conference)
    $("#registration-period-start-datepicker").datetimepicker({
@@ -147,6 +148,23 @@ $(function () {
       pickTime: false,
       format: "YYYY-MM-DD"
   });
+
+
+$("#report-start-datepicker").datetimepicker({
+    pickTime: false,
+    useCurrent: false,
+    format: "YYYY-MM-DD",
+    // minDate : today,
+    // maxDate : $("#registration-period-start-datepicker").attr('end_date'),
+});
+
+$("#report-end-datepicker").datetimepicker({
+    pickTime: false,
+    useCurrent: false,
+    format: "YYYY-MM-DD",
+    // minDate: $("#registration-period-start-datepicker").attr('end_date'),
+    maxDate : today,
+});
 
   /* Appends the datetimepicker to new injected nested target fields. */
   $('a:contains("Add target")').click(function () {

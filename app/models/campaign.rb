@@ -48,19 +48,6 @@ class Campaign < ActiveRecord::Base
     events_by_name('Event submission')
   end
 
-  private
-
-  ##
-  # Helper method for submissions and registrations.
-  #
-  # ====Returns
-  # * +Fixnum+ -> registrations / submissions
-  def events_by_name(event_name)
-    parameters = get_parameters
-    parameters['ahoy_events.name'] = event_name
-    Ahoy::Visit.joins(:ahoy_events).where(parameters).where('started_at > ?', created_at).count
-  end
-
   ##
   # Helper method to get the parameters for queries.
   #
@@ -74,6 +61,19 @@ class Campaign < ActiveRecord::Base
     conditions[:utm_content] = self[:utm_content] unless self[:utm_content].blank?
     conditions[:utm_campaign] = self[:utm_campaign] unless self[:utm_campaign].blank?
     conditions
+  end
+
+  private
+
+  ##
+  # Helper method for submissions and registrations.
+  #
+  # ====Returns
+  # * +Fixnum+ -> registrations / submissions
+  def events_by_name(event_name)
+    parameters = get_parameters
+    parameters['ahoy_events.name'] = event_name
+    Ahoy::Visit.joins(:ahoy_events).where(parameters).where('started_at > ?', created_at).count
   end
 
   def set_start

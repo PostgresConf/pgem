@@ -20,7 +20,6 @@
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require cocoon
 //= require bootstrap
-//= require Chart
 //= require osem
 //= require osem-dashboard
 //= require ahoy
@@ -35,6 +34,9 @@
 //= require momentjs
 //= require leaflet
 //= require holderjs
+//= require chartkick
+//= require chartjs
+
 //= require bootstrap-datetimepicker
 //= require osem-datepickers
 //= require osem-datatables

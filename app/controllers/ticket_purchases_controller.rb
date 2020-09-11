@@ -30,6 +30,9 @@ class TicketPurchasesController < ApplicationController
         redirect_to new_conference_payment_path,
                     notice: 'Please pay here to get tickets.'
       elsif current_user.ticket_purchases.by_conference(@conference).paid.any?
+        # Trigger ahoy event
+        ahoy.track 'Ticket purchase', title: 'New free purchase'
+
         redirect_to complete_conference_tickets_path,
                     notice: 'You have free tickets for the conference.'
       else

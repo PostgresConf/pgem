@@ -45,6 +45,9 @@ class PaymentsController < ApplicationController
         @payment.status = 1
 
         if @payment.save
+          # Trigger ahoy event
+          ahoy.track 'Ticket purchase', title: 'New purchase'
+
           update_purchased_ticket_purchases
           Mailbot.purchase_confirmation_mail(@payment).deliver_later
           redirect_to complete_conference_tickets_path,

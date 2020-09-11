@@ -7,7 +7,7 @@
   .col-md-12
     .chart_data{ "data-chart"=>"#{y.to_json}", "data-conferences"=>"#{conferences.to_json}",
                         "data-deactive"=>"#{deactive_conferences.to_json}", "data-weeks"=>"#{x.to_json}",
-                        "data-active"=>"#{active_conferences.to_json}"}
+                        "data-active"=>"#{active_conferences.to_json}", "style"=>"height: 200px"}
       %canvas.line_chart{ :id => "line_chart_#{name}", "data-name"=>"#{name}" }
 .row
   .col-md-12

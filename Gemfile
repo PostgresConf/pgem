@@ -122,6 +122,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-markdown'
   gem 'rails-assets-to-markdown'
   gem 'rails-assets-markdown'
+  gem 'rails-assets-chartjs'
 end
 
 # as date picker
@@ -129,7 +130,10 @@ gem 'bootstrap3-datetimepicker-rails', '~> 3.0.2'
 gem 'jquery-datatables-rails', '~> 2.2.1'
 
 # for charts
-gem 'chart-js-rails'
+gem 'groupdate'
+gem 'hightop'
+gem "chartkick"
+gem 'rails_pdf'
 
 # for displaying maps
 gem 'leaflet-rails'

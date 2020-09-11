@@ -6,12 +6,6 @@ $(function() {
         }
         clearTimeout(t);
         t = setTimeout(function(){
-            $("canvas").each(function(i,el){
-                    $(el).attr({
-                        "width":$(el).parent().width()
-                    });
-            });
-
             $(".line_chart").each(function(){
                 draw_line_chart(animate, $(this));
             });
@@ -22,11 +16,11 @@ $(function() {
                 }
             });
 
-        }, 30);
+        }, 1);
     }
 
-    function draw_doughnut_chart(animation, $this){
-        var options = get_animation({}, animation);
+    function draw_doughnut_chart(animate, $this){
+        var animation = get_animation(animate);
         var tmp = $this.data('chart');
 
         if(jQuery.isEmptyObject(tmp)){
@@ -40,44 +34,85 @@ $(function() {
                 data.push(tmp[key]);
             }
 
-            var ctx = $this.get(0).getContext("2d");
-            new Chart(ctx).Doughnut(data, options);
+            let dataset = {
+                data: [],
+                backgroundColor: []
+            }
+            let labels = []
+
+            for(var key in tmp) {
+                dataset['data'].push(tmp[key]['value'])
+                dataset['backgroundColor'].push(tmp[key]['color'])
+                labels.push(key)
+            }
+
+            var config = {
+                type: 'doughnut',
+                data: {
+                    datasets: [
+                        dataset
+                    ],
+                    labels: labels,
+
+                },
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: animation
+                }
+            }
+            new Chart($this, config);
         }
     }
 
-    function get_animation(options, animation){
-        if (!animation){
-            options.animation = false;
-        } else {
-            options.animation = true;
-        }
-        return options;
+    function get_animation(animate){
+        return {duration: animate? 1000 : 0};
     }
 
-    function draw_line_chart(animation, $canvas){
-        var options = get_animation({}, animation);
+    function draw_line_chart(animate, $canvas){
+        var animation = get_animation(animate);
         var chart_data = create_dataset($canvas);
-        var weeks = $canvas.parent().data('weeks');
+        var weeks = $canvas.closest('.chart_data').data('weeks');
         var data = {
             labels : weeks,
             datasets : chart_data
         }
 
-        var ctx = $canvas.get(0).getContext("2d");
-        new Chart(ctx).Line(data, options);
+        var config = {
+            type: 'line',
+            data: {
+                labels : weeks,
+                datasets: chart_data
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: animation
+            }
+        }
+
+        new Chart($canvas, config);
     }
 
     function create_dataset($canvas){
         var selected = getSelectedConferences($canvas);
-        var chart_data = $canvas.parent().data('chart');
-        var conferences = $canvas.parent().data('conferences');
+        var chart_data = $canvas.closest('.chart_data').data('chart');
+        var conferences = $canvas.closest('.chart_data').data('conferences');
         var result = [];
 
         for(var i in conferences){
             if(selected.indexOf(conferences[i].short_title) >= 0){
                 var options = {};
-                options.fillColor = "rgba(255,255,255,0.0)";
-                options.strokeColor = conferences[i].color;
+                options.backgroundColor = "rgba(255,255,0,0.0)";
+                options.borderColor = conferences[i].color;
+                options.label = conferences[i].short_title;
+                options.pointBorderWidth = 3
                 options.data = chart_data[conferences[i].short_title];
                 if(options.data == null || options.data.length == 0){
                     options.data = [0];
@@ -102,7 +137,7 @@ $(function() {
                 }
             });
         }else{
-            var active = $canvas.parent().data('active');
+            var active = $canvas.closest('.chart_data').data('active');
             for(i in active){
                 selected.push(active[i].short_title)
             }

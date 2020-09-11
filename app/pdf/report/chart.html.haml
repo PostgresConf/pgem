@@ -1,0 +1,95 @@
+
+%script{:src =>"#{Rails.root}/app/pdf/shared/javascripts/chartkick.js"}
+%script{:src =>"#{Rails.root}/app/pdf/shared/javascripts/Chart.bundle.min.js"}
+
+%link{:rel => :stylesheet, :href => "#{Rails.root}/app/pdf/shared/stylesheets/bootstrap/bootstrap.min.css"}
+%link{:rel => :stylesheet, :href => "#{Rails.root}/app/pdf/shared/stylesheets/bootstrap/bootstrap.print.css"}
+%link{:rel => :stylesheet, :href => "#{Rails.root}/app/pdf/shared/stylesheets/font-awesome/style.css"}
+
+
+%br/
+%br/
+.container
+  .row
+    .col-sm-12.col-print-12
+      %h1.text-center
+        %strong  #{report_title}
+
+%br/
+%br/
+
+.container
+  .row
+    .col-md-12
+      .row
+        .col-sm-4.col-xs-4
+          .dashbox.text-center
+            %span.fa.fa-file-word.fa-5x
+            %span.fa.fa-5x
+              = submissions = scoped_events.where(name: 'Event submission').count
+            %p
+              %small
+                #{'Submission'.pluralize(submissions)}
+        .col-sm-4.col-xs-4
+          .dashbox.text-center
+            %span.fa.fa-check-square.fa-5x
+            %span.fa.fa-5x
+              = registrations = scoped_events.where(name: 'Registration').count
+            %p
+              %small
+                #{'Registration'.pluralize(registrations)}
+
+        .col-sm-4.col-xs-4
+          .dashbox.text-center
+            %span.fa.fa-credit-card.fa-5x
+            %span.fa.fa-5x
+              = purchases = scoped_events.where(name: 'Ticket purchase').count
+            %p
+              %small
+                #{'Ticket purchase'.pluralize(purchases)}
+
+%br/
+%br/
+
+.container
+  .row
+    .col-md-6.col-print-6
+      .card{:style => "height: 410px"}
+        .card-header Visitors by Country (top 5)
+        .card-body
+          #chartContainer
+            = pie_chart visits.top(:country, 5), adapter: "chartjs", width: "410px"
+
+    .col-md-6.col-print-6
+      .card{:style => "height: 410px"}
+        .card-header Visitors by UTM Source
+        .card-body
+          #chartContainer
+            = pie_chart visits.group(:utm_source).count, adapter: "chartjs", width: "410px"
+
+%br/
+
+.container
+  .row
+    .col-md-12.col-print-12
+      .card
+        .card-header Visitors Over Time
+        .card-body
+          #chartContainer
+            = line_chart visits.group_by_day(:started_at).count, adapter: "chartjs", width: "900px"
+
+%br/
+
+
+.container
+  .row
+    .col-md-12.col-print-12
+      .card
+        .card-header Events Over Time
+        .card-body
+          #chartContainer
+            - ahoy_events = Ahoy::Event.joins(:visit).where(visit: visits)
+            = line_chart ahoy_events.group(:name).group_by_day(:time).count, adapter: "chartjs", width: "900px"
+
+%br/
+

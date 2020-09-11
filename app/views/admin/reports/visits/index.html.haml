@@ -1,0 +1,112 @@
+.row
+  .col-md-11
+    .page-header
+      %h1
+        %span.fa.fa-bar-chart-o
+        = @report_title
+      %p.text-muted
+        Track where people come from
+.row
+  .col-md-8
+    = semantic_form_for('report', :url => admin_reports_visits_path, :method => :post) do |f|
+      = f.inputs name: 'Filter by conference campaign properties'  do
+        = f.input :campaign, label: 'Campaign', as: :select,
+          collection: options_for_select(Campaign.all.map {|campaign| ["#{campaign.name} (#{campaign.conference.short_title})", campaign.id]}, @campaign),
+          include_blank: true
+      = f.inputs name: 'Filter by UTM Parameters' do
+        .row.formreset
+          .col-md-6
+            = f.input :start_date, label: 'Start Date', :as => :string, :input_html => {value: @start_date, :id => "report-start-datepicker", :readonly => "readonly" }
+          .col-md-6
+            = f.input :end_date, label: 'End Date', :as => :string, :input_html => {value: @end_date, :id => "report-end-datepicker", :readonly => "readonly" }\
+        .row.formreset
+          .col-md-4
+            = f.input :utm_campaign, label: 'UTM Campaign', as: :select,
+              collection: options_for_select(@base_scope.pluck(:utm_campaign).uniq, @utm_campaign),
+          include_blank: false, input_html: { class: 'select-help-toggle', multiple: 'true' }
+          .col-md-4
+            = f.input :utm_source, label: 'UTM Source', as: :select,
+              collection: options_for_select(@base_scope.pluck(:utm_source).uniq, @utm_source),
+          include_blank: false, input_html: { class: 'select-help-toggle', multiple: 'true' }
+          .col-md-4
+            = f.input :utm_medium, label: 'UTM Medium', as: :select,
+              collection: options_for_select(@base_scope.pluck(:utm_medium).uniq, @utm_medium),
+          include_blank: false, input_html: { class: 'select-help-toggle', multiple: 'true' }
+
+      
+      .row
+        .col-md-6.col-md-offset-6.text-right
+          = f.action :submit, label: 'Generate Report', as: :button, button_html: { class: 'btn btn-primary' }
+          = f.action :submit, label: 'Export to PDF', as: :button, button_html: { class: 'btn btn-default', id: 'submit_pdf' }
+
+%span#report-container
+  .row
+    .col-md-8
+      .row
+        .col-sm-4.col-xs-4
+          .dashbox.text-center
+            %span.fa.fa-file-text.fa-lg
+            %span.fa.fa-lg
+              = @submissions = @scoped_events.where(name: 'Event submission').count
+            %p
+              %small
+                #{'Submission'.pluralize(@submissions)}
+        .col-sm-4.col-xs-4
+          .dashbox.text-center
+            %span.fa.fa-check-square.fa-lg
+            %span.fa.fa-lg
+              = @registrations = @scoped_events.where(name: 'Registration').count
+            %p
+              %small
+                #{'Registration'.pluralize(@registrations)}
+
+        .col-sm-4.col-xs-4
+          .dashbox.text-center
+            %span.fa.fa-credit-card.fa-lg
+            %span.fa.fa-lg
+              = @purchases = @scoped_events.where(name: 'Ticket purchase').count
+            %p
+              %small
+                #{'Ticket purchase'.pluralize(@purchase)}
+      .row
+        .col-md-12
+          .h3
+            Visits Over Time
+          = line_chart @visits.group_by_day(:started_at).count, adapter: "chartjs"
+      .row
+        .col-md-6
+          .h3
+            Visitors by Country (top 5)
+          = pie_chart @visits.top(:country, 5), adapter: "chartjs"
+
+        .col-md-6
+          .h3
+            Visitors by UTM Source
+          = pie_chart @visits.group(:utm_source).count, adapter: "chartjs"
+
+      .row
+        .col-md-12
+          .h3
+            Events Over Time
+          - @ahoy_events = Ahoy::Event.joins(:visit).where(visit: @visits)
+          = line_chart @ahoy_events.group(:name).group_by_day(:time).count
+
+
+:javascript
+
+  $(document).ready(function() {
+    $('#report_utm_campaign, #report_utm_source, #report_utm_medium').selectize({
+      plugins: ['remove_button'],
+      maxItems: 10
+    } );
+
+    $('.formreset').click(function(){
+      $('#report_campaign').val('')
+    })
+
+    $('#submit_pdf').click(function(){
+      debugger
+      $(this).append('<input type="hidden" name="as_pdf" value="true" /> ');
+      return true
+    })
+  });
