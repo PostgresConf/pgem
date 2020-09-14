@@ -3,7 +3,8 @@
     .col-md-12
       %h2.text-center
         Conference Highlights
-      - @conference.program.events.highlights.each_slice(2) do |slice|
+      -@highlights = @conference.program.events.highlights.sort { |a,b| a.time && b.time ? a.time <=> b.time : a.time ? -1 : 1 }
+      -@highlights.each_slice(2) do |slice|
         .row.row-centered
           - slice.each do |event|
             .col-md-6.col-centered.col-top.highlights
