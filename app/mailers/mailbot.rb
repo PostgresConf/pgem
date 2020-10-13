@@ -205,4 +205,16 @@ class Mailbot < ActionMailer::Base
          template_name: 'comment_template',
          subject: "New comment has been posted for #{@event.title}")
   end
+
+  def invitation_mail(invitation)
+    @event = invitation.event
+    @conference = @event.program.conference
+    @user = User.find_by_email(invitation.email)
+    @username = @user.present? ? @user.name : invitation.email
+    @invitation = invitation
+    mail(to: invitation.email,
+         from: @conference.contact.email,
+         template_name: 'speaker_invitation_template',
+         subject: "You have been invited as a speaker to #{@event.title}")
+  end
 end

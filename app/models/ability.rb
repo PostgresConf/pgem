@@ -102,6 +102,12 @@ class Ability
       event.program.cfp_open? && event.new_record?
     end
 
+    # invitations can be created only if the user has a submitter role for the existing event
+    # and if conferecen CfP is still open
+    can [:new, :create], SpeakerInvitation do |invitation|
+      invitation.event.submitter == user && invitation.event.id && invitation.event.program.cfp_open?
+    end
+
     can [:update, :show, :delete, :index], Event do |event|
       event.users.include?(user)
     end

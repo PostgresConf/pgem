@@ -16,6 +16,9 @@ class Event < ActiveRecord::Base
   has_one :submitter_event_user, -> { where(event_role: 'submitter') }, class_name: 'EventUser'
   has_one  :submitter, through: :submitter_event_user, source: :user
 
+  has_many :speaker_invitations
+  validates_length_of :speaker_invitations, maximum: 5
+
   has_many :involved, -> { distinct }, through: :event_users, source: :user
 
   has_many :ticket_purchases
@@ -224,6 +227,14 @@ class Event < ActiveRecord::Base
       result.add(speaker.name)
     end
     result.to_a.to_sentence
+  end
+
+  def invitations_left
+    5 - self.speaker_invitations.count
+  end
+
+  def pending_invitations
+    self.speaker_invitations.where.not(accepted: true)
   end
 
   ##

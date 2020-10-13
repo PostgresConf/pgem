@@ -6,9 +6,26 @@
 
     = f.input :subtitle, as: :string
 
-    = f.input :speakers, as: :select,
-      collection: options_for_select(@users.map {|user| ["#{user.name} (#{user.email})", user.id]}, @event.speakers.map(&:id)),
-      include_blank: false, label: 'Speakers', input_html: { class: 'select-help-toggle', multiple: 'true' }
+    - if (current_user.is_admin)
+      = f.input :speakers, as: :select,
+        collection: options_for_select(@users.map {|user| ["#{user.name} (#{user.email})", user.id]}, @event.speakers.map(&:id)),
+        include_blank: false, label: 'Speakers', input_html: { class: 'select-help-toggle', multiple: 'true' }
+    - if can? :create, @event.speaker_invitations.new
+      .form-group
+        - unless (current_user.is_admin)
+          %span.form_label
+            %label.control-label
+              Speakers
+        %div
+          = @event.speaker_names
+          - if @event.invitations_left > 0
+            %a{ href: '#', class: 'btn btn-xs btn-info btn-outline', data: { toggle: 'modal', target: "#invite-speaker_#{@event.id}"} }
+              = "Invite speakers (#{@event.invitations_left} invitations left)"
+        - if @event.pending_invitations.any?
+          %div
+            %strong
+              Pending Invitations:
+            #{@event.pending_invitations.pluck(:email).join(', ')}
 
     - if @program.tracks.any?
       = f.input :track_id, as: :select,
@@ -86,3 +103,19 @@
       maxItems: 10
     } )
   });
+
+
+.modal.fade{ id: "invite-speaker_#{@event.id}", 'role' => 'dialog', 'aria-hidden' => 'true' }
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h3
+          Invite another speaker
+      .modal-body
+        = semantic_form_for('invitation', url: invite_conference_program_proposal_path(@conference.short_title, @event.id)) do |f|
+          = f.input :email, :as => :email
+          %button{class: 'btn btn-primary'}
+            Invite
+          .pull-right
+            %button{class: 'btn btn-danger', 'data-dismiss'=> 'modal', 'aria-hidden'=>'true'}
+              Cancel

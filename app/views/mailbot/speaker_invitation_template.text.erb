@@ -1,0 +1,8 @@
+Dear <%= @username %>,
+
+You have been invited as a speaker for event <%= @event.title %> of <%= @conference.short_title %> .
+
+To accept this invitation, please go to <%=  h(conference_program_proposal_accept_invitation_url(@conference.short_title, @event, @invitation.token, only_path: false)) %>
+
+Best wishes,
+<%= @conference.title %> Team

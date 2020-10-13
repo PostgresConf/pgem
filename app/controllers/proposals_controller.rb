@@ -1,11 +1,12 @@
 class ProposalsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :new, :create]
+  before_action :load_invitation, only: :accept_invitation
   load_resource :conference, find_by: :short_title
   load_resource :program, through: :conference, singleton: true, except: :my_proposals
   load_and_authorize_resource :event, parent: false, through: :program, except: :my_proposals
   # We authorize manually in these actions
-  skip_authorize_resource :event, only: [:confirm, :restart, :withdraw, :comment, :vote]
-  skip_authorization_check :only => [:comment, :vote, :my_proposals]
+  skip_authorize_resource :event, only: [:confirm, :restart, :withdraw, :comment, :vote, :invite, :accept_invitation]
+  skip_authorization_check :only => [:comment, :vote, :my_proposals, :invite, :accept_invitation]
 
   def index
     @event = @program.events.new
@@ -188,6 +189,29 @@ class ProposalsController < ApplicationController
     end
   end
 
+  def invite
+    @invitation = @event.speaker_invitations.new(invitation_params)
+    authorize! :create, @invitation
+
+    if @invitation.save
+      redirect_to conference_program_proposals_path(conference_id: @conference.short_title),
+        notice: "Speaker invitation has been sent to #{@invitation.email}"
+    else
+      redirect_to conference_program_proposals_path(conference_id: @conference.short_title),
+        error: "Failed to invite #{@invitation.email}: #{@invitation.errors.full_messages.join(', ')}"
+    end
+  end
+
+  def accept_invitation
+    if @invitation.accept
+      redirect_to conference_program_proposals_path(conference_id: @conference.short_title),
+        notice: "You have been added as a speaker to #{@invitation.event.title}. Thank you!"
+    else
+      redirect_to conference_program_proposals_path(conference_id: @conference.short_title),
+        error: "Failed to accept invitation: #{@invitation.errors.full_messages.join(', ')}"
+    end
+  end
+
   def registrations; end
 
   def authenticate_user!
@@ -204,6 +228,10 @@ class ProposalsController < ApplicationController
                                   )
   end
 
+  def invitation_params
+    params.require(:invitation).permit(:email)
+  end
+
   def user_params
     params.require(:user).permit(:first_name, :last_name, :title, :affiliation, :mobile,
                                  :email, :password, :password_confirmation, :username)
@@ -211,6 +239,11 @@ class ProposalsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:commentable, :body, :user_id)
+  end
+
+  def load_invitation
+    @invitation = SpeakerInvitation.find_by_token(params[:token])
+    redirect_to root_path, alert: 'not found' unless @invitation
   end
 
 end

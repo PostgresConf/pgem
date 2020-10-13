@@ -200,6 +200,7 @@ Osem::Application.routes.draw do
       resources :proposals, except: :destroy do
         get 'commercials/render_commercial' => 'commercials#render_commercial'
         resources :commercials, only: [:create, :update, :destroy]
+        get 'accept_invitation/:token' => 'proposals#accept_invitation', as: :accept_invitation
         member do
           get :registrations
           patch '/withdraw' => 'proposals#withdraw'
@@ -207,6 +208,7 @@ Osem::Application.routes.draw do
           patch '/confirm' => 'proposals#confirm'
           patch '/restart' => 'proposals#restart'
           post :comment
+          post :invite
           get :vote
         end
       end
