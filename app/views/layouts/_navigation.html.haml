@@ -19,18 +19,19 @@
         %ul.nav.navbar-nav
           %li
             = link_to('Home', conference_path(@conference.short_title))
-          - if @conference.splashpage.include_program and @conference.program.schedule_public
-            %li
-              = link_to('Schedule', events_conference_schedule_path(@conference.short_title))
-          - if @conference.sponsorships.any? and @conference.splashpage.include_sponsors
-            %li
-              = link_to('Sponsors', conference_path(@conference.short_title, :anchor => "sponsors"))
-          - if @conference.program.cfp_open? and @conference.splashpage.include_cfp
-            %li
-              = link_to('Call For Papers', conference_path(@conference.short_title, :anchor => "callforpapers"))
-          - if @conference.venue and @conference.splashpage.include_venue
-            %li
-              = link_to('Venue', conference_path(@conference.short_title, :anchor => "venue"))
+          - if @conference.splashpage.present?
+            - if @conference.splashpage.include_program and @conference.program.schedule_public
+              %li
+                = link_to('Schedule', events_conference_schedule_path(@conference.short_title))
+            - if @conference.sponsorships.any? and @conference.splashpage.include_sponsors
+              %li
+                = link_to('Sponsors', conference_path(@conference.short_title, :anchor => "sponsors"))
+            - if @conference.program.cfp_open? and @conference.splashpage.include_cfp
+              %li
+                = link_to('Call For Papers', conference_path(@conference.short_title, :anchor => "callforpapers"))
+            - if @conference.venue and @conference.splashpage.include_venue
+              %li
+                = link_to('Venue', conference_path(@conference.short_title, :anchor => "venue"))
           - if @conference.tickets.any? and @conference.registration_open?
             %li
               = link_to('Register', conference_buytickets_path(@conference.short_title))
