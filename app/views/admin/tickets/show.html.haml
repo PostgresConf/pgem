@@ -17,6 +17,7 @@
         %th Name
         %th Quantity
         %th E-Mail
+        %th Title
         %th Affiliation
         %th Paid
       %tbody
@@ -30,6 +31,8 @@
               = buyer.ticket_purchases.where(ticket_id: @ticket.id).sum('quantity')
             %td
               = buyer.email
+            %td
+              = buyer.title
             %td
               = buyer.affiliation
             %td
