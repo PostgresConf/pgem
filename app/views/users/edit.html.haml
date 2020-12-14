@@ -10,6 +10,9 @@
         = f.input :last_name, as: :string, :required => true, :label => "Last Name"
         = f.input :nickname, as: :string, :label => "Twitter Handle"
         = f.input :mobile, :as => :phone, :label => "Phone Number"
+        = f.input :country, :as => :country, :include_blank => 'Please choose...', :label => "Country"
+        = f.input :state, :label => "State"
+        = f.input :city, :label => "City"
         = f.input :affiliation, as: :string, :required => true
         = f.input :title, as: :string, :required => true, :label => "Job Title", hint: 'This could be a company, a user group, or organization.'
 
@@ -24,6 +27,8 @@
         = f.input :biography, input_html: { rows: 5, data: { provide: 'markdown-editable' }, 'onkeyup' => "word_count(this, 'biography-count', 150)" },
           hint: markdown_hint
         You have used
+        %span
+          If you have any cerifications, please include them in your bio.
         %span#bio_length
           = @user.biography ? @user.biography.split.length : 0
         words.  Biographies are limited to 150 words.

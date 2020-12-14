@@ -51,6 +51,10 @@
                       = password_field_tag 'user[password]', nil, id: 'user_password_dd', placeholder: 'Password', class: 'form-control'
                     .form-group
                       = button_to 'Log In', main_app.new_user_session_path, class: 'btn register-btn-other uppercase bold'
+
+                    .form-group.text-center.font-weight-normal
+                      Don't have an account?
+                      = link_to 'Register', main_app.new_user_registration_path
                     .clearfix
                       %label.pull-left.checkbox-inline
                         = check_box_tag 'user[remember_me]'
