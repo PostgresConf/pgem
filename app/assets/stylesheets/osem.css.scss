@@ -460,3 +460,10 @@ p.comment-body {
 .flex-maxheight {
   height: 100%;
 }
+
+.pass {
+  padding-top: 10px;
+  .help-link {
+      display: block;
+  }
+}

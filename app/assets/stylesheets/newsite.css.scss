@@ -260,7 +260,12 @@ a:focus {
 }
 
 .pass {
-    margin: 10px 0;
+    .help-link {
+        display: block;
+        &:first-of-type{
+            margin-top: 10px;
+        }
+    }
 }
 
 .central-blocks,
