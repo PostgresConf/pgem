@@ -39,7 +39,6 @@ class Commercial < ActiveRecord::Base
         OEmbed::Providers::Vimeo,
         OEmbed::Providers::Slideshare,
         OEmbed::Providers::Flickr,
-        OEmbed::Providers::Instagram,
         speakerdeck
     )
   end
