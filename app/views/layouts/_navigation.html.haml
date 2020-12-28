@@ -102,12 +102,11 @@
                     %h6.text-center
                       or
                     = render 'devise/shared/openid_links'
-                  %p.text-right
-                    %br
-                    %a.small.btn.btn-xs.btn-default{"data-toggle" => "collapse", "data-target" =>  "#navbar-devise-help"}
+                  %div.dropdown-footer.clearfix
+                    %a.small.btn.btn-xs.btn-default.pull-right{"data-toggle" => "collapse", "data-target" =>  "#navbar-devise-help"}
                       Need Help?
-                    #navbar-devise-help.collapse
-                      = render 'devise/shared/links'
+                  #navbar-devise-help.collapse
+                    = render 'devise/shared/links'
                   %li.hidden-lg
                     = link_to('Sign In', new_user_session_path)
 

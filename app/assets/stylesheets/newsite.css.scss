@@ -903,11 +903,6 @@ a:focus {
         }
     }
 
-    .navbar-collapse {
-        max-height: 350px;
-        overflow-y: auto;
-    }
-
     .sign-in-form {
         max-height: 370px;
         overflow-y: scroll;
@@ -918,9 +913,8 @@ a:focus {
         }
     }
 
-    .sign-in-form>form>h2,
-    .sign-in-form>form>div.clearfix>label,
-    .sign-in-form>form>div.clearfix>a {
+    .sign-in-form,
+    .sign-in-form a {
         color: white;
     }
 
