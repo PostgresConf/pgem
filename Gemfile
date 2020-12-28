@@ -201,7 +201,7 @@ gem 'acts_as_list'
 gem 'bootstrap-switch-rails', '~> 3.0.0'
 
 # for parsing OEmbed data
-gem 'ruby-oembed'
+gem 'ruby-oembed', '~> 0.14.0'
 
 # for uploading images to the cloud
 gem 'cloudinary'
