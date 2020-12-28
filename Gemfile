@@ -34,6 +34,8 @@ gem 'rails-observers'
 # for tracking data changes
 gem 'paper_trail'
 
+gem 'better_tempfile'
+
 # for upload management
 gem 'carrierwave'
 gem 'mini_magick', '>= 4.9.4'
