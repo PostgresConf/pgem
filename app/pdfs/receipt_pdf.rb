@@ -23,7 +23,7 @@ class ReceiptPdf < InvoicePrinter::Document
       provider_name: conference.contact.name,
       provider_street: conference.contact.street1,
       provider_postcode: conference.contact.street2,
-      provider_extra_address_line: conference.contact.city + ', ' + conference.contact.state + ' ' + conference.contact.postal_code + ' ' + conference.contact.country,
+      provider_extra_address_line: "#{conference.contact.city}, #{conference.contact.state} #{conference.contact.postal_code} #{conference.contact.country}",
       purchaser_name: user.name,
       due_date: payment.created_at.strftime("%B %d, %Y"),
       total: ActionView::Base.new.humanized_money_with_symbol(payment.amount_as_money),

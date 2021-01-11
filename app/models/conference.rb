@@ -324,6 +324,7 @@ class Conference < ActiveRecord::Base
       difficulty_levels: difficulty_levels_set?,
       splashpage: splashpage && splashpage.public?,
       payment_method: payment_method_set?,
+      contact_email: contact_email_set?,
       tickets: tickets_set?
     }
 
@@ -913,13 +914,23 @@ class Conference < ActiveRecord::Base
   end
 
   ##
-  # Checks if there is a track.
+  # Checks if there is a payment method set.
   #
   # ====Returns
-  # * +True+ -> One track or more
-  # * +False+ -> No track
+  # * +True+ -> Payment method is set
+  # * +False+ -> No payment method
   def payment_method_set?
     payment_method.present?
+  end
+
+  ##
+  # Checks if the conference has a valid contact email to be used for outbound emails
+  #
+  # ====Returns
+  # * +True+ -> Email is set
+  # * +False+ -> No email
+  def contact_email_set?
+    contact.email.present?
   end
 
   ##

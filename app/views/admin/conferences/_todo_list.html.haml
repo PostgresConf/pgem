@@ -66,6 +66,12 @@
       = link_to 'Set up a Payment Method', admin_conference_payment_method_path(conference_progress['short_title'])
     - else
       Set up Payment Methods
+  %li{class: "list-group-item #{class_for_todo(conference_progress['contact_email'])}"}
+    %span{'class'=>icon_for_todo(conference_progress['contact_email'])}
+    - if can? :update, @conference
+      = link_to 'Set up a Contact Email', edit_admin_conference_contact_path(conference_progress['short_title'])
+    - else
+      Set up a Contact Email
   %li{class: "list-group-item #{class_for_todo(conference_progress['tickets'])}"}
     %span{'class'=>icon_for_todo(conference_progress['tickets'])}
     - if can? :update, @conference

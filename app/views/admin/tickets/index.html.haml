@@ -1,9 +1,20 @@
 .row
   .col-md-12
     .page-header
-      %h1 Tickets
+      %h1
+        Tickets
+        .pull-right
+          - if @conference.payment_method.present? && @conference.contact.email.present?
+            = link_to 'Add Ticket', new_admin_conference_ticket_path, class: 'btn btn-success pull-right'
+          - else
+            .btn-toolbar
+              - unless @conference.payment_method.present?
+                = link_to 'Set up a Payment Method First!', admin_conference_payment_method_path(@conference.short_title), class: 'btn btn-warning pull-right'
+              - unless @conference.contact.email.present?
+                = link_to 'Set up a Conference Email Address First!', edit_admin_conference_contact_path(@conference.short_title), class: 'btn btn-warning pull-right'
       %p.text-muted
         Tickets to get during registration
+
 - if @conference.tickets.any?
   .row
     .col-md-12
@@ -44,10 +55,3 @@
                   = link_to 'Delete', admin_conference_ticket_path(@conference.short_title, ticket.id),
                   method: :delete, class: 'btn btn-danger',
                   data: { confirm: "Do you really want to delete the Ticket for #{ticket.title}? Attention: All ticket purchases will be also deleted!" }
-.row
-  .col-md-12
-    - if @conference.payment_method.present?
-      = link_to 'Add Ticket', new_admin_conference_ticket_path, class: 'btn btn-success pull-right'
-    - else
-      = link_to 'Set up a Payment Method First!', admin_conference_payment_method_path(@conference.short_title), class: 'btn btn-warning pull-right'
-

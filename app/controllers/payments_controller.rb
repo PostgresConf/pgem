@@ -49,7 +49,7 @@ class PaymentsController < ApplicationController
           ahoy.track 'Ticket purchase', title: 'New purchase'
 
           update_purchased_ticket_purchases
-          Mailbot.purchase_confirmation_mail(@payment).deliver_later
+          Mailbot.purchase_confirmation_mail(@payment).deliver_later if @conference.contact.email.present?
           redirect_to complete_conference_tickets_path,
                      notice: 'Thanks! Your ticket is booked successfully.'
         end
@@ -142,7 +142,7 @@ class PaymentsController < ApplicationController
 
      if @payment.purchase && @payment.save
        update_purchased_ticket_purchases
-       Mailbot.purchase_confirmation_mail(@payment).deliver_later
+       Mailbot.purchase_confirmation_mail(@payment).deliver_later if @conference.contact.email.present?
        redirect_to complete_conference_tickets_path,
                    notice: 'Thanks! Your ticket is booked successfully.'
      else
@@ -208,19 +208,19 @@ class PaymentsController < ApplicationController
 
       flash[:error] = "Server error: " + err 
       render "new"
-   else
-     @payment = Payment.by_reference(ref)
-     @payment.status = 'success'
-     @payment.amount = amt
-     @payment.last4 = last4
-     @payment.authorization_code = auth_code
-     if @payment.save
-       update_purchased_ticket_purchases
-       Mailbot.purchase_confirmation_mail(@payment).deliver_later
-       redirect_to complete_conference_tickets_path,
-                notice: 'Thanks! Your ticket is booked successfully.'
-     end
-   end
+    else
+      @payment = Payment.by_reference(ref)
+      @payment.status = 'success'
+      @payment.amount = amt
+      @payment.last4 = last4
+      @payment.authorization_code = auth_code
+      if @payment.save
+        update_purchased_ticket_purchases
+        Mailbot.purchase_confirmation_mail(@payment).deliver_later if @conference.contact.email.present?
+        redirect_to complete_conference_tickets_path,
+                  notice: 'Thanks! Your ticket is booked successfully.'
+      end
+    end
 
   end
 
