@@ -6,21 +6,14 @@ if Gem::Version.new(Bundler::VERSION) < Gem::Version.new('1.8.4')
 end
 
 # as web framework
-gem 'rails', '~> 4.2.11.1'
+gem 'rails', '~> 4.2.11.3'
 
 gem 'braintree'
 gem 'gon', '~> 5.1.2'
-# enables serving assets in production and setting your logger to standard out
-# both of which are required to run an application on a twelve-factor provider
-# like heroku.com
-#gem 'rails_12factor', group: :production
 
 # respond_to methods have been extracted to the responders gem
 # http://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#responders
 gem 'responders', '~> 2.0'
-
-# as the database for Active Record
-#gem 'mysql2'
 
 # comment the mysql gem above if using Postgres
 gem 'pg'
@@ -34,12 +27,11 @@ gem 'rails-observers'
 # for tracking data changes
 gem 'paper_trail'
 
-gem 'better_tempfile'
-
 # for upload management
 gem 'carrierwave'
 gem 'mini_magick', '>= 4.9.4'
 gem 'carrierwave-bombshelter'
+gem 'better_tempfile'
 
 # for internationalizing
 gem 'rails-i18n', '~> 4.0.0'
@@ -49,7 +41,7 @@ gem 'devise',  '>= 4.7.1'
 gem 'devise_ichain_authenticatable'
 
 # for openID authentication
-gem 'omniauth'
+gem 'omniauth', '1.9.1'
 gem 'omniauth-facebook'
 gem 'omniauth-openid'
 gem 'omniauth-google-oauth2'
@@ -85,7 +77,7 @@ gem 'mini_racer'
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'autoprefixer-rails'
 gem 'formtastic-bootstrap'
-gem 'formtastic', '~> 3.1.1'
+gem 'formtastic', '~> 3.1.5'
 gem 'cocoon'
 # gem 'pdfjs_viewer-rails'#, :git => 'https://github.com/TinderBox/pdfjs_viewer-rails.git', :branch => 'pdfjs-1.5.188'
 
@@ -158,10 +150,9 @@ gem 'axlsx_rails'
 gem 'axlsx',
      git: 'https://github.com/randym/axlsx.git',
      ref: '776037c0fc799bb09da8c9ea47980bd3bf296874'
-gem 'rubyzip', '>= 1.2.2'            # Rubyzip before 1.2.1 has a directory traversal vulnerability: CVE-2017-5946
 
-# as error catcher
-gem 'hoptoad_notifier', '~> 2.3'
+# gem 'rubyzip', '>= 1.2.2'
+
 
 # to make links faster
 gem 'turbolinks'
@@ -173,8 +164,9 @@ gem 'active_model_serializers'
 gem 'font-awesome-rails'
 
 # for markdown
-gem 'redcarpet'
+gem 'redcarpet', '>= 3.5.1'
 
+# FIXME: do we really need an alternative JSON parser?
 gem 'yajl-ruby', '~> 1.2', '>= 1.2.1'
 
 # as rdoc generator
@@ -254,7 +246,7 @@ gem 'rest-client-logger'
 gem 'acts-as-taggable-on'
 
 # used by many dependencies, enforce reasonably fresh version
-gem "nokogiri", ">= 1.10.4"
+gem "nokogiri", ">= 1.11.0"
 
 #To make SOAP calls to the PayU API
 gem 'httpclient', '~> 2.8', '>= 2.8.3'
