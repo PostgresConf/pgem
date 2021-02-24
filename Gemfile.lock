@@ -454,7 +454,7 @@ GEM
       ast (~> 2.4.0)
     pbkdf2_password_hasher (0.2.0)
     pdf-core (0.4.0)
-    pg (0.20)
+    pg (0.20.0)
     phantomjs (2.1.1.0)
     piwik_analytics (1.0.2)
       actionpack
@@ -552,7 +552,7 @@ GEM
       loggability (~> 0.12)
       rdoc (~> 6.0)
       yajl-ruby (~> 1.3)
-    redcarpet (3.2.3)
+    redcarpet (3.5.1)
     referer-parser (0.3.0)
     refinerycms (3.0.6)
       refinerycms-core (= 3.0.6)
@@ -652,7 +652,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.4.0)
-    ruby-oembed (0.8.14)
+    ruby-oembed (0.14.1)
     ruby-openid (2.5.0)
     ruby-progressbar (1.10.0)
     rubyzip (1.2.2)
@@ -778,6 +778,7 @@ DEPENDENCIES
   axlsx!
   axlsx_rails
   better_errors
+  better_tempfile
   binding_of_caller
   bootstrap-sass (~> 3.4.1)
   bootstrap-social-rails
@@ -884,7 +885,7 @@ DEPENDENCIES
   rspec-activemodel-mocks
   rspec-rails
   rubocop
-  ruby-oembed
+  ruby-oembed (~> 0.14.0)
   rubyzip (>= 1.2.2)
   sass-rails (>= 4.0.2)
   sched (~> 0.1.13)
