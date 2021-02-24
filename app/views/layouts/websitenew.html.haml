@@ -6,7 +6,11 @@
     = render "/refinery/newheader"
     %section.central-blocks
       .jumbotron
-        %h1.text-center.uppercase.bold Postgres Conference
+        %h1.text-center.uppercase.bold
+          - if request.domain=='postgresworld.org'
+            PostgresWorld
+          - else
+            Postgres Conference
       .container-fluid
         .row
           - @meetups = Refinery::Meetups::Meetup.upcoming(10)
