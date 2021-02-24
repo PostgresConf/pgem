@@ -151,7 +151,8 @@ gem 'axlsx',
      git: 'https://github.com/randym/axlsx.git',
      ref: '776037c0fc799bb09da8c9ea47980bd3bf296874'
 
-# gem 'rubyzip', '>= 1.2.2'
+
+gem 'rubyzip', '>= 1.3.0'
 
 
 # to make links faster
