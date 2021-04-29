@@ -37,15 +37,16 @@ gem 'better_tempfile'
 gem 'rails-i18n', '~> 4.0.0'
 
 # as authentification framework
-gem 'devise',  '>= 4.7.1'
+gem 'devise',  '>= 4.8.0'
 gem 'devise_ichain_authenticatable'
 
 # for openID authentication
-gem 'omniauth', '1.9.1'
-gem 'omniauth-facebook'
-gem 'omniauth-openid'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-github'
+gem 'omniauth', '2.0.4'
+gem 'omniauth-facebook', '8.0.0'
+gem 'omniauth-openid', '2.0.1'
+gem 'omniauth-google-oauth2', '1.0.0'
+gem 'omniauth-github', '2.0.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
 # as authorization framework
 gem 'cancancan'
