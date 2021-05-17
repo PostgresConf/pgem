@@ -29,6 +29,7 @@ class Conference < ActiveRecord::Base
   has_many :physical_tickets, through: :ticket_purchases
   has_many :sponsorship_levels_benefits, through: :sponsorship_levels
   has_many :ticket_purchases, dependent: :destroy
+  has_many :physical_tickets, through: :ticket_purchases
   has_many :payments, dependent: :destroy
   has_many :supporters, through: :ticket_purchases, source: :user
   has_many :ticket_groups, -> { order('position ASC') }, dependent: :destroy
