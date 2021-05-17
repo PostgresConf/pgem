@@ -101,7 +101,31 @@ GIT
   specs:
     refinerycms-dynamicfields (3.0.0)
       nested_form
+<<<<<<< HEAD
       refinerycms-core (~> 4.1.0)
+=======
+<<<<<<< HEAD
+      refinerycms-core (~> 3.0.0)
+
+GIT
+  remote: https://github.com/refinery/refinerycms-blog
+  revision: 76ee576e31945dde56ccf45f3715ccf9af631573
+  branch: master
+  specs:
+    refinerycms-blog (3.0.1)
+      acts-as-taggable-on
+      filters_spam (~> 0.2)
+      friendly_id (~> 5.1.0)
+      globalize (>= 4.0.0, < 5.2)
+      jquery-ui-rails (~> 5.0.0)
+      rails_autolink (~> 1.1.3)
+      refinerycms-core (~> 3.0.0)
+      refinerycms-settings (~> 3.0.0)
+      seo_meta (~> 2.0.0.rc.1)
+=======
+      refinerycms-core (~> 4.1.0)
+>>>>>>> 4ff81a7 (updates dependencies)
+>>>>>>> eaa1495 (updates dependencies)
 
 GIT
   remote: https://github.com/refinery/refinerycms-search
@@ -132,6 +156,7 @@ GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
   specs:
+<<<<<<< HEAD
     actioncable (6.1.6)
       actionpack (= 6.1.6)
       activesupport (= 6.1.6)
@@ -180,10 +205,46 @@ GEM
       globalid (>= 0.3.6)
     activemodel (6.1.6)
       activesupport (= 6.1.6)
+=======
+    actioncable (5.2.6)
+      actionpack (= 5.2.6)
+      nio4r (~> 2.0)
+      websocket-driver (>= 0.6.1)
+    actionmailer (5.2.6)
+      actionpack (= 5.2.6)
+      actionview (= 5.2.6)
+      activejob (= 5.2.6)
+      mail (~> 2.5, >= 2.5.4)
+      rails-dom-testing (~> 2.0)
+    actionpack (5.2.6)
+      actionview (= 5.2.6)
+      activesupport (= 5.2.6)
+      rack (~> 2.0, >= 2.0.8)
+      rack-test (>= 0.6.3)
+      rails-dom-testing (~> 2.0)
+      rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    actionview (5.2.6)
+      activesupport (= 5.2.6)
+      builder (~> 3.1)
+      erubi (~> 1.4)
+      rails-dom-testing (~> 2.0)
+      rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_model_serializers (0.10.12)
+      actionpack (>= 4.1, < 6.2)
+      activemodel (>= 4.1, < 6.2)
+      case_transform (>= 0.2)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
+    activejob (5.2.6)
+      activesupport (= 5.2.6)
+      globalid (>= 0.3.6)
+    activemodel (5.2.6)
+      activesupport (= 5.2.6)
+>>>>>>> eaa1495 (updates dependencies)
     activemodel-serializers-xml (1.0.2)
       activemodel (> 5.x)
       activesupport (> 5.x)
       builder (~> 3.1)
+<<<<<<< HEAD
     activerecord (6.1.6)
       activemodel (= 6.1.6)
       activesupport (= 6.1.6)
@@ -202,6 +263,23 @@ GEM
       zeitwerk (~> 2.3)
     acts-as-taggable-on (9.0.1)
       activerecord (>= 6.0, < 7.1)
+=======
+    activerecord (5.2.6)
+      activemodel (= 5.2.6)
+      activesupport (= 5.2.6)
+      arel (>= 9.0)
+    activestorage (5.2.6)
+      actionpack (= 5.2.6)
+      activerecord (= 5.2.6)
+      marcel (~> 1.0.0)
+    activesupport (5.2.6)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 0.7, < 2)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
+    acts-as-taggable-on (7.0.0)
+      activerecord (>= 5.0, < 6.2)
+>>>>>>> eaa1495 (updates dependencies)
     acts_as_commentable_with_threading (2.0.1)
       activerecord (>= 4.0)
       activesupport (>= 4.0)
@@ -209,7 +287,11 @@ GEM
     acts_as_indexed (0.8.3)
     acts_as_list (1.0.4)
       activerecord (>= 4.2)
+<<<<<<< HEAD
     addressable (2.8.0)
+=======
+    addressable (2.7.0)
+>>>>>>> eaa1495 (updates dependencies)
       public_suffix (>= 2.0.2, < 5.0)
     ahoy_matey (2.2.1)
       addressable
@@ -224,6 +306,7 @@ GEM
     akami (1.3.1)
       gyoku (>= 0.4.0)
       nokogiri
+<<<<<<< HEAD
     ast (2.4.2)
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
@@ -232,6 +315,17 @@ GEM
     aws_cf_signer (0.1.3)
     babosa (1.0.4)
     bcrypt (3.1.18)
+=======
+    arel (9.0.0)
+    ast (2.4.2)
+    autoprefixer-rails (10.2.4.0)
+      execjs
+    awesome_nested_set (3.4.0)
+      activerecord (>= 4.0.0, < 7.0)
+    aws_cf_signer (0.1.3)
+    babosa (1.0.4)
+    bcrypt (3.1.16)
+>>>>>>> eaa1495 (updates dependencies)
     better_errors (2.9.1)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
@@ -248,6 +342,7 @@ GEM
     bootstrap-switch-rails (3.2.2)
     bootstrap3-datetimepicker-rails (4.17.47)
       momentjs-rails (>= 2.8.1)
+<<<<<<< HEAD
     braintree (4.7.0)
       builder (>= 3.2.4)
       rexml (>= 3.1.9)
@@ -258,13 +353,28 @@ GEM
     capybara (3.36.0)
       addressable
       matrix
+=======
+    braintree (3.4.0)
+      builder (>= 3.2.4)
+      libxml-ruby (>= 3.2.0)
+    browser (2.7.1)
+    builder (3.2.4)
+    byebug (11.1.3)
+    cancancan (3.2.1)
+    capybara (3.35.3)
+      addressable
+>>>>>>> eaa1495 (updates dependencies)
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+<<<<<<< HEAD
     carrierwave (2.2.2)
+=======
+    carrierwave (2.2.1)
+>>>>>>> eaa1495 (updates dependencies)
       activemodel (>= 5.0.0)
       activesupport (>= 5.0.0)
       addressable (~> 2.6)
@@ -278,7 +388,11 @@ GEM
       fastimage
     case_transform (0.2)
       activesupport
+<<<<<<< HEAD
     caxlsx (3.2.0)
+=======
+    caxlsx (3.1.0)
+>>>>>>> eaa1495 (updates dependencies)
       htmlentities (~> 4.3, >= 4.3.4)
       marcel (~> 1.0)
       nokogiri (~> 1.10, >= 1.10.4)
@@ -286,28 +400,50 @@ GEM
     caxlsx_rails (0.6.3)
       actionpack (>= 3.1)
       caxlsx (>= 3.0)
+<<<<<<< HEAD
     chartkick (4.1.3)
     chronic (0.10.2)
     chunky_png (1.4.0)
     cliver (0.3.2)
     cloudinary (1.23.0)
+=======
+    chartkick (3.4.2)
+    chronic (0.10.2)
+    chunky_png (1.4.0)
+    cliver (0.3.2)
+    cloudinary (1.20.0)
+>>>>>>> eaa1495 (updates dependencies)
       aws_cf_signer
       rest-client (>= 2.0.0)
     cocoon (1.2.15)
     coderay (1.1.3)
+<<<<<<< HEAD
     coffee-rails (5.0.0)
+=======
+    coffee-rails (4.2.2)
+>>>>>>> eaa1495 (updates dependencies)
       coffee-script (>= 2.2.0)
       railties (>= 5.2.0)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+<<<<<<< HEAD
     concurrent-ruby (1.1.10)
     countries (4.2.3)
       i18n_data (~> 0.16.0)
       sixarm_ruby_unaccent (~> 1.1)
     country_select (6.1.1)
       countries (~> 4.2)
+=======
+    concurrent-ruby (1.1.8)
+    countries (3.1.0)
+      i18n_data (~> 0.11.0)
+      sixarm_ruby_unaccent (~> 1.1)
+      unicode_utils (~> 1.4)
+    country_select (5.0.1)
+      countries (~> 3.0)
+>>>>>>> eaa1495 (updates dependencies)
       sort_alphabetical (~> 1.1)
     coveralls (0.8.23)
       json (>= 1.8, < 3)
@@ -319,17 +455,26 @@ GEM
       rexml
     crass (1.0.6)
     curb (0.9.11)
+<<<<<<< HEAD
     daemons (1.4.1)
     dante (0.2.0)
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
     database_cleaner-active_record (2.0.1)
+=======
+    daemons (1.4.0)
+    dante (0.2.0)
+    database_cleaner (2.0.1)
+      database_cleaner-active_record (~> 2.0.0)
+    database_cleaner-active_record (2.0.0)
+>>>>>>> eaa1495 (updates dependencies)
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
     debug_inspector (1.1.0)
     decorators (2.0.5)
       railties (>= 4.0.0, < 7)
+<<<<<<< HEAD
     delayed_job (4.1.10)
       activesupport (>= 3.0, < 8.0)
     delayed_job_active_record (4.1.7)
@@ -337,6 +482,15 @@ GEM
       delayed_job (>= 3.0, < 5)
     device_detector (1.0.7)
     devise (4.8.1)
+=======
+    delayed_job (4.1.9)
+      activesupport (>= 3.0, < 6.2)
+    delayed_job_active_record (4.1.6)
+      activerecord (>= 3.0, < 6.2)
+      delayed_job (>= 3.0, < 5)
+    device_detector (1.0.5)
+    devise (4.8.0)
+>>>>>>> eaa1495 (updates dependencies)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -344,15 +498,22 @@ GEM
       warden (~> 1.2.3)
     devise_ichain_authenticatable (0.3.2)
       devise (>= 2.2)
+<<<<<<< HEAD
     diff-lcs (1.5.0)
     diffy (3.4.0)
     docile (1.4.0)
+=======
+    diff-lcs (1.4.4)
+    diffy (3.4.0)
+    docile (1.3.5)
+>>>>>>> eaa1495 (updates dependencies)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.7.6)
     dotenv-rails (2.7.6)
       dotenv (= 2.7.6)
       railties (>= 3.2)
+<<<<<<< HEAD
     dragonfly (1.4.0)
       addressable (~> 2.3)
       multi_json (~> 1.0)
@@ -364,11 +525,29 @@ GEM
       actionmailer (>= 5.2, < 8)
       activesupport (>= 5.2, < 8)
     execjs (2.8.1)
+=======
+    dragonfly (1.3.0)
+      addressable (~> 2.3)
+      multi_json (~> 1.0)
+      rack (>= 1.3)
+    dragonfly-s3_data_store (1.3.0)
+      dragonfly (~> 1.0)
+      fog-aws
+    errbase (0.2.1)
+    erubi (1.10.0)
+    erubis (2.7.0)
+    exception_notification (4.4.3)
+      actionmailer (>= 4.0, < 7)
+      activesupport (>= 4.0, < 7)
+    excon (0.81.0)
+    execjs (2.7.0)
+>>>>>>> eaa1495 (updates dependencies)
     factory_girl (4.9.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.9.0)
       factory_girl (~> 4.9.0)
       railties (>= 3.0.0)
+<<<<<<< HEAD
     faker (2.21.0)
       i18n (>= 1.8.11, < 2)
     faraday (2.3.0)
@@ -386,6 +565,46 @@ GEM
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
     formatador (1.1.0)
+=======
+    faker (2.17.0)
+      i18n (>= 1.6, < 2)
+    faraday (1.4.1)
+      faraday-excon (~> 1.1)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.1)
+      multipart-post (>= 1.2, < 3)
+      ruby2_keywords (>= 0.0.4)
+    faraday-excon (1.1.0)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.1.0)
+    fastimage (2.2.3)
+    feedjira (3.1.2)
+      loofah (>= 2.3.1)
+      sax-machine (>= 1.0)
+    ffi (1.15.0)
+    filters_spam (0.5)
+    fog-aws (3.10.0)
+      fog-core (~> 2.1)
+      fog-json (~> 1.1)
+      fog-xml (~> 0.1)
+      ipaddress (~> 0.8)
+    fog-core (2.2.4)
+      builder
+      excon (~> 0.71)
+      formatador (~> 0.2)
+      mime-types
+    fog-json (1.2.0)
+      fog-core
+      multi_json (~> 1.10)
+    fog-xml (0.1.3)
+      fog-core
+      nokogiri (>= 1.5.11, < 2.0.0)
+    font-awesome-rails (4.7.0.7)
+      railties (>= 3.2, < 7)
+    font-awesome-sass (4.7.0)
+      sass (>= 3.2)
+    formatador (0.2.5)
+>>>>>>> eaa1495 (updates dependencies)
     formtastic (3.1.5)
       actionpack (>= 3.2.13)
     formtastic-bootstrap (3.1.1)
@@ -395,6 +614,7 @@ GEM
     friendly_id-mobility (0.5.5)
       friendly_id (>= 5.0.0, <= 5.4.0)
       mobility (>= 0.5.1, < 1.0)
+<<<<<<< HEAD
     geocoder (1.8.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -402,21 +622,36 @@ GEM
       activemodel (>= 4.2, < 7.0)
       activerecord (>= 4.2, < 7.0)
       request_store (~> 1.0)
+=======
+    geocoder (1.6.7)
+    globalid (0.4.2)
+      activesupport (>= 4.2.0)
+>>>>>>> eaa1495 (updates dependencies)
     gon (5.1.2)
       actionpack (>= 2.3.0)
       json
       multi_json
       request_store (>= 1.0.5)
     gravtastic (3.2.6)
+<<<<<<< HEAD
     groupdate (6.1.0)
       activesupport (>= 5.2)
     guard (2.18.0)
+=======
+    groupdate (5.2.2)
+      activesupport (>= 5)
+    guard (2.16.2)
+>>>>>>> eaa1495 (updates dependencies)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
       lumberjack (>= 1.0.12, < 2.0)
       nenv (~> 0.1)
       notiffany (~> 0.0)
+<<<<<<< HEAD
       pry (>= 0.13.0)
+=======
+      pry (>= 0.9.12)
+>>>>>>> eaa1495 (updates dependencies)
       shellany (~> 0.0)
       thor (>= 0.18.1)
     guard-rspec (4.2.10)
@@ -434,17 +669,28 @@ GEM
       haml (>= 4.0.6, < 6.0)
       html2haml (>= 1.0.1)
       railties (>= 5.1)
+<<<<<<< HEAD
     haml_lint (0.40.0)
+=======
+    haml_lint (0.37.0)
+>>>>>>> eaa1495 (updates dependencies)
       haml (>= 4.0, < 5.3)
       parallel (~> 1.10)
       rainbow
       rubocop (>= 0.50.0)
       sysexits (~> 1.1)
     hashdiff (1.0.1)
+<<<<<<< HEAD
     hashie (5.0.0)
     highline (2.0.3)
     hightop (0.3.0)
       activesupport (>= 5.2)
+=======
+    hashie (4.1.0)
+    highline (2.0.3)
+    hightop (0.2.4)
+      activesupport (>= 5)
+>>>>>>> eaa1495 (updates dependencies)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -452,6 +698,7 @@ GEM
       ruby_parser (~> 3.5)
     htmlentities (4.3.4)
     http-accept (1.7.0)
+<<<<<<< HEAD
     http-cookie (1.0.5)
       domain_name (~> 0.5)
     httpclient (2.8.3)
@@ -464,6 +711,19 @@ GEM
       ice_cube (~> 0.16)
     ice_cube (0.16.4)
     image_processing (1.12.2)
+=======
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
+    httpclient (2.8.3)
+    humanize (2.5.1)
+    i18n (1.8.10)
+      concurrent-ruby (~> 1.0)
+    i18n_data (0.11.0)
+    icalendar (2.7.1)
+      ice_cube (~> 0.16)
+    ice_cube (0.16.3)
+    image_processing (1.12.1)
+>>>>>>> eaa1495 (updates dependencies)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     inversion (1.3.1)
@@ -475,9 +735,15 @@ GEM
       json
       prawn
       prawn-layout
+<<<<<<< HEAD
     iso-639 (0.3.5)
     jquery-datatables-rails (3.4.0)
       actionpack (>= 3.1)
+=======
+    ipaddress (0.8.3)
+    iso-639 (0.3.5)
+    jquery-datatables-rails (2.2.3)
+>>>>>>> eaa1495 (updates dependencies)
       jquery-rails
       railties (>= 3.1)
       sass-rails
@@ -485,6 +751,7 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+<<<<<<< HEAD
     jquery-slick-rails (1.10.0)
       railties (>= 3.1)
     jquery-ui-rails (6.0.1)
@@ -494,10 +761,22 @@ GEM
       addressable (>= 2.8)
     jsonapi-renderer (0.2.2)
     jwt (2.3.0)
+=======
+    jquery-slick-rails (1.9.0)
+      railties (>= 3.1)
+    jquery-ui-rails (6.0.1)
+      railties (>= 3.2.16)
+    json (2.5.1)
+    json-schema (2.8.1)
+      addressable (>= 2.4)
+    jsonapi-renderer (0.2.2)
+    jwt (2.2.3)
+>>>>>>> eaa1495 (updates dependencies)
     launchy (2.5.0)
       addressable (~> 2.7)
     leaflet-rails (1.7.0)
       rails (>= 4.2.0)
+<<<<<<< HEAD
     letter_opener (1.8.1)
       launchy (>= 2.2, < 3)
     letter_opener_web (1.4.1)
@@ -505,6 +784,17 @@ GEM
       letter_opener (~> 1.0)
       railties (>= 3.2)
     listen (3.7.1)
+=======
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
+    letter_opener_web (1.4.0)
+      actionmailer (>= 3.2)
+      letter_opener (~> 1.0)
+      railties (>= 3.2)
+    libv8-node (15.14.0.1)
+    libxml-ruby (3.2.1)
+    listen (3.5.1)
+>>>>>>> eaa1495 (updates dependencies)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loggability (0.18.2)
@@ -516,6 +806,7 @@ GEM
     lumberjack (1.2.8)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
+<<<<<<< HEAD
     marcel (1.0.2)
     matrix (0.4.2)
     maxminddb (0.1.22)
@@ -552,12 +843,56 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.6)
       mini_portile2 (~> 2.8.0)
+=======
+    marcel (1.0.1)
+    method_source (1.0.0)
+    mime-types (3.3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2021.0225)
+    mina (1.2.3)
+      open4 (~> 1.3.4)
+      rake
+    mini_magick (4.11.0)
+    mini_mime (1.1.0)
+    mini_portile2 (2.5.1)
+    mini_racer (0.4.0)
+      libv8-node (~> 15.14.0.0)
+    minitest (5.14.4)
+    mobility (0.8.13)
+      i18n (>= 0.6.10, < 2)
+      request_store (~> 1.0)
+    momentjs-rails (2.20.1)
+      railties (>= 3.1)
+    monetize (1.9.4)
+      money (~> 6.12)
+    money (6.13.8)
+      i18n (>= 0.6.4, <= 2)
+    money-rails (1.14.0)
+      activesupport (>= 3.0)
+      monetize (~> 1.9.0)
+      money (~> 6.13.2)
+      railties (>= 3.0)
+    multi_json (1.15.0)
+    multi_xml (0.6.0)
+    multipart-post (2.1.1)
+    nenv (0.3.0)
+    nested_form (0.3.2)
+    netrc (0.11.0)
+    nio4r (2.5.7)
+    nokogiri (1.11.3)
+      mini_portile2 (~> 2.5.0)
+>>>>>>> eaa1495 (updates dependencies)
       racc (~> 1.4)
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
+<<<<<<< HEAD
     oauth2 (1.4.9)
       faraday (>= 0.17.3, < 3.0)
+=======
+    oauth2 (1.4.7)
+      faraday (>= 0.8, < 2.0)
+>>>>>>> eaa1495 (updates dependencies)
       jwt (>= 1.0, < 3.0)
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
@@ -587,6 +922,7 @@ GEM
       omniauth (~> 2.0)
     open4 (1.3.4)
     orm_adapter (0.5.0)
+<<<<<<< HEAD
     paper_trail (12.3.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
@@ -596,6 +932,17 @@ GEM
     pbkdf2_password_hasher (0.2.0)
     pdf-core (0.4.0)
     pg (1.3.5)
+=======
+    paper_trail (12.0.0)
+      activerecord (>= 5.2)
+      request_store (~> 1.1)
+    parallel (1.20.1)
+    parser (3.0.1.1)
+      ast (~> 2.4.1)
+    pbkdf2_password_hasher (0.2.0)
+    pdf-core (0.4.0)
+    pg (1.2.3)
+>>>>>>> eaa1495 (updates dependencies)
     phantomjs (2.1.1.0)
     piwik_analytics (1.0.2)
       actionpack
@@ -618,12 +965,17 @@ GEM
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
+<<<<<<< HEAD
     psych (4.0.4)
       stringio
     public_suffix (4.0.7)
     puma (5.6.4)
       nio4r (~> 2.0)
     racc (1.6.0)
+=======
+    public_suffix (4.0.6)
+    racc (1.5.2)
+>>>>>>> eaa1495 (updates dependencies)
     rack (2.2.3)
     rack-openid (1.4.2)
       rack (>= 1.1.0)
@@ -632,6 +984,7 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
+<<<<<<< HEAD
     rails (6.1.6)
       actioncable (= 6.1.6)
       actionmailbox (= 6.1.6)
@@ -646,6 +999,20 @@ GEM
       activesupport (= 6.1.6)
       bundler (>= 1.15.0)
       railties (= 6.1.6)
+=======
+    rails (5.2.6)
+      actioncable (= 5.2.6)
+      actionmailer (= 5.2.6)
+      actionpack (= 5.2.6)
+      actionview (= 5.2.6)
+      activejob (= 5.2.6)
+      activemodel (= 5.2.6)
+      activerecord (= 5.2.6)
+      activestorage (= 5.2.6)
+      activesupport (= 5.2.6)
+      bundler (>= 1.3.0)
+      railties (= 5.2.6)
+>>>>>>> eaa1495 (updates dependencies)
       sprockets-rails (>= 2.0.0)
     rails-assets-bootstrap (3.4.1)
       rails-assets-jquery (>= 1.9.1, < 4)
@@ -654,11 +1021,19 @@ GEM
     rails-assets-chartjs (3.8.0)
     rails-assets-date.format (1.2.3)
     rails-assets-holderjs (2.9.6)
+<<<<<<< HEAD
     rails-assets-jquery (3.6.0)
     rails-assets-jquery-smooth-scroll (2.2.0)
       rails-assets-jquery (>= 1.7.0)
     rails-assets-markdown (0.5.0)
     rails-assets-momentjs (2.29.3)
+=======
+    rails-assets-jquery (3.4.1)
+    rails-assets-jquery-smooth-scroll (2.2.0)
+      rails-assets-jquery (>= 1.7.0)
+    rails-assets-markdown (0.5.0)
+    rails-assets-momentjs (2.22.2)
+>>>>>>> eaa1495 (updates dependencies)
     rails-assets-spectrum (1.8.0)
       rails-assets-jquery (>= 1.7.2)
     rails-assets-tinycolor (1.4.1)
@@ -668,11 +1043,19 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
+<<<<<<< HEAD
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
     rails-i18n (6.0.0)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 7)
+=======
+    rails-html-sanitizer (1.3.0)
+      loofah (~> 2.3)
+    rails-i18n (5.1.3)
+      i18n (>= 0.7, < 2)
+      railties (>= 5.0, < 6)
+>>>>>>> eaa1495 (updates dependencies)
     rails-observers (0.1.5)
       activemodel (>= 4.0)
     rails_autolink (1.1.6)
@@ -680,6 +1063,7 @@ GEM
     rails_pdf (0.2.1)
       better_tempfile
       rails (>= 4.2.0)
+<<<<<<< HEAD
     railties (6.1.6)
       actionpack (= 6.1.6)
       activesupport (= 6.1.6)
@@ -693,6 +1077,20 @@ GEM
       ffi (~> 1.0)
     rdoc (6.4.0)
       psych (>= 4.0.0)
+=======
+    railties (5.2.6)
+      actionpack (= 5.2.6)
+      activesupport (= 5.2.6)
+      method_source
+      rake (>= 0.8.7)
+      thor (>= 0.19.0, < 2.0)
+    rainbow (3.0.0)
+    rake (13.0.3)
+    rb-fsevent (0.10.4)
+    rb-inotify (0.10.1)
+      ffi (~> 1.0)
+    rdoc (6.3.1)
+>>>>>>> eaa1495 (updates dependencies)
     rdoc-generator-fivefish (0.4.0)
       inversion (~> 1.1)
       loggability (~> 0.12)
@@ -702,6 +1100,12 @@ GEM
       json
     redcarpet (3.5.1)
     referer-parser (0.3.0)
+<<<<<<< HEAD
+=======
+    refinerycms-dragonfly (1.0.1)
+      dragonfly (~> 1.1)
+      dragonfly-s3_data_store
+>>>>>>> eaa1495 (updates dependencies)
     refinerycms-i18n (5.0.1)
       mobility (~> 0.8.8)
       rails-i18n (>= 5.0)
@@ -709,8 +1113,13 @@ GEM
     refinerycms-settings (4.0.1)
       friendly_id (>= 5.1.0, < 5.3)
       refinerycms-core (~> 4.0, >= 4.0.0)
+<<<<<<< HEAD
     regexp_parser (2.4.0)
     request_store (1.5.1)
+=======
+    regexp_parser (2.1.1)
+    request_store (1.5.0)
+>>>>>>> eaa1495 (updates dependencies)
       rack (>= 1.4)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -722,6 +1131,7 @@ GEM
       netrc (~> 0.8)
     rexml (3.2.5)
     rolify (6.0.0)
+<<<<<<< HEAD
     routing-filter (0.7.0)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
@@ -733,10 +1143,24 @@ GEM
       rspec-core (~> 3.11.0)
       rspec-expectations (~> 3.11.0)
       rspec-mocks (~> 3.11.0)
+=======
+    routing-filter (0.6.3)
+      actionpack (>= 4.2)
+      activesupport (>= 4.2)
+    rqrcode (2.0.0)
+      chunky_png (~> 1.0)
+      rqrcode_core (~> 1.0)
+    rqrcode_core (1.0.0)
+    rspec (3.10.0)
+      rspec-core (~> 3.10.0)
+      rspec-expectations (~> 3.10.0)
+      rspec-mocks (~> 3.10.0)
+>>>>>>> eaa1495 (updates dependencies)
     rspec-activemodel-mocks (1.1.0)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       rspec-mocks (>= 2.99, < 4.0)
+<<<<<<< HEAD
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
     rspec-expectations (3.11.0)
@@ -746,6 +1170,17 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
     rspec-rails (5.1.2)
+=======
+    rspec-core (3.10.1)
+      rspec-support (~> 3.10.0)
+    rspec-expectations (3.10.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-mocks (3.10.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-rails (5.0.1)
+>>>>>>> eaa1495 (updates dependencies)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       railties (>= 5.2)
@@ -753,6 +1188,7 @@ GEM
       rspec-expectations (~> 3.10)
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
+<<<<<<< HEAD
     rspec-support (3.11.0)
     rubocop (1.30.0)
       parallel (~> 1.10)
@@ -776,6 +1212,32 @@ GEM
     ruby_parser (3.19.1)
       sexp_processor (~> 4.16)
     rubyzip (2.3.2)
+=======
+    rspec-support (3.10.2)
+    rubocop (1.14.0)
+      parallel (~> 1.10)
+      parser (>= 3.0.0.0)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml
+      rubocop-ast (>= 1.5.0, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.5.0)
+      parser (>= 3.0.1.1)
+    rubocop-rspec (2.3.0)
+      rubocop (~> 1.0)
+      rubocop-ast (>= 1.1.0)
+    ruby-oembed (0.14.1)
+    ruby-openid (2.9.2)
+    ruby-progressbar (1.11.0)
+    ruby-vips (2.1.2)
+      ffi (~> 1.12)
+    ruby2_keywords (0.0.4)
+    ruby_parser (3.15.1)
+      sexp_processor (~> 4.9)
+    rubyzip (2.3.0)
+>>>>>>> eaa1495 (updates dependencies)
     safely_block (0.3.0)
       errbase (>= 0.1.1)
     sass (3.7.4)
@@ -798,6 +1260,7 @@ GEM
       activerecord (>= 4)
       activesupport (>= 4)
     selectize-rails (0.12.6)
+<<<<<<< HEAD
     seo_meta (3.1.0)
       railties (>= 5.0.0)
     sexp_processor (4.16.1)
@@ -805,6 +1268,15 @@ GEM
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
     simple_calendar (2.4.3)
+=======
+    seo_meta (3.0.0)
+      railties (>= 5.0.0)
+    sexp_processor (4.15.2)
+    shellany (0.0.1)
+    shoulda-matchers (4.5.1)
+      activesupport (>= 4.2.0)
+    simple_calendar (2.4.2)
+>>>>>>> eaa1495 (updates dependencies)
       rails (>= 3.0)
     simple_po_parser (1.1.6)
     simplecov (0.16.1)
@@ -817,7 +1289,11 @@ GEM
       unicode_utils (>= 1.2.2)
     speakingurl-rails (8.0.2)
       railties (>= 3.1)
+<<<<<<< HEAD
     spring (3.1.1)
+=======
+    spring (2.1.1)
+>>>>>>> eaa1495 (updates dependencies)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
     sprockets (3.7.2)
@@ -829,8 +1305,12 @@ GEM
       sprockets (>= 3.0.0)
     ssrf_filter (1.0.7)
     stringex (2.8.5)
+<<<<<<< HEAD
     stringio (3.0.2)
     stripe (5.55.0)
+=======
+    stripe (5.32.1)
+>>>>>>> eaa1495 (updates dependencies)
     stripe-ruby-mock (3.0.1)
       dante (>= 0.2.0)
       multi_json (~> 1.0)
@@ -840,30 +1320,54 @@ GEM
     temple (0.8.2)
     term-ansicolor (1.7.1)
       tins (~> 1.0)
+<<<<<<< HEAD
     thor (1.2.1)
     tilt (2.0.10)
     timecop (0.9.5)
     tins (1.31.1)
       sync
     transitions (1.3.0)
+=======
+    thor (1.1.0)
+    thread_safe (0.3.6)
+    tilt (2.0.10)
+    timecop (0.9.4)
+    tins (1.28.0)
+      sync
+    transitions (1.2.1)
+>>>>>>> eaa1495 (updates dependencies)
     trollop (2.9.10)
     truncate_html (0.9.3)
     ttfunk (1.4.0)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
+<<<<<<< HEAD
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+=======
+    tzinfo (1.2.9)
+      thread_safe (~> 0.1)
+>>>>>>> eaa1495 (updates dependencies)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
+<<<<<<< HEAD
     unf_ext (0.0.8.2)
     unicode-display_width (2.1.0)
     unicode_utils (1.4.0)
     unobtrusive_flash (3.3.1)
       railties
     user_agent_parser (2.11.0)
+=======
+    unf_ext (0.0.7.7)
+    unicode-display_width (2.0.0)
+    unicode_utils (1.4.0)
+    unobtrusive_flash (3.3.1)
+      railties
+    user_agent_parser (2.7.0)
+>>>>>>> eaa1495 (updates dependencies)
     uuidtools (2.2.0)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -872,21 +1376,37 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+<<<<<<< HEAD
     webmock (3.14.0)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
     websocket-driver (0.7.5)
+=======
+    webmock (3.12.2)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
+    websocket-driver (0.7.3)
+>>>>>>> eaa1495 (updates dependencies)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     whenever (1.0.0)
       chronic (>= 0.6.3)
+<<<<<<< HEAD
     will_paginate (3.3.1)
+=======
+    will_paginate (3.3.0)
+>>>>>>> eaa1495 (updates dependencies)
     will_paginate-bootstrap (1.0.2)
       will_paginate (>= 3.0.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+<<<<<<< HEAD
     yajl-ruby (1.4.2)
+=======
+    yajl-ruby (1.4.1)
+>>>>>>> eaa1495 (updates dependencies)
     zeitwerk (2.5.4)
     zilch-authorisation (0.0.1)
 
@@ -977,8 +1497,13 @@ DEPENDENCIES
   prawn (~> 1.3.0)
   prawn-qrcode (~> 0.2.2.1)
   prawn_rails
+<<<<<<< HEAD
   puma
   rails (~> 6.1.6)
+=======
+  questionnaire_engine!
+  rails (~> 5.2)
+>>>>>>> eaa1495 (updates dependencies)
   rails-assets-bootstrap-markdown!
   rails-assets-chartjs!
   rails-assets-date.format!
@@ -992,7 +1517,11 @@ DEPENDENCIES
   rails-assets-to-markdown (~> 3)!
   rails-assets-trianglify!
   rails-assets-waypoints!
+<<<<<<< HEAD
   rails-i18n (~> 6.0)
+=======
+  rails-i18n (~> 5.1)
+>>>>>>> eaa1495 (updates dependencies)
   rails-observers
   rails_pdf
   rdoc-generator-fivefish (~> 0.4.0)
@@ -1007,7 +1536,10 @@ DEPENDENCIES
   refinerycms-search!
   refinerycms-sponsors!
   refinerycms-team_members!
+<<<<<<< HEAD
   refinerycms-tinymce!
+=======
+>>>>>>> eaa1495 (updates dependencies)
   responders (~> 3.0)
   rolify
   rqrcode
@@ -1017,7 +1549,11 @@ DEPENDENCIES
   rubocop-rspec
   ruby-oembed (~> 0.14.0)
   rubyzip (>= 1.3.0)
+<<<<<<< HEAD
   sassc
+=======
+  sass-rails (= 5.0.8)
+>>>>>>> eaa1495 (updates dependencies)
   sched (~> 0.1.13)
   seed_dump
   selectize-rails
@@ -1026,7 +1562,10 @@ DEPENDENCIES
   spring-commands-rspec
   stripe
   stripe-ruby-mock
+<<<<<<< HEAD
   survey!
+=======
+>>>>>>> eaa1495 (updates dependencies)
   timecop
   transitions
   turbolinks
