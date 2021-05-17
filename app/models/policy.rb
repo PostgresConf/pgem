@@ -5,7 +5,7 @@ class Policy < ActiveRecord::Base
 
   def code
     if title
-      title.parameterize('_')
+      title.parameterize(separator: '_')
     end
   end
 end
