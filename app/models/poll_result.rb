@@ -1,5 +1,5 @@
 class PollResult < ActiveRecord::Base
-  belongs_to :survey_question, :class_name => Survey::Question
+  belongs_to :survey_question, :class_name => 'Survey::Question'
 
   delegate :text, to: :survey_question
 
