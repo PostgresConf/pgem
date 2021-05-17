@@ -2,7 +2,7 @@ module Refinery
   module Sponsors
     module Admin
       class SponsorsController < ::Refinery::AdminController
-        before_filter :find_all_sponsorship_levels
+        before_action :find_all_sponsorship_levels
         crudify :'refinery/sponsors/sponsor',
                 :title_attribute => 'name'
 
