@@ -51,8 +51,8 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   has_many :event_users, dependent: :destroy
-  has_many :events, -> { uniq }, through: :event_users
-  has_many :presented_events, -> { joins(:event_users).where(event_users: {event_role: 'speaker'}).uniq }, through: :event_users, source: :event
+  has_many :events, -> { distinct }, through: :event_users
+  has_many :presented_events, -> { joins(:event_users).where(event_users: {event_role: 'speaker'}).distinct }, through: :event_users, source: :event
   has_many :registrations, dependent: :destroy
   has_many :events_registrations, through: :registrations
   has_many :ticket_purchases, dependent: :destroy
