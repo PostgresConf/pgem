@@ -7,7 +7,7 @@ In particular, this community seeks the following types of contributions:
 * ideas: participate in an issues thread or start your own to have your voice heard.
 * copy editing: fix typos, clarify language, and generally improve the quality of the content of OSEM
 
-### Runing OSEM for development
+### Running OSEM for development
 We are using [Vagrant](https://www.vagrantup.com/) to create our development environments.
 
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html) and [VirtualBox](https://www.virtualbox.org/wiki/Downloads). Both tools support Linux, MacOS and Windows.
