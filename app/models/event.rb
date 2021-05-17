@@ -46,7 +46,7 @@ class Event < ActiveRecord::Base
   validate :abstract_limit
   validate :before_end_of_conference, on: :create
   validates :title, presence: true
-  validates :abstract, presence: true, unless: "event_type.internal_event"
+  validates :abstract, presence: true, unless: ->  { event_type.internal_event }
   validates :event_type, presence: true
   validates :program, presence: true
   validates :speakers, presence: true
