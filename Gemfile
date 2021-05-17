@@ -6,14 +6,14 @@ if Gem::Version.new(Bundler::VERSION) < Gem::Version.new('1.8.4')
 end
 
 # as web framework
-gem 'rails', '~> 4.2.11.3'
+gem 'rails', '~> 5.2'
 
 gem 'braintree'
 gem 'gon', '~> 5.1.2'
 
 # respond_to methods have been extracted to the responders gem
 # http://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#responders
-gem 'responders', '~> 2.0'
+gem 'responders', '~> 3.0'
 
 # comment the mysql gem above if using Postgres
 gem 'pg'
@@ -34,7 +34,7 @@ gem 'carrierwave-bombshelter'
 gem 'better_tempfile'
 
 # for internationalizing
-gem 'rails-i18n', '~> 4.0.0'
+gem 'rails-i18n', '~> 5.1'
 
 # as authentification framework
 gem 'devise',  '>= 4.8.0'
@@ -63,14 +63,14 @@ gem 'unobtrusive_flash', '>=3'
 gem 'transitions', :require => %w( transitions active_record/transitions )
 
 # for comments
-gem 'awesome_nested_set', '~> 3.0.0'
+gem 'awesome_nested_set'#, '~> 3.0.0'
 gem 'acts_as_commentable_with_threading'
 
 # as templating language
 gem 'haml-rails'
 
 # for stylesheets
-gem 'sass-rails', '>= 4.0.2'
+gem 'sass-rails', '5.0.8'
 
 # as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -85,8 +85,8 @@ gem 'cocoon'
 # gem 'pdfjs_viewer-rails'#, :git => 'https://github.com/TinderBox/pdfjs_viewer-rails.git', :branch => 'pdfjs-1.5.188'
 
 # as the JavaScript library
-gem 'jquery-rails'
-gem 'jquery-ui-rails', '~> 5.0.0'
+gem 'jquery-rails', '~> 4.3.5'
+gem 'jquery-ui-rails', '~> 6.0.1'
 
 # for languages validation
 gem 'iso-639'
@@ -118,17 +118,16 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-waypoints'
   # for markdown editors
   gem 'rails-assets-bootstrap-markdown'
-  gem 'rails-assets-to-markdown'
   gem 'rails-assets-markdown'
+  gem 'rails-assets-to-markdown', '~> 3'
   gem 'rails-assets-chartjs'
 end
 
 # as date picker
-gem 'bootstrap3-datetimepicker-rails', '~> 3.0.2'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 
-
-gem 'jquery-datatables-rails', '~> 2.2.1'
 # datatables server-side processing
+gem 'jquery-datatables-rails'
 gem 'ajax-datatables-rails'
 
 # for charts
@@ -201,7 +200,7 @@ gem 'money-rails'
 gem 'acts_as_list'
 
 # for switch checkboxes
-gem 'bootstrap-switch-rails', '~> 3.0.0'
+gem 'bootstrap-switch-rails', '~> 3.2.2'
 
 # for parsing OEmbed data
 gem 'ruby-oembed', '~> 0.14.0'
@@ -231,7 +230,7 @@ gem 'schema_dot_org', git: 'https://github.com/eug3nix/schema-dot-org', branch: 
 gem 'bootstrap-social-rails'
 
 # for readable propopsal urls
-gem 'friendly_id', '~> 5.1.0'
+gem 'friendly_id', '~> 5.2.5'
 
 # for calendars
 gem 'simple_calendar', '~> 2.4'
@@ -240,7 +239,9 @@ gem 'simple_calendar', '~> 2.4'
 gem 'jquery-slick-rails'
 
 #for survey
-gem 'survey'
+# gem 'survey'
+gem 'questionnaire_engine', git: 'https://github.com/clearfunction/questionnaire', branch: 'master', :require=>"survey"
+
 
 #for iCal schedules
 gem 'icalendar'
@@ -251,8 +252,8 @@ gem 'humanize'
 gem 'sched', '~> 0.1.13'
 
 #for REST calls to external sources
-gem 'rest-client'
-gem 'rest-client-logger'
+# gem 'rest-client'
+# gem 'rest-client-logger'
 
 # event tags
 gem 'acts-as-taggable-on'
@@ -270,10 +271,12 @@ group :development do
   # to launch specs when files are modified
   gem 'guard-rspec', '~> 4.2.8'
   gem 'spring-commands-rspec'
+  gem 'haml_lint'
   # for static code analisys
   gem 'rubocop', require: false
+  gem 'rubocop-rspec', require: false
   # to silence rack assests messages
-  gem 'quiet_assets'
+  # gem 'quiet_assets'
   # to open mails
   gem 'letter_opener'
   # to open mails in browser
@@ -281,7 +284,7 @@ group :development do
   # as deployment system
   gem 'mina'
   # as debugger on error pages
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 3.0'
   # to dump CMS cofiguration
   gem 'seed_dump'
   # webrick threads misbehave in the current setup
@@ -325,11 +328,12 @@ group :production do
 end
 
 # IMPORTANT - refinery stuff should come last in gemfile
-gem 'refinerycms', '~> 3.0.0'
-gem 'refinerycms-search', git: 'https://github.com/refinery/refinerycms-search', branch: '3-0-stable'
-gem 'refinerycms-blog', git: 'https://github.com/refinery/refinerycms-blog', branch: 'master'
-gem 'refinerycms-dynamicfields', :git => 'https://github.com/jfalameda/refinerycms-dynamicfields.git'
-gem 'refinerycms-tinymce', git: 'https://github.com/ghoppe/refinerycms-tinymce'
+gem 'refinerycms', git: 'https://github.com/refinery/refinerycms', branch: '4-1-stable'
+gem 'refinerycms-acts-as-indexed', git: 'https://github.com/refinery/refinerycms-acts-as-indexed', branch: 'master'
+gem 'refinerycms-search', git: 'https://github.com/refinery/refinerycms-search', branch: 'master'
+gem 'refinerycms-blog', git: 'https://github.com/anitagraham/refinerycms-blog', branch: 'feature/refinery-5'
+gem 'refinerycms-dynamicfields', :git => 'https://github.com/rozsnyai/refinerycms-dynamicfields', branch: 'update-dependencies'
+# gem 'refinerycms-tinymce', git: 'https://github.com/ghoppe/refinerycms-tinymce'
 
 gem 'refinerycms-team_members', path: 'vendor/extensions'
 gem 'refinerycms-sponsors', path: 'vendor/extensions'
