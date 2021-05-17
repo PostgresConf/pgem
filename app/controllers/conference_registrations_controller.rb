@@ -1,5 +1,5 @@
 class ConferenceRegistrationsController < ApplicationController
-  before_filter :authenticate_user!, except: [:new, :create]
+  before_action :authenticate_user!, except: [:new, :create]
   load_resource :conference, find_by: :short_title
   authorize_resource :conference_registrations, class: Registration, except: [:new, :create]
   before_action :set_registration, only: [:edit, :update, :destroy, :show]
@@ -103,7 +103,7 @@ class ConferenceRegistrationsController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :title, :affiliation, :mobile, 
+    params.require(:user).permit(:first_name, :last_name, :title, :affiliation, :mobile,
       :username, :email, :name, :password, :password_confirmation)
   end
 

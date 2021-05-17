@@ -1,10 +1,10 @@
 class TicketsController < ApplicationController
   before_action :store_user_location!
-  before_filter :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index]
   load_resource :conference, find_by: :short_title
   load_resource :ticket, through: :conference
   authorize_resource :conference_registrations, class: Registration
-  before_filter :check_load_resource, only: :index
+  before_action :check_load_resource, only: :index
 
   def index
   @tix = params['ticket']

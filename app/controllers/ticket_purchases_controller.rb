@@ -1,7 +1,7 @@
 class TicketPurchasesController < ApplicationController
   load_resource :conference, find_by: :short_title
   before_action :persist_purchase_params, only: :create
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   authorize_resource :conference_registrations, class: Registration
 
   def create
@@ -9,7 +9,7 @@ class TicketPurchasesController < ApplicationController
     prices = params[:purchase_prices] || []
     code_id = params[:code_id] || ''
     chosen_events = params[:chosen_events] || []
-    
+
     if tkts[0].blank?
       return redirect_to conference_tickets_path(@conference.short_title),
       error: 'Please get at least one ticket to continue.'

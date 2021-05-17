@@ -1,11 +1,11 @@
 module Portal
   class BaseController < ApplicationController
-    before_filter :verify_user
+    before_action :verify_user
 
     rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
     def record_not_found
-      redirect_to root_path, notice: "Invalid Sponsor Name" 
+      redirect_to root_path, notice: "Invalid Sponsor Name"
     end
 
     def verify_user
