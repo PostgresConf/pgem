@@ -6,10 +6,10 @@ end
 
 
 class ApplicationController < ActionController::Base
-  before_action :set_paper_trail_whodunnit
   include ApplicationHelper
   add_flash_types :error
-  protect_from_forgery with: :exception, prepend: true
+  protect_from_forgery prepend: true
+  before_action :set_paper_trail_whodunnit, unless: :devise_controller?
   before_action :get_conferences
   before_action :store_location
   helper_method :date_string
