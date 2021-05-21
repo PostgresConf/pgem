@@ -11,7 +11,7 @@
               = index
         - else
           %li
-            %a{ 'href'=>"##{index}",' "role"'=>'tab', 'data-toggle'=>'tab' }
+            %a{ 'href'=>"##{index}", 'role'=>'tab', 'data-toggle'=>'tab' }
               = index
     .tab-content
       - commercials.each.with_index(1) do  |commercial, index|
