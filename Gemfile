@@ -28,7 +28,7 @@ gem 'rails-observers'
 gem 'paper_trail'
 
 # for upload management
-gem 'carrierwave'
+gem 'carrierwave', '0.11.1'
 gem 'mini_magick', '>= 4.9.4'
 gem 'carrierwave-bombshelter'
 gem 'better_tempfile'
@@ -321,7 +321,7 @@ gem 'refinerycms-acts-as-indexed', git: 'https://github.com/refinery/refinerycms
 gem 'refinerycms-search', github: 'refinery/refinerycms-search', branch: 'master'
 gem 'refinerycms-blog', git: 'https://github.com/anitagraham/refinerycms-blog', branch: 'feature/refinery-5'
 gem 'refinerycms-dynamicfields', :git => 'https://github.com/rozsnyai/refinerycms-dynamicfields', branch: 'update-dependencies'
-# gem 'refinerycms-tinymce', git: 'https://github.com/ghoppe/refinerycms-tinymce'
+gem 'refinerycms-tinymce', git: 'https://github.com/ghoppe/refinerycms-tinymce'
 
 gem 'refinerycms-team_members', path: 'vendor/extensions'
 gem 'refinerycms-sponsors', path: 'vendor/extensions'

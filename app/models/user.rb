@@ -239,7 +239,7 @@ class User < ActiveRecord::Base
   def avatar_url(options={})
     version = options[:version] || 'medium'
     if self.avatar?
-      self.avatar.send version
+      self.avatar.send(version).url
     else
       size_map = {'large' => 200, 'medium' => 48, 'small' => 32, 'xsmall' => 25}
       gravatar_url(size: size_map[version])
