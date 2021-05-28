@@ -239,9 +239,7 @@ gem 'simple_calendar', '~> 2.4'
 gem 'jquery-slick-rails'
 
 #for survey
-# gem 'survey'
-gem 'questionnaire_engine', git: 'https://github.com/clearfunction/questionnaire', branch: 'master', :require=>"survey"
-
+gem 'survey', git: 'https://github.com/mes/survey'
 
 #for iCal schedules
 gem 'icalendar'
