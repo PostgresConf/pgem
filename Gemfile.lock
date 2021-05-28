@@ -24,20 +24,20 @@ GIT
       seo_meta (~> 3.0, >= 3.0.0)
 
 GIT
-  remote: https://github.com/clearfunction/questionnaire
-  revision: f9c7f434b9c5c649dec67a90fbf24c112f3bb0fe
-  branch: master
-  specs:
-    questionnaire_engine (0.1)
-      rails (~> 5.1)
-
-GIT
   remote: https://github.com/ghoppe/refinerycms-tinymce
   revision: 1042b0b83541116ec86adfc7360c017e9f0cd0b2
   ref: 1042b0b83541116ec86adfc7360c017e9f0cd0b2
   specs:
     refinerycms-tinymce (1.0.0)
       refinerycms-core (>= 3.0.0)
+
+GIT
+  remote: https://github.com/mes/survey
+  revision: 12356eeb68694fa82b57405b5a345344a5763620
+  specs:
+    survey (0.2)
+      rails (>= 3.2.6)
+      railties (>= 3.2.6)
 
 GIT
   remote: https://github.com/refinery/refinerycms
@@ -956,7 +956,6 @@ DEPENDENCIES
   prawn (~> 1.3.0)
   prawn-qrcode (~> 0.2.2.1)
   prawn_rails
-  questionnaire_engine!
   rails (~> 5.2)
   rails-assets-bootstrap-markdown!
   rails-assets-chartjs!
@@ -1003,6 +1002,7 @@ DEPENDENCIES
   spring-commands-rspec
   stripe
   stripe-ruby-mock
+  survey!
   timecop
   transitions
   turbolinks
