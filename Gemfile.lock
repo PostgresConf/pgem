@@ -33,9 +33,10 @@ GIT
 
 GIT
   remote: https://github.com/ghoppe/refinerycms-tinymce
-  revision: 57aa9e8047a6f335677068846e22e108e1aff78b
+  revision: 1042b0b83541116ec86adfc7360c017e9f0cd0b2
+  ref: 1042b0b83541116ec86adfc7360c017e9f0cd0b2
   specs:
-    refinerycms-tinymce (5.1.4)
+    refinerycms-tinymce (1.0.0)
       refinerycms-core (>= 3.0.0)
 
 GIT
@@ -334,7 +335,7 @@ GEM
       actionmailer (>= 4.0, < 7)
       activesupport (>= 4.0, < 7)
     excon (0.81.0)
-    execjs (2.7.0)
+    execjs (2.8.1)
     factory_girl (4.9.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.9.0)
@@ -538,7 +539,7 @@ GEM
     nested_form (0.3.2)
     netrc (0.11.0)
     nio4r (2.5.7)
-    nokogiri (1.11.3)
+    nokogiri (1.11.6)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     notiffany (0.1.3)
@@ -670,7 +671,7 @@ GEM
       thor (>= 0.19.0, < 2.0)
     rainbow (3.0.0)
     rake (13.0.3)
-    rb-fsevent (0.10.4)
+    rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rdoc (6.3.1)

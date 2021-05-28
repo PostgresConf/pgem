@@ -321,7 +321,7 @@ gem 'refinerycms-acts-as-indexed', git: 'https://github.com/refinery/refinerycms
 gem 'refinerycms-search', github: 'refinery/refinerycms-search', branch: 'master'
 gem 'refinerycms-blog', git: 'https://github.com/anitagraham/refinerycms-blog', branch: 'feature/refinery-5'
 gem 'refinerycms-dynamicfields', :git => 'https://github.com/rozsnyai/refinerycms-dynamicfields', branch: 'update-dependencies'
-gem 'refinerycms-tinymce', git: 'https://github.com/ghoppe/refinerycms-tinymce'
+gem 'refinerycms-tinymce', git: 'https://github.com/ghoppe/refinerycms-tinymce', ref: '1042b0b83541116ec86adfc7360c017e9f0cd0b2'
 
 gem 'refinerycms-team_members', path: 'vendor/extensions'
 gem 'refinerycms-sponsors', path: 'vendor/extensions'
