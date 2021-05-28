@@ -74,7 +74,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   version :medium do
     process resize_to_fit: [130, 130]
   end
-    
+
   version :thumb, from_version: :large do
     process resize_to_fit: [100, 100]
   end

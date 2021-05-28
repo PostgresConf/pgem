@@ -9,7 +9,8 @@ Refinery::Blog::PostsController.class_eval do
       render status: 501, text: "format not supported"
   end
 
-  alias_method_chain :show, :format_stub
+  alias_method :show_without_format_stub, :show
+  alias_method :show, :show_with_format_stub
 
   def author
     @posts_author = User.find(params[:author_id])
