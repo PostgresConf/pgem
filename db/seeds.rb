@@ -56,3 +56,12 @@ Refinery::TeamMembers::Engine.load_seed
 
 # Added by Refinery CMS Sponsors extension
 Refinery::Sponsors::Engine.load_seed
+
+# Added by Refinery CMS Meetups extension
+Refinery::Meetups::Engine.load_seed
+
+# Added by Refinery CMS Communities extension
+Refinery::Communities::Engine.load_seed
+
+# Added by Refinery CMS CommunityEvents extension
+Refinery::CommunityEvents::Engine.load_seed
