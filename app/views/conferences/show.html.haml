@@ -146,7 +146,12 @@
           $('#banner').css('background-image', 'url(#{@conference.background_url})');
         }
 
-        #{link_policies(@conference)}
+        $('a.policy').each(function(){
+          let linkdata = $(this).data('target')
+          if(window.location.hash === linkdata) {
+            $(linkdata).modal()
+          }
+        })
       });
 
       $('.navbar-toggle').click(function(){
@@ -157,4 +162,3 @@
       });
 
     });
-
