@@ -70,7 +70,6 @@ class Conference < ActiveRecord::Base
 
   mount_uploader :picture, PictureUploader, mount_on: :logo_file_name
   mount_uploader :background, BackgroundUploader, mount_on: :background_file_name
-  mount_uploader :tile_background, BackgroundUploader, mount_on: :tile_background_file_name
 
   validates_presence_of :title,
                         :short_title,
@@ -719,7 +718,7 @@ class Conference < ActiveRecord::Base
   def previous_conferences
     Conference.where("conference_group_id = ? AND start_date < ?", conference_group_id, start_date).order('start_date')
   end
-  
+
   private
 
   # Returns a different html colour for every i and consecutive colors are
@@ -1177,7 +1176,7 @@ Best wishes
 
 
   def create_email_settings
-    build_email_settings(EMAIL_SETTINGS_DEFAULTS) 
+    build_email_settings(EMAIL_SETTINGS_DEFAULTS)
     true
   end
 
@@ -1250,7 +1249,7 @@ Best wishes
       tz_old = ActiveSupport::TimeZone.new(tzchanges[0])
       tz_new = ActiveSupport::TimeZone.new(tzchanges[1])
       tzdiff = tz_old.utc_offset - tz_new.utc_offset
-      if tzdiff != 0 
+      if tzdiff != 0
         program.selected_schedule.event_schedules.destroy_all if program.selected_schedule
       end
     end

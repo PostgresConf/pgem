@@ -30,10 +30,8 @@
     $(document).ready(function() {
       //override background if conference has one
       var banner_bg = "#{::Refinery::Setting.find_or_set(:banner_background, '')}"
-      console.log(banner_bg)
       if(banner_bg !== '') {
         $('.home-banner').css('background', banner_bg);
       }
     });
   });
-

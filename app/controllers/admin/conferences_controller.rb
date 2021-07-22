@@ -181,7 +181,6 @@ module Admin
                                          :rooms_attributes, :tracks_attributes,
                                          :tickets_attributes, :event_types_attributes,
                                          :picture, :picture_cache, :background, :background_cache,
-                                         :tile_background, :tile_background_cache, :tile_font_color,
                                          :policies_attributes,:policy_ids,
                                          :questions_attributes,:question_ids, :answers_attributes,
                                          :answer_ids, :difficulty_levels_attributes,

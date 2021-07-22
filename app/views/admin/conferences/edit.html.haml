@@ -29,16 +29,6 @@
       = f.input :background, :label => false, :hint => "This image will be used as the splashpage background."
       = f.hidden_field :background_cache
 
-      = f.input :tile_font_color, :hint => "The color to be used for the conference tile font", :input_html => {:size => 6, :type => "color", :class => 'color-picker'}
-      
-      = f.label 'Conference Tile Background Image'
-      %br
-      - if @conference.tile_background?
-        = image_tag @conference.tile_background.thumb.url
-      = f.input :tile_background, :label => false, :hint => "This image will be used as conference tile background."
-      = f.hidden_field :tile_background_cache
-
-
       = f.input :ticket_layout, as: :select, collection: Conference.ticket_layouts.keys, hint: "Layout type for tickets of the conference."
 
       = f.inputs :name => "Scheduling" do

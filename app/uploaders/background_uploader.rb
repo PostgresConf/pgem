@@ -28,8 +28,7 @@ class BackgroundUploader < CarrierWave::Uploader::Base
 
   # compatibility with our paperclip storage paths..
   def extra_store_dir
-    return 'backgrounds' if mounted_as == :background
-    'tile_backgrounds'
+    'backgrounds'
   end
 
   # Returns the id of the instance in a split path form. e.g. returns
