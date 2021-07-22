@@ -147,14 +147,10 @@ gem 'prawn-qrcode', '~> 0.2.2.1'
 gem 'invoice_printer'
 
 # to render XLS spreadsheets
-gem 'axlsx_rails'
-gem 'axlsx',
-     git: 'https://github.com/randym/axlsx.git',
-     ref: '776037c0fc799bb09da8c9ea47980bd3bf296874'
-
+gem 'caxlsx_rails'
+gem 'caxlsx'
 
 gem 'rubyzip', '>= 1.3.0'
-
 
 # to make links faster
 gem 'turbolinks'
