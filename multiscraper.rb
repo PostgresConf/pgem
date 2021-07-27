@@ -78,9 +78,22 @@ end
 def get_event_info(url, event_id)
     doc = Nokogiri::HTML(open("#{url}/events/#{event_id}"))
     jsons = doc.css('script[type="application/ld+json"]')
-    ret = JSON.parse(jsons.children.first.content)
+    ret = nil
+    jsons.children.each do  |child|
+        begin
+            parsed = JSON.parse(child)
+        rescue
+            next
+        end
+        # meetup sometimes injects multiple event jsons into the peage, all of these are usually "recommended" events
+        next if parsed.kind_of? Array
+        purl = parsed['url'] || ''
+        if purl.include? event_id
+            ret = parsed
+        end
+    end
+
     picurl = doc.css("meta[property='og:image']").attribute('content').value
-    p picurl
     ret['pic_url'] = picurl
     ret
 end
@@ -103,7 +116,8 @@ GROUP_URLS=[
     'https://www.meetup.com/Whatcom-Postgres/'
 ]
 
-def scrape_groups
+def scrape_meetups
+    @logger.info('Meetup scraper starting')
     GROUP_URLS.each do |gurl|
         eids = get_group_event_ids(gurl)
 
@@ -134,4 +148,4 @@ end
 
 scrape_planet
 scrape_blogs
-scrape_groups
+scrape_meetups
