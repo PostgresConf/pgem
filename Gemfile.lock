@@ -275,8 +275,8 @@ GEM
       sax-machine (>= 1.0)
     ffi (1.9.24)
     filters_spam (0.5)
-    font-awesome-rails (4.1.0.0)
-      railties (>= 3.2, < 5.0)
+    font-awesome-rails (4.7.0.7)
+      railties (>= 3.2, < 7)
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
     formatador (0.2.4)
@@ -815,7 +815,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   feedjira
-  font-awesome-rails
+  font-awesome-rails (>= 4.7.0)
   formtastic (~> 3.1.5)
   formtastic-bootstrap
   friendly_id (~> 5.1.0)

@@ -159,7 +159,7 @@ gem 'turbolinks'
 gem 'active_model_serializers'
 
 # as icon font
-gem 'font-awesome-rails'
+gem 'font-awesome-rails', '>= 4.7.0'
 
 # for markdown
 gem 'redcarpet', '>= 3.5.1'
