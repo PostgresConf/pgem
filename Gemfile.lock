@@ -385,6 +385,7 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.1)
+    maxminddb (0.1.22)
     method_source (0.8.2)
     mime-types (2.99.3)
     mina (0.3.8)
@@ -839,6 +840,7 @@ DEPENDENCIES
   letter_opener
   letter_opener_web
   lolsoap (~> 0.9.0)
+  maxminddb
   mina
   mini_magick (>= 4.9.4)
   mini_racer

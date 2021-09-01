@@ -172,6 +172,10 @@ gem 'rdoc-generator-fivefish', '~> 0.4.0'
 
 # for visitor tracking
 gem 'ahoy_matey', '~> 2'
+#offline geoip database for ahoy
+
+gem 'maxminddb'
+
 # gem 'activeuuid'
 gem 'uuidtools'
 gem 'piwik_analytics', '~> 1.0.1'
