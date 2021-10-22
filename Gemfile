@@ -151,9 +151,7 @@ gem 'invoice_printer'
 gem 'caxlsx_rails'
 gem 'caxlsx'
 
-
 gem 'rubyzip', '>= 1.3.0'
-
 
 # to make links faster
 gem 'turbolinks'
@@ -162,7 +160,7 @@ gem 'turbolinks'
 gem 'active_model_serializers'
 
 # as icon font
-gem 'font-awesome-rails'
+gem 'font-awesome-rails', '>= 4.7.0'
 
 # for markdown
 gem 'redcarpet', '>= 3.5.1'
@@ -175,6 +173,10 @@ gem 'rdoc-generator-fivefish', '~> 0.4.0'
 
 # for visitor tracking
 gem 'ahoy_matey', '~> 2'
+#offline geoip database for ahoy
+
+gem 'maxminddb'
+
 # gem 'activeuuid'
 gem 'uuidtools'
 gem 'piwik_analytics', '~> 1.0.1'

@@ -6,6 +6,13 @@
       .container
         .row
           .col-md-8.col-md-offset-2#header
+            .center
+              %h2.text-center.uppercase.bold
+                - if request.domain=='postgresworld.org'
+                  PostgresWorld
+                - else
+                  Postgres Conference
+
             .row
               .col-md-4
                 = image_tag(@conference.picture_url, class: 'img-responsive img-center', id: 'splash-logo') if @conference.picture?
@@ -139,7 +146,12 @@
           $('#banner').css('background-image', 'url(#{@conference.background_url})');
         }
 
-        #{link_policies(@conference)}
+        $('a.policy').each(function(){
+          let linkdata = $(this).data('target')
+          if(window.location.hash === linkdata) {
+            $(linkdata).modal()
+          }
+        })
       });
 
       $('.navbar-toggle').click(function(){
@@ -150,4 +162,3 @@
       });
 
     });
-

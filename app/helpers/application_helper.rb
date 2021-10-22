@@ -243,19 +243,6 @@ module ApplicationHelper
     return ts
   end
 
-  def link_policies(conference)
-    content = ''
-    if @conference
-      if @conference.policies.any?
-        @conference.policies.each do |policy|
-          content << "if(window.location.href.indexOf('#" + policy.code + "') != -1) { $('#" + policy.code + "').modal('show'); }\n"
-        end
-      end
-    end
-
-    content
-  end
-
   # rubocop:disable Lint/EndAlignment
   def word_pluralize(count, singular, plural = nil)
     word = if (count == 1 || count =~ /^1(\.0+)?$/)

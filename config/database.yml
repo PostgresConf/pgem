@@ -9,22 +9,34 @@
 #  pool: 5
 #  timeout: 5000
 
+development:
+  adapter: postgresql
+  database: osem_prod
+  schema_search_path: 'pgconforg, public'
+  #schema_search_path: 'public'
+  host: localhost
+  username: osem
+  password: osem
+  encoding: utf8
+
+production:
+  adapter: postgresql
+  database: osem_prod
+  schema_search_path: 'pgconforg, public'
+  host: localhost
+  username: osem
+  password: osem
+  encoding: utf8
+
+
+
 # development:
 #   adapter: postgresql
-#   database: osem
+#   database: osem_pg
 #   host: localhost
 #   username: osem
 #   password: osem
 #   encoding: utf8
-
-development:
-  adapter: postgresql
-  database: <%= ENV['DB_NAME'] %>
-  host: <%= ENV['DB_HOSTNAME'] %>
-  encoding: utf8
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
-  schema_search_path: "pgconforg, public"
 
 
 # development:
@@ -38,20 +50,19 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-# test:
-#   adapter: sqlite3
-#   database: db/test.sqlite3
-#   pool: 5
-#   timeout: 5000
-
 test:
-  adapter: postgresql
-  database: <%= ENV['DB_NAME'] %>
-  host: <%= ENV['DB_HOSTNAME'] %>
-  encoding: utf8
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
-  schema_search_path: "pgconforg, public"
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
+# test:
+#   adapter: postgresql
+#   database: osem_test
+#   host: localhost
+#   username: osem
+#   password: osem
+#   encoding: utf8
 
 # test:
 #   adapter: mysql2
@@ -61,14 +72,18 @@ test:
 #   password: test
 #   encoding: utf8
 
-production:
-  adapter: postgresql
-  database: <%= ENV['DB_NAME'] %> 
-  host: <%= ENV['DB_HOSTNAME'] %> 
-  encoding: utf8
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
-#uncomment this line when running migrations on pgconforg db
-#  schema_search_path: "pgconforg"
-  schema_search_path: "pgconforg, public"
+# production:
+#   adapter: postgresql
+#   database: osem
+#   host: localhost
+#   username: osem
+#   password: osem
+
+# change this to point to your actual database
+# legacy:
+#   adapter: postgresql
+#   database: pgconfus
+#   encoding: utf8
+#   username: pgconfus
+#   password:
 

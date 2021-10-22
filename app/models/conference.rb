@@ -71,7 +71,6 @@ class Conference < ActiveRecord::Base
 
   mount_uploader :picture, PictureUploader, mount_on: :logo_file_name
   mount_uploader :background, BackgroundUploader, mount_on: :background_file_name
-  mount_uploader :tile_background, BackgroundUploader, mount_on: :tile_background_file_name
 
   validates_presence_of :title,
                         :short_title,
