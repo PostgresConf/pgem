@@ -36,10 +36,10 @@
                   %b.caret
                 %ul.dropdown-menu
                   = render 'layouts/user_menu'
-                
+
             -else
               %li.dropdown
-                %a.dropdown-toggle.uppercase{"data-toggle" => "dropdown", :href => "#"}
+                %a.dropdown-toggle.uppercase{"data-toggle" => "dropdown", :href => "#", id: "scrolldown", "data-scrolldown-target": ".sign-in-form h2"}
                   Sign in
                   %b.caret
                 .dropdown-menu.sign-in-form
