@@ -324,7 +324,41 @@ a:focus {
             }
         }
 
+        .btn-wrapper-bottom {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+
+            .btn.cta-btn {
+                flex: 0 1 50%;
+                &:nth-child(2) {
+                    margin: 0 0 0 15px;
+                }
+            }
+        }
+
+        &.conference {
+            .btn-wrapper-bottom {
+                width: 100%;
+                flex-direction: column;
+                .btn.cta-btn {
+                    flex: 1 0 auto;
+
+                    &:nth-child(2) {
+                        margin: 15px 0 0 0;
+                    }
+                }
+            }
+        }
+
+        &.digital-event {
+            .btn {
+                font-size: 12px;
+            }
+        }
+
     }
+
 
     .poster {
         margin: 0px 0px 20px;
@@ -345,9 +379,6 @@ a:focus {
             }
         }
 
-        .btn-wrapper-bottom{
-            width: 100%;
-        }
     }
 
     .digital-event,
@@ -366,23 +397,18 @@ a:focus {
         height: 100%;
     }
 
-    .btn-wrapper-bottom {
-        margin-top: auto;
-        width: 50%;
-    }
 
     .angle-down {
         display: flex;
         justify-content: center;
         color: white;
     }
-    
+
     .floating {
         animation-name: floating;
         animation-duration: 3s;
         animation-iteration-count: infinite;
         animation-timing-function: ease-in-out;
-    
     }
 }
 
@@ -400,14 +426,16 @@ a:focus {
     }
 }
 
-.register-btn {
+.cta-btn {
     width: 100%;
     border: 2px solid $button_color;
     color: $font_button_color;
     background: none;
     cursor: pointer;
     padding: 10px 0;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 700;
@@ -438,16 +466,8 @@ a:focus {
         }
     }
 }
-.register-btn-small {
-    color: $font_button_color;
-    &:hover, &:focus{
-        color: $main-color;
-        background-color: $main_color;
-        background-color: $button_color;
-        outline: none !important;
-    }
-}
-.register-btn-other {
+
+.cta-btn-other {
     background-color: $main_color;
     color: $button_color;
     width: 100%;
@@ -455,7 +475,7 @@ a:focus {
     transition: 0.2s all linear 0s;
     &:hover, &:focus{
       background-color: transparent;
-      color: $main_color;  
+      color: $main_color;
       transition: 0.2s all ease-in 0s;
     }
 }
@@ -515,7 +535,7 @@ a:focus {
         color: white;
     }
     h3 {
-        color: $main_color; 
+        color: $main_color;
     }
     .card {
         display: flex;
@@ -537,7 +557,7 @@ a:focus {
             flex-direction: column;
             flex-grow: 1;
             position: relative;
-        
+
             h3 {
                 margin-top: 4vh;
             }
@@ -549,11 +569,11 @@ a:focus {
     .card-upcoming{
         width: 100%;
         margin-right: 0;
-       
+
         .wrapper-img-upcoming {
             margin-top: -10vh;
         }
-        
+
         .img-upcoming {
             box-shadow: $shadow;
             left: 50%;
@@ -571,8 +591,8 @@ a:focus {
             }
         }
     }
-    .future-events {  
-    
+    .future-events {
+
         .future-events-wrapper {
             display: flex;
             flex-flow: row wrap;
@@ -705,7 +725,7 @@ a:focus {
             &:hover {
             color: #ffffff
             }
-        }    
+        }
             &:after {
             top: 75%;
         }
@@ -809,6 +829,17 @@ a:focus {
     .btn {
         font-size: 1rem;
     }
+
+    .central-blocks {
+        .main-card {
+            &.digital-event {
+                .btn {
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+
 }
 
 @media (max-width: 1300px) and (min-width: 992px) {
@@ -935,8 +966,33 @@ a:focus {
             max-height: none;
         }
 
-        .btn-wrapper-bottom {
-            width: 100%;
+        .main-card {
+            .btn-wrapper-bottom {
+                .btn.cta-btn {
+                    font-size: 13px;
+                    flex: unset;
+                    width: 47%;
+                    &:nth-child(2){
+                        margin: 0 0 0 15px;
+                    }
+                }
+            }
+
+            &.conference {
+                .btn-wrapper-bottom {
+                    margin-top: 30px;
+                    .btn.cta-btn {
+                        width: 47%;
+
+                        &:nth-child(2){
+                            margin: 0 0 0 15px;
+                            float: right;
+                        }
+                    }
+
+
+                }
+            }
         }
     }
 
@@ -963,16 +1019,12 @@ a:focus {
 
     .digital-event,
     .meetup {
+        margin-top: 2rem;
         height: auto !important;
 
         p {
             margin-bottom: 2rem;
         }
-    }
-
-    .digital-event {
-        margin-top: 2rem;
-        margin-bottom: 2rem;
     }
 
     .future-events-wrapper {
@@ -1116,10 +1168,21 @@ a:focus {
             }
         }
     }
-} 
+}
 @media(max-width: 767px){
 }
 @media(max-width: 575px){
+
+    .central-blocks {
+        .main-card {
+            .btn-wrapper-bottom {
+                .btn.cta-btn {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
     .digital-events{
         .card{
             margin-right: 0;

@@ -6,10 +6,12 @@
         .btn-wrapper-bottom.hidden-xs.hidden-sm
           - if conference.splashpage && conference.splashpage.public
             - if conference.registration_open? && conference.tickets.any?
-              = link_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn register-btn bold uppercase", disabled: conference.registration_limit_exceeded?
-            - elsif conference.splashpage.include_sponsors && !conference.ended?
-              = link_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), class: "btn register-btn bold uppercase"
-
+              = link_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn cta-btn bold uppercase", disabled: conference.registration_limit_exceeded?
+            - else
+              - if conference.splashpage.include_sponsors && !conference.ended?
+                = link_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), class: "btn cta-btn bold uppercase"
+              - if conference.program.cfp_open? and conference.splashpage.include_cfp
+                = link_to "Call For Papers", main_app.conference_program_proposals_path(conference.short_title), class: 'btn cta-btn bold uppercase'
     .col-md-7.col-md-pull-5.h-100
       %h1.bold
         - if conference.splashpage && conference.splashpage.public
@@ -27,6 +29,9 @@
       .btn-wrapper-bottom.visible-xs.visible-sm
         - if conference.splashpage && conference.splashpage.public
           - if conference.registration_open? && conference.tickets.any?
-            = link_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn register-btn bold uppercase", disabled: conference.registration_limit_exceeded?
-          - elsif conference.splashpage.include_sponsors && !conference.ended?
-            = link_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), class: "btn register-btn bold uppercase"
+            = link_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn cta-btn cta-btn-half bold uppercase", disabled: conference.registration_limit_exceeded?
+          - else
+            - if conference.splashpage.include_sponsors && !conference.ended?
+              = link_to "Sponsor!", main_app.conference_sponsorships_path(conference.short_title), class: "btn cta-btn cta-btn-half bold uppercase"
+            - if conference.program.cfp_open? and conference.splashpage.include_cfp
+              = link_to "Call For Papers", main_app.conference_program_proposals_path(conference.short_title), class: 'btn cta-btn cta-btn-half bold uppercase'

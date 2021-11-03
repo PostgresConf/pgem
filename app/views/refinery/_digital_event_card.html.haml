@@ -22,4 +22,4 @@
           .col-sm-5.col-sm-offset-2.no-gutter
             - if conference.splashpage && conference.splashpage.public
               - if conference.registration_open? && conference.tickets.any?
-                = link_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn register-btn-other bold uppercase", disabled: conference.registration_limit_exceeded?
+                = link_to "Register", main_app.conference_buytickets_path(conference.short_title), class: "btn cta-btn-other bold uppercase", disabled: conference.registration_limit_exceeded?
