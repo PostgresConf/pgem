@@ -42,8 +42,8 @@
 //= require osem-datatables
 //= require osem-tickets
 //= require bootstrap-switch
-//= require osem-schedule
 //= require osem-switch
+//= require osem-schedule
 //= require osem-bootstrap
 //= require osem-revisionhistory
 //= require osem-commercials
