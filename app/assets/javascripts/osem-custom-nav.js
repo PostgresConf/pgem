@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    if($('.navbar-custom').length) {
+    if($('.navbar-custom:not(.navbar-solid)').length) {
       $(window).on('scroll load', function(){
           let top = $(window).scrollTop();
 
