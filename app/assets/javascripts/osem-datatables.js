@@ -16,7 +16,6 @@ $(function () {
       "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
       // initialize bs switch on each page draw,
       "fnDrawCallback": function() {
-        console.log('draw')
         $("[class='event-switch-checkbox']").bootstrapSwitch();
 
         $('input[class="event-switch-checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {

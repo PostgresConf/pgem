@@ -48,6 +48,7 @@
 //= require osem-commercials
 //= require osem-event-bulkops
 //= require osem-datatables
+//= require osem-custom-nav
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
 //= require accounting.min
