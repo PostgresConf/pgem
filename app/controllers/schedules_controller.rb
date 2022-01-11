@@ -177,7 +177,7 @@ class SchedulesController < ApplicationController
   end
 
   def ical
-    schedules = @program.selected_event_schedules
+    schedules = @program.selected_event_schedules || []
 
     @cal = Icalendar::Calendar.new
     @cal.prodid = Icalendar::Values::Text.new(@conference.title)
