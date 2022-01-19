@@ -9,7 +9,7 @@
         - @conference.highlighted_speakers.each do |speaker|
           .container
             .card.flex-maxheight
-              = image_tag speaker.avatar_url(version: 'large'), class: 'img-responsive img-center'
+              = image_tag speaker.avatar_url(version: 'xlarge'), class: 'img-responsive img-center'
               .card-block
                 %h4
                   %strong
@@ -18,6 +18,7 @@
                   = speaker.affiliation
                 %i.text-center
                   = speaker.title
+
 
 :javascript
   $('.speakers').slick({
