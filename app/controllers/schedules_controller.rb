@@ -14,7 +14,8 @@ class SchedulesController < ApplicationController
 
     @events_schedules = schedules
     @events_xml = schedules.map(&:event).group_by{ |event| event.time.to_date } if schedules
-    @dates = @conference.start_date..@conference.end_date
+    # create date slots only for days which have scheduled events
+    @dates = schedules.map{|es| es.start_time.to_date}.uniq
     @tracks = @conference.program.tracks
 
     @step_minutes = EventType::LENGTH_STEP.minutes
