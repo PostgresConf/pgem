@@ -496,7 +496,7 @@ module ApplicationHelper
     if version.item_type == 'Registration'
       user = current_or_last_object_state(version.item_type, version.item_id).try(:user)
     elsif version.item_type == 'EventsRegistration'
-      registration_id = current_or_last_object_state(version.item_type, version.item_id).registration_id
+      registration_id = current_or_last_object_state(version.item_type, version.item_id).try(:registration_id)
       user = current_or_last_object_state('Registration', registration_id).try(:user)
     end
 
