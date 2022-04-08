@@ -494,23 +494,25 @@ module ApplicationHelper
 
   def registration_change_description(version)
     if version.item_type == 'Registration'
-      user = current_or_last_object_state(version.item_type, version.item_id).user
+      user = current_or_last_object_state(version.item_type, version.item_id).try(:user)
     elsif version.item_type == 'EventsRegistration'
       registration_id = current_or_last_object_state(version.item_type, version.item_id).registration_id
-      user = current_or_last_object_state('Registration', registration_id).user
+      user = current_or_last_object_state('Registration', registration_id).try(:user)
     end
 
-    if user.id.to_s == version.whodunnit
-      case version.event
-      when 'create' then 'registered to'
-      when 'update' then "updated #{updated_attributes(version)} of the registration for"
-      when 'destroy' then 'unregistered  from'
-      end
-    else
-      case version.event
-      when 'create' then "registered #{user.name} to"
-      when 'update' then "updated #{updated_attributes(version)} of  #{user.name}'s registration for"
-      when 'destroy' then "unregistered #{user.name} from"
+    if user
+      if user.id.to_s == version.whodunnit
+        case version.event
+        when 'create' then 'registered to'
+        when 'update' then "updated #{updated_attributes(version)} of the registration for"
+        when 'destroy' then 'unregistered  from'
+        end
+      else
+        case version.event
+        when 'create' then "registered #{user.name} to"
+        when 'update' then "updated #{updated_attributes(version)} of  #{user.name}'s registration for"
+        when 'destroy' then "unregistered #{user.name} from"
+        end
       end
     end
   end
