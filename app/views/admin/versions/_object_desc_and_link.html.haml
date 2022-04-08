@@ -45,9 +45,10 @@
 - when 'EventsRegistration', 'Comment', 'Vote', 'Event'
   = 'event'
   - object = current_or_last_object_state(version.item_type, version.item_id)
-  - event_id = object.try(:id) || object.try(:event_id) || object.commentable_id
-  = link_to (current_or_last_object_state('Event', event_id).try(:title) || 'deleted event'),
-          admin_conference_program_event_path(conference_id: Conference.find(version.conference_id).short_title, id: event_id)
+  - event_id = object.try(:id) || object.try(:event_id) || object.try(:commentable_id)
+  - if event_id
+    = link_to (current_or_last_object_state('Event', event_id).try(:title) || 'deleted event'),
+            admin_conference_program_event_path(conference_id: Conference.find(version.conference_id).short_title, id: event_id)
 
 - when 'Target'
   = 'target'
@@ -56,12 +57,13 @@
 
 - when 'EventSchedule'
   - event_schedule = current_or_last_object_state(version.item_type, version.item_id)
-  event
-  = link_to (current_or_last_object_state('Event', event_schedule.event_id).try(:title) || 'deleted event'),
-           admin_conference_program_event_path(conference_id: Conference.find(version.conference_id).short_title, id: event_schedule.event_id)
-  in
-  =  link_to "Schedule #{event_schedule.schedule_id}",
-            admin_conference_schedule_path(conference_id: Conference.find(version.conference_id).short_title, id: event_schedule.schedule_id)
+  - if event_schedule
+    event
+    = link_to (current_or_last_object_state('Event', event_schedule.event_id).try(:title) || 'deleted event'),
+            admin_conference_program_event_path(conference_id: Conference.find(version.conference_id).short_title, id: event_schedule.event_id)
+    in
+    =  link_to "Schedule #{event_schedule.schedule_id}",
+              admin_conference_schedule_path(conference_id: Conference.find(version.conference_id).short_title, id: event_schedule.schedule_id)
 
 - when 'Schedule'
   = link_if_alive version, "Schedule #{version.item_id}",
@@ -121,20 +123,20 @@
 - when 'Activity'
   = 'activities'
   - activity = current_or_last_object_state(version.item_type, version.item_id)
-  = link_if_alive version, activity.name,
+  = link_if_alive version, activity.try(:name) || 'deleted activity',
           admin_conference_activities_path(conference_id: Conference.find(version.conference_id).short_title)
 
 - when 'Room'
   = 'room'
   - room = current_or_last_object_state(version.item_type, version.item_id)
-  = link_if_alive version, room.name,
+  = link_if_alive version, room.try(:name) || 'deleted room',
           admin_conference_venue_rooms_path(conference_id: Conference.find(version.conference_id).short_title)
 
 - when 'Sponsor'
   = 'sponsor'
   - sponsor = current_or_last_object_state(version.item_type, version.item_id)
-  = link_if_alive version, sponsor.name,
-          admin_conference_sponsors_path(conference_id: Conference.find(version.conference_id).short_title)
+  = link_if_alive version, sponsor.try(:name) || 'deleted sponsor',
+          admin_sponsors_path(version.item_id)
 
 - when 'SponsorshipLevel'
   = 'sponsorship level'
