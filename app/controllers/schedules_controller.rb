@@ -8,14 +8,14 @@ class SchedulesController < ApplicationController
   def show
     @rooms = @conference.venue.rooms if @conference.venue
     schedules = @program.selected_event_schedules
-    unless schedules
+    unless schedules.present?
       redirect_to events_conference_schedule_path(@conference.short_title)
     end
 
     @events_schedules = schedules
-    @events_xml = schedules.map(&:event).group_by{ |event| event.time.to_date } if schedules
+    @events_xml = schedules.map(&:event).group_by{ |event| event.time.to_date }
     # create date slots only for days which have scheduled events
-    @dates = schedules.map{|es| es.start_time.to_date}.uniq if schedules
+    @dates = schedules.map{|es| es.start_time.to_date}.uniq
     @tracks = @conference.program.tracks
 
     @step_minutes = EventType::LENGTH_STEP.minutes
