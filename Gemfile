@@ -278,6 +278,8 @@ group :development do
   gem 'web-console', '~> 2.0'
   # to dump CMS cofiguration
   gem 'seed_dump'
+  # webrick threads misbehave in the current setup
+  gem 'puma'
 end
 
 group :test do

@@ -71,7 +71,7 @@ module Admin
       @comments = @event.root_comments
       @comment_count = @event.comment_threads.count
       @user = @event.submitter
-      @users = User.all.order(:name)
+      @users = User.speakers_only.order(:name)
       @url = admin_conference_program_event_path(@conference.short_title, @event)
       @languages = @program.languages_list
     end
