@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   has_one :sponsor, through: :sponsors_user
 
   scope :admin, -> { where(is_admin: true) }
-
+  scope :speakers_only, -> { joins(:event_users).where("event_users.event_role='submitter'").uniq }
   validates :email, presence: true
 
   validate :biography_limit
