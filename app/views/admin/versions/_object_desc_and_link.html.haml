@@ -22,16 +22,16 @@
   - case commercial.commercialable_type
   - when 'Event'
     commercial in
-    - if commercialable_last_version.item
+    - if commercialable_last_version.try(:item)
       event
-      =  link_to commercialable.title,
+      =  link_to commercialable.try(:title),
              admin_conference_program_event_path(conference_id: Conference.find(version.conference_id).short_title, id: commercialable.id)
     - else
-      = commercialable.title
+      = commercialable.try(:title)
 
   - when 'Venue'
     commercial in venue
-    - if commercialable_last_version.item
+    - if commercialable_last_version.try(:item)
       = link_to commercialable.name,
             edit_admin_conference_venue_path(conference_id: Conference.find(version.conference_id).short_title,
                                                 id: commercialable.id, anchor: 'commercials-content')
@@ -99,7 +99,7 @@
 - when 'EventType'
   = 'event type'
   - event_type = current_or_last_object_state(version.item_type, version.item_id)
-  = link_if_alive version, event_type.title,
+  = link_if_alive version, event_type.try(:title),
           admin_conference_program_event_types_path(conference_id: Conference.find(version.conference_id).short_title)
 
 - when 'Role'
