@@ -21,7 +21,7 @@ class RegistrationsController < Devise::RegistrationsController
     if session[:previous_url].blank?
       edit_user_registration_path(resource)
     else
-      session[:previous_url] || root_path
+      session[:previous_url] || new_user_session_path
     end
   end
 

@@ -300,7 +300,7 @@ class Event < ActiveRecord::Base
       10
     else
       purchased = EventsRegistration.where(event_id: self.id).count
-      max_attendees - purchased 
+      max_attendees - purchased
     end
   end
 

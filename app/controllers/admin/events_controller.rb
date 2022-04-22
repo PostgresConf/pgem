@@ -147,7 +147,7 @@ module Admin
     def new
       @url = admin_conference_program_events_path(@conference.short_title, @event)
       @languages = @program.languages_list
-      @users = User.all.order(:name)
+      @users = User.speakers_only.order(:name)
     end
 
     def accept
