@@ -35,7 +35,7 @@ class TicketPurchase < ActiveRecord::Base
 
   def self.total_payments(conference, ticket)
     total_paid = TicketPurchase.where(ticket_id: ticket.id, paid: true,
-                         conference_id: conference.id).joins(:payment).sum(:amount)
+                         conference_id: conference.id).joins(:payment).sum(:purchase_price_cents)
 
     Money.new(total_paid, conference.default_currency)
   end
