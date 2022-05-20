@@ -188,6 +188,9 @@
           = link_to 'Poll Results', admin_conference_reports_poll_results_path(@conference.short_title)
         %li{class: active_nav_li(admin_conference_reports_tickets_path(@conference.short_title))}
           = link_to 'Tickets', admin_conference_reports_tickets_path(@conference.short_title)
+        %li{class: active_nav_li(admin_conference_reports_purchases_path(@conference.short_title))}
+          = link_to 'Purchases', admin_conference_reports_purchases_path(@conference.short_title)
+
 
   - if can? :manage, @conference.integrations.build
     %li{:class=> active_nav_li(admin_conference_integrations_path(@conference.short_title))}
