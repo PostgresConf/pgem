@@ -1,15 +1,15 @@
 .row
-  .col-md-6
+  .col-md-12
     .page-header
       %h1
         Payments
+        .btn-group.pull-right.export-buttons
+          = link_to 'Export PDF', admin_conference_reports_payments_path(@conference.short_title, @event, format: :pdf), class: 'btn btn-success'
+          = link_to 'Export CSV', admin_conference_reports_payments_path(@conference.short_title, @event, format: :csv), class: 'btn btn-success'
+          = link_to 'Export XLS', admin_conference_reports_payments_path(@conference.short_title, @event, format: :xlsx), class: 'btn btn-success'
+
       %p.text-muted
         Successful payments for the conference
-  .col-md-6
-    .btn-group.pull-right.export-buttons
-      = link_to 'Export PDF', admin_conference_reports_payments_path(@conference.short_title, @event, format: :pdf), class: 'btn btn-success'
-      = link_to 'Export CSV', admin_conference_reports_payments_path(@conference.short_title, @event, format: :csv), class: 'btn btn-success'
-      = link_to 'Export XLS', admin_conference_reports_payments_path(@conference.short_title, @event, format: :xlsx), class: 'btn btn-success'
 .row
   .col-md-12
     %table.table.table-hover.datatable
