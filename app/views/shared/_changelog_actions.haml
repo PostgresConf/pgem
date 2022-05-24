@@ -9,7 +9,9 @@
 
       - if can? :revert_attribute, version
         %li.divider{role: 'separator'}
-        - version.changeset.reject{ |_, values| values[0].blank? && values[1].blank? }.each do |attribute, values|
-          %li= link_to attribute, admin_revision_history_revert_attribute_path(id: version.id, attribute: attribute), data: { confirm: "Are you sure you want to revert #{attribute}?" }
+        - changeset = safe_changeset version
+        - if changeset
+          - changeset.reject{ |_, values| values[0].blank? && values[1].blank? }.each do |attribute, values|
+            %li= link_to attribute, admin_revision_history_revert_attribute_path(id: version.id, attribute: attribute), data: { confirm: "Are you sure you want to revert #{attribute}?" }
   - else
     %button.btn.btn-sm.btn-primary.disabled Revert

@@ -609,6 +609,8 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (4.0.6)
+    puma (5.6.4)
+      nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-openid (1.4.2)
@@ -958,6 +960,7 @@ DEPENDENCIES
   prawn (~> 1.3.0)
   prawn-qrcode (~> 0.2.2.1)
   prawn_rails
+  puma
   rails (~> 5.2)
   rails-assets-bootstrap-markdown!
   rails-assets-chartjs!

@@ -38,15 +38,16 @@
 
 //= require bootstrap-datetimepicker
 //= require osem-datepickers
-//= require osem-datatables
 //= require osem-tickets
 //= require bootstrap-switch
-//= require osem-schedule
 //= require osem-switch
+//= require osem-schedule
 //= require osem-bootstrap
 //= require osem-revisionhistory
 //= require osem-commercials
 //= require osem-event-bulkops
+//= require osem-datatables
+//= require osem-custom-nav
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
 //= require accounting.min

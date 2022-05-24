@@ -8,55 +8,16 @@
 
         - if can? :create, User && ENV['OSEM_ICHAIN_ENABLED'] != 'true'
           .pull-right
-            =link_to 'Add User', new_admin_user_path, :class => 'button btn btn-default btn-info'
+            = link_to 'Add User', new_admin_user_path, :class => 'button btn btn-default btn-info'
 .row
   .col-md-12.table-responsive
-    %table.table.table-striped.table-bordered.table-hover.datatable
+    %table.table.table-striped.table-bordered.table-hover.datatable-users{ data: {source: admin_users_url(format: :json)} }
       %thead
         %th ID
         %th Confirmed?
         %th Email
         %th Name
-        %th Attended Conferences
         %th Roles
         %th View
         %th Edit
       %tbody
-        - @users.each do |user|
-          %tr
-            %td
-              = user.id
-            %td
-              - if can? :toggle_confirmation, user
-                = check_box_tag user.id, user.id, user.confirmed?, 
-                  method: :patch, 
-                  url: "/admin/users/#{user.id}/toggle_confirmation?user[to_confirm]=", 
-                  class: 'switch-checkbox', 
-                  readonly: false,
-                  data: { size: 'small', on_color: 'success', off_color: 'warning', on_text: 'Yes', off_text: 'No' } 
-              - else
-                = check_box_tag user.id, user.id, user.confirmed?, 
-                  method: :patch, 
-                  url: "/admin/users/#{user.id}/toggle_confirmation?user[to_confirm]=", 
-                  class: 'switch-checkbox', 
-                  readonly: true,
-                  data: { size: 'small', on_color: 'success', off_color: 'warning', on_text: 'Yes', off_text: 'No' }  
-            %td
-              = user.email
-            %td
-              = user.name
-            %td
-              = user.regcount
-            %td
-              - unless user.get_roles.blank?
-                = show_roles(user.get_roles.first(2))
-                - if user.get_roles.count > 2
-                  = '...'
-              - else
-                None
-            %td
-              - if can? :show, user
-                = link_to 'View', admin_user_path(user), class: 'btn btn-success'
-            %td
-              - if can? :update, user
-                = link_to 'Edit', edit_admin_user_path(user), class: 'btn btn-primary'

@@ -18,11 +18,12 @@ module Admin
     end
 
     def index
-      @users = User.all
-      .joins('left outer join "registrations" on "registrations"."id" = "users"."id" and "registrations"."attended" = true')
-      .select('users.*, COUNT("registrations"."id") as regcount')
-      .group('users.id')
-      .includes(:roles)
+      respond_to do |format|
+        format.html
+        format.json {
+          render json: UserDatatable.new(params, view_context: view_context)
+        }
+      end
     end
 
     # This action allow admins to manually toggle confirmation state of another user

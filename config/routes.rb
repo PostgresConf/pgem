@@ -187,6 +187,7 @@ Osem::Application.routes.draw do
         resources :payments, only: [:index]
         resources :poll_results, only: [:index]
         resources :tickets, only: [:index]
+        resources :purchases, only: [:index]
       end
     end
 

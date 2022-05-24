@@ -1,6 +1,6 @@
 class ProposalsController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :new, :create]
   before_action :load_invitation, only: :accept_invitation
+  before_action :authenticate_user!, except: [:show, :new, :create]
   load_resource :conference, find_by: :short_title
   load_resource :program, through: :conference, singleton: true, except: :my_proposals
   load_and_authorize_resource :event, parent: false, through: :program, except: :my_proposals
@@ -42,7 +42,7 @@ class ProposalsController < ApplicationController
 
   def edit
     @url = conference_program_proposal_path(@conference.short_title, params[:id])
-    @users = User.all.order(:name)
+    @users = User.speakers_only.order(:name)
     @languages = @program.languages_list
   end
 
@@ -74,7 +74,11 @@ class ProposalsController < ApplicationController
     @event.submitter = current_user
     if @event.save
       ahoy.track 'Event submission', title: 'New submission'
-      redirect_to conference_program_proposals_path(@conference.short_title), notice: 'Proposal was successfully submitted.'
+      if @event.speakers_pending
+        redirect_to edit_conference_program_proposal_path(@conference.short_title, @event), notice: 'Proposal was successfully submitted but there are no speakers yet. You can send some speaker invitations below.'
+      else
+        redirect_to conference_program_proposals_path(@conference.short_title), notice: 'Proposal was successfully submitted.'
+      end
     else
       flash.now[:error] = "Could not submit proposal: #{@event.errors.full_messages.join(', ')}"
       render action: 'new'
@@ -203,6 +207,7 @@ class ProposalsController < ApplicationController
   end
 
   def accept_invitation
+    session.delete(:pending_invitation_url)
     if @invitation.accept
       redirect_to conference_program_proposals_path(conference_id: @conference.short_title),
         notice: "You have been added as a speaker to #{@invitation.event.title}. Thank you!"
@@ -215,7 +220,7 @@ class ProposalsController < ApplicationController
   def registrations; end
 
   def authenticate_user!
-    redirect_to( new_user_registration_path) unless user_signed_in?
+    redirect_to(new_user_registration_path) unless user_signed_in?
   end
 
   private
@@ -223,7 +228,7 @@ class ProposalsController < ApplicationController
   def event_params
     params.require(:event).permit(:event_type_id, :track_id, :difficulty_level_id,
                                   :title, :subtitle, :abstract, :description, :document,
-                                  :require_registration, :max_attendees, :language,
+                                  :require_registration, :max_attendees, :language, :speakers_pending,
                                   :speaker_ids => []
                                   )
   end
@@ -243,6 +248,16 @@ class ProposalsController < ApplicationController
 
   def load_invitation
     @invitation = SpeakerInvitation.find_by_token(params[:token])
+
+    unless current_user
+      session[:pending_invitation_url] = request.original_url
+      invitee = User.find_by(email: @invitation.email)
+      if invitee.present?
+        redirect_to new_user_session_path, alert: 'Please login to accept your invitation.'
+      else
+        redirect_to new_user_registration_path, alert: 'Please register first.'
+      end
+    end
     redirect_to root_path, alert: 'not found' unless @invitation
   end
 

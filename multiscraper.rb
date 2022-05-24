@@ -76,25 +76,22 @@ def get_group_event_ids(url)
 end
 
 def get_event_info(url, event_id)
-    doc = Nokogiri::HTML(open("#{url}/events/#{event_id}"))
-    jsons = doc.css('script[type="application/ld+json"]')
-    ret = nil
-    jsons.children.each do  |child|
-        begin
-            parsed = JSON.parse(child)
-        rescue
-            next
-        end
-        # meetup sometimes injects multiple event jsons into the peage, all of these are usually "recommended" events
-        next if parsed.kind_of? Array
-        purl = parsed['url'] || ''
-        if purl.include? event_id
-            ret = parsed
-        end
+    doc = Nokogiri::HTML(open("#{url}/events/#{event_id}/"))
+    ret = {}
+    datajson = JSON.parse(doc.css('script[id="__NEXT_DATA__"]').children.first.to_s)
+    event = datajson["props"]["pageProps"]["event"]
+    ret['name'] = event['title']
+    ret['description'] = event['description']
+    ret['url'] = event['eventUrl']
+    ret['pic_url'] = event['imageUrl']
+    ret['startDate'] = event['dateTime']
+    ret['endDate'] = event['endTime']
+    location = 'N/A'
+    venue = event['venue']
+    if venue['address'].present?
+        location = "#{venue['address']}, #{venue['city']} / #{venue['country']}"
     end
-
-    picurl = doc.css("meta[property='og:image']").attribute('content').value
-    ret['pic_url'] = picurl
+    ret['location'] = location
     ret
 end
 
@@ -123,6 +120,7 @@ def scrape_meetups
 
         eids.each do |event_id|
             event = get_event_info(gurl, event_id)
+            # byebug
             meetup = Refinery::Meetups::Meetup.find_or_initialize_by({external_id: event_id})
             meetup.title = event['name']
             meetup.description = event['description']
@@ -132,10 +130,7 @@ def scrape_meetups
             if event['endDate']
                    meetup.end = DateTime.parse(event['endDate'])
             end
-            meetup.location = 'N/A'
-            if event['location'].present?
-                meetup.location = "#{event['location']['address']['addressLocality']} / #{event['location']['address']['addressCountry']}" unless event['location']['@type'] == "VirtualLocation"
-            end
+            meetup.location = event['location']
             if meetup.new_record?
                 @logger.info("Creating new meetup record from #{event_id}: #{meetup.title}")
             else

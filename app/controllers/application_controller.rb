@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
       session[:return_to] == root_path)
       admin_conferences_path
     else
-      session[:return_to] || root_path
+      session[:pending_invitation_url] || session[:return_to] || root_path
     end
   end
 

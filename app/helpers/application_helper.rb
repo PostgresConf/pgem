@@ -419,10 +419,22 @@ module ApplicationHelper
   # Eg: If version.changeset = '{"title"=>[nil, "Premium"], "description"=>[nil, "Premium = Super cool"], "conference_id"=>[nil, 3]}'
   # Output will be 'title, description and conference'
   def updated_attributes(version)
-    version.changeset.
-      reject{ |_, values| values[0].blank? && values[1].blank? }.
-      keys.map{ |key| key.gsub('_id', '').tr('_', ' ')}.join(', ').
-      reverse.sub(',', ' dna ').reverse
+    begin
+      version.changeset.
+        reject{ |_, values| values[0].blank? && values[1].blank? }.
+        keys.map{ |key| key.gsub('_id', '').tr('_', ' ')}.join(', ').
+        reverse.sub(',', ' dna ').reverse
+    rescue NoMethodError
+      'failed to get attrs'
+    end
+  end
+
+  def safe_changeset(version)
+    begin
+      version.changeset
+    rescue NoMethodError
+      return nil
+    end
   end
 
   def link_to_user(user_id)
@@ -482,23 +494,25 @@ module ApplicationHelper
 
   def registration_change_description(version)
     if version.item_type == 'Registration'
-      user = current_or_last_object_state(version.item_type, version.item_id).user
+      user = current_or_last_object_state(version.item_type, version.item_id).try(:user)
     elsif version.item_type == 'EventsRegistration'
-      registration_id = current_or_last_object_state(version.item_type, version.item_id).registration_id
-      user = current_or_last_object_state('Registration', registration_id).user
+      registration_id = current_or_last_object_state(version.item_type, version.item_id).try(:registration_id)
+      user = current_or_last_object_state('Registration', registration_id).try(:user)
     end
 
-    if user.id.to_s == version.whodunnit
-      case version.event
-      when 'create' then 'registered to'
-      when 'update' then "updated #{updated_attributes(version)} of the registration for"
-      when 'destroy' then 'unregistered  from'
-      end
-    else
-      case version.event
-      when 'create' then "registered #{user.name} to"
-      when 'update' then "updated #{updated_attributes(version)} of  #{user.name}'s registration for"
-      when 'destroy' then "unregistered #{user.name} from"
+    if user
+      if user.id.to_s == version.whodunnit
+        case version.event
+        when 'create' then 'registered to'
+        when 'update' then "updated #{updated_attributes(version)} of the registration for"
+        when 'destroy' then 'unregistered  from'
+        end
+      else
+        case version.event
+        when 'create' then "registered #{user.name} to"
+        when 'update' then "updated #{updated_attributes(version)} of  #{user.name}'s registration for"
+        when 'destroy' then "unregistered #{user.name} from"
+        end
       end
     end
   end

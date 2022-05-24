@@ -65,14 +65,14 @@
       %h3
         Cancellation Policy
       %p
-        Cancellations within 14 days of the event are non-refundable. 
+        Cancellations within 14 days of the event are non-refundable.
         <a class='policy' data-target='#cancellation_policy' data-toggle='modal' href='#'>Read more</a>.
 
       = markdown(@primary_group.additional_details)
       %h3
         Code of Conduct
       %p
-        All participants must follow our Code of Conduct. 
+        All participants must follow our Code of Conduct.
         <a class='policy' data-target='#code_of_conduct' data-toggle='modal' href='#'>Read more</a>.
       %br
       = link_to 'Register Now', conference_tickets_path(@conference.short_title), class: 'btn btn-success btn-lg'
@@ -84,35 +84,3 @@
 
 #splash
   = yield :ticket_groups_base
-
-- content_for :script_head do
-  :javascript
-
-    $(window).scroll(function () {
-        handleTopNavAnimation();
-    });
-
-    $(window).load(function () {
-        handleTopNavAnimation();
-    });
-
-    function handleTopNavAnimation() {
-        var top = $(window).scrollTop();
-
-        // skip if user clicked navbar-toggle and the menu is shown
-        if($('.navbar-custom.expanded').length === 0) {
-          if (top > 50) {
-              $('#site-nav').addClass('navbar-solid');
-          }
-          else {
-              $('#site-nav').removeClass('navbar-solid');
-          }
-        }
-    }
-
-    $('.navbar-toggle').click(function(){
-      var top = $(window).scrollTop();
-      if(top <= 50) {
-        $('#site-nav').toggleClass('navbar-solid expanded');
-      }
-    });

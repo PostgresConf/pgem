@@ -1,0 +1,4 @@
+- headers = ['Purchase Date', 'Ticket', 'Qty','Buyer', 'Purchase Total', 'Code Used', 'Paid?']
+= CSV.generate_line headers
+- @purchases.each do |pur|
+  = CSV.generate_line([pur.created_at.strftime("%b %d, %Y"),pur.title,pur.quantity,pur.user.name,humanized_money_with_symbol(pur.purchase_price*pur.quantity),"#{pur.code.present? ? pur.code.name : ''}","#{pur.paid? ? 'Yes' : 'No'}"]).html_safe
