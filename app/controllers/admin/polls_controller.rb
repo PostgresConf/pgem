@@ -33,7 +33,7 @@ module Admin
     end
 
     def update
-      if @poll.update_attributes(poll_params)
+      if @poll.update(poll_params)
         redirect_to admin_conference_poll_path(
                     conference_id: @conference.short_title),
                     notice: 'Poll successfully updated.'

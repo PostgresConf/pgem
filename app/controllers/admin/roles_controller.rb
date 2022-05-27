@@ -22,7 +22,7 @@ module Admin
     def update
       role_name = @role.name
 
-      if @role.update_attributes(role_params)
+      if @role.update(role_params)
         redirect_to admin_conference_role_path(@conference.short_title, @role.name),
                     notice: 'Successfully updated role ' + @role.name
       else

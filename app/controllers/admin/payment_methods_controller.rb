@@ -2,7 +2,7 @@ module Admin
   class PaymentMethodsController < Admin::BaseController
     load_and_authorize_resource :conference, find_by: :short_title
     load_and_authorize_resource through: :conference, singleton: true
- 
+
     def show; end
 
     def edit; end
@@ -19,7 +19,7 @@ module Admin
     end
 
     def update
-      if @payment_method.update_attributes(payment_method_params)
+      if @payment_method.update(payment_method_params)
         redirect_to admin_conference_payment_method_path(conference_id: @conference.short_title),
                     notice: 'Payment Method was successfully updated.'
       else
@@ -36,7 +36,7 @@ module Admin
                                              :braintree_private_key, :braintree_merchant_account,
                                              :braintree_environment, :payu_store_name,
                                              :payu_store_id, :payu_webservice_name,
-                                             :payu_webservice_password, :payu_signature_key, 
+                                             :payu_webservice_password, :payu_signature_key,
                                              :payu_service_domain)
     end
   end

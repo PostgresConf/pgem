@@ -24,7 +24,7 @@ module Admin
     def edit; end
 
     def update
-      if @activity.update_attributes(activity_params)
+      if @activity.update(activity_params)
         redirect_to admin_conference_activities_path(conference_id: @conference.short_title),
                     notice: 'Activity successfully updated.'
       else

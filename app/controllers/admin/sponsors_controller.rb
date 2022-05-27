@@ -7,7 +7,7 @@ module Admin
     end
 
     def edit
-      @users = User.order(:first_name, :last_name) 
+      @users = User.order(:first_name, :last_name)
     end
 
     def create
@@ -21,7 +21,7 @@ module Admin
     end
 
     def update
-      if @sponsor.update_attributes(sponsor_params)
+      if @sponsor.update(sponsor_params)
         redirect_to admin_sponsors_path,
                     notice: 'Sponsor successfully updated.'
       else

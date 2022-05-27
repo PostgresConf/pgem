@@ -24,7 +24,7 @@ module Admin
     end
 
     def update
-      if @room_location.update_attributes(room_location_params)
+      if @room_location.update(room_location_params)
         redirect_to admin_conference_venue_room_locations_path(conference_id: @conference.short_title),
                     notice: 'Room Location successfully updated.'
       else

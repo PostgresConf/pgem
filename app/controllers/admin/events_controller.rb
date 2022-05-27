@@ -111,7 +111,7 @@ module Admin
     def update
       # @event.validate_owners = true
       @users = User.all.order(:name)
-      if @event.update_attributes(event_params)
+      if @event.update(event_params)
 
         if request.xhr?
           render js: 'index'
@@ -207,7 +207,7 @@ module Admin
     def vote
       @ratings = @event.votes.includes(:user)
       if (votes = current_user.votes.find_by_event_id(Event.find(params[:id]).id))
-        votes.update_attributes(rating: params[:rating])
+        votes.update(rating: params[:rating])
       else
         @myvote = @event.votes.build
         @myvote.user = current_user

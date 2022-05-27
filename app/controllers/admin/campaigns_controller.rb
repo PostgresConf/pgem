@@ -25,7 +25,7 @@ module Admin
     def edit; end
 
     def update
-      if @campaign.update_attributes(campaign_params)
+      if @campaign.update(campaign_params)
         redirect_to admin_conference_campaigns_path(conference_id: @conference.short_title),
                     notice: "Campaign '#{@campaign.name}' successfully updated."
       else
@@ -49,7 +49,7 @@ module Admin
 
     def campaign_params
       params.require(:campaign).permit(:name, :utm_source, :utm_medium, :utm_term, :utm_content,
-        :utm_campaign, 
+        :utm_campaign,
         :conference_id,
         :sponsor_id,
         :description,

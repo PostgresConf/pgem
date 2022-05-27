@@ -8,7 +8,7 @@ module Admin
     end
 
     def update
-      if @survey.update_attributes(survey_params)
+      if @survey.update(survey_params)
         redirect_to admin_conference_poll_path(
                     conference_id: @conference.short_title),
                     notice: 'Survey successfully updated.'
