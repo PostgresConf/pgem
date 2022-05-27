@@ -19,7 +19,7 @@ module Admin
     end
 
     def update
-      if @sponsorship_info.update_attributes(sponsorship_info_params)
+      if @sponsorship_info.update(sponsorship_info_params)
         redirect_to admin_conference_sponsorship_info_path(conference_id: @conference.short_title),
                     notice: 'Sponsorship Info was successfully updated.'
       else

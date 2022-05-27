@@ -17,7 +17,7 @@ module Portal
     end
 
     def update
-      if @sponsor.update_attributes(sponsor_params)
+      if @sponsor.update(sponsor_params)
         redirect_to portal_sponsor_path(current_user.sponsor.short_name),
                 notice: 'Details successfully updated.'
       else

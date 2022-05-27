@@ -34,7 +34,7 @@ module Admin
     # Update team_members used for the conference
     def update_conference
       authorize! :update, ConferenceTeamMember.new(conference_id: @conference.id)
-      if @conference.update_attributes(conference_params)
+      if @conference.update(conference_params)
         redirect_to admin_conference_conference_team_members_path(conference_id: @conference.short_title), notice: "Team Member for #{@conference.short_title} successfully updated."
       else
         redirect_to admin_conference_conference_team_members_path(conference_id: @conference.short_title), notice: "Update of Team Member for #{@conference.short_title} failed."

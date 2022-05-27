@@ -28,7 +28,7 @@ module Admin
 
     # PUT ticket_groups/1
     def update
-      if @ticket_group.update_attributes(ticket_group_params)
+      if @ticket_group.update(ticket_group_params)
         redirect_to admin_conference_ticket_groups_path(conference_id: @conference.short_title), notice: "Ticket Group '#{@ticket_group.name}' for #{@conference.short_title} successfully updated."
       else
         flash.now[:error] = "Update of Ticket Group for #{@conference.short_title} failed. #{@code.errors.full_messages.join('. ')}"
@@ -44,7 +44,7 @@ module Admin
     # Update ticket_groups used for the conference
     def update_conference
       authorize! :update, TicketGroup.new(conference_id: @conference.id)
-      if @conference.update_attributes(conference_params)
+      if @conference.update(conference_params)
         redirect_to admin_conference_ticket_groups_path(conference_id: @conference.short_title), notice: "Ticket Groups for #{@conference.short_title} successfully updated."
       else
         redirect_to admin_conference_ticket_groups_path(conference_id: @conference.short_title), notice: "Update of Ticket Groups for #{@conference.short_title} failed."

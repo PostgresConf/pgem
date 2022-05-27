@@ -13,7 +13,7 @@ module Admin
       @program.assign_attributes(program_params)
       send_mail_on_schedule_public = @program.notify_on_schedule_public?
 
-      if @program.update_attributes(program_params)
+      if @program.update(program_params)
         ConferenceScheduleUpdateMailJob.perform_later(@conference) if send_mail_on_schedule_public
         respond_to do |format|
           format.html do

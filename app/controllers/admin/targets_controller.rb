@@ -23,7 +23,7 @@ module Admin
     def edit; end
 
     def update
-      if @target.update_attributes(target_params)
+      if @target.update(target_params)
         redirect_to admin_conference_targets_path(conference_id: @conference.short_title),
                     notice: 'Target successfully updated.'
       else

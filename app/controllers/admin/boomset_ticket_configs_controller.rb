@@ -32,7 +32,7 @@ module Admin
     end
 
     def update
-      if @boomset_ticket_config.update_attributes(boomset_ticket_config_params)
+      if @boomset_ticket_config.update(boomset_ticket_config_params)
         redirect_to admin_conference_boomset_ticket_configs_path(conference_id: @conference.short_title),
                     notice: 'Boomset ticket successfully updated.'
       else

@@ -41,7 +41,7 @@ module Admin
 
     # PUT policies/1
     def update
-      if @policy.update_attributes(policy_params)
+      if @policy.update(policy_params)
         redirect_to admin_conference_policies_path(conference_id: @conference.short_title), notice: "Policy '#{@policy.title}' for #{@conference.short_title} successfully updated."
       else
         redirect_to admin_conference_policies_path(conference_id: @conference.short_title), notice: "Update of policies for #{@conference.short_title} failed. #{@policy.errors.full_messages.join('. ')}"
@@ -51,7 +51,7 @@ module Admin
     # Update policies used for the conference
     def update_conference
       authorize! :update, Policy.new(conference_id: @conference.id)
-      if @conference.update_attributes(conference_params)
+      if @conference.update(conference_params)
         redirect_to admin_conference_policies_path(conference_id: @conference.short_title), notice: "Policies for #{@conference.short_title} successfully updated."
       else
         redirect_to admin_conference_policies_path(conference_id: @conference.short_title), notice: "Update of policies for #{@conference.short_title} failed."

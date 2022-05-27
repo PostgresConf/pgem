@@ -22,7 +22,7 @@ module Admin
     end
 
     def update
-      if @benefit.update_attributes(benefit_params)
+      if @benefit.update(benefit_params)
         redirect_to admin_conference_benefits_path(conference_id: @conference.short_title),
                     notice: 'Benefit successfully updated.'
       else

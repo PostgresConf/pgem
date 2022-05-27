@@ -24,7 +24,7 @@ module Admin
     def edit; end
 
     def update
-      if @integration.update_attributes(integration_params)
+      if @integration.update(integration_params)
         redirect_to admin_conference_integrations_path(conference_id: @conference.short_title),
                     notice: 'Integration successfully updated.'
       else

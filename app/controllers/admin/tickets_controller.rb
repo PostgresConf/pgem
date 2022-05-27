@@ -25,7 +25,7 @@ module Admin
     def edit; end
 
     def update
-      if @ticket.update_attributes(ticket_params)
+      if @ticket.update(ticket_params)
         redirect_to admin_conference_tickets_path(conference_id: @conference.short_title),
                     notice: 'Ticket successfully updated.'
       else
@@ -59,8 +59,8 @@ module Admin
 
     def ticket_params
       params.require(:ticket).permit(:conference, :title, :short_title, :url, :description,
-                                     :conference_id, :price_cents, :price_currency, :price, 
-                                     :hidden, :ticket_group_id, :early_bird_price_cents, 
+                                     :conference_id, :price_cents, :price_currency, :price,
+                                     :hidden, :ticket_group_id, :early_bird_price_cents,
                                      :early_bird_price_currency, :early_bird_price, :ticket_type,
                                      :start_date, :end_date, :extra_info, :max_per_purchase)
     end

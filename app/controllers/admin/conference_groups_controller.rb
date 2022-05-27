@@ -20,7 +20,7 @@ module Admin
     end
 
     def update
-      if @conference_group.update_attributes(conference_group_params)
+      if @conference_group.update(conference_group_params)
         redirect_to admin_conference_groups_path_path,
                     notice: 'Conference Group successfully updated.'
       else

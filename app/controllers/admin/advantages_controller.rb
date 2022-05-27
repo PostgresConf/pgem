@@ -24,7 +24,7 @@ module Admin
     def edit; end
 
     def update
-      if @advantage.update_attributes(advantage_params)
+      if @advantage.update(advantage_params)
         redirect_to admin_conference_advantages_path(conference_id: @conference.short_title),
                     notice: 'Advantage successfully updated.'
       else
