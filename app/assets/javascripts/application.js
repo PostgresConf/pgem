@@ -34,7 +34,7 @@
 //= require leaflet
 //= require holderjs
 //= require chartkick
-//= require chartjs
+//= require Chart.bundle
 
 //= require bootstrap-datetimepicker
 //= require osem-datepickers

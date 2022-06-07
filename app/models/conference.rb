@@ -26,7 +26,6 @@ class Conference < ActiveRecord::Base
   has_one :program, dependent: :destroy
   has_one :poll, dependent: :destroy
   has_one :venue, dependent: :destroy
-  has_many :physical_tickets, through: :ticket_purchases
   has_many :sponsorship_levels_benefits, through: :sponsorship_levels
   has_many :ticket_purchases, dependent: :destroy
   has_many :physical_tickets, through: :ticket_purchases
