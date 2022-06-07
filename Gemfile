@@ -101,7 +101,7 @@ gem 'feedjira'
 
 # frontend javascripts
 source 'https://rails-assets.org' do
-  gem 'rails-assets-jquery'
+  gem 'rails-assets-jquery', :source => 'https://rails-assets.org/'
   # for placeholder images
   gem 'rails-assets-holderjs'
   # for formating dates
@@ -235,27 +235,13 @@ gem 'bootstrap-social-rails'
 gem 'friendly_id', '~> 5.2.5'
 
 # for calendars
-<<<<<<< HEAD
 gem 'simple_calendar', "~> 2.4.3"
-=======
-<<<<<<< HEAD
-gem 'simple_calendar', '~> 2.4'
-=======
-gem 'simple_calendar', "~> 2.4"
->>>>>>> 4ff81a7 (updates dependencies)
->>>>>>> eaa1495 (updates dependencies)
 
 #for carousel
 gem 'jquery-slick-rails'
 
 #for survey
-<<<<<<< HEAD
 gem 'survey', git: 'https://github.com/mes/survey'
-=======
-# gem 'survey'
-gem 'questionnaire_engine', git: 'https://github.com/clearfunction/questionnaire', branch: 'master', :require=>"survey"
-
->>>>>>> eaa1495 (updates dependencies)
 
 #for iCal schedules
 gem 'icalendar'
@@ -343,12 +329,15 @@ end
 
 # IMPORTANT - refinery stuff should come last in gemfile
 <<<<<<< HEAD
+<<<<<<< HEAD
 gem 'refinerycms', git: 'https://github.com/refinery/refinerycms', branch: '4-1-stable'
 gem 'refinerycms-acts-as-indexed', git: 'https://github.com/refinery/refinerycms-acts-as-indexed', branch: 'master'
 gem 'refinerycms-search', git: 'https://github.com/refinery/refinerycms-search', branch: 'master'
 gem 'refinerycms-blog', git: 'https://github.com/anitagraham/refinerycms-blog', branch: 'feature/refinery-5'
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> 38782a8 (rails6 port, WIP)
 gem 'refinerycms', git: 'https://github.com/refinery/refinerycms', branch: 'master'
 gem 'refinerycms-acts-as-indexed', git: 'https://github.com/refinery/refinerycms-acts-as-indexed', ref: 'f866ca2'
 gem 'refinerycms-search', git: 'https://github.com/anitagraham/refinerycms-search', ref: '36fd8a39be5909c2a83e5faee93a5fb46d1b3fb2'
@@ -356,14 +345,6 @@ gem 'refinerycms-blog', git: 'https://github.com/AIDCVT/refinerycms-blog', ref: 
 >>>>>>> aedf9b0 (updates dependencies)
 gem 'refinerycms-dynamicfields', :git => 'https://github.com/rozsnyai/refinerycms-dynamicfields', branch: 'update-dependencies'
 gem 'refinerycms-tinymce', git: 'https://github.com/ghoppe/refinerycms-tinymce', ref: '1042b0b83541116ec86adfc7360c017e9f0cd0b2'
-=======
-gem 'refinerycms', git: 'https://github.com/refinery/refinerycms', branch: '4-1-stable'
-gem 'refinerycms-acts-as-indexed', git: 'https://github.com/refinery/refinerycms-acts-as-indexed', branch: 'master'
-gem 'refinerycms-search', github: 'refinery/refinerycms-search', branch: 'master'
-gem 'refinerycms-blog', git: 'https://github.com/anitagraham/refinerycms-blog', branch: 'feature/refinery-5'
-gem 'refinerycms-dynamicfields', :git => 'https://github.com/rozsnyai/refinerycms-dynamicfields', branch: 'update-dependencies'
-# gem 'refinerycms-tinymce', git: 'https://github.com/ghoppe/refinerycms-tinymce'
->>>>>>> eaa1495 (updates dependencies)
 
 # PGEM custom extensions
 gem 'refinerycms-team_members', path: 'vendor/extensions'
