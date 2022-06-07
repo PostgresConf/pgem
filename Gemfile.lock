@@ -1,7 +1,13 @@
 GIT
+<<<<<<< HEAD
   remote: https://github.com/AIDCVT/refinerycms-blog
   revision: 3f1b0c68db1f4d7005656058d999c929a9185cfa
   ref: 3f1b0c6
+=======
+  remote: https://github.com/anitagraham/refinerycms-blog
+  revision: f7463df2ffd38558740c565610a87d33a6cab2e3
+  branch: feature/refinery-5
+>>>>>>> 33e0da8 (rails6 port, WIP)
   specs:
     refinerycms-blog (4.0.0)
       activemodel-serializers-xml (~> 1.0, >= 1.0.1)
@@ -102,6 +108,7 @@ GIT
     refinerycms-dynamicfields (3.0.0)
       nested_form
 <<<<<<< HEAD
+<<<<<<< HEAD
       refinerycms-core (~> 4.1.0)
 =======
 <<<<<<< HEAD
@@ -126,6 +133,9 @@ GIT
       refinerycms-core (~> 4.1.0)
 >>>>>>> 4ff81a7 (updates dependencies)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+      refinerycms-core (~> 4.1.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
 
 GIT
   remote: https://github.com/refinery/refinerycms-search
@@ -156,6 +166,7 @@ GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
   specs:
+<<<<<<< HEAD
 <<<<<<< HEAD
     actioncable (6.1.6)
       actionpack (= 6.1.6)
@@ -208,43 +219,70 @@ GEM
 =======
     actioncable (5.2.6)
       actionpack (= 5.2.6)
+=======
+    actioncable (6.1.6)
+      actionpack (= 6.1.6)
+      activesupport (= 6.1.6)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
-    actionmailer (5.2.6)
-      actionpack (= 5.2.6)
-      actionview (= 5.2.6)
-      activejob (= 5.2.6)
+    actionmailbox (6.1.6)
+      actionpack (= 6.1.6)
+      activejob (= 6.1.6)
+      activerecord (= 6.1.6)
+      activestorage (= 6.1.6)
+      activesupport (= 6.1.6)
+      mail (>= 2.7.1)
+    actionmailer (6.1.6)
+      actionpack (= 6.1.6)
+      actionview (= 6.1.6)
+      activejob (= 6.1.6)
+      activesupport (= 6.1.6)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (5.2.6)
-      actionview (= 5.2.6)
-      activesupport (= 5.2.6)
-      rack (~> 2.0, >= 2.0.8)
+    actionpack (6.1.6)
+      actionview (= 6.1.6)
+      activesupport (= 6.1.6)
+      rack (~> 2.0, >= 2.0.9)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
-      rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionview (5.2.6)
-      activesupport (= 5.2.6)
+      rails-html-sanitizer (~> 1.0, >= 1.2.0)
+    actiontext (6.1.6)
+      actionpack (= 6.1.6)
+      activerecord (= 6.1.6)
+      activestorage (= 6.1.6)
+      activesupport (= 6.1.6)
+      nokogiri (>= 1.8.5)
+    actionview (6.1.6)
+      activesupport (= 6.1.6)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
-      rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    active_model_serializers (0.10.12)
-      actionpack (>= 4.1, < 6.2)
-      activemodel (>= 4.1, < 6.2)
+      rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_model_serializers (0.10.13)
+      actionpack (>= 4.1, < 7.1)
+      activemodel (>= 4.1, < 7.1)
       case_transform (>= 0.2)
       jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
-    activejob (5.2.6)
-      activesupport (= 5.2.6)
+    activejob (6.1.6)
+      activesupport (= 6.1.6)
       globalid (>= 0.3.6)
+<<<<<<< HEAD
     activemodel (5.2.6)
       activesupport (= 5.2.6)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    activemodel (6.1.6)
+      activesupport (= 6.1.6)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     activemodel-serializers-xml (1.0.2)
       activemodel (> 5.x)
       activesupport (> 5.x)
       builder (~> 3.1)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 33e0da8 (rails6 port, WIP)
     activerecord (6.1.6)
       activemodel (= 6.1.6)
       activesupport (= 6.1.6)
@@ -256,6 +294,7 @@ GEM
       marcel (~> 1.0)
       mini_mime (>= 1.1.0)
     activesupport (6.1.6)
+<<<<<<< HEAD
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -280,6 +319,15 @@ GEM
     acts-as-taggable-on (7.0.0)
       activerecord (>= 5.0, < 6.2)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+      zeitwerk (~> 2.3)
+    acts-as-taggable-on (9.0.1)
+      activerecord (>= 6.0, < 7.1)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     acts_as_commentable_with_threading (2.0.1)
       activerecord (>= 4.0)
       activesupport (>= 4.0)
@@ -288,10 +336,14 @@ GEM
     acts_as_list (1.0.4)
       activerecord (>= 4.2)
 <<<<<<< HEAD
+<<<<<<< HEAD
     addressable (2.8.0)
 =======
     addressable (2.7.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    addressable (2.8.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       public_suffix (>= 2.0.2, < 5.0)
     ahoy_matey (2.2.1)
       addressable
@@ -307,6 +359,7 @@ GEM
       gyoku (>= 0.4.0)
       nokogiri
 <<<<<<< HEAD
+<<<<<<< HEAD
     ast (2.4.2)
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
@@ -317,15 +370,21 @@ GEM
     bcrypt (3.1.18)
 =======
     arel (9.0.0)
+=======
+>>>>>>> 33e0da8 (rails6 port, WIP)
     ast (2.4.2)
-    autoprefixer-rails (10.2.4.0)
-      execjs
-    awesome_nested_set (3.4.0)
-      activerecord (>= 4.0.0, < 7.0)
+    autoprefixer-rails (10.4.7.0)
+      execjs (~> 2)
+    awesome_nested_set (3.5.0)
+      activerecord (>= 4.0.0, < 7.1)
     aws_cf_signer (0.1.3)
     babosa (1.0.4)
+<<<<<<< HEAD
     bcrypt (3.1.16)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    bcrypt (3.1.18)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     better_errors (2.9.1)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
@@ -343,6 +402,7 @@ GEM
     bootstrap3-datetimepicker-rails (4.17.47)
       momentjs-rails (>= 2.8.1)
 <<<<<<< HEAD
+<<<<<<< HEAD
     braintree (4.7.0)
       builder (>= 3.2.4)
       rexml (>= 3.1.9)
@@ -355,15 +415,22 @@ GEM
       matrix
 =======
     braintree (3.4.0)
+=======
+    braintree (4.7.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       builder (>= 3.2.4)
-      libxml-ruby (>= 3.2.0)
+      rexml (>= 3.1.9)
     browser (2.7.1)
     builder (3.2.4)
     byebug (11.1.3)
-    cancancan (3.2.1)
-    capybara (3.35.3)
+    cancancan (3.3.0)
+    capybara (3.36.0)
       addressable
+<<<<<<< HEAD
 >>>>>>> eaa1495 (updates dependencies)
+=======
+      matrix
+>>>>>>> 33e0da8 (rails6 port, WIP)
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
       rack (>= 1.6.0)
@@ -371,10 +438,14 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
 <<<<<<< HEAD
+<<<<<<< HEAD
     carrierwave (2.2.2)
 =======
     carrierwave (2.2.1)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    carrierwave (2.2.2)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       activemodel (>= 5.0.0)
       activesupport (>= 5.0.0)
       addressable (~> 2.6)
@@ -389,10 +460,14 @@ GEM
     case_transform (0.2)
       activesupport
 <<<<<<< HEAD
+<<<<<<< HEAD
     caxlsx (3.2.0)
 =======
     caxlsx (3.1.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    caxlsx (3.2.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       htmlentities (~> 4.3, >= 4.3.4)
       marcel (~> 1.0)
       nokogiri (~> 1.10, >= 1.10.4)
@@ -400,6 +475,7 @@ GEM
     caxlsx_rails (0.6.3)
       actionpack (>= 3.1)
       caxlsx (>= 3.0)
+<<<<<<< HEAD
 <<<<<<< HEAD
     chartkick (4.1.3)
     chronic (0.10.2)
@@ -413,21 +489,33 @@ GEM
     cliver (0.3.2)
     cloudinary (1.20.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    chartkick (4.1.3)
+    chronic (0.10.2)
+    chunky_png (1.4.0)
+    cliver (0.3.2)
+    cloudinary (1.23.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       aws_cf_signer
       rest-client (>= 2.0.0)
     cocoon (1.2.15)
     coderay (1.1.3)
 <<<<<<< HEAD
+<<<<<<< HEAD
     coffee-rails (5.0.0)
 =======
     coffee-rails (4.2.2)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    coffee-rails (5.0.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       coffee-script (>= 2.2.0)
       railties (>= 5.2.0)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+<<<<<<< HEAD
 <<<<<<< HEAD
     concurrent-ruby (1.1.10)
     countries (4.2.3)
@@ -444,6 +532,14 @@ GEM
     country_select (5.0.1)
       countries (~> 3.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    concurrent-ruby (1.1.10)
+    countries (4.2.3)
+      i18n_data (~> 0.16.0)
+      sixarm_ruby_unaccent (~> 1.1)
+    country_select (6.1.1)
+      countries (~> 4.2)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       sort_alphabetical (~> 1.1)
     coveralls (0.8.23)
       json (>= 1.8, < 3)
@@ -455,6 +551,7 @@ GEM
       rexml
     crass (1.0.6)
     curb (0.9.11)
+<<<<<<< HEAD
 <<<<<<< HEAD
     daemons (1.4.1)
     dante (0.2.0)
@@ -468,6 +565,13 @@ GEM
       database_cleaner-active_record (~> 2.0.0)
     database_cleaner-active_record (2.0.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    daemons (1.4.1)
+    dante (0.2.0)
+    database_cleaner (2.0.1)
+      database_cleaner-active_record (~> 2.0.0)
+    database_cleaner-active_record (2.0.1)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
@@ -475,10 +579,14 @@ GEM
     decorators (2.0.5)
       railties (>= 4.0.0, < 7)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 33e0da8 (rails6 port, WIP)
     delayed_job (4.1.10)
       activesupport (>= 3.0, < 8.0)
     delayed_job_active_record (4.1.7)
       activerecord (>= 3.0, < 8.0)
+<<<<<<< HEAD
       delayed_job (>= 3.0, < 5)
     device_detector (1.0.7)
     devise (4.8.1)
@@ -491,6 +599,11 @@ GEM
     device_detector (1.0.5)
     devise (4.8.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+      delayed_job (>= 3.0, < 5)
+    device_detector (1.0.7)
+    devise (4.8.1)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -498,6 +611,7 @@ GEM
       warden (~> 1.2.3)
     devise_ichain_authenticatable (0.3.2)
       devise (>= 2.2)
+<<<<<<< HEAD
 <<<<<<< HEAD
     diff-lcs (1.5.0)
     diffy (3.4.0)
@@ -507,12 +621,18 @@ GEM
     diffy (3.4.0)
     docile (1.3.5)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    diff-lcs (1.5.0)
+    diffy (3.4.0)
+    docile (1.4.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.7.6)
     dotenv-rails (2.7.6)
       dotenv (= 2.7.6)
       railties (>= 3.2)
+<<<<<<< HEAD
 <<<<<<< HEAD
     dragonfly (1.4.0)
       addressable (~> 2.3)
@@ -527,31 +647,42 @@ GEM
     execjs (2.8.1)
 =======
     dragonfly (1.3.0)
+=======
+    dragonfly (1.4.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       addressable (~> 2.3)
       multi_json (~> 1.0)
       rack (>= 1.3)
-    dragonfly-s3_data_store (1.3.0)
-      dragonfly (~> 1.0)
-      fog-aws
-    errbase (0.2.1)
+    errbase (0.2.2)
     erubi (1.10.0)
     erubis (2.7.0)
+<<<<<<< HEAD
     exception_notification (4.4.3)
       actionmailer (>= 4.0, < 7)
       activesupport (>= 4.0, < 7)
     excon (0.81.0)
     execjs (2.7.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    exception_notification (4.5.0)
+      actionmailer (>= 5.2, < 8)
+      activesupport (>= 5.2, < 8)
+    execjs (2.8.1)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     factory_girl (4.9.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.9.0)
       factory_girl (~> 4.9.0)
       railties (>= 3.0.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 33e0da8 (rails6 port, WIP)
     faker (2.21.0)
       i18n (>= 1.8.11, < 2)
     faraday (2.3.0)
       faraday-net_http (~> 2.0)
+<<<<<<< HEAD
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (2.0.3)
     fastimage (2.2.6)
@@ -573,38 +704,30 @@ GEM
       faraday-net_http (~> 1.0)
       faraday-net_http_persistent (~> 1.1)
       multipart-post (>= 1.2, < 3)
+=======
+>>>>>>> 33e0da8 (rails6 port, WIP)
       ruby2_keywords (>= 0.0.4)
-    faraday-excon (1.1.0)
-    faraday-net_http (1.0.1)
-    faraday-net_http_persistent (1.1.0)
-    fastimage (2.2.3)
-    feedjira (3.1.2)
+    faraday-net_http (2.0.3)
+    fastimage (2.2.6)
+    feedjira (3.2.1)
       loofah (>= 2.3.1)
       sax-machine (>= 1.0)
+<<<<<<< HEAD
     ffi (1.15.0)
+=======
+    ffi (1.15.5)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     filters_spam (0.5)
-    fog-aws (3.10.0)
-      fog-core (~> 2.1)
-      fog-json (~> 1.1)
-      fog-xml (~> 0.1)
-      ipaddress (~> 0.8)
-    fog-core (2.2.4)
-      builder
-      excon (~> 0.71)
-      formatador (~> 0.2)
-      mime-types
-    fog-json (1.2.0)
-      fog-core
-      multi_json (~> 1.10)
-    fog-xml (0.1.3)
-      fog-core
-      nokogiri (>= 1.5.11, < 2.0.0)
-    font-awesome-rails (4.7.0.7)
-      railties (>= 3.2, < 7)
+    font-awesome-rails (4.7.0.8)
+      railties (>= 3.2, < 8.0)
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
+<<<<<<< HEAD
     formatador (0.2.5)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    formatador (1.1.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     formtastic (3.1.5)
       actionpack (>= 3.2.13)
     formtastic-bootstrap (3.1.1)
@@ -614,6 +737,7 @@ GEM
     friendly_id-mobility (0.5.5)
       friendly_id (>= 5.0.0, <= 5.4.0)
       mobility (>= 0.5.1, < 1.0)
+<<<<<<< HEAD
 <<<<<<< HEAD
     geocoder (1.8.0)
     globalid (1.0.0)
@@ -627,12 +751,18 @@ GEM
     globalid (0.4.2)
       activesupport (>= 4.2.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    geocoder (1.8.0)
+    globalid (1.0.0)
+      activesupport (>= 5.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     gon (5.1.2)
       actionpack (>= 2.3.0)
       json
       multi_json
       request_store (>= 1.0.5)
     gravtastic (3.2.6)
+<<<<<<< HEAD
 <<<<<<< HEAD
     groupdate (6.1.0)
       activesupport (>= 5.2)
@@ -642,16 +772,25 @@ GEM
       activesupport (>= 5)
     guard (2.16.2)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    groupdate (6.1.0)
+      activesupport (>= 5.2)
+    guard (2.18.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
       lumberjack (>= 1.0.12, < 2.0)
       nenv (~> 0.1)
       notiffany (~> 0.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
       pry (>= 0.13.0)
 =======
       pry (>= 0.9.12)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+      pry (>= 0.13.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       shellany (~> 0.0)
       thor (>= 0.18.1)
     guard-rspec (4.2.10)
@@ -670,16 +809,21 @@ GEM
       html2haml (>= 1.0.1)
       railties (>= 5.1)
 <<<<<<< HEAD
+<<<<<<< HEAD
     haml_lint (0.40.0)
 =======
     haml_lint (0.37.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    haml_lint (0.40.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       haml (>= 4.0, < 5.3)
       parallel (~> 1.10)
       rainbow
       rubocop (>= 0.50.0)
       sysexits (~> 1.1)
     hashdiff (1.0.1)
+<<<<<<< HEAD
 <<<<<<< HEAD
     hashie (5.0.0)
     highline (2.0.3)
@@ -691,6 +835,12 @@ GEM
     hightop (0.2.4)
       activesupport (>= 5)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    hashie (5.0.0)
+    highline (2.0.3)
+    hightop (0.3.0)
+      activesupport (>= 5.2)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -698,6 +848,7 @@ GEM
       ruby_parser (~> 3.5)
     htmlentities (4.3.4)
     http-accept (1.7.0)
+<<<<<<< HEAD
 <<<<<<< HEAD
     http-cookie (1.0.5)
       domain_name (~> 0.5)
@@ -713,17 +864,26 @@ GEM
     image_processing (1.12.2)
 =======
     http-cookie (1.0.3)
+=======
+    http-cookie (1.0.5)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       domain_name (~> 0.5)
     httpclient (2.8.3)
     humanize (2.5.1)
-    i18n (1.8.10)
+    i18n (1.10.0)
       concurrent-ruby (~> 1.0)
-    i18n_data (0.11.0)
+    i18n_data (0.16.0)
+      simple_po_parser (~> 1.1)
     icalendar (2.7.1)
       ice_cube (~> 0.16)
+<<<<<<< HEAD
     ice_cube (0.16.3)
     image_processing (1.12.1)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    ice_cube (0.16.4)
+    image_processing (1.12.2)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     inversion (1.3.1)
@@ -736,6 +896,7 @@ GEM
       prawn
       prawn-layout
 <<<<<<< HEAD
+<<<<<<< HEAD
     iso-639 (0.3.5)
     jquery-datatables-rails (3.4.0)
       actionpack (>= 3.1)
@@ -744,6 +905,11 @@ GEM
     iso-639 (0.3.5)
     jquery-datatables-rails (2.2.3)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    iso-639 (0.3.5)
+    jquery-datatables-rails (3.4.0)
+      actionpack (>= 3.1)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       jquery-rails
       railties (>= 3.1)
       sass-rails
@@ -751,6 +917,7 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+<<<<<<< HEAD
 <<<<<<< HEAD
     jquery-slick-rails (1.10.0)
       railties (>= 3.1)
@@ -763,19 +930,27 @@ GEM
     jwt (2.3.0)
 =======
     jquery-slick-rails (1.9.0)
+=======
+    jquery-slick-rails (1.10.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       railties (>= 3.1)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (2.5.1)
-    json-schema (2.8.1)
-      addressable (>= 2.4)
+    json (2.6.2)
+    json-schema (3.0.0)
+      addressable (>= 2.8)
     jsonapi-renderer (0.2.2)
+<<<<<<< HEAD
     jwt (2.2.3)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    jwt (2.3.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     launchy (2.5.0)
       addressable (~> 2.7)
     leaflet-rails (1.7.0)
       rails (>= 4.2.0)
+<<<<<<< HEAD
 <<<<<<< HEAD
     letter_opener (1.8.1)
       launchy (>= 2.2, < 3)
@@ -795,6 +970,15 @@ GEM
     libxml-ruby (3.2.1)
     listen (3.5.1)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
+    letter_opener_web (1.4.1)
+      actionmailer (>= 3.2)
+      letter_opener (~> 1.0)
+      railties (>= 3.2)
+    listen (3.7.1)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loggability (0.18.2)
@@ -806,6 +990,7 @@ GEM
     lumberjack (1.2.8)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
+<<<<<<< HEAD
 <<<<<<< HEAD
     marcel (1.0.2)
     matrix (0.4.2)
@@ -845,47 +1030,61 @@ GEM
       mini_portile2 (~> 2.8.0)
 =======
     marcel (1.0.1)
+=======
+    marcel (1.0.2)
+    matrix (0.4.2)
+    maxminddb (0.1.22)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     method_source (1.0.0)
-    mime-types (3.3.1)
+    mime-types (3.4.1)
       mime-types-data (~> 3.2015)
+<<<<<<< HEAD
     mime-types-data (3.2021.0225)
     mina (1.2.3)
+=======
+    mime-types-data (3.2022.0105)
+    mina (1.2.4)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       open4 (~> 1.3.4)
       rake
     mini_magick (4.11.0)
-    mini_mime (1.1.0)
-    mini_portile2 (2.5.1)
-    mini_racer (0.4.0)
-      libv8-node (~> 15.14.0.0)
-    minitest (5.14.4)
+    mini_mime (1.1.2)
+    mini_portile2 (2.8.0)
+    minitest (5.15.0)
     mobility (0.8.13)
       i18n (>= 0.6.10, < 2)
       request_store (~> 1.0)
-    momentjs-rails (2.20.1)
+    momentjs-rails (2.29.1.1)
       railties (>= 3.1)
-    monetize (1.9.4)
+    monetize (1.12.0)
       money (~> 6.12)
-    money (6.13.8)
+    money (6.16.0)
       i18n (>= 0.6.4, <= 2)
-    money-rails (1.14.0)
+    money-rails (1.15.0)
       activesupport (>= 3.0)
-      monetize (~> 1.9.0)
-      money (~> 6.13.2)
+      monetize (~> 1.9)
+      money (~> 6.13)
       railties (>= 3.0)
     multi_json (1.15.0)
     multi_xml (0.6.0)
-    multipart-post (2.1.1)
     nenv (0.3.0)
     nested_form (0.3.2)
     netrc (0.11.0)
+<<<<<<< HEAD
     nio4r (2.5.7)
     nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    nio4r (2.5.8)
+    nokogiri (1.13.6)
+      mini_portile2 (~> 2.8.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       racc (~> 1.4)
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
+<<<<<<< HEAD
 <<<<<<< HEAD
     oauth2 (1.4.9)
       faraday (>= 0.17.3, < 3.0)
@@ -893,6 +1092,10 @@ GEM
     oauth2 (1.4.7)
       faraday (>= 0.8, < 2.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    oauth2 (1.4.9)
+      faraday (>= 0.17.3, < 3.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       jwt (>= 1.0, < 3.0)
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
@@ -923,6 +1126,7 @@ GEM
     open4 (1.3.4)
     orm_adapter (0.5.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
     paper_trail (12.3.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
@@ -934,15 +1138,22 @@ GEM
     pg (1.3.5)
 =======
     paper_trail (12.0.0)
+=======
+    paper_trail (12.3.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       activerecord (>= 5.2)
       request_store (~> 1.1)
-    parallel (1.20.1)
-    parser (3.0.1.1)
+    parallel (1.22.1)
+    parser (3.1.2.0)
       ast (~> 2.4.1)
     pbkdf2_password_hasher (0.2.0)
     pdf-core (0.4.0)
+<<<<<<< HEAD
     pg (1.2.3)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    pg (1.3.5)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     phantomjs (2.1.1.0)
     piwik_analytics (1.0.2)
       actionpack
@@ -966,16 +1177,22 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 33e0da8 (rails6 port, WIP)
     psych (4.0.4)
       stringio
     public_suffix (4.0.7)
     puma (5.6.4)
       nio4r (~> 2.0)
     racc (1.6.0)
+<<<<<<< HEAD
 =======
     public_suffix (4.0.6)
     racc (1.5.2)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+>>>>>>> 33e0da8 (rails6 port, WIP)
     rack (2.2.3)
     rack-openid (1.4.2)
       rack (>= 1.1.0)
@@ -985,6 +1202,9 @@ GEM
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 33e0da8 (rails6 port, WIP)
     rails (6.1.6)
       actioncable (= 6.1.6)
       actionmailbox (= 6.1.6)
@@ -999,6 +1219,7 @@ GEM
       activesupport (= 6.1.6)
       bundler (>= 1.15.0)
       railties (= 6.1.6)
+<<<<<<< HEAD
 =======
     rails (5.2.6)
       actioncable (= 5.2.6)
@@ -1013,6 +1234,8 @@ GEM
       bundler (>= 1.3.0)
       railties (= 5.2.6)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+>>>>>>> 33e0da8 (rails6 port, WIP)
       sprockets-rails (>= 2.0.0)
     rails-assets-bootstrap (3.4.1)
       rails-assets-jquery (>= 1.9.1, < 4)
@@ -1021,6 +1244,7 @@ GEM
     rails-assets-chartjs (3.8.0)
     rails-assets-date.format (1.2.3)
     rails-assets-holderjs (2.9.6)
+<<<<<<< HEAD
 <<<<<<< HEAD
     rails-assets-jquery (3.6.0)
     rails-assets-jquery-smooth-scroll (2.2.0)
@@ -1034,6 +1258,13 @@ GEM
     rails-assets-markdown (0.5.0)
     rails-assets-momentjs (2.22.2)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    rails-assets-jquery (3.6.0)
+    rails-assets-jquery-smooth-scroll (2.2.0)
+      rails-assets-jquery (>= 1.7.0)
+    rails-assets-markdown (0.5.0)
+    rails-assets-momentjs (2.29.3)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     rails-assets-spectrum (1.8.0)
       rails-assets-jquery (>= 1.7.2)
     rails-assets-tinycolor (1.4.1)
@@ -1044,6 +1275,7 @@ GEM
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
 <<<<<<< HEAD
+<<<<<<< HEAD
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
     rails-i18n (6.0.0)
@@ -1051,11 +1283,18 @@ GEM
       railties (>= 6.0.0, < 7)
 =======
     rails-html-sanitizer (1.3.0)
+=======
+    rails-html-sanitizer (1.4.2)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       loofah (~> 2.3)
-    rails-i18n (5.1.3)
+    rails-i18n (6.0.0)
       i18n (>= 0.7, < 2)
+<<<<<<< HEAD
       railties (>= 5.0, < 6)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+      railties (>= 6.0.0, < 7)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     rails-observers (0.1.5)
       activemodel (>= 4.0)
     rails_autolink (1.1.6)
@@ -1063,6 +1302,7 @@ GEM
     rails_pdf (0.2.1)
       better_tempfile
       rails (>= 4.2.0)
+<<<<<<< HEAD
 <<<<<<< HEAD
     railties (6.1.6)
       actionpack (= 6.1.6)
@@ -1091,6 +1331,21 @@ GEM
       ffi (~> 1.0)
     rdoc (6.3.1)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    railties (6.1.6)
+      actionpack (= 6.1.6)
+      activesupport (= 6.1.6)
+      method_source
+      rake (>= 12.2)
+      thor (~> 1.0)
+    rainbow (3.1.1)
+    rake (13.0.6)
+    rb-fsevent (0.11.1)
+    rb-inotify (0.10.1)
+      ffi (~> 1.0)
+    rdoc (6.4.0)
+      psych (>= 4.0.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     rdoc-generator-fivefish (0.4.0)
       inversion (~> 1.1)
       loggability (~> 0.12)
@@ -1101,11 +1356,14 @@ GEM
     redcarpet (3.5.1)
     referer-parser (0.3.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     refinerycms-dragonfly (1.0.1)
       dragonfly (~> 1.1)
       dragonfly-s3_data_store
 >>>>>>> eaa1495 (updates dependencies)
+=======
+>>>>>>> 33e0da8 (rails6 port, WIP)
     refinerycms-i18n (5.0.1)
       mobility (~> 0.8.8)
       rails-i18n (>= 5.0)
@@ -1114,12 +1372,17 @@ GEM
       friendly_id (>= 5.1.0, < 5.3)
       refinerycms-core (~> 4.0, >= 4.0.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
     regexp_parser (2.4.0)
     request_store (1.5.1)
 =======
     regexp_parser (2.1.1)
     request_store (1.5.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    regexp_parser (2.4.0)
+    request_store (1.5.1)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       rack (>= 1.4)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -1132,10 +1395,14 @@ GEM
     rexml (3.2.5)
     rolify (6.0.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 33e0da8 (rails6 port, WIP)
     routing-filter (0.7.0)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
     rqrcode (2.1.1)
+<<<<<<< HEAD
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
@@ -1156,10 +1423,20 @@ GEM
       rspec-expectations (~> 3.10.0)
       rspec-mocks (~> 3.10.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+      chunky_png (~> 1.0)
+      rqrcode_core (~> 1.0)
+    rqrcode_core (1.2.0)
+    rspec (3.11.0)
+      rspec-core (~> 3.11.0)
+      rspec-expectations (~> 3.11.0)
+      rspec-mocks (~> 3.11.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     rspec-activemodel-mocks (1.1.0)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       rspec-mocks (>= 2.99, < 4.0)
+<<<<<<< HEAD
 <<<<<<< HEAD
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
@@ -1174,13 +1451,23 @@ GEM
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
+=======
+    rspec-core (3.11.0)
+      rspec-support (~> 3.11.0)
+    rspec-expectations (3.11.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.10.0)
-    rspec-mocks (3.10.2)
+      rspec-support (~> 3.11.0)
+    rspec-mocks (3.11.1)
       diff-lcs (>= 1.2.0, < 2.0)
+<<<<<<< HEAD
       rspec-support (~> 3.10.0)
     rspec-rails (5.0.1)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+      rspec-support (~> 3.11.0)
+    rspec-rails (5.1.2)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       railties (>= 5.2)
@@ -1188,6 +1475,7 @@ GEM
       rspec-expectations (~> 3.10)
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
+<<<<<<< HEAD
 <<<<<<< HEAD
     rspec-support (3.11.0)
     rubocop (1.30.0)
@@ -1215,22 +1503,26 @@ GEM
 =======
     rspec-support (3.10.2)
     rubocop (1.14.0)
+=======
+    rspec-support (3.11.0)
+    rubocop (1.30.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       parallel (~> 1.10)
-      parser (>= 3.0.0.0)
+      parser (>= 3.1.0.0)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
-      rexml
-      rubocop-ast (>= 1.5.0, < 2.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.18.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.5.0)
-      parser (>= 3.0.1.1)
-    rubocop-rspec (2.3.0)
-      rubocop (~> 1.0)
-      rubocop-ast (>= 1.1.0)
+    rubocop-ast (1.18.0)
+      parser (>= 3.1.1.0)
+    rubocop-rspec (2.11.1)
+      rubocop (~> 1.19)
     ruby-oembed (0.14.1)
     ruby-openid (2.9.2)
     ruby-progressbar (1.11.0)
+<<<<<<< HEAD
     ruby-vips (2.1.2)
       ffi (~> 1.12)
     ruby2_keywords (0.0.4)
@@ -1238,6 +1530,14 @@ GEM
       sexp_processor (~> 4.9)
     rubyzip (2.3.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    ruby-vips (2.1.4)
+      ffi (~> 1.12)
+    ruby2_keywords (0.0.5)
+    ruby_parser (3.19.1)
+      sexp_processor (~> 4.16)
+    rubyzip (2.3.2)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     safely_block (0.3.0)
       errbase (>= 0.1.1)
     sass (3.7.4)
@@ -1261,6 +1561,7 @@ GEM
       activesupport (>= 4)
     selectize-rails (0.12.6)
 <<<<<<< HEAD
+<<<<<<< HEAD
     seo_meta (3.1.0)
       railties (>= 5.0.0)
     sexp_processor (4.16.1)
@@ -1270,13 +1571,22 @@ GEM
     simple_calendar (2.4.3)
 =======
     seo_meta (3.0.0)
+=======
+    seo_meta (3.1.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       railties (>= 5.0.0)
-    sexp_processor (4.15.2)
+    sexp_processor (4.16.1)
     shellany (0.0.1)
+<<<<<<< HEAD
     shoulda-matchers (4.5.1)
       activesupport (>= 4.2.0)
     simple_calendar (2.4.2)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    shoulda-matchers (5.1.0)
+      activesupport (>= 5.2.0)
+    simple_calendar (2.4.3)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       rails (>= 3.0)
     simple_po_parser (1.1.6)
     simplecov (0.16.1)
@@ -1290,10 +1600,14 @@ GEM
     speakingurl-rails (8.0.2)
       railties (>= 3.1)
 <<<<<<< HEAD
+<<<<<<< HEAD
     spring (3.1.1)
 =======
     spring (2.1.1)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    spring (3.1.1)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
     sprockets (3.7.2)
@@ -1306,11 +1620,16 @@ GEM
     ssrf_filter (1.0.7)
     stringex (2.8.5)
 <<<<<<< HEAD
+<<<<<<< HEAD
     stringio (3.0.2)
     stripe (5.55.0)
 =======
     stripe (5.32.1)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    stringio (3.0.2)
+    stripe (5.55.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     stripe-ruby-mock (3.0.1)
       dante (>= 0.2.0)
       multi_json (~> 1.0)
@@ -1321,6 +1640,7 @@ GEM
     term-ansicolor (1.7.1)
       tins (~> 1.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
     thor (1.2.1)
     tilt (2.0.10)
     timecop (0.9.5)
@@ -1330,12 +1650,19 @@ GEM
 =======
     thor (1.1.0)
     thread_safe (0.3.6)
+=======
+    thor (1.2.1)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     tilt (2.0.10)
-    timecop (0.9.4)
-    tins (1.28.0)
+    timecop (0.9.5)
+    tins (1.31.1)
       sync
+<<<<<<< HEAD
     transitions (1.2.1)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    transitions (1.3.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     trollop (2.9.10)
     truncate_html (0.9.3)
     ttfunk (1.4.0)
@@ -1343,16 +1670,22 @@ GEM
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
 =======
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    tzinfo (2.0.4)
+      concurrent-ruby (~> 1.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
+<<<<<<< HEAD
 <<<<<<< HEAD
     unf_ext (0.0.8.2)
     unicode-display_width (2.1.0)
@@ -1368,6 +1701,14 @@ GEM
       railties
     user_agent_parser (2.7.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    unf_ext (0.0.8.2)
+    unicode-display_width (2.1.0)
+    unicode_utils (1.4.0)
+    unobtrusive_flash (3.3.1)
+      railties
+    user_agent_parser (2.11.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     uuidtools (2.2.0)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -1376,6 +1717,7 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+<<<<<<< HEAD
 <<<<<<< HEAD
     webmock (3.14.0)
       addressable (>= 2.8.0)
@@ -1389,24 +1731,39 @@ GEM
       hashdiff (>= 0.4.0, < 2.0.0)
     websocket-driver (0.7.3)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    webmock (3.14.0)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
+    websocket-driver (0.7.5)
+>>>>>>> 33e0da8 (rails6 port, WIP)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     whenever (1.0.0)
       chronic (>= 0.6.3)
 <<<<<<< HEAD
+<<<<<<< HEAD
     will_paginate (3.3.1)
 =======
     will_paginate (3.3.0)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    will_paginate (3.3.1)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     will_paginate-bootstrap (1.0.2)
       will_paginate (>= 3.0.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 <<<<<<< HEAD
+<<<<<<< HEAD
     yajl-ruby (1.4.2)
 =======
     yajl-ruby (1.4.1)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+    yajl-ruby (1.4.2)
+>>>>>>> 33e0da8 (rails6 port, WIP)
     zeitwerk (2.5.4)
     zilch-authorisation (0.0.1)
 
@@ -1498,12 +1855,17 @@ DEPENDENCIES
   prawn-qrcode (~> 0.2.2.1)
   prawn_rails
 <<<<<<< HEAD
+<<<<<<< HEAD
   puma
   rails (~> 6.1.6)
 =======
   questionnaire_engine!
   rails (~> 5.2)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+  puma
+  rails (~> 6.1.6)
+>>>>>>> 33e0da8 (rails6 port, WIP)
   rails-assets-bootstrap-markdown!
   rails-assets-chartjs!
   rails-assets-date.format!
@@ -1518,10 +1880,14 @@ DEPENDENCIES
   rails-assets-trianglify!
   rails-assets-waypoints!
 <<<<<<< HEAD
+<<<<<<< HEAD
   rails-i18n (~> 6.0)
 =======
   rails-i18n (~> 5.1)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+  rails-i18n (~> 6.0)
+>>>>>>> 33e0da8 (rails6 port, WIP)
   rails-observers
   rails_pdf
   rdoc-generator-fivefish (~> 0.4.0)
@@ -1550,10 +1916,14 @@ DEPENDENCIES
   ruby-oembed (~> 0.14.0)
   rubyzip (>= 1.3.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
   sassc
 =======
   sass-rails (= 5.0.8)
 >>>>>>> eaa1495 (updates dependencies)
+=======
+  sassc
+>>>>>>> 33e0da8 (rails6 port, WIP)
   sched (~> 0.1.13)
   seed_dump
   selectize-rails
