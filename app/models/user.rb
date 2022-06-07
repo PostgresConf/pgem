@@ -5,14 +5,15 @@ class UserDisabled < StandardError
 end
 
 class User < ActiveRecord::Base
-  rolify
   has_many :physical_tickets, through: :ticket_purchases do
     def by_conference(conference)
       where('ticket_purchases.conference_id = ?', conference)
     end
   end
+
   has_many :users_roles
   has_many :roles, through: :users_roles, dependent: :destroy
+  rolify
 
   has_paper_trail on: [:create, :update], ignore: [:sign_in_count, :remember_created_at, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip, :unconfirmed_email,
                                                    :avatar_content_type, :avatar_file_size, :avatar_updated_at, :updated_at, :confirmation_sent_at, :confirmation_token, :reset_password_token]
@@ -67,7 +68,7 @@ class User < ActiveRecord::Base
   has_one :sponsor, through: :sponsors_user
 
   scope :admin, -> { where(is_admin: true) }
-  scope :speakers_only, -> { joins(:event_users).where("event_users.event_role in ('submitter', 'speaker')").uniq }
+  scope :speakers_only, -> { joins(:event_users).where("event_users.event_role in ('submitter', 'speaker')").distinct }
   validates :email, presence: true
 
   validate :biography_limit

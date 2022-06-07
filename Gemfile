@@ -6,7 +6,7 @@ if Gem::Version.new(Bundler::VERSION) < Gem::Version.new('1.8.4')
 end
 
 # as web framework
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 6.1.6'
 
 gem 'braintree'
 gem 'gon', '~> 5.1.2'
@@ -28,13 +28,13 @@ gem 'rails-observers'
 gem 'paper_trail'
 
 # for upload management
-gem 'carrierwave', '0.11.1'
+gem 'carrierwave', '2.2.2'
 gem 'mini_magick', '>= 4.9.4'
 gem 'carrierwave-bombshelter'
 gem 'better_tempfile'
 
 # for internationalizing
-gem 'rails-i18n', '~> 5.1'
+gem 'rails-i18n', '~> 6.0'
 
 # as authentification framework
 gem 'devise',  '>= 4.8.0'
@@ -68,13 +68,14 @@ gem 'acts_as_commentable_with_threading'
 gem 'haml-rails'
 
 # for stylesheets
-gem 'sass-rails', '5.0.8'
+# gem 'sass-rails', '5.0.8'
+gem 'sassc'
 
 # as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
 # as the front-end framework
-gem 'mini_racer'
+# gem 'mini_racer'
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'autoprefixer-rails'
 gem 'formtastic-bootstrap'
@@ -222,10 +223,10 @@ gem 'selectize-rails'
 gem 'bootstrap-social-rails'
 
 # for readable propopsal urls
-gem 'friendly_id', '~> 5.2.5'
+gem 'friendly_id', '~> 5.3.0'
 
 # for calendars
-gem 'simple_calendar', "~> 2.4"
+gem 'simple_calendar', "~> 2.4.3"
 
 #for carousel
 gem 'jquery-slick-rails'
@@ -318,15 +319,15 @@ group :production do
 end
 
 # IMPORTANT - refinery stuff should come last in gemfile
-gem 'refinerycms', git: 'https://github.com/refinery/refinerycms', branch: '4-1-stable'
-gem 'refinerycms-acts-as-indexed', git: 'https://github.com/refinery/refinerycms-acts-as-indexed', branch: 'master'
-gem 'refinerycms-search', github: 'refinery/refinerycms-search', branch: 'master'
-gem 'refinerycms-blog', git: 'https://github.com/anitagraham/refinerycms-blog', branch: 'feature/refinery-5'
+gem 'refinerycms', git: 'https://github.com/refinery/refinerycms', branch: 'master'
+gem 'refinerycms-acts-as-indexed', git: 'https://github.com/refinery/refinerycms-acts-as-indexed', ref: 'f866ca2'
+gem 'refinerycms-search', git: 'https://github.com/anitagraham/refinerycms-search', ref: '36fd8a39be5909c2a83e5faee93a5fb46d1b3fb2'
+gem 'refinerycms-blog', git: 'https://github.com/AIDCVT/refinerycms-blog', ref: '3f1b0c6'
 gem 'refinerycms-dynamicfields', :git => 'https://github.com/rozsnyai/refinerycms-dynamicfields', branch: 'update-dependencies'
 gem 'refinerycms-tinymce', git: 'https://github.com/ghoppe/refinerycms-tinymce', ref: '1042b0b83541116ec86adfc7360c017e9f0cd0b2'
 
+# PGEM custom extensions
 gem 'refinerycms-team_members', path: 'vendor/extensions'
 gem 'refinerycms-sponsors', path: 'vendor/extensions'
-
 gem 'refinerycms-meetups', path: 'vendor/extensions'
 gem 'refinerycms-community_events', path: 'vendor/extensions'
