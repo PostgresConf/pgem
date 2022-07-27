@@ -10,9 +10,7 @@
   -if @conference.contact and !@conference.contact.sponsor_email.blank?
     .row
       .col-md-12
-        %h4
-          %p.text-muted.text-center
-            = link_to "Become a Sponsor!", conference_sponsorships_path(@conference.short_title), class: 'btn btn-warning btn-outline'
+        .text-center
+          = link_to "Become a Sponsor!", conference_sponsorships_path(@conference.short_title), class: 'btn btn-lg btn-warning btn-outline btn-cta'
 
   = render 'conferences/sponsors_listing'
-
