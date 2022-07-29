@@ -16,7 +16,7 @@
                     = event.time.to_date.strftime('%b %d')
                 %span.author
                   %span.fa.fa-user-o
-                  Hello
+                  = event.speaker_names
                 %h4.strong
                   = link_to event.title, conference_program_proposal_path(@conference.short_title, event)
                 %p
