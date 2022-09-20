@@ -1,15 +1,16 @@
 GIT
-  remote: https://github.com/anitagraham/refinerycms-blog
-  revision: f7463df2ffd38558740c565610a87d33a6cab2e3
-  branch: feature/refinery-5
+  remote: https://github.com/AIDCVT/refinerycms-blog
+  revision: 3f1b0c68db1f4d7005656058d999c929a9185cfa
+  ref: 3f1b0c6
   specs:
     refinerycms-blog (4.0.0)
       activemodel-serializers-xml (~> 1.0, >= 1.0.1)
       acts-as-taggable-on
       filters_spam (~> 0.2)
-      friendly_id (>= 5.1.0, < 5.3)
+      friendly_id (>= 5.1.0, < 5.5)
+      globalize (>= 5.3, < 6.1)
       rails_autolink (~> 1.1.3)
-      refinerycms-core (~> 4.0)
+      refinerycms-core (~> 4.1.0)
       refinerycms-settings (~> 4.0)
       responders (~> 3.0)
       seo_meta (~> 3.0, >= 3.0.0)
@@ -388,6 +389,10 @@ GEM
     geocoder (1.8.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    globalize (6.0.1)
+      activemodel (>= 4.2, < 7.0)
+      activerecord (>= 4.2, < 7.0)
+      request_store (~> 1.0)
     gon (5.1.2)
       actionpack (>= 2.3.0)
       json
@@ -1020,6 +1025,7 @@ DEPENDENCIES
   whenever
   will_paginate-bootstrap
   yajl-ruby (~> 1.2, >= 1.2.1)
+  zeitwerk (~> 2.5.4)
 
 BUNDLED WITH
    1.17.2
