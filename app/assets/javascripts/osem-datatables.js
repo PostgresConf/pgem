@@ -24,7 +24,7 @@ $(function () {
       pagingType: 'full_numbers',
       'lengthMenu': [[25, 50, 100, -1], [25, 50, 100, "All"]],
       // initialize bs switch on each page draw,
-      'lengthMenu': function() {
+      'fnDrawCallback': function() {
         $("[class='event-switch-checkbox']").bootstrapSwitch();
         $("input[class='event-switch-checkbox']").on('switchChange.bootstrapSwitch', switchChangeHandler);
       }
@@ -40,7 +40,6 @@ $(function () {
       "lengthMenu": [[25, 50, 100, 250], [25, 50, 100, 250]],
       "fnDrawCallback": function() {
         $("[class='switch-checkbox']").bootstrapSwitch();
-
         $('input[class="switch-checkbox"]').on('switchChange.bootstrapSwitch', switchChangeHandler);
       },
       columns: [

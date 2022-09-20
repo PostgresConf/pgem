@@ -3,15 +3,21 @@
     .col-md-12
       %h2.text-center
         Conference Highlights
+      %br
       -@highlights = @conference.program.events.highlights.sort { |a,b| a.time && b.time ? a.time <=> b.time : a.time ? -1 : 1 }
       -@highlights.each_slice(2) do |slice|
-        .row.row-centered
+        .row.row-centered.equal
           - slice.each do |event|
-            .col-md-6.col-centered.col-top.highlights
-              %h4.strong
+            .col-lg-6.col-centered.col-top.highlights
+              .card.card-outline-primary.highlight-card
                 - if event.time
-                  %span.fa.fa-calendar-o
-                  = event.time.to_date.strftime('%b %d')
-                = link_to event.title, conference_program_proposal_path(@conference.short_title, event)
-              %h5
-                = strip_markdown truncate(event.abstract, length: 500, separator: ' ')
+                  %span.date
+                    %span.fa.fa-calendar-o
+                    = event.time.to_date.strftime('%b %d')
+                %span.author
+                  %span.fa.fa-user-o
+                  = event.speaker_names
+                %h4.strong
+                  = link_to event.title, conference_program_proposal_path(@conference.short_title, event)
+                %p
+                  = strip_markdown truncate(event.abstract, length: 500, separator: ' ')
