@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 Refinery::I18n.configure do |config|
+  config.enabled = false
+  config.url_filter_enabled = false
   # config.default_locale = :en
 
   # config.current_locale = :en

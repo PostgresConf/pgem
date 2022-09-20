@@ -7,6 +7,7 @@ end
 
 # as web framework
 gem 'rails', '~> 6.1.6'
+gem 'zeitwerk', '~> 2.5.4'
 
 gem 'braintree'
 gem 'gon', '~> 5.1.2'
@@ -231,7 +232,7 @@ gem 'schema_dot_org', git: 'https://github.com/eug3nix/schema-dot-org', branch: 
 gem 'bootstrap-social-rails'
 
 # for readable propopsal urls
-gem 'friendly_id', '~> 5.3.0'
+gem 'friendly_id', '~> 5.2.5'
 
 # for calendars
 gem 'simple_calendar', "~> 2.4.3"
