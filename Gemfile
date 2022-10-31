@@ -125,6 +125,8 @@ end
 # as date picker
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 
+# datatables server-side processing
+gem 'ajax-datatables-rails'
 gem 'jquery-datatables-rails'
 
 # for charts
