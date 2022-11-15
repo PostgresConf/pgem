@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
+  prepend_before_action :check_captcha, only: [:create, :update]
 
   def edit
     @openids = Openid.where(user_id: current_user.id).order(:provider)
@@ -36,3 +37,12 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 end
+
+private
+  def check_captcha
+      unless verify_recaptcha
+          self.resource = resource_class.new sign_up_params
+          resource.validate
+          respond_with_navigational(resource) { render :new }
+      end
+  end

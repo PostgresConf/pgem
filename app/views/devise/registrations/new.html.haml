@@ -18,5 +18,7 @@
             %p.text-right
               = f.action :submit, as: :button, label: 'Sign Up', button_html: { class: 'btn btn-success' }
 
+            = recaptcha_tags
+
           = render partial: 'devise/shared/openid'
           = render partial: 'devise/shared/help'

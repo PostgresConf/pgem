@@ -39,6 +39,8 @@ gem 'rails-i18n', '~> 4.0.0'
 # as authentification framework
 gem 'devise',  '>= 4.8.0'
 gem 'devise_ichain_authenticatable'
+# prevent bot registrations
+gem "recaptcha", require: "recaptcha/rails"
 
 # for openID authentication
 gem 'omniauth', '2.0.4'
@@ -97,6 +99,7 @@ gem 'feedjira'
 
 # frontend javascripts
 source 'https://rails-assets.org' do
+  gem 'rails-assets-jquery'
   # for placeholder images
   gem 'rails-assets-holderjs'
   # for formating dates
@@ -320,7 +323,7 @@ end
 
 # IMPORTANT - refinery stuff should come last in gemfile
 gem 'refinerycms', '~> 3.0.0'
-gem 'refinerycms-search', github: 'refinery/refinerycms-search', branch: 'master'
+gem 'refinerycms-search', git: 'https://github.com/refinery/refinerycms-search', branch: '3-0-stable'
 gem 'refinerycms-blog', git: 'https://github.com/refinery/refinerycms-blog', branch: 'master'
 gem 'refinerycms-dynamicfields', :git => 'https://github.com/jfalameda/refinerycms-dynamicfields.git'
 gem 'refinerycms-tinymce', git: 'https://github.com/ghoppe/refinerycms-tinymce'
