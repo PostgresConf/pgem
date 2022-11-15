@@ -695,7 +695,7 @@ GEM
     sexp_processor (4.15.2)
     shoulda-matchers (2.6.1)
       activesupport (>= 3.0.0)
-    simple_calendar (2.2.7)
+    simple_calendar (2.4.3)
       rails (>= 3.0)
     simplecov (0.16.1)
       docile (~> 1.1)
@@ -914,7 +914,7 @@ DEPENDENCIES
   seed_dump
   selectize-rails
   shoulda-matchers
-  simple_calendar (~> 2.2, >= 2.2.7)
+  simple_calendar (~> 2.4)
   spring-commands-rspec
   stripe
   stripe-ruby-mock

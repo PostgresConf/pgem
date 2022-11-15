@@ -231,7 +231,7 @@ gem 'bootstrap-social-rails'
 gem 'friendly_id', '~> 5.1.0'
 
 # for calendars
-gem 'simple_calendar', '~> 2.2', '>= 2.2.7'
+gem 'simple_calendar', '~> 2.4'
 
 #for carousel
 gem 'jquery-slick-rails'
