@@ -9,7 +9,7 @@ end
 gem 'rails', '~> 4.2.11.3'
 
 gem 'braintree'
-gem 'gon', '~> 5.1.2'
+gem 'gon', '~> 6.4.0'
 
 # respond_to methods have been extracted to the responders gem
 # http://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#responders
