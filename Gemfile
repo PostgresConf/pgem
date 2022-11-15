@@ -40,6 +40,8 @@ gem 'rails-i18n', '~> 6.0'
 # as authentification framework
 gem 'devise',  '>= 4.8.0'
 gem 'devise_ichain_authenticatable'
+# prevent bot registrations
+gem "recaptcha", require: "recaptcha/rails"
 
 # for openID authentication
 gem 'omniauth', '2.0.4'
@@ -99,6 +101,7 @@ gem 'feedjira'
 
 # frontend javascripts
 source 'https://rails-assets.org' do
+  gem 'rails-assets-jquery'
   # for placeholder images
   gem 'rails-assets-holderjs'
   # for formating dates

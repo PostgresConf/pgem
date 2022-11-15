@@ -103,6 +103,15 @@ GIT
       nested_form
       refinerycms-core (~> 4.1.0)
 
+GIT
+  remote: https://github.com/refinery/refinerycms-search
+  revision: 6a7d4c60181ea00ad1219f52c9f90fe4b283a1ba
+  branch: 3-0-stable
+  specs:
+    refinerycms-search (3.0.0)
+      refinerycms-acts-as-indexed (~> 3.0)
+      refinerycms-core (~> 3.0)
+
 PATH
   remote: vendor/extensions
   specs:
@@ -689,6 +698,8 @@ GEM
       loggability (~> 0.12)
       rdoc (~> 6.0)
       yajl-ruby (~> 1.3)
+    recaptcha (5.9.0)
+      json
     redcarpet (3.5.1)
     referer-parser (0.3.0)
     refinerycms-i18n (5.0.1)
@@ -972,6 +983,7 @@ DEPENDENCIES
   rails-assets-chartjs!
   rails-assets-date.format!
   rails-assets-holderjs!
+  rails-assets-jquery!
   rails-assets-jquery-smooth-scroll!
   rails-assets-markdown!
   rails-assets-momentjs!
@@ -984,6 +996,7 @@ DEPENDENCIES
   rails-observers
   rails_pdf
   rdoc-generator-fivefish (~> 0.4.0)
+  recaptcha
   redcarpet (>= 3.5.1)
   refinerycms!
   refinerycms-acts-as-indexed!
