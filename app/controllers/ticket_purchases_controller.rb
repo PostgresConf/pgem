@@ -9,7 +9,12 @@ class TicketPurchasesController < ApplicationController
     prices = params[:purchase_prices] || []
     code_id = params[:code_id] || ''
     chosen_events = params[:chosen_events] || []
-    
+
+    unless verify_recaptcha
+      return redirect_to conference_tickets_path(@conference.short_title)
+    end
+
+
     if tkts[0].blank?
       return redirect_to conference_tickets_path(@conference.short_title),
       error: 'Please get at least one ticket to continue.'

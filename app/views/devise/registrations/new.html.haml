@@ -6,7 +6,7 @@
           %h3.panel-title
             Sign Up
         .panel-body
-          = semantic_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          = semantic_form_for(resource, as: resource_name, url: registration_path(resource_name), id: 'registration-form') do |f|
             = f.input :first_name, :required => true, :label => "First Name"
             = f.input :last_name, :required => true, :label => "Last Name"
             = f.input :affiliation, :required => true, :hint => "This could be a company, a user group, or organization."
@@ -16,9 +16,21 @@
             = f.input :password, :as => :password, :required => true, input_html: { required: 'required', autocomplete: 'off', id: 'password_inline' }
             = f.input :password_confirmation, :as => :password, :required => true, :label => "Password Confirmation"
             %p.text-right
-              = f.action :submit, as: :button, label: 'Sign Up', button_html: { class: 'btn btn-success' }
+              = button_tag(type: 'button', id: 'submit-registration-btn', class: 'btn btn-success') do
+                Sign Up
 
-            = recaptcha_tags
+            = invisible_recaptcha_tags ui: :invisible, callback: 'submitInvisibleRecaptchaForm'
 
           = render partial: 'devise/shared/openid'
           = render partial: 'devise/shared/help'
+
+
+:javascript
+  var submitInvisibleRecaptchaForm = function () {
+    $("#registration-form").submit();
+  };
+  $(document).ready(function () {
+    $("#submit-registration-btn").click(function(){
+      grecaptcha.execute();
+    })
+  });
