@@ -12,10 +12,10 @@
           Register
 
   .row
-    - if @conference.codes.any?  
+    - if @conference.codes.any?
       = render 'code'
 
-    = form_tag(conference_ticket_purchases_path, method: :post) do |f|
+    = form_tag(conference_ticket_purchases_path, method: :post, id: 'purchase-form') do |f|
       - if @conference.tickets.applied_code.present?
         = hidden_field_tag 'code_id', @conference.tickets.applied_code.id
       .col-md-12
@@ -41,7 +41,7 @@
                 - ticket.ticketed_events.each do |event|
                   = render partial: 'ticket', f: f, locals: {ticket: ticket, event: event}
 
-            - if @conference.codes.any?  
+            - if @conference.codes.any?
               = link_to 'Apply Promo Code!','#', 'data-toggle' => 'modal', 'data-target' => '#apply-code', class: 'btn btn-info pull-right'
 
           .panel-footer
@@ -52,9 +52,10 @@
                   %strong#total_price
                     $0
               .col-md-3
-                = button_tag(type: 'submit', class: 'btn btn-success btn-block') do
+                = button_tag(type: 'button', id: 'submit-checkout-btn', class: 'btn btn-success btn-block') do
                   Checkout
                   %i.fa.fa-shopping-cart
+                = invisible_recaptcha_tags ui: :invisible, callback: 'submitInvisibleRecaptchaForm'
   .row
     .col-md-13
       %p.text-muted.text-center
@@ -75,3 +76,13 @@
                   %button.close.fa.fa-times{ data: { dismiss: 'modal' } }
                 .modal-body.text-center
                   You will have the opportunity to assign tickets to group members later in the registration process. The total fees for all registrants in the group will be charged to the first person in the group. If members of the group are paying individually (for example, with different credit cards), you must create separate registrations for each.
+
+:javascript
+  var submitInvisibleRecaptchaForm = function () {
+    $("#purchase-form").submit();
+  };
+  $(document).ready(function () {
+    $("#submit-checkout-btn").click(function(){
+      grecaptcha.execute();
+    })
+  });
