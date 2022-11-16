@@ -90,3 +90,13 @@
                   %button.close.fa.fa-times{ data: { dismiss: 'modal' } }
                 .modal-body.text-center
                   You will have the opportunity to assign tickets to group members later in the registration process. The total fees for all registrants in the group will be charged to the first person in the group. If members of the group are paying individually (for example, with different credit cards), you must create separate registrations for each.
+
+:javascript
+  var submitInvisibleRecaptchaForm = function () {
+    $("#purchase-form").submit();
+  };
+  $(document).ready(function () {
+    $("#submit-checkout-btn").click(function(){
+      grecaptcha.execute();
+    })
+  });
