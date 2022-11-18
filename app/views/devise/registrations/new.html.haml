@@ -1,3 +1,15 @@
+:javascript
+  var submitInvisibleRecaptchaForm = function () {
+    document.getElementById("registration-form").submit();
+  };
+
+  var recapchaAttach = function() {
+    var element = document.getElementById('submit-registration-btn').addEventListener('click', function (e) {
+      e.preventDefault();
+      grecaptcha.execute();
+    });
+  }
+
 .container
   .row
     .col-md-6.col-md-offset-3
@@ -6,7 +18,7 @@
           %h3.panel-title
             Sign Up
         .panel-body
-          = semantic_form_for(resource, as: resource_name, url: registration_path(resource_name), id: 'registration-form') do |f|
+          = semantic_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { id: 'registration-form'} ) do |f|
             = f.input :first_name, :required => true, :label => "First Name"
             = f.input :last_name, :required => true, :label => "Last Name"
             = f.input :affiliation, :required => true, :hint => "This could be a company, a user group, or organization."
@@ -20,17 +32,9 @@
                 Sign Up
 
             = invisible_recaptcha_tags ui: :invisible, callback: 'submitInvisibleRecaptchaForm'
+            :javascript
+              recapchaAttach();
+
 
           = render partial: 'devise/shared/openid'
           = render partial: 'devise/shared/help'
-
-
-:javascript
-  var submitInvisibleRecaptchaForm = function () {
-    $("#registration-form").submit();
-  };
-  $(document).ready(function () {
-    $("#submit-registration-btn").click(function(){
-      grecaptcha.execute();
-    })
-  });
