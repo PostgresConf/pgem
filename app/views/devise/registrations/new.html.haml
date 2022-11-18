@@ -35,19 +35,5 @@
             :javascript
               recapchaAttach();
 
-
-            = invisible_recaptcha_tags ui: :invisible, callback: 'submitInvisibleRecaptchaForm'
-
           = render partial: 'devise/shared/openid'
           = render partial: 'devise/shared/help'
-
-
-:javascript
-  var submitInvisibleRecaptchaForm = function () {
-    $("#registration-form").submit();
-  };
-  $(document).ready(function () {
-    $("#submit-registration-btn").click(function(){
-      grecaptcha.execute();
-    })
-  });
