@@ -137,15 +137,6 @@ GIT
       refinerycms-core (~> 4.1.0)
 >>>>>>> 33e0da8 (rails6 port, WIP)
 
-GIT
-  remote: https://github.com/refinery/refinerycms-search
-  revision: 6a7d4c60181ea00ad1219f52c9f90fe4b283a1ba
-  branch: 3-0-stable
-  specs:
-    refinerycms-search (3.0.0)
-      refinerycms-acts-as-indexed (~> 3.0)
-      refinerycms-core (~> 3.0)
-
 PATH
   remote: vendor/extensions
   specs:
