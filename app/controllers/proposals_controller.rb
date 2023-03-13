@@ -248,7 +248,7 @@ class ProposalsController < ApplicationController
 
   def load_invitation
     @invitation = SpeakerInvitation.find_by_token(params[:token])
-    redirect_to root_path, alert: 'not found' unless @invitation
+    return redirect_to root_path, alert: 'not found' unless @invitation
 
     unless current_user
       session[:pending_invitation_url] = request.original_url
