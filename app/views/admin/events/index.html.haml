@@ -96,7 +96,7 @@
               = link_to event.title, admin_conference_program_event_path(@conference.short_title, event)
 
             - if @program.rating_enabled?
-              %td{'data-order' => "#{event.average_rating}", style:'min-width: 100px'}
+              %td{'data-order' => "#{event.average_rating}", style:'min-width: 110px'}
                 = render partial: 'voting_index', locals: { event: event }
 
             - if event.submitter && event.submitter.registrations && event.submitter.registrations.count < 1
