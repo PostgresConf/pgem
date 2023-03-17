@@ -4,6 +4,10 @@
       %h1
         Events
         = "tagged with #{@tag_name}" if @tag_name
+        = "with #{@track_name} track" if @track_name
+        = "with #{@type} type" if @type
+        = "with #{@difficulty} difficulty" if @difficulty
+        = "with #{@state.titleize} status" if @state
         = "(#{@events.length})" if @events.any?
 
         .pull-right
@@ -56,6 +60,42 @@
     = render partial: 'admin/conferences/doughnut_chart', locals: {title: 'Tracks of confirmed events', data: @tracks_distribution_confirmed}
   .col-md-3
     = render partial: 'admin/events/tag_cloud', locals: {title: 'Tags', data: @tags}
+.row
+  .col-md-3.col-md-offset-9
+    .h4.pull-left
+      Filter:
+    .btn-group.pull-right
+      %button.btn.btn-info.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+        Track
+        %span.caret
+      %ul.dropdown-menu{:role => "menu"}
+        - @program.tracks.each do |track|
+          %li= link_to track.name, with_track_admin_conference_program_events_path(@conference.short_title, track: track.name)
+
+    .btn-group.pull-right
+      %button.btn.btn-info.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+        Difficulty
+        %span.caret
+      %ul.dropdown-menu{:role => "menu"}
+        - @program.difficulty_levels.each do |level|
+          %li= link_to level.title, with_difficulty_admin_conference_program_events_path(@conference.short_title, difficulty: level.title)
+
+    .btn-group.pull-right
+      %button.btn.btn-info.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+        Type
+        %span.caret
+      %ul.dropdown-menu{:role => "menu"}
+        - @program.event_types.each do |event_type|
+          %li= link_to event_type.title, with_type_admin_conference_program_events_path(@conference.short_title, type: event_type.title)
+
+    .btn-group.pull-right
+      %button.btn.btn-info.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+        Status
+        %span.caret
+      %ul.dropdown-menu{:role => "menu"}
+        - ['new', 'withdrawn', 'unconfirmed', 'confirmed', 'cancelled', 'rejected'].each do |state|
+          %li= link_to state.titleize, with_state_admin_conference_program_events_path(@conference.short_title, state: state)
+
 .row
   .col-md-12
     %div.margin-event-table

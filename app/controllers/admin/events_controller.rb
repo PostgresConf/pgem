@@ -24,6 +24,26 @@ module Admin
         @events = @program.events
       end
 
+      @track_name = params[:track]
+      if @track_name
+        @events = @events.joins(:track).where(tracks: {name: @track_name})
+      end
+
+      @type = params[:type]
+      if @type
+        @events = @events.joins(:event_type).where(event_types: {title: @type})
+      end
+
+      @difficulty = params[:difficulty]
+      if @difficulty
+        @events = @events.joins(:difficulty_level).where(difficulty_levels: {title: @difficulty})
+      end
+
+      @state = params[:state]
+      if @state
+        @events = @events.where(state: @state)
+      end
+
       @tracks = @program.tracks
       @difficulty_levels = @program.difficulty_levels
       @event_types = @program.event_types

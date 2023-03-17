@@ -106,6 +106,10 @@ Osem::Application.routes.draw do
           end
           collection do
             get 'tagged_with/:tag' => 'events#index', as: 'tagged'
+            get 'with_track/:track' => 'events#index', as: 'with_track'
+            get 'with_type/:type' => 'events#index', as: 'with_type'
+            get 'with_difficulty/:difficulty' => 'events#index', as: 'with_difficulty'
+            get 'with_state/:state' => 'events#index', as: 'with_state'
             patch :bulk_state_change
           end
         end
