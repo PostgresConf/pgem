@@ -20,7 +20,7 @@ class SpeakerInvitation < ActiveRecord::Base
   end
 
   def accept
-    invitee = User.find_by_email(self.email)
+    invitee = User.find_by_email(self.email.downcase)
     if invitee and not self.accepted
       event = self.event
       if event.speakers_pending?
