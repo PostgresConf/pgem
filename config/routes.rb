@@ -110,7 +110,7 @@ Osem::Application.routes.draw do
             get 'with_type/:type' => 'events#index', as: 'with_type'
             get 'with_difficulty/:difficulty' => 'events#index', as: 'with_difficulty'
             get 'with_state/:state' => 'events#index', as: 'with_state'
-            patch :bulk_state_change
+            post :bulk_state_change
           end
         end
       end

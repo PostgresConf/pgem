@@ -191,17 +191,25 @@ module Admin
       @events.each do |event|
         begin
           event.send(@transition, send_mail: params[:send_mail].blank?)
-          event.save
+          event.save!
         rescue Transitions::InvalidTransition => e
-          @errors.push "Update state failed. #{e.message}"
+          @errors.push "update state failed: #{e.message}"
+        rescue ActiveRecord::RecordInvalid => e
+          @errors.push "event #{event.id}: #{e.message}"
         end
       end
 
       @notice += ', there were some errors' unless @errors.blank?
       flash[:notice] = @notice if @errors.size != @events.size
-      flash[:error] = 'Failed to update: ' + @errors.join(';') unless @errors.blank?
+      flash[:error] = 'Failed to update: ' + @errors.join('; ') unless @errors.blank?
 
-      redirect_back_or_to(admin_conference_program_events_path(conference_id: @conference.short_title)) && return
+      if @errors.blank?
+        # redirect to events admin index to reset any set checkboxes
+        render js: "window.location = '#{admin_conference_program_events_path(conference_id: @conference.short_title)}'"
+      else
+        # reload the current page, this keeps previous selections
+        render js: "window.location.reload()"
+      end
     end
 
     def confirm

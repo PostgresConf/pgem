@@ -19,6 +19,11 @@ $(function () {
     });
 
     $('.datatable-events').DataTable({
+      columnDefs: [ {
+        orderable: false,
+        className: 'select-checkbox',
+        targets:   0
+      } ],
       stateSave: true,
       autoWidth: false,
       pagingType: 'full_numbers',
@@ -27,6 +32,7 @@ $(function () {
       'fnDrawCallback': function() {
         $("[class='event-switch-checkbox']").bootstrapSwitch();
         $("input[class='event-switch-checkbox']").on('switchChange.bootstrapSwitch', switchChangeHandler);
+        handle_change()
       }
     });
 
