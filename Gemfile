@@ -179,8 +179,8 @@ gem 'rdoc-generator-fivefish', '~> 0.4.0'
 
 # for visitor tracking
 gem 'ahoy_matey', '~> 2'
-#offline geoip database for ahoy
 
+# offline geoip database for ahoy
 gem 'maxminddb'
 
 # gem 'activeuuid'
@@ -223,6 +223,9 @@ gem 'stripe'
 
 # for multiple speakers select on proposal/event forms
 gem 'selectize-rails'
+
+# metadata for reach search results on google pages
+gem 'schema_dot_org', git: 'https://github.com/eug3nix/schema-dot-org', branch: 'pgem_entities'
 
 # event social sharing bootstrap buttons
 gem 'bootstrap-social-rails'

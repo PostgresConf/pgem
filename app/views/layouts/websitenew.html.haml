@@ -2,6 +2,9 @@
 %html{:lang => "en"}
   %head
     = render "/refinery/newhead"
+    - if @structured_data
+      = @structured_data
+
   %body
     = render "/refinery/newheader"
     %section.central-blocks

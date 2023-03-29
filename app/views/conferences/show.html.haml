@@ -1,5 +1,7 @@
+= content_for :meta_description do
+  = @conference.description
 = content_for :title do
-  = @conference.title
+  = "Postgres Conference - #{@conference.title}"
 = content_for :splash_base do
   - if @conference.splashpage
     #banner
