@@ -90,7 +90,7 @@ module Admin
       else
         redirect_to edit_admin_conference_path(id: short_title),
                     error: 'Updating conference failed. ' \
-                    "#{@conference.errors.full_messages.join('. ')}."
+                    "#{@conference.errors.full_messages.join('. ')}.".truncate(1500)
       end
     end
 
