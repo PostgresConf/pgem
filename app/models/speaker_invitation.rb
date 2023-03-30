@@ -28,6 +28,10 @@ class SpeakerInvitation < ActiveRecord::Base
         event.speakers = event.speakers.to_a.reject! {|speaker| speaker==event.submitter}
         event.speakers_pending = false
       end
+      if event.speaker_ids.include? invitee.id
+        self.errors.add(:base, "you are already a speaker in this event")
+        return false
+      end
       event.speakers << invitee
       event.save
       self.user = invitee

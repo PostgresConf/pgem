@@ -194,8 +194,13 @@ class ProposalsController < ApplicationController
   end
 
   def invite
-    @invitation = @event.speaker_invitations.new(invitation_params)
+    @invitation = @event.speaker_invitations.find_or_initialize_by(invitation_params)
     authorize! :create, @invitation
+    if not @invitation.new_record?
+      @invitation.send_notification
+      redirect_to conference_program_proposals_path(conference_id: @conference.short_title),
+      notice: "Invitation already existed, a new invitation email has been sent to #{@invitation.email}" and return
+    end
 
     if @invitation.save
       redirect_to conference_program_proposals_path(conference_id: @conference.short_title),
