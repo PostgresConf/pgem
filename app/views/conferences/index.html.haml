@@ -1,8 +1,5 @@
-- content_for :meta_description do
-  - if @current.any?
-    = @current.last.description
-  - else
-    Postgres Conference - past events
+- content_for :head do
+  %meta{content: "noindex", name: "robots"}
 
 - content_for :conferences_nav do
   %br
