@@ -14,6 +14,8 @@ class Sponsorship < ActiveRecord::Base
   delegate :picture, to: :sponsor
   delegate :title, to: :sponsorship_level
 
+  validates :sponsor, uniqueness: {scope: :conference}
+
   def progress_status
     status = {
       company_name: !self.sponsor.name.blank?
@@ -87,7 +89,7 @@ class Sponsorship < ActiveRecord::Base
         code.save!
         ConferencesCode.create :conference => conference, :code => code
       end
-      sponsorship.save!
+      sponsorship.save
     end
   end
 

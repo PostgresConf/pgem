@@ -16,7 +16,7 @@
         %th URL
         %th Actions
       %tbody
-        - Sponsor.ordered.each do |sponsor|
+        - @sponsors.order(:name).each do |sponsor|
           %tr
             %td
               = image_tag(sponsor.picture.thumb.url, width: '20%')
