@@ -7,11 +7,7 @@
                      "data-interval" => "false" }
   / Wrapper for slides
   .carousel-inner
-    - first_event = EventSchedule.first_event_time(@schedule, date)
-    - if first_event.present?
-      - start_time = "#{first_event} #{@conf_start}".in_time_zone(@conference.timezone)
-    - else 
-      - start_time = "#{date} #{@conf_start}".in_time_zone(@conference.timezone)
+    - start_time = "#{date} #{@conf_start}".in_time_zone(@conference.timezone)
     - (0..carousel_number-1).each do |number|
       %div{ class: "#{ carousel_item_class(number, carousel_number, hrs_per_slide, @hour_column)}" }
         %table.table.table-bordered.schedule-table#schedule
