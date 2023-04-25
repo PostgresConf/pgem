@@ -19,7 +19,7 @@
           - @meetups = Refinery::Meetups::Meetup.upcoming(10)
           - @current = Conference.where('end_date >= ?', Date.current).reorder(sticky: :desc, start_date: :asc)
           - @digital_events = @current.where({digital: true}).limit(5)
-          - @main_conference = @current.first
+          - @main_conference = @current.first || Conference.reorder(sticky: :desc, start_date: :asc).last
           -# top card should have nearest digital event, or use 2nd upcoming conference as a fallback
           - @top_card = @digital_events.first || @current.second
           - @bottom_card = @meetups.first || @current.third
