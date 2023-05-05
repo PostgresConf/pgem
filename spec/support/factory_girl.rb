@@ -5,7 +5,7 @@ RSpec.configure do |config|
   config.before(:suite) do
     if ENV['OSEM_FACTORY_LINT'] != 'false'
       mock_commercial_request
-      FactoryGirl.lint
+      FactoryBot.lint
     end
   end
 

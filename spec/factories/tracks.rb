@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :track do
     name { Faker::Commerce.department(2, true) }
     description { Faker::Lorem.sentence }

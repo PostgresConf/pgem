@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :ticket do
     title { "#{Faker::Hipster.word} Ticket" }
     price_cents 1000

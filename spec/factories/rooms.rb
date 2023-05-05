@@ -1,5 +1,5 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-FactoryGirl.define do
+# Read about factories at https://github.com/thoughtbot/factory_bot
+FactoryBot.define do
   factory :room do
     name { "Room #{Faker::Address.country}" }
     size 4

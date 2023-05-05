@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :contact do
     social_tag { SecureRandom.urlsafe_base64(4) }
     email { Faker::Internet.email }

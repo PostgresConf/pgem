@@ -1,4 +1,4 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
 # It is a feature of our app that first signed up user is admin. This property
 # is set in a before create callback `setup_role` in user model.
@@ -13,7 +13,7 @@
 # For a non-admin user, use: `create(:user)`
 # For an admin user, use: `create(:admin)
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     sequence(:email) { |n| "example#{n}@example.com" }
     sequence(:name) { |n| "name#{n}" }
