@@ -275,7 +275,8 @@ class PaymentsController < ApplicationController
       password = @conference.payment_method.payu_webservice_password
       @wsse = Akami.wsse
       @wsse.credentials(username, password)
-
+    elsif @conference.payment_method.gateway == 'stripe'
+      Stripe.api_key = @conference.payment_method.stripe_secret_key
     end
-  end  
+  end
 end
