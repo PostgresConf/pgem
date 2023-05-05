@@ -20,13 +20,17 @@ class SpeakerInvitation < ActiveRecord::Base
   end
 
   def accept
-    invitee = User.find_by_email(self.email)
+    invitee = User.find_by_email(self.email.downcase)
     if invitee and not self.accepted
       event = self.event
       if event.speakers_pending?
         # remove submitter from the speakers list
         event.speakers = event.speakers.to_a.reject! {|speaker| speaker==event.submitter}
         event.speakers_pending = false
+      end
+      if event.speaker_ids.include? invitee.id
+        self.errors.add(:base, "you are already a speaker in this event")
+        return false
       end
       event.speakers << invitee
       event.save

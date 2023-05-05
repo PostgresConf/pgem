@@ -12,6 +12,8 @@ module Admin
 
     def new
       @sponsorship = @conference.sponsorships.new
+      # exclude existing sponsors from the candidate list
+      @sponsors = Sponsor.where.not(id: @conference.sponsorships.pluck(:sponsor_id)).order(:name)
     end
 
     def create

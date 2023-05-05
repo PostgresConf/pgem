@@ -15,11 +15,6 @@ class Sponsor < ActiveRecord::Base
   validates :short_name, presence: true, allow_blank: false
   validates :short_name, uniqueness: true, allow_blank: false
 
-  def self.ordered
-    sponsors = Sponsor.order(:name)
-    sponsors
-  end
-
   def upcoming_sponsorships
     self.sponsorships.joins(:conference).where("DATE(conferences.end_date) >= ?", Date.today).order("conferences.end_date")
   end

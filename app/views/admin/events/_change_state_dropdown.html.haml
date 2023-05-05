@@ -1,13 +1,13 @@
 - if event.transition_possible? :accept
-  %li= link_to 'Accept event',
-  accept_admin_conference_program_event_path(@conference.short_title, event),
-  method: :patch, id: "accept_event_#{event.id}"
+  -# %li= link_to 'Accept event',
+  -# accept_admin_conference_program_event_path(@conference.short_title, event),
+  -# method: :patch, id: "accept_event_#{event.id}"
 
-  - if @conference.email_settings.send_on_accepted?
-    %li= link_to 'Accept event (without email)',
-    accept_admin_conference_program_event_path(@conference.short_title, event, send_mail: false),
-    method: :patch, hint: 'Accept this event without sending an automated email.',
-    id: "accept_event_without_mail_#{event.id}"
+  -# - if @conference.email_settings.send_on_accepted?
+  -#   %li= link_to 'Accept event (without email)',
+  -#   accept_admin_conference_program_event_path(@conference.short_title, event, send_mail: false),
+  -#   method: :patch, hint: 'Accept this event without sending an automated email.',
+  -#   id: "accept_event_without_mail_#{event.id}"
 
   %li= link_to 'Accept and confirm event',
   accept_and_confirm_admin_conference_program_event_path(@conference.short_title, event),

@@ -1,54 +1,64 @@
-%nav.navbar.navbar-fixed-top.navbar-solid.navbar-custom{:role=>'navigation', :id=>'site-nav'}
-  .container
-    .navbar-header
-      %button{'data-target'=>'.navbar-collapse', 'data-toggle'=>'collapse', :class=>'navbar-toggle', :type=>'button'}
-        %span.sr-only
-          Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      = link_to image_tag(ENV['OSEM_NAVBAR_LOGO'].presence || 'brand.png'), refinery.root_path, class: 'navbar-brand', title: 'Postgres Conference'
-      = link_to Refinery::Core.site_name, refinery.root_path, {class:'navbar-brand' }
-    .collapse.navbar-collapse
-      = navigation_menu.to_html
-      %ul.nav.navbar-nav.navbar-right
-        -if user_signed_in?
-          %li.dropdown
-            %a.dropdown-toggle.userpic{'data-toggle' => 'dropdown', :href => '#', id: 'current-user-detail'}
-              - if not current_user.name.blank?
-                #{current_user.name}
-              -else
-                #{current_user.email}
-              = image_tag(current_user.avatar_url(version: 'small'), title: 'Yo #{current_user.name}!', :alt => '')
-              %b.caret
-            %ul.dropdown-menu
-              = render 'layouts/user_menu'
+%nav#nav-top.navbar.navbar-fixed-top{:role => "navigation"}
+  .container-fluid
+    .row
+      .col-md-10.col-md-offset-1
+        .navbar-header
+          %button.navbar-toggle.hamburger-button{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+            %i.fa.fa-bars.fa-2x.hamburger-icon{"aria-hidden" => "true"}
+          = link_to image_tag(ENV['OSEM_NAVBAR_LOGO'].presence || 'brand.png', class: 'logo'), refinery.root_path, class: 'navbar-brand', title: 'Postgres Conference'
 
-        - else
-          %li.dropdown.visible-desktop
-            %a.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}
-              %span.fa.fa-user
-              Sign In
-              %span.caret
-            .dropdown-menu{:style => 'padding: 17px; min-width: 225px;'}
-              = form_tag main_app.new_user_session_path do
-                = text_field_tag 'user[login]', nil, id: 'user_login_dd', placeholder: 'E-Mail'
-                = password_field_tag 'user[password]', nil, id: 'user_password_dd', placeholder: 'Password'
-                %p.text-right
-                  %small
-                    Remember me
-                    = check_box_tag 'user[remember_me]'
-                %button.btn.btn-success.btn-block Sign in
-                - unless omniauth_configured.empty?
-                  .divider
-                  %h6.text-center
-                    or
-                  = render 'devise/shared/openid_links'
-                %p.text-right
-                  %br
-                  %a.small.btn.btn-xs.btn-default{'data-toggle' => 'collapse', 'data-target' =>  '#navbar-devise-help'}
-                    Need Help?
-                  #navbar-devise-help.collapse
-                    = render 'devise/shared/links'
-                %li.hidden-lg
-                  = link_to('Sign In', main_app.new_user_session_path)
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          -# = navigation_menu.to_html
+          %ul.nav.navbar-nav.navbar-custom
+            %li.uppercase.link-effect
+              %a{:href => "#Conferences"} Conferences
+            %li.uppercase.link-effect
+              %a{:href => "#Digital Events"} Digital events
+            %li.uppercase.link-effect
+              %a{:href => "#Meetups"} Meetups
+            %li.uppercase.link-effect
+              %a{:href => "#Blog"} Blog
+            %li.uppercase.link-effect
+              %a{:href => "/about"} About
+
+            %li.uppercase.link-effect
+              %a{:href => "https://mailchi.mp/postgresconf.org/peoplepostgresdata", :target => '_blank'} Newsletter
+
+          %ul.nav.navbar-nav.navbar-right.navbar-custom
+            -if user_signed_in?
+              %li.dropdown
+                %a.dropdown-toggle.uppercase.userpic{'data-toggle' => 'dropdown', :href => '#', id: 'current-user-detail'}
+                  - if not current_user.name.blank?
+                    #{current_user.name}
+                  -else
+                    #{current_user.email}
+                  = image_tag(current_user.avatar_url(version: 'small'), title: 'Yo #{current_user.name}!', :alt => '')
+                  %b.caret
+                %ul.dropdown-menu
+                  = render 'layouts/user_menu'
+
+            -else
+              %li.dropdown
+                %a.dropdown-toggle.uppercase{"data-toggle" => "dropdown", :href => "#", id: "scrolldown", "data-scrolldown-target": ".sign-in-form h2"}
+                  Sign in
+                  %b.caret
+                .dropdown-menu.sign-in-form
+                  = form_tag main_app.new_user_session_path do
+                    %h2.text-center Sign in
+                    .form-group
+                      = text_field_tag 'user[login]', nil, id: 'user_login_dd', placeholder: 'E-Mail', class: 'form-control'
+                    .form-group
+                      = password_field_tag 'user[password]', nil, id: 'user_password_dd', placeholder: 'Password', class: 'form-control'
+                    .form-group
+                      = button_to 'Log In', main_app.new_user_session_path, class: 'btn cta-btn-other uppercase bold'
+
+                    .form-group.text-center.font-weight-normal
+                      Don't have an account?
+                      = link_to 'Register', main_app.new_user_registration_path
+                    .clearfix
+                      %label.pull-left.checkbox-inline
+                        = check_box_tag 'user[remember_me]'
+                        Remember me
+                      %a.pull-right{"aria-expanded" => "true", "id" => "help_link", "data-target" => "#navbar-devise-help", "data-toggle" => "collapse", :href => "#"} Need help?
+                    #navbar-devise-help.collapse{"aria-expanded" => "true"}
+                      = render 'devise/shared/links'

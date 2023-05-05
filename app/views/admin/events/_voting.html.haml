@@ -24,7 +24,7 @@
           (
           = @ratings.map {|x| "#{x.name}"}.join ', '
           )
-  %tr
+  %tr{id: 'vote_widget'}
     %td.col-md-2
       %b Your vote
     %td

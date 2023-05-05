@@ -114,7 +114,7 @@
           %h3
             Invite another speaker
         .modal-body
-          = semantic_form_for('invitation', url: invite_conference_program_proposal_path(@conference.short_title, @event.id)) do |f|
+          = semantic_form_for('invitation', remote: true, url: invite_conference_program_proposal_path(@conference.short_title, @event.id)) do |f|
             = f.input :email, :as => :email
             %button{class: 'btn btn-primary'}
               Invite

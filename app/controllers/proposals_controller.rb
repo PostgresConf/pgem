@@ -194,16 +194,21 @@ class ProposalsController < ApplicationController
   end
 
   def invite
-    @invitation = @event.speaker_invitations.new(invitation_params)
+    @invitation = @event.speaker_invitations.find_or_initialize_by(invitation_params)
     authorize! :create, @invitation
+    if not @invitation.new_record?
+      @invitation.send_notification
+      flash[:notice] = "Invitation already existed, a new invitation email has been sent to #{@invitation.email}"
+      render js: "window.location = window.location" and return
+    end
 
     if @invitation.save
-      redirect_to conference_program_proposals_path(conference_id: @conference.short_title),
-        notice: "Speaker invitation has been sent to #{@invitation.email}"
+      flash[:notice] = "Speaker invitation has been sent to #{@invitation.email}"
     else
-      redirect_to conference_program_proposals_path(conference_id: @conference.short_title),
-        error: "Failed to invite #{@invitation.email}: #{@invitation.errors.full_messages.join(', ')}"
+      flash[:error] = "Failed to invite #{@invitation.email}: #{@invitation.errors.full_messages.join(', ')}"
     end
+    # yeah, that' weird but it works. the idea here is to reload the current screen AND reset the email in the invitation form
+    render js: "window.location = window.location"
   end
 
   def accept_invitation
@@ -248,6 +253,7 @@ class ProposalsController < ApplicationController
 
   def load_invitation
     @invitation = SpeakerInvitation.find_by_token(params[:token])
+    return redirect_to root_path, alert: 'not found' unless @invitation
 
     unless current_user
       session[:pending_invitation_url] = request.original_url
@@ -258,7 +264,6 @@ class ProposalsController < ApplicationController
         redirect_to new_user_registration_path, alert: 'Please register first.'
       end
     end
-    redirect_to root_path, alert: 'not found' unless @invitation
   end
 
 end

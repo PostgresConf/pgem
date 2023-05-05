@@ -4,6 +4,10 @@
       %h1
         Events
         = "tagged with #{@tag_name}" if @tag_name
+        = "with #{@track_name} track" if @track_name
+        = "with #{@type} type" if @type
+        = "with #{@difficulty} difficulty" if @difficulty
+        = "with #{@state.titleize} status" if @state
         = "(#{@events.length})" if @events.any?
 
         .pull-right
@@ -14,11 +18,11 @@
                 Bulk Operations
                 %span.caret
               %ul.dropdown-menu{:role => "menu"}
-                %li= link_to 'Accept selected', bulk_state_change_admin_conference_program_events_path(@conference.short_title, state: 'accept'), id: 'bulk_accept', data: { method: :patch, confirm: 'Are you sure?'}
-                %li= link_to 'Accept selected (without email)', bulk_state_change_admin_conference_program_events_path(@conference.short_title, state: 'accept', send_mail: false), id: 'bulk_accept', data: { method: :patch, confirm: 'Are you sure?'}
-                %li= link_to 'Confirm selected', bulk_state_change_admin_conference_program_events_path(@conference.short_title, state: 'confirm'), id: 'bulk_confirm', data: { method: :patch, confirm: 'Are you sure?'}
-                %li= link_to 'Reject selected', bulk_state_change_admin_conference_program_events_path(@conference.short_title, state: 'reject'), id: 'bulk_reject', data: { method: :patch, confirm: 'Are you sure?'}
-                %li= link_to 'Reject selected (without email)', bulk_state_change_admin_conference_program_events_path(@conference.short_title, state: 'reject', send_mail: false), id: 'bulk_reject', data: { method: :patch, confirm: 'Are you sure?'}
+                %li= link_to 'Accept selected', '', id: 'bulk_accept', data: {'href': bulk_state_change_admin_conference_program_events_path(@conference.short_title, state: 'accept')}
+                %li= link_to 'Accept selected (without email)', '', id: 'bulk_accept_silent', data: {'href': bulk_state_change_admin_conference_program_events_path(@conference.short_title, state: 'accept', send_mail: false)}
+                %li= link_to 'Confirm selected', '', id: 'bulk_confirm', data: {'href': bulk_state_change_admin_conference_program_events_path(@conference.short_title, state: 'confirm')}
+                %li= link_to 'Reject selected', '', id: 'bulk_reject', data: {'href': bulk_state_change_admin_conference_program_events_path(@conference.short_title, state: 'reject')}
+                %li= link_to 'Reject selected (without email)','', id: 'bulk_reject_silent', data: {'href': bulk_state_change_admin_conference_program_events_path(@conference.short_title, state: 'reject', send_mail: false)}
 
           - if can? :read, Event
             .btn-group
@@ -57,10 +61,49 @@
   .col-md-3
     = render partial: 'admin/events/tag_cloud', locals: {title: 'Tags', data: @tags}
 .row
+  .col-md-3.col-md-offset-9
+    .h4.pull-left
+      Filter:
+    .btn-group.pull-right
+      %button.btn.btn-info.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+        Track
+        %span.caret
+      %ul.dropdown-menu{:role => "menu"}
+        - @program.tracks.each do |track|
+          %li= link_to track.name, with_track_admin_conference_program_events_path(@conference.short_title, track: track.name)
+
+    .btn-group.pull-right
+      %button.btn.btn-info.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+        Difficulty
+        %span.caret
+      %ul.dropdown-menu{:role => "menu"}
+        - @program.difficulty_levels.each do |level|
+          %li= link_to level.title, with_difficulty_admin_conference_program_events_path(@conference.short_title, difficulty: level.title)
+
+    .btn-group.pull-right
+      %button.btn.btn-info.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+        Type
+        %span.caret
+      %ul.dropdown-menu{:role => "menu"}
+        - @program.event_types.each do |event_type|
+          %li= link_to event_type.title, with_type_admin_conference_program_events_path(@conference.short_title, type: event_type.title)
+
+    .btn-group.pull-right
+      %button.btn.btn-info.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+        Status
+        %span.caret
+      %ul.dropdown-menu{:role => "menu"}
+        - ['new', 'withdrawn', 'unconfirmed', 'confirmed', 'cancelled', 'rejected'].each do |state|
+          %li= link_to state.titleize, with_state_admin_conference_program_events_path(@conference.short_title, state: state)
+
+.row
   .col-md-12
     %div.margin-event-table
       %table.table.table-striped.table-bordered.table-hover.datatable-events
         %thead
+          %th
+            %b Sel. all
+            = check_box_tag "select_all", 1, false
           %th
             %b ID
           %th
@@ -90,13 +133,14 @@
         - @events.each do |event|
           %tr
             %td
+              = check_box_tag "selected-event-#{event.id}", 1, false, class: 'event-checkbox',  data: {event_id: event.id}
+            %td
               = event.id
-              = check_box_tag :selected_event, 1, false, class: 'event-checkbox',  data: {event_id: event.id}
             %td
               = link_to event.title, admin_conference_program_event_path(@conference.short_title, event)
 
             - if @program.rating_enabled?
-              %td.col-md-1{'data-order' => "#{event.average_rating}"}
+              %td{'data-order' => "#{event.average_rating}", style:'min-width: 110px'}
                 = render partial: 'voting_index', locals: { event: event }
 
             - if event.submitter && event.submitter.registrations && event.submitter.registrations.count < 1
