@@ -68,7 +68,7 @@ describe Ticket do
     let!(:ticket_purchase) { create(:ticket_purchase, user: user, ticket: ticket) }
 
     context 'user has paid' do
-      before { ticket_purchase.update_attributes(paid: true) }
+      before { ticket_purchase.update(paid: true) }
 
       it 'returns true' do
         expect(ticket.paid?(user)).to eq(true)
@@ -93,7 +93,7 @@ describe Ticket do
     end
 
     context 'user has paid' do
-      before { ticket_purchase.update_attributes(paid: true) }
+      before { ticket_purchase.update(paid: true) }
 
       it 'returns false' do
         expect(ticket.unpaid?(user)).to eq(false)
@@ -118,7 +118,7 @@ describe Ticket do
 
     context 'user has paid' do
       let!(:ticket_purchase) { create(:ticket_purchase, user: user, ticket: ticket, quantity: 20) }
-      before { ticket_purchase.update_attributes(paid: true) }
+      before { ticket_purchase.update(paid: true) }
 
       it 'returns the correct value if the user has bought and paid for this ticket' do
         expect(ticket.quantity_bought_by(user, paid: true)).to eq(20)
@@ -143,7 +143,7 @@ describe Ticket do
 
     context 'user has paid' do
       let!(:ticket_purchase) { create(:ticket_purchase, user: user, ticket: ticket, quantity: 20) }
-      before { ticket_purchase.update_attributes(paid: true) }
+      before { ticket_purchase.update(paid: true) }
 
       it 'returns the correct value if the user has bought this ticket' do
         expect(ticket.total_price(user, paid: true)).to eq(Money.new(100000, 'USD'))

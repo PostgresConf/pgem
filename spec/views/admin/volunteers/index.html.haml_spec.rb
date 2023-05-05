@@ -4,7 +4,7 @@ describe 'admin/volunteers/index' do
 
   it 'renders volunteers days as vdays' do
     @vday = create(:vday)
-    @vday.conference.update_attributes(use_volunteers: true, use_vdays: true)
+    @vday.conference.update(use_volunteers: true, use_vdays: true)
     assign :conference, @vday.conference
     render
     expect(rendered).to have_selector(
@@ -17,7 +17,7 @@ describe 'admin/volunteers/index' do
 
   it 'renders volunteers positions as vpositions' do
     @vposition = create(:vposition)
-    @vposition.conference.update_attributes(
+    @vposition.conference.update(
         use_vpositions: true, use_volunteers: true, use_vdays: true)
     assign :conference, @vposition.conference
     render

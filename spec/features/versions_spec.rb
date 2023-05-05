@@ -32,7 +32,7 @@ feature 'Version' do
 
   scenario 'display changes in cfp', feature: true, versioning: true, js: true do
     cfp = create(:cfp, program: conference.program)
-    cfp.update_attributes(start_date: (Date.today + 1).strftime('%d/%m/%Y'), end_date: (Date.today + 3).strftime('%d/%m/%Y'))
+    cfp.update(start_date: (Date.today + 1).strftime('%d/%m/%Y'), end_date: (Date.today + 3).strftime('%d/%m/%Y'))
     cfp.destroy
 
     visit admin_revision_history_path
@@ -43,7 +43,7 @@ feature 'Version' do
 
   scenario 'display changes in registration_period', feature: true, versioning: true, js: true do
     registration_period = create(:registration_period, conference: conference)
-    registration_period.update_attributes(start_date: (Date.today + 1).strftime('%d/%m/%Y'), end_date: (Date.today + 3).strftime('%d/%m/%Y'))
+    registration_period.update(start_date: (Date.today + 1).strftime('%d/%m/%Y'), end_date: (Date.today + 3).strftime('%d/%m/%Y'))
     registration_period.destroy
 
     visit admin_revision_history_path
@@ -55,7 +55,7 @@ feature 'Version' do
   scenario 'display changes in conference', feature: true, versioning: true, js: true do
     new_conference = create(:conference, title: 'Test Conference')
     organizer.add_role :organizer, new_conference
-    new_conference.update_attributes(title: 'New Con', short_title: 'NewCon')
+    new_conference.update(title: 'New Con', short_title: 'NewCon')
 
     visit admin_revision_history_path
     select '100', from: 'versionstable_length'
@@ -67,7 +67,7 @@ feature 'Version' do
 
   scenario 'display changes in event_type', feature: true, versioning: true, js: true do
     event_type = create(:event_type, program: conference.program, name: 'Discussion')
-    event_type.update_attributes(length: 90, maximum_abstract_length: 10000)
+    event_type.update(length: 90, maximum_abstract_length: 10000)
     event_type.destroy
 
     visit admin_revision_history_path
@@ -78,7 +78,7 @@ feature 'Version' do
 
   scenario 'display changes in lodging', feature: true, versioning: true, js: true do
     lodging = create(:lodging, conference: conference, name: 'Hotel XYZ')
-    lodging.update_attributes(description: 'Nice view,close to venue', website_link: 'http://www.example.com')
+    lodging.update(description: 'Nice view,close to venue', website_link: 'http://www.example.com')
     lodging.destroy
 
     visit admin_revision_history_path
@@ -99,7 +99,7 @@ feature 'Version' do
   scenario 'display changes in room', feature: true, versioning: true, js: true do
     venue = create(:venue, conference: conference)
     room = create(:room, venue: venue, name: 'Auditorium')
-    room.update_attributes(size: 120)
+    room.update(size: 120)
     room.destroy
 
     visit admin_revision_history_path
@@ -111,7 +111,7 @@ feature 'Version' do
   scenario 'display changes in sponsor', feature: true, versioning: true, js: true do
     conference.sponsorship_levels << create_list(:sponsorship_level, 2, conference: conference)
     sponsor = create(:sponsor, conference: conference, name: 'SUSE', sponsorship_level: conference.sponsorship_levels.first)
-    sponsor.update_attributes(website_url: 'https://www.suse.com/company/history', sponsorship_level: conference.sponsorship_levels.second)
+    sponsor.update(website_url: 'https://www.suse.com/company/history', sponsorship_level: conference.sponsorship_levels.second)
     sponsor.destroy
 
     visit admin_revision_history_path
@@ -122,7 +122,7 @@ feature 'Version' do
 
   scenario 'display changes in sponsorship_level', feature: true, versioning: true, js: true do
     sponsorship_level = create(:sponsorship_level, conference: conference)
-    sponsorship_level.update_attributes(title: 'Gold')
+    sponsorship_level.update(title: 'Gold')
     sponsorship_level.destroy
 
     visit admin_revision_history_path
@@ -133,7 +133,7 @@ feature 'Version' do
 
   scenario 'display changes in ticket', feature: true, versioning: true, js: true do
     ticket = create(:ticket, conference: conference, title: 'Gold')
-    ticket.update_attributes(price: 50, description: 'Premium Ticket')
+    ticket.update(price: 50, description: 'Premium Ticket')
     ticket.destroy
 
     visit admin_revision_history_path
@@ -144,7 +144,7 @@ feature 'Version' do
 
   scenario 'display changes in track', feature: true, versioning: true, js: true do
     track = create(:track, program: conference.program, name: 'Distribution')
-    track.update_attributes(description: 'Events about Linux distributions')
+    track.update(description: 'Events about Linux distributions')
     track.destroy
 
     visit admin_revision_history_path
@@ -155,7 +155,7 @@ feature 'Version' do
 
   scenario 'display changes in venue', feature: true, versioning: true, js: true do
     venue = create(:venue, conference: conference, name: 'Example University')
-    venue.update_attributes(website: 'www.example.com new', description: 'Just another beautiful venue')
+    venue.update(website: 'www.example.com new', description: 'Just another beautiful venue')
     venue.destroy
 
     visit admin_revision_history_path
@@ -206,7 +206,7 @@ feature 'Version' do
 
   scenario 'display changes in difficulty levels', feature: true, versioning: true, js: true do
     difficulty_level = create(:difficulty_level, program: conference.program, title: 'Expert')
-    difficulty_level.update_attributes(description: 'Only for Experts')
+    difficulty_level.update(description: 'Only for Experts')
     difficulty_level.destroy
 
     visit admin_revision_history_path
@@ -249,7 +249,7 @@ feature 'Version' do
 
   scenario 'display changes in conference commercials', feature: true, versioning: true, js: true do
     conference_commercial = create(:conference_commercial, commercialable: conference)
-    conference_commercial.update_attributes(url: 'https://www.youtube.com/watch?v=VNkDJk5_9eU')
+    conference_commercial.update(url: 'https://www.youtube.com/watch?v=VNkDJk5_9eU')
     conference_commercial.destroy
 
     visit admin_revision_history_path
@@ -261,7 +261,7 @@ feature 'Version' do
   scenario 'display changes in event commercials', feature: true, versioning: true, js: true do
     event = create(:event, program: conference.program)
     event_commercial = create(:event_commercial, commercialable: event, url: 'https://www.youtube.com/watch?v=M9bq_alk-sw')
-    event_commercial.update_attributes(url: 'https://www.youtube.com/watch?v=VNkDJk5_9eU')
+    event_commercial.update(url: 'https://www.youtube.com/watch?v=VNkDJk5_9eU')
     event_commercial.destroy
 
     visit admin_revision_history_path
@@ -281,7 +281,7 @@ feature 'Version' do
   end
 
   scenario 'display changes in email settings', feature: true, versioning: true, js: true do
-    conference.email_settings.update_attributes(registration_subject: 'xxxxx', registration_body: 'yyyyy', accepted_subject: 'zzzzz')
+    conference.email_settings.update(registration_subject: 'xxxxx', registration_body: 'yyyyy', accepted_subject: 'zzzzz')
 
     visit admin_revision_history_path
     expect(page).to have_text("Someone (probably via the console) updated registration subject, registration body and accepted subject
@@ -301,7 +301,7 @@ feature 'Version' do
     registration = Registration.create(user: organizer, conference: conference)
     event = create(:event, program: conference.program)
     EventsRegistration.create(registration: registration, event: event)
-    EventsRegistration.first.update_attributes(attended: true)
+    EventsRegistration.first.update(attended: true)
     EventsRegistration.last.destroy
     # Here registration is deleted to ensure the event registration related change still displays the asociated user's name
     registration.destroy
@@ -314,7 +314,7 @@ feature 'Version' do
 
   scenario 'display changes in target', feature: true, versioning: true, js: true do
     target = create(:target, conference: conference)
-    target.update_attributes(due_date: Date.today, target_count: 1000)
+    target.update(due_date: Date.today, target_count: 1000)
     target.destroy
 
     visit admin_revision_history_path
@@ -340,7 +340,7 @@ feature 'Version' do
 
   scenario 'display changes in campaign', feature: true, versioning: true, js: true do
     campaign = create(:campaign, conference: conference, name: 'Test Campaign', utm_campaign: 'campaign')
-    campaign.update_attributes(utm_source: 'source', utm_medium: 'medium', utm_term: 'term', utm_content: 'content')
+    campaign.update(utm_source: 'source', utm_medium: 'medium', utm_term: 'term', utm_content: 'content')
     campaign.destroy
 
     visit admin_revision_history_path
@@ -366,7 +366,7 @@ feature 'Version' do
 
   scenario 'display updates to user', feature: true, versioning: true, js: true do
     user = create(:user)
-    user.update_attributes(nickname: 'testnick', affiliation: 'openSUSE')
+    user.update(nickname: 'testnick', affiliation: 'openSUSE')
 
     visit admin_revision_history_path
     expect(page).to have_text("Someone (probably via the console) updated  nickname and affiliation of user #{user.name}")

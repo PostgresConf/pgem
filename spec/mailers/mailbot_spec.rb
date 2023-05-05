@@ -5,7 +5,7 @@ describe Mailbot do
   let!(:email_settings) { create(:email_settings, conference: conference) }
   let(:user) { create(:user, email: 'user@example.com') }
 
-  before { conference.contact.update_attributes(email: 'conf@domain.com') }
+  before { conference.contact.update(email: 'conf@domain.com') }
 
   context 'onboarding and proposal' do
     let(:event_user) { create(:submitter, user: user) }
@@ -38,7 +38,7 @@ describe Mailbot do
 
     describe '.acceptance_mail' do
       before do
-        conference.email_settings.update_attributes(send_on_accepted: true,
+        conference.email_settings.update(send_on_accepted: true,
                                                     accepted_subject: 'Lorem Ipsum Dolsum',
                                                     accepted_body: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit')
       end
@@ -50,7 +50,7 @@ describe Mailbot do
 
     describe '.rejection_mail' do
       before do
-        conference.email_settings.update_attributes(send_on_rejected: true,
+        conference.email_settings.update(send_on_rejected: true,
                                                     rejected_subject: 'Lorem Ipsum Dolsum',
                                                     rejected_body: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit')
       end
@@ -62,7 +62,7 @@ describe Mailbot do
 
     describe '.confirm_reminder_mail' do
       before do
-        conference.email_settings.update_attributes(send_on_confirmed_without_registration: true,
+        conference.email_settings.update(send_on_confirmed_without_registration: true,
                                                     confirmed_without_registration_subject: 'Lorem Ipsum Dolsum',
                                                     confirmed_without_registration_body: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit')
       end
