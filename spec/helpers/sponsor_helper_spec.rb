@@ -7,7 +7,7 @@ describe SponsorsHelper, type: :helper do
     context 'first sponsorship_level' do
       before do
         first_sponsorship_level = create(:sponsorship_level, position: 1)
-        sponsor.update_attributes(sponsorship_level: first_sponsorship_level)
+        sponsor.update(sponsorship_level: first_sponsorship_level)
       end
 
       it 'returns correct url' do
@@ -18,7 +18,7 @@ describe SponsorsHelper, type: :helper do
     context 'second sponsorship_level' do
       before do
         second_sponsorship_level = create(:sponsorship_level, position: 2)
-        sponsor.update_attributes(sponsorship_level: second_sponsorship_level)
+        sponsor.update(sponsorship_level: second_sponsorship_level)
       end
 
       it 'returns correct url' do
@@ -29,7 +29,7 @@ describe SponsorsHelper, type: :helper do
     context 'other sponsorship_level' do
       before do
         other_sponsorship_level = create(:sponsorship_level, position: 3)
-        sponsor.update_attributes(sponsorship_level: other_sponsorship_level)
+        sponsor.update(sponsorship_level: other_sponsorship_level)
       end
 
       it 'returns correct url' do

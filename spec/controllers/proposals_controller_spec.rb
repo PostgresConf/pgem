@@ -10,7 +10,7 @@ describe ProposalsController do
     describe 'GET #new' do
       before do
         # We allow new proposal only if program has open cfp
-        conference.program.update_attributes(cfp: create(:cfp))
+        conference.program.update(cfp: create(:cfp))
         get :new, conference_id: conference.short_title
       end
 
@@ -26,7 +26,7 @@ describe ProposalsController do
 
     describe 'POST #create' do
       # We allow proposal create only if program has open cfp
-      before { conference.program.update_attributes(cfp: create(:cfp)) }
+      before { conference.program.update(cfp: create(:cfp)) }
 
       it 'assigns url variables' do
         post :create, event: attributes_for(:event, event_type_id: event_type.id),
@@ -193,7 +193,7 @@ describe ProposalsController do
     describe 'GET #new' do
       before do
         # We allow new proposal only if program has open cfp
-        conference.program.update_attributes(cfp: create(:cfp))
+        conference.program.update(cfp: create(:cfp))
         get :new, conference_id: conference.short_title
       end
 
@@ -224,7 +224,7 @@ describe ProposalsController do
 
     describe 'POST #create' do
       # We allow proposal create only if program has open cfp
-      before { conference.program.update_attributes(cfp: create(:cfp)) }
+      before { conference.program.update(cfp: create(:cfp)) }
 
       it 'assigns url variables' do
         post :create, event: attributes_for(:event, event_type_id: event_type.id),
@@ -414,7 +414,7 @@ describe ProposalsController do
     end
 
     describe 'PATCH #confirm' do
-      before { event.update_attributes(state: 'unconfirmed') }
+      before { event.update(state: 'unconfirmed') }
 
       context 'confirmed successfully' do
         describe 'when require_registration is set' do
@@ -500,7 +500,7 @@ describe ProposalsController do
 
       context 'event save fails' do
         before do
-          event.update_attributes(state: 'unconfirmed')
+          event.update(state: 'unconfirmed')
           allow_any_instance_of(Event).to receive(:save).and_return(false)
           patch :confirm, conference_id: conference.short_title, id: event.id
         end
@@ -520,7 +520,7 @@ describe ProposalsController do
     end
 
     describe 'PATCH #restart' do
-      before { event.update_attributes(state: 'withdrawn') }
+      before { event.update(state: 'withdrawn') }
 
       it 'assigns url variable' do
         patch :restart, conference_id: conference.short_title, id: event.id
