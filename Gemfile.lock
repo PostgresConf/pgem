@@ -423,11 +423,6 @@ GEM
       activemodel (>= 4.2, < 7.0)
       activerecord (>= 4.2, < 7.0)
       request_store (~> 1.0)
-    gon (5.1.2)
-      actionpack (>= 2.3.0)
-      json
-      multi_json
-      request_store (>= 1.0.5)
     gravtastic (3.2.6)
     groupdate (5.2.4)
       activesupport (>= 5)
@@ -949,7 +944,6 @@ DEPENDENCIES
   formtastic (~> 3.1.5)
   formtastic-bootstrap
   friendly_id (~> 5.2.5)
-  gon (~> 5.1.2)
   gravtastic
   groupdate
   guard-rspec (~> 4.2.8)

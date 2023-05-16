@@ -28,8 +28,8 @@
       = render 'code'
 
     = form_tag(conference_ticket_purchases_path, method: :post, id: 'purchase-form') do |f|
-      - if @conference.tickets.applied_code.present?
-        = hidden_field_tag 'code_id', @conference.tickets.applied_code.id
+      - if @applied_code.present?
+        = hidden_field_tag 'code_id', @applied_code.id
       .col-md-12
         .panel.panel-default.products
           .panel-heading
@@ -42,16 +42,15 @@
                   here*
           .panel-body
             - event_ticket_ids = @conference.program.events.where.not(ticket_id: nil).pluck(:ticket_id)
-            - visible_tickets = @conference.tickets.visible_tickets.sort_by{|t| t.position}
+            - visible_tickets = @conference.tickets.visible_tickets(@applied_code).sort_by{|t| t.position}
             - visible_tickets.each do |ticket|
-              - unless event_ticket_ids.include? ticket.id
-                = render partial: 'ticket', f: f, locals: {ticket: ticket, event: nil}
-                = hidden_field_tag "purchase_prices[][#{ticket.id}]", ticket.adjusted_price
-              - else
-                = hidden_field_tag "purchase_prices[][#{ticket.id}]", ticket.adjusted_price
+              = hidden_field_tag "purchase_prices[][#{ticket.id}]", ticket.adjusted_price(@applied_code)
+              - if event_ticket_ids.include? ticket.id
                 = hidden_field_tag("tickets[][#{ticket.id}]", 0, type: 'number', min: 0, class: "form-control quantity", 'data-id' => ticket.id)
                 - ticket.ticketed_events.each do |event|
                   = render partial: 'ticket', f: f, locals: {ticket: ticket, event: event}
+              - else
+                = render partial: 'ticket', f: f, locals: {ticket: ticket, event: nil}
 
             - if @conference.codes.any?
               = link_to 'Apply Promo Code!','#', 'data-toggle' => 'modal', 'data-target' => '#apply-code', class: 'btn btn-info pull-right'

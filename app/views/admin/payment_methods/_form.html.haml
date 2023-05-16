@@ -33,7 +33,7 @@
 .row
   .col-md-8
     .page-header
-      %h1 Sponsorship Information
+      %h1 Payment Method
 .row
   .col-md-8
     = semantic_form_for(@payment_method, url: admin_conference_payment_method_path(@conference.short_title)) do |f|
@@ -50,7 +50,7 @@
         = f.input :payu_webservice_name, label: 'Webservice Name'
         = f.input :payu_webservice_password, :as => :password, label: 'Webservice Password'
         = f.input :payu_signature_key, label: 'Signature Key'
-        = f.input :payu_service_domain, label: 'Service Domain (staging.payu.co.za)'
+        = f.input :payu_service_domain, label: 'Service Domain (e.g. staging.payu.co.za)'
       %div#stripe
         = f.input :stripe_publishable_key, label: 'Publishable Key'
         = f.input :stripe_secret_key, label: 'Secret Key'

@@ -29,14 +29,11 @@ class TicketPurchase < ActiveRecord::Base
   scope :by_user, -> (user) { where(user_id: user.id) }
 
   def total_purchase_price
-    tpp = purchase_price_cents * quantity
-    Money.new(tpp, conference.default_currency)
+    Money.new(purchase_price_cents * quantity, conference.default_currency)
   end
 
   def self.total_payments(conference, ticket)
-    total_paid = TicketPurchase.where(ticket_id: ticket.id, paid: true,
-                         conference_id: conference.id).joins(:payment).sum(:purchase_price_cents)
-
+    total_paid = TicketPurchase.by_conference(conference).paid.joins(:payment).sum(:purchase_price_cents)
     Money.new(total_paid, conference.default_currency)
   end
 
@@ -44,7 +41,7 @@ class TicketPurchase < ActiveRecord::Base
     errors = []
     ActiveRecord::Base.transaction do
       conference.tickets.each do |ticket|
-        chosen_event_list = nil 
+        chosen_event_list = nil
         if chosen_events.present?
           chosen_events.each do |key, value|
             if key == ticket.id.to_s
@@ -56,13 +53,13 @@ class TicketPurchase < ActiveRecord::Base
         quantity = purchases[ticket.id.to_s].to_i
         price = prices[ticket.id.to_s].to_f
 
-	if quantity > 0
+        if quantity > 0
           code = Code.find_by(id: code_id)
-	  if code.present?
-	    if TicketPurchase.get_code_usage(conference, code) >= code.max_uses && code.max_uses != 0
+          if code.present?
+            if TicketPurchase.get_code_usage(conference, code) >= code.max_uses && code.max_uses != 0
               errors.push( "The Promotional Code (" + code.name + ") has aleady been used")
-	    end
-	  end
+            end
+          end
 
           # if the user bought the ticket, just update the quantity
           if ticket.bought?(user) && ticket.unpaid?(user)
@@ -74,7 +71,7 @@ class TicketPurchase < ActiveRecord::Base
           if purchase && !purchase.save
             errors.push(purchase.errors.full_messages)
           end
-	end 
+        end
       end
     end
     errors.join('. ')
@@ -109,18 +106,17 @@ class TicketPurchase < ActiveRecord::Base
 
   def pay(payment, user)
     if self.pending_event_tickets.present?
+      # FIXME: this is very bad, should we convert this field to yaml or json and get rid of eval?
       pending_tkts = eval(self.pending_event_tickets)
     end
-    update_attributes(paid: true, payment: payment, pending_event_tickets: nil)
+    update(paid: true, payment: payment, pending_event_tickets: nil)
     PhysicalTicket.transaction do
       if pending_tkts.present?
         pending_tkts.each do |evt, qty|
           if qty.present?
-            for i in 1..qty.to_i
-              physical_tickets.assign(self, user, nil, evt.to_i)
-            end
+            qty.times { physical_tickets.assign(self, user, nil, evt.to_i) }
           end
-        end      
+        end
       else
         quantity.times { physical_tickets.assign(self, user, nil, nil) }
       end
@@ -129,7 +125,6 @@ class TicketPurchase < ActiveRecord::Base
   end
 
   def self.get_code_usage(conference, code)
-    usage = TicketPurchase.where(conference_id: conference.id, code_id: code.id).sum(:quantity)
-    usage
+    TicketPurchase.where(conference_id: conference.id, code_id: code.id).sum(:quantity)
   end
 end

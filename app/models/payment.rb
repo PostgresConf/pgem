@@ -6,6 +6,7 @@ class Payment < ActiveRecord::Base
   attr_accessor :stripe_customer_email
   attr_accessor :stripe_customer_token
   attr_accessor :payment_method_nonce
+  attr_accessor :applied_code
 
   validates :status, presence: true
   validates :user_id, presence: true
@@ -20,7 +21,7 @@ class Payment < ActiveRecord::Base
   }
 
   def amount_to_pay
-    Ticket.total_price(conference, user, paid: false).cents
+    Ticket.total_price(conference, user, applied_code, paid: false)
   end
 
   def amount_as_money
@@ -46,29 +47,72 @@ class Payment < ActiveRecord::Base
   end
 
   def purchase
-    if amount_to_pay > 0
-      if @conference.payment_method.gateway == 'stripe'
+    if amount_to_pay == 0
+      self.amount = 0
+      self.status = 'success'
+      return true
+    end
+
+    if conference.payment_method.present?
+      return self.send "purchase_with_#{conference.payment_method.gateway}"
+    else
+      errors.add(:base, "No payment method configured for this conference")
+      self.status = 'failure'
+      return false
+    end
+  end
+
+  private
+    def purchase_with_stripe
+      begin
         gateway_response = Stripe::Charge.create source: stripe_customer_token,
-                                               receipt_email: stripe_customer_email,
-                                               description: "ticket purchases(#{user.username})",
-                                               amount: amount_to_pay,
-                                               currency: conference.tickets.first.price_currency
+        receipt_email: stripe_customer_email,
+        description: "ticket purchases(#{user.username})",
+        amount: amount_to_pay.cents,
+        currency: conference.tickets.first.price_currency
 
         self.amount = gateway_response[:amount]
         self.last4 = gateway_response[:source][:last4]
         self.authorization_code = gateway_response[:id]
         self.status = 'success'
+      rescue Stripe::StripeError => error
+        errors.add(:base, error.message)
+        self.status = 'failure'
+        return false
       end
-    else
-      self.amount = 0
-      self.status = 'success'
+      true
     end
 
-    true
+    def purchase_with_braintree
+      result = Braintree::Transaction.sale(
+        :amount => -1,
+        :payment_method_nonce => self.payment_method_nonce,
+        :merchant_account_id => conference.payment_method.braintree_merchant_account,
+        :customer => {
+            :email => user.email,
+            :first_name => user.first_name,
+            :last_name => user.last_name
+        },
+        :options => {
+            :submit_for_settlement => true
+        }
 
-  rescue Stripe::StripeError => error
-    errors.add(:base, error.message)
-    self.status = 'failure'
-    false
-  end
+      )
+      if result.success?
+        self.authorization_code = result.transaction.id
+        self.amount = result.transaction.amount * 100
+        self.last4 = result.transaction.credit_card_details.last_4
+        self.status = 'success'
+        return true
+      else
+        @error_messages = result.errors.map { |error| "Error: #{error.code}: #{error.message}" }
+        errors.add(:base, @error_messages)
+        return false
+      end
+    end
+
+    # FIXME: legacy payu is a candidate for removal
+    def purchase_with_payu
+      return false
+    end
 end

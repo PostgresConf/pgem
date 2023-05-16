@@ -11,8 +11,6 @@ class Ticket < ActiveRecord::Base
 
   has_and_belongs_to_many :codes, :join_table => :codes_tickets
 
-  cattr_accessor :applied_code
-
   enum ticket_type: [:normal, :date_range, :day_pass]
 
   has_paper_trail meta: { conference_id: :conference_id }
@@ -64,21 +62,23 @@ class Ticket < ActiveRecord::Base
   def has_benefit?(benefit)
     TicketGroupBenefitsTicket.where(ticket_group_benefit_id: benefit.id, ticket_id: self.id).exists?
   end
-  
-  def total_price(user, paid: false)
-    quantity_bought_by(user, paid: paid) * adjusted_price
+
+  # total price is actually calculated from ticket purchase
+  # move this to purchase?
+  def total_price(user, applied_code, paid: false)
+    quantity_bought_by(user, paid: paid) * adjusted_price(applied_code)
   end
 
   def self.total_quantity(conference, user, paid: false)
     TicketPurchase.where(conference_id: conference.id, user_id: user.id, paid: paid).sum(:quantity)
   end
 
-  def self.total_price(conference, user, paid: false)
+  def self.total_price(conference, user, applied_code , paid: false)
     tickets = Ticket.where(conference_id: conference.id)
     result = nil
     begin
       tickets.each do |ticket|
-        price = ticket.total_price(user, paid: paid)
+        price = ticket.total_price(user, applied_code, paid: paid)
         if result
           result +=  price unless price.zero?
         else
@@ -104,7 +104,7 @@ class Ticket < ActiveRecord::Base
     cur_price
   end
 
-  def adjusted_price
+  def adjusted_price(applied_code)
     if applied_code.present?
       if Ticket.where(id: id).joins(:codes).where("codes.id = ?", applied_code.id).count > 0
         adj_price = current_price - (current_price * ((applied_code.discount.to_f) / 100.0))
@@ -117,15 +117,12 @@ class Ticket < ActiveRecord::Base
     adj_price
   end
 
-  def self.visible_tickets
-    if applied_code.present?
-      if applied_code.code_type.title == 'Access'
-        where(hidden: true).joins(:codes).where("codes.id = ?", applied_code.id) | where(hidden: false)
-      else
-        where(hidden: false)
-      end
+  def self.visible_tickets(applied_code)
+    return visible unless applied_code.present?
+    if applied_code.code_type.title == 'Access'
+      where(hidden: true).joins(:codes).where("codes.id = ?", applied_code.id) | visible
     else
-      where(hidden: false)
+      visible
     end
   end
 
@@ -134,7 +131,7 @@ class Ticket < ActiveRecord::Base
   end
 
   # This will return the maximum number of tickets available within one purchase, maxing out at max_per_purchase
-  def purchase_quantity_available
+  def purchase_quantity_available(applied_code)
     available = max_per_purchase
     if applied_code.present?
       if Ticket.where(id: id).joins(:codes).where("codes.id = ?", applied_code.id).count > 0

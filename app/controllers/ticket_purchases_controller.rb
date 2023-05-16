@@ -14,7 +14,7 @@ class TicketPurchasesController < ApplicationController
       return redirect_to conference_tickets_path(@conference.short_title)
     end
 
-
+    # FIXME: test this, it seems that it is possible to purchase zero tickets
     if tkts[0].blank?
       return redirect_to conference_tickets_path(@conference.short_title),
       error: 'Please get at least one ticket to continue.'

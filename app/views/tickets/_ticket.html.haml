@@ -13,12 +13,12 @@
     .col-md-6.col-sm-10.col-xs-8.text-right
       %h5
         %strong
-          %span{id: "price_#{ticket.id}", data:{price: ticket.adjusted_price}}
+          %span{id: "price_#{ticket.id}", data:{price: ticket.adjusted_price(@applied_code)}}
           - if ticket.current_price.zero?
             Free!
           - else
             = ticket.current_price.symbol
-            = humanized_money ticket.adjusted_price
+            = humanized_money ticket.adjusted_price(@applied_code)
             %span.hidden.total_row{id: "total_row_#{ticket.id}"}
               0
     .col-md-6.col-sm-2.col-xs-4
@@ -41,4 +41,4 @@
                 = render partial: 'event_listing', locals: { event: event }
 
       - else
-        = select_tag("tickets[][#{ticket.id}]", options_for_select((0..ticket.purchase_quantity_available).to_a), class: "selectpicker form-control quantity", 'data-id' => ticket.id)
+        = select_tag("tickets[][#{ticket.id}]", options_for_select((0..ticket.purchase_quantity_available(@applied_code)).to_a), class: "selectpicker form-control quantity", 'data-id' => ticket.id)

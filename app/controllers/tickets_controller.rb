@@ -20,13 +20,12 @@ class TicketsController < ApplicationController
         else
           flash.now[:notice] = "The Promotional Code (#{applied_code}) has been applied."
           @applied_code = code
+          session[:applied_code_id] = code.id
         end
       else
         flash.now[:warning] = "The Promotional Code (#{applied_code}) is not valid."
       end
     end
-
-    Ticket.applied_code = code
   end
 
   def complete

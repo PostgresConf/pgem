@@ -14,6 +14,7 @@ class ReceiptPdf < InvoicePrinter::Document
       if line.code_id.present?
         discount = Code.get_discount(line.code_id, line.ticket_id)
       end
+
       items << InvoicePrinter::Document::Item.new(
         name: line.title,
         quantity: line.quantity,
