@@ -14,7 +14,7 @@ Refinery::PagesController.class_eval do
 
   def set_structured_data
     @announced_conference = Conference.where('end_date >= ?', Date.current).reorder(start_date: :asc).first
-    return unless @announced_conference
+    return unless @announced_conference and @announced_conference.description and @announced_conference.venue
 
     # TODO: add Offers (tickets)
     # see https://developers.google.com/search/docs/appearance/structured-data/product#product-with-shipping-example
