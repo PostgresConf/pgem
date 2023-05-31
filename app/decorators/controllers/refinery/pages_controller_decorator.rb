@@ -23,7 +23,7 @@ Refinery::PagesController.class_eval do
       description: @announced_conference.description,
       startDate: @announced_conference.start_date,
       endDate: @announced_conference.end_date,
-      image: @announced_conference.picture.url,
+      image: @announced_conference.picture.url || '',
       # TODO: use virtual location instead of Place for digital events
       location: SchemaDotOrg::Place.new(address: @announced_conference.venue.address),
       url: main_app.conference_url(@announced_conference.short_title)
