@@ -110,9 +110,4 @@ class Payment < ActiveRecord::Base
         return false
       end
     end
-
-    # FIXME: legacy payu is a candidate for removal
-    def purchase_with_payu
-      return false
-    end
 end

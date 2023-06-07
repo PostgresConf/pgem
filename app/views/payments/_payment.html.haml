@@ -39,8 +39,8 @@
         = button_tag(type: 'submit', class: 'btn btn-success btn-lg') do
           Confirm
 
-- elsif @conference.payment_method.gateway == 'braintree'
-  - @client_token = Braintree::ClientToken.generate
+- if @conference.payment_method.gateway == 'braintree'
+
   = form_tag conference_payments_path, id: 'payment-form' do
     #dropin-container
     = hidden_field_tag("payment_method_nonce", nil, :id => "nonce")
@@ -75,15 +75,5 @@
           });
         });
       });
-- elsif @conference.payment_method.gateway == 'payu'
-  = form_tag conference_payments_path do
-    - if @total_amount_to_pay.cents > 0
-      .pull-right
-        = button_tag(type: 'submit', class: 'btn btn-success btn-lg',  data: {confirm: 'You will be redirected to our payment processor (PayU) to collect your payment information. Are you sure you wish to continue?'}) do
-          Pay #{humanized_money_with_symbol @total_amount_to_pay}
-    - else
-      .pull-right
-        = button_tag(type: 'submit', class: 'btn btn-success btn-lg') do
-          Confirm
 
 = link_to '	Edit', conference_tickets_path(@conference.short_title), class: 'btn btn-info btn-lg'

@@ -1,32 +1,20 @@
 :javascript
   $(document).ready(function() {
-    hide_fields();
+    adjust_form();
+    $('#payment_method_gateway').change(adjust_form)
   });
 
-  function hide_fields() {
-    var e = document.getElementById("payment_method_gateway");
-    var gateway = e.options[e.selectedIndex].value;
-
-    var bt = document.getElementById("braintree");
-    var pu = document.getElementById("payu");
-    var st = document.getElementById("stripe");
+  function adjust_form() {
+    let gateway = $("#payment_method_gateway").val();
 
     if (gateway === "braintree") {
-      bt.style.display = "block";
-      pu.style.display = "none";
-      st.style.display = "none";
-    }
-
-    if (gateway === "payu") {
-      bt.style.display = "none";
-      pu.style.display = "block";
-      st.style.display = "none";
+      $('#braintree').show()
+      $('#stripe').hide()
     }
 
     if (gateway === "stripe") {
-      bt.style.display = "none";
-      pu.style.display = "none";
-      st.style.display = "block";
+      $('#braintree').hide()
+      $('#stripe').show()
     }
   }
 
@@ -37,20 +25,13 @@
 .row
   .col-md-8
     = semantic_form_for(@payment_method, url: admin_conference_payment_method_path(@conference.short_title)) do |f|
-      = f.input :gateway, :as => :select, :collection => PaymentMethod::GATEWAYS, :input_html => { :onchange => "hide_fields();"}
+      = f.input :gateway, as: :select, collection: PaymentMethod::GATEWAYS
       %div#braintree
-        = f.input :braintree_environment, :as => :select, :collection => PaymentMethod::BRAINTREE_ENVS
+        = f.input :braintree_environment, as: :select, collection: PaymentMethod::BRAINTREE_ENVS
         = f.input :braintree_merchant_id, label: 'Merchant ID'
         = f.input :braintree_public_key, label: 'Public Key'
         = f.input :braintree_private_key, label: 'Private Key'
         = f.input :braintree_merchant_account, label: 'Merchant Account'
-      %div#payu
-        = f.input :payu_store_name, label: 'Store Name'
-        = f.input :payu_store_id, label: 'Store ID'
-        = f.input :payu_webservice_name, label: 'Webservice Name'
-        = f.input :payu_webservice_password, :as => :password, label: 'Webservice Password'
-        = f.input :payu_signature_key, label: 'Signature Key'
-        = f.input :payu_service_domain, label: 'Service Domain (e.g. staging.payu.co.za)'
       %div#stripe
         = f.input :stripe_publishable_key, label: 'Publishable Key'
         = f.input :stripe_secret_key, label: 'Secret Key'
