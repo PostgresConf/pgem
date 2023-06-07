@@ -84,8 +84,17 @@ class Payment < ActiveRecord::Base
     end
 
     def purchase_with_braintree
-      result = Braintree::Transaction.sale(
-        :amount => -1,
+      gateway = Braintree::Gateway.new(
+        :environment => conference.payment_method.braintree_environment,
+        :merchant_id => conference.payment_method.braintree_merchant_id,
+        :public_key => conference.payment_method.braintree_public_key,
+        :private_key => conference.payment_method.braintree_private_key,
+      )
+
+      result = gateway.transaction.sale(
+        # use .amount that returns BigDecimal to avoid ambiguity
+        # braintree expects either a string or big decimal for its :amount field,
+        :amount => amount_to_pay.amount,
         :payment_method_nonce => self.payment_method_nonce,
         :merchant_account_id => conference.payment_method.braintree_merchant_account,
         :customer => {

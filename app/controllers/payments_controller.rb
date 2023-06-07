@@ -55,25 +55,18 @@ class PaymentsController < ApplicationController
 
   def setup_payment_client
     if @conference.payment_method.gateway == 'braintree'
-      Braintree::Configuration.environment = @conference.payment_method.braintree_environment
-      Braintree::Configuration.merchant_id = @conference.payment_method.braintree_merchant_id
-      Braintree::Configuration.public_key = @conference.payment_method.braintree_public_key
-      Braintree::Configuration.private_key = @conference.payment_method.braintree_private_key
-    elsif @conference.payment_method.gateway == 'payu'
-      @http = HTTPClient.new
+      gateway = Braintree::Gateway.new(
+        :environment => @conference.payment_method.braintree_environment,
+        :merchant_id => @conference.payment_method.braintree_merchant_id,
+        :public_key => @conference.payment_method.braintree_public_key,
+        :private_key => @conference.payment_method.braintree_private_key,
+      )
+      @client_token = gateway.client_token.generate
+    end
 
-      @base_url = 'https://' + @conference.payment_method.payu_service_domain
-      wsdl_url = @base_url + '/service/PayUAPI?wsdl'
-      wsdl = @http.get_content wsdl_url
-
-      @client = LolSoap::Client.new(wsdl)
-
-      username = @conference.payment_method.payu_webservice_name
-      password = @conference.payment_method.payu_webservice_password
-      @wsse = Akami.wsse
-      @wsse.credentials(username, password)
-    elsif @conference.payment_method.gateway == 'stripe'
-      Stripe.api_key = @conference.payment_method.stripe_secret_key
+    if @conference.payment_method.gateway == 'stripe'
+      # it seems that this is not needed, stripe transaction is performed using stripe_customer_token which is enough
+      # Stripe.api_key = @conference.payment_method.stripe_secret_key
     end
   end
 end
