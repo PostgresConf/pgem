@@ -5,7 +5,7 @@ module ApplicationHelper
   # Checks if the voting has already started, or if it has already ended
   #
   def voting_open_or_close(program)
-    return if program.voting_period?
+    return unless program.voting_period?
     if program.voting_start_date > Date.today
       return 'Voting period has not started yet!'
     else # voting_end_date > Date.today because voting_start_date < voting_end_date
