@@ -1,9 +1,9 @@
 module RefineryHelper
   def navigation_menu
     presenter = Refinery::Pages::MenuPresenter.new(refinery_menu_pages, self)
-    presenter.css = ""
+    presenter.css = "uppercase link-effect"
     presenter.menu_tag = :span
-    presenter.list_tag_css = "nav navbar-nav"
+    presenter.list_tag_css = "nav navbar-nav navbar-custom"
     presenter.selected_css = "active"
     presenter.first_css = ""
     presenter.last_css = ""

@@ -8,7 +8,6 @@
           = link_to image_tag(ENV['OSEM_NAVBAR_LOGO'].presence || 'brand.png', class: 'logo'), refinery.root_path, class: 'navbar-brand', title: 'Postgres Conference'
 
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          -# = navigation_menu.to_html
           %ul.nav.navbar-nav.navbar-custom
             %li.uppercase.link-effect
               %a{:href => "#Conferences"} Conferences
