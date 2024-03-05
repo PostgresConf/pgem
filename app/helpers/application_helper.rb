@@ -376,6 +376,10 @@ module ApplicationHelper
     (size - 31) / 17
   end
 
+  def speaker_links(event)
+    safe_join(event.speakers.map{ |speaker| link_to speaker.name, admin_user_path(speaker) }, ',')
+  end
+
   def speaker_height(rooms)
     # td padding = 3px
     speaker_height = td_height(rooms) - 6 - event_height(rooms)

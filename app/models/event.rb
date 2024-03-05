@@ -242,9 +242,11 @@ class Event < ActiveRecord::Base
   # Returns +Hash+
   def progress_status
     {
-      biography: !self.submitter.biography.blank?,
-      subtitle: !self.subtitle.blank?,
-      track: (!self.track.blank? unless self.program.tracks.empty?),
+      registered:       speakers.all? { |speaker| program.conference.user_registered? speaker },
+      commercials:      commercials.any?,
+      biographies:      speakers.all? { |speaker| !speaker.biography.blank? },
+      subtitle:         !self.subtitle.blank?,
+      track:            (!self.track.blank? unless self.program.tracks.empty?),
       difficulty_level: !self.difficulty_level.blank?,
       title: true,
       abstract: true
