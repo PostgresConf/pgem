@@ -5,19 +5,19 @@
         %b
           Confirmed?
         - if can? :toggle_confirmation, @user
-          = check_box_tag @user.id, @user.id, @user.confirmed?, 
-            method: :patch, 
-            url: "/admin/users/#{@user.id}/toggle_confirmation?user[to_confirm]=", 
-            class: 'switch-checkbox', 
+          = check_box_tag @user.id, @user.id, @user.confirmed?,
+            method: :patch,
+            url: "/admin/users/#{@user.id}/toggle_confirmation?user[to_confirm]=",
+            class: 'switch-checkbox',
             readonly: false,
-            data: { size: 'small', on_color: 'success', off_color: 'warning', on_text: 'Yes', off_text: 'No' } 
+            data: { size: 'small', on_color: 'success', off_color: 'warning', on_text: 'Yes', off_text: 'No' }
         - else
-          = check_box_tag @user.id, @user.id, @user.confirmed?, 
-            method: :patch, 
-            url: "/admin/users/#{@user.id}/toggle_confirmation?user[to_confirm]=", 
-            class: 'switch-checkbox', 
+          = check_box_tag @user.id, @user.id, @user.confirmed?,
+            method: :patch,
+            url: "/admin/users/#{@user.id}/toggle_confirmation?user[to_confirm]=",
+            class: 'switch-checkbox',
             readonly: true,
-            data: { size: 'small', on_color: 'success', off_color: 'warning', on_text: 'Yes', off_text: 'No' } 
+            data: { size: 'small', on_color: 'success', off_color: 'warning', on_text: 'Yes', off_text: 'No' }
     = f.input :is_admin, hint: 'An admin can create a new conference, manage users and make other users admins.'
     = f.input :name, :as => :string
     = f.input :first_name, :as => :string
@@ -29,6 +29,11 @@
     = f.input :password
     = f.input :affiliation, :as => :string
     = f.input :title, as: :string, label: 'Job Title'
+    = f.input :avatar, label: 'Local Avatar'
+    - if f.object.avatar?
+      = image_tag f.object.avatar.medium.url
+      = f.input :remove_avatar, as: :boolean, hint: "Tick this if you want to delete your local avatar"
+
     = f.input :biography, input_html: { rows: 10, data: { provide: 'markdown-editable' } },
       hint: markdown_hint
   = f.actions do
