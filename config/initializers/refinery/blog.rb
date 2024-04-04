@@ -13,6 +13,7 @@ Refinery::Blog.configure do |config|
 
   # If you're grafting onto an existing app, change this to your User class
   Refinery::Blog.user_class = "User"
+  config.allowed_author_ids = [44, 8705, 1414, 235, 1192, 5, 1677, 279, 2062, 237, 157, 1875, 256]
 end
 
 # a hacky way to force the new controller action into app routes, could we do better?
