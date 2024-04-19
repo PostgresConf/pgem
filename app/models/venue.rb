@@ -20,7 +20,7 @@ class Venue < ActiveRecord::Base
 
   def country_name
     name = ISO3166::Country[country]
-    name.name if name
+    name.common_name if name
   end
 
   def location?
