@@ -6,7 +6,7 @@ if Gem::Version.new(Bundler::VERSION) < Gem::Version.new('1.8.4')
 end
 
 # as web framework
-gem 'rails', '~> 6.1.6'
+gem 'rails', '~> 6.1.7'
 gem 'zeitwerk', '~> 2.5.4'
 
 gem 'braintree'
