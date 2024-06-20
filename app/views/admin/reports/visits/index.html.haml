@@ -18,7 +18,7 @@
           .col-md-6
             = f.input :start_date, label: 'Start Date', :as => :string, :input_html => {value: @start_date, :id => "report-start-datepicker", :readonly => "readonly" }
           .col-md-6
-            = f.input :end_date, label: 'End Date', :as => :string, :input_html => {value: @end_date, :id => "report-end-datepicker", :readonly => "readonly" }\
+            = f.input :end_date, label: 'End Date', :as => :string, :input_html => {value: @end_date, :id => "report-end-datepicker", :readonly => "readonly" }
         .row.formreset
           .col-md-4
             = f.input :utm_campaign, label: 'UTM Campaign', as: :select,
@@ -105,7 +105,6 @@
     })
 
     $('#submit_pdf').click(function(){
-      debugger
       $(this).append('<input type="hidden" name="as_pdf" value="true" /> ');
       return true
     })
