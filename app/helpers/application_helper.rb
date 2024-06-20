@@ -492,6 +492,7 @@ module ApplicationHelper
 
   def subscription_change_description(version)
     user = current_or_last_object_state(version.item_type, version.item_id).user
+    return unless user
     user_name = user.name unless user.id.to_s == version.whodunnit
     version.event == 'create' ? "subscribed #{user_name} to" : "unsubscribed #{user_name} from"
   end
