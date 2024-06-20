@@ -5,7 +5,7 @@ module Admin
     def index
       authorize! :index, PaperTrail::Version.new(item_type: 'User')
       conf_ids_for_organizer = current_user.is_admin? ? Conference.pluck(:id) : Conference.with_role(:organizer, current_user).pluck(:id)
-      @versions = PaperTrail::Version.where(["conference_id IN (?) OR item_type = 'User'", conf_ids_for_organizer])
+      @versions = PaperTrail::Version.where(["conference_id IN (?) OR item_type = 'User'", conf_ids_for_organizer]).order(created_at: :desc).limit(500)
     end
 
     def revert_attribute
