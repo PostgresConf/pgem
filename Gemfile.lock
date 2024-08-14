@@ -1,14 +1,14 @@
 GIT
   remote: https://github.com/AIDCVT/refinerycms-blog
-  revision: 3f1b0c68db1f4d7005656058d999c929a9185cfa
-  ref: 3f1b0c6
+  revision: d6932e437bbc0d250f49f13e64e4fec0e45d3247
+  ref: d6932e437bbc0d250f49f13e64e4fec0e45d3247
   specs:
     refinerycms-blog (4.0.0)
       activemodel-serializers-xml (~> 1.0, >= 1.0.1)
       acts-as-taggable-on
       filters_spam (~> 0.2)
       friendly_id (>= 5.1.0, < 5.5)
-      globalize (>= 5.3, < 6.1)
+      globalize (>= 5.3, < 7.1)
       rails_autolink (~> 1.1.3)
       refinerycms-core (~> 4.1.0)
       refinerycms-settings (~> 4.0)
@@ -16,34 +16,17 @@ GIT
       seo_meta (~> 3.0, >= 3.0.0)
 
 GIT
-  remote: https://github.com/anitagraham/refinerycms-search
-  revision: 36fd8a39be5909c2a83e5faee93a5fb46d1b3fb2
-  ref: 36fd8a39be5909c2a83e5faee93a5fb46d1b3fb2
+  remote: https://github.com/NickYudin/formtastic-bootstrap
+  revision: bd2a62213252a104721f24646502468bb4309b37
+  ref: bd2a62213252a104721f24646502468bb4309b37
   specs:
-    refinerycms-search (4.1.0)
-      refinerycms-acts-as-indexed (~> 4.0)
-      refinerycms-core (~> 4.0)
+    formtastic-bootstrap (3.2.0)
+      formtastic (>= 3.0)
 
 GIT
-  remote: https://github.com/eug3nix/schema-dot-org
-  revision: 0bb7508f3f92e5edac05991d730faecce9cadf46
-  branch: pgem_entities
-  specs:
-    schema_dot_org (1.6.1)
-      validated_object (~> 2.0.2)
-
-GIT
-  remote: https://github.com/mes/survey
-  revision: 2ba85665c89bc7981748c52c804736782fea6dc3
-  specs:
-    survey (0.2)
-      rails (>= 3.2.6)
-      railties (>= 3.2.6)
-
-GIT
-  remote: https://github.com/refinery/refinerycms
-  revision: aee49a603860bf7d5fdb1532b9add5f4e7f839f4
-  branch: master
+  remote: https://github.com/anitagraham/refinerycms
+  revision: d1d981e156f7ba1bc966d29ba0df086eb7a0081a
+  ref: d1d981e156f7ba1bc966d29ba0df086eb7a0081a
   specs:
     refinerycms (4.1.0)
       refinerycms-core (= 4.1.0)
@@ -74,14 +57,56 @@ GIT
       awesome_nested_set (~> 3.1, >= 3.1.0)
       babosa (~> 1.0)
       diffy (~> 3.1, >= 3.1.0)
-      friendly_id (>= 5.1.0, < 5.3)
-      friendly_id-mobility (~> 0.5)
+      friendly_id (>= 5.4.0)
+      friendly_id-mobility (~> 1.0.3)
       refinerycms-core (= 4.1.0)
       seo_meta (~> 3.0, >= 3.0.0)
       speakingurl-rails (~> 8.0, >= 8.0.0)
     refinerycms-resources (4.1.0)
       refinerycms-core (= 4.1.0)
       refinerycms-dragonfly (~> 1.0)
+
+GIT
+  remote: https://github.com/anitagraham/refinerycms-i18n
+  revision: db49a72b9784128c279bced597151653dd549e9a
+  specs:
+    refinerycms-i18n (5.0.1)
+      mobility (~> 1.2, >= 1.2.9)
+      rails-i18n (>= 5.0)
+      routing-filter (~> 0.6)
+
+GIT
+  remote: https://github.com/anitagraham/refinerycms-search
+  revision: 36fd8a39be5909c2a83e5faee93a5fb46d1b3fb2
+  ref: 36fd8a39be5909c2a83e5faee93a5fb46d1b3fb2
+  specs:
+    refinerycms-search (4.1.0)
+      refinerycms-acts-as-indexed (~> 4.0)
+      refinerycms-core (~> 4.0)
+
+GIT
+  remote: https://github.com/eug3nix/schema-dot-org
+  revision: 0bb7508f3f92e5edac05991d730faecce9cadf46
+  branch: pgem_entities
+  specs:
+    schema_dot_org (1.6.1)
+      validated_object (~> 2.0.2)
+
+GIT
+  remote: https://github.com/ghoppe/refinerycms-tinymce
+  revision: 1042b0b83541116ec86adfc7360c017e9f0cd0b2
+  ref: 1042b0b83541116ec86adfc7360c017e9f0cd0b2
+  specs:
+    refinerycms-tinymce (1.0.0)
+      refinerycms-core (>= 3.0.0)
+
+GIT
+  remote: https://github.com/mes/survey
+  revision: 2ba85665c89bc7981748c52c804736782fea6dc3
+  specs:
+    survey (0.2)
+      rails (>= 3.2.6)
+      railties (>= 3.2.6)
 
 GIT
   remote: https://github.com/refinery/refinerycms-acts-as-indexed
@@ -93,6 +118,24 @@ GIT
       decorators (~> 2.0)
       refinerycms-core (>= 4.0.0, < 5.0)
       stringex (~> 2.5)
+
+GIT
+  remote: https://github.com/rozsnyai/refinerycms-dynamicfields
+  revision: 9628a568b31bfd6413fb320a75ee7487f111f54e
+  branch: update-dependencies
+  specs:
+    refinerycms-dynamicfields (3.0.0)
+      nested_form
+      refinerycms-core (~> 4.1.0)
+
+GIT
+  remote: https://github.com/wested/refinerycms-settings
+  revision: e044eb253e18ed788251994de8805063f099b72d
+  ref: e044eb253e18ed788251994de8805063f099b72d
+  specs:
+    refinerycms-settings (4.0.1)
+      friendly_id (>= 5.3.0)
+      refinerycms-core (~> 4.0, >= 4.0.0)
 
 PATH
   remote: vendor/extensions
@@ -378,15 +421,17 @@ GEM
       railties (>= 3.0.0)
     faker (3.3.1)
       i18n (>= 1.8.11, < 2)
-    faraday (2.8.1)
-      base64
-      faraday-net_http (>= 2.0, < 3.1)
-      ruby2_keywords (>= 0.0.4)
-    faraday-net_http (3.0.2)
+    faraday (1.2.0)
+      multipart-post (>= 1.2, < 3)
+      ruby2_keywords
+    faraday_middleware (1.2.0)
+      faraday (~> 1.0)
     fastimage (2.3.1)
-    feedjira (3.2.3)
-      loofah (>= 2.3.1, < 3)
-      sax-machine (>= 1.0, < 2)
+    feedjira (2.2.0)
+      faraday (>= 0.9)
+      faraday_middleware (>= 0.9)
+      loofah (>= 2.0)
+      sax-machine (>= 1.0)
     ffi (1.16.3)
     filters_spam (0.5)
     font-awesome-rails (4.7.0.8)
@@ -394,28 +439,26 @@ GEM
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
     formatador (1.1.0)
-    formtastic (3.1.5)
-      actionpack (>= 3.2.13)
-    formtastic-bootstrap (3.1.1)
-      formtastic (>= 3.0)
-    friendly_id (5.2.5)
+    formtastic (5.0.0)
+      actionpack (>= 6.0.0)
+    friendly_id (5.4.2)
       activerecord (>= 4.0.0)
-    friendly_id-mobility (0.5.5)
-      friendly_id (>= 5.0.0, <= 5.4.0)
-      mobility (>= 0.5.1, < 1.0)
+    friendly_id-mobility (1.0.4)
+      friendly_id (>= 5.0.0, < 5.5)
+      mobility (>= 1.0.1, < 2.0)
     geocoder (1.8.2)
     gli (2.21.1)
     globalid (1.1.0)
       activesupport (>= 5.0)
-    globalize (6.0.1)
-      activemodel (>= 4.2, < 7.0)
-      activerecord (>= 4.2, < 7.0)
+    globalize (6.3.0)
+      activemodel (>= 4.2, < 7.2)
+      activerecord (>= 4.2, < 7.2)
       request_store (~> 1.0)
-    gon (5.1.2)
-      actionpack (>= 2.3.0)
-      json
+    gon (6.4.0)
+      actionpack (>= 3.0.20)
+      i18n (>= 0.7)
       multi_json
-      request_store (>= 1.0.5)
+      request_store (>= 1.0)
     gravtastic (3.2.6)
     groupdate (6.2.1)
       activesupport (>= 5.2)
@@ -538,7 +581,7 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     minitest (5.22.3)
-    mobility (0.8.13)
+    mobility (1.2.9)
       i18n (>= 0.6.10, < 2)
       request_store (~> 1.0)
     momentjs-rails (2.29.4.1)
@@ -554,7 +597,9 @@ GEM
       railties (>= 3.0)
     multi_json (1.15.0)
     multi_xml (0.6.0)
+    multipart-post (2.4.1)
     nenv (0.3.0)
+    nested_form (0.3.2)
     net-imap (0.4.10)
       date
       net-protocol
@@ -705,13 +750,6 @@ GEM
     recaptcha (5.16.0)
     redcarpet (3.6.0)
     referer-parser (0.3.0)
-    refinerycms-i18n (5.0.1)
-      mobility (~> 0.8.8)
-      rails-i18n (>= 5.0)
-      routing-filter (~> 0.4)
-    refinerycms-settings (4.0.1)
-      friendly_id (>= 5.1.0, < 5.3)
-      refinerycms-core (~> 4.0, >= 4.0.0)
     regexp_parser (2.9.0)
     request_store (1.6.0)
       rack (>= 1.4)
@@ -952,12 +990,12 @@ DEPENDENCIES
   exception_notification
   factory_bot_rails (~> 4.11.1)
   faker
-  feedjira
+  feedjira (~> 2.2)
   font-awesome-rails (>= 4.7.0)
-  formtastic (~> 3.1.5)
-  formtastic-bootstrap
-  friendly_id (~> 5.2.5)
-  gon (~> 5.1.2)
+  formtastic (~> 5.0.0)
+  formtastic-bootstrap!
+  friendly_id (~> 5.4.2)
+  gon (~> 6.4.0)
   gravtastic
   groupdate
   guard-rspec (~> 4.2.8)
@@ -999,7 +1037,7 @@ DEPENDENCIES
   prawn-qrcode (~> 0.2.2.1)
   prawn_rails
   puma
-  rails (~> 6.1.6)
+  rails (~> 6.1.7)
   rails-assets-bootstrap-markdown!
   rails-assets-chartjs!
   rails-assets-date.format!
@@ -1023,10 +1061,14 @@ DEPENDENCIES
   refinerycms-acts-as-indexed!
   refinerycms-blog!
   refinerycms-community_events!
+  refinerycms-dynamicfields!
+  refinerycms-i18n!
   refinerycms-meetups!
   refinerycms-search!
+  refinerycms-settings!
   refinerycms-sponsors!
   refinerycms-team_members!
+  refinerycms-tinymce!
   responders (~> 3.0)
   rolify
   rqrcode

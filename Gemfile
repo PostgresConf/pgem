@@ -10,7 +10,7 @@ gem 'rails', '~> 6.1.7'
 gem 'zeitwerk', '~> 2.5.4'
 
 gem 'braintree'
-gem 'gon', '~> 5.1.2'
+gem 'gon', '~> 6.4.0'
 
 # respond_to methods have been extracted to the responders gem
 # http://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#responders
@@ -97,7 +97,7 @@ gem 'iso-639'
 gem 'will_paginate-bootstrap'
 
 #for automated RSS blog impoprt
-gem 'feedjira'
+gem 'feedjira', '~> 2.2'
 
 # frontend javascripts
 source 'https://rails-assets.org' do
