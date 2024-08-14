@@ -17,6 +17,9 @@ class PaymentsController < ApplicationController
     if @conference.payment_method.gateway == 'braintree'
       gon.client_token = generate_client_token
     end
+    if @conference.payment_method.gateway == 'stripe'
+      @stripe_publishable_key = @conference.payment_method.stripe_publishable_key
+    end
   end
 
   def create
