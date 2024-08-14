@@ -344,10 +344,7 @@ class Event < ActiveRecord::Base
   end
 
   def set_week
-    self.week = created_at.strftime('%W')
-    self.without_versioning do
-      self.save!
-    end
+    update!(week: created_at.strftime('%W'))
   end
 
   def before_end_of_conference

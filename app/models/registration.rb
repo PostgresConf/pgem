@@ -84,10 +84,7 @@ class Registration < ActiveRecord::Base
   end
 
   def set_week
-    self.week = created_at.strftime('%W')
-    without_versioning do
-      save!
-    end
+    update!(week: created_at.strftime('%W'))
   end
 
   def registration_limit_not_exceed
