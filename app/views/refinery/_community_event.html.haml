@@ -5,5 +5,6 @@
   %p.rss-author
     Posted by
     = item.author
-    on
-    = item.published_at.strftime("%B %d, %Y")
+    - if item.published_at
+      on
+      = item.published_at.strftime("%B %d, %Y")
