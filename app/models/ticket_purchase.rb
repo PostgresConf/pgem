@@ -111,7 +111,7 @@ class TicketPurchase < ActiveRecord::Base
     if self.pending_event_tickets.present?
       pending_tkts = eval(self.pending_event_tickets)
     end
-    update_attributes(paid: true, payment: payment, pending_event_tickets: nil)
+    update(paid: true, payment: payment, pending_event_tickets: nil)
     PhysicalTicket.transaction do
       if pending_tkts.present?
         pending_tkts.each do |evt, qty|
