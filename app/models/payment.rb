@@ -47,7 +47,7 @@ class Payment < ActiveRecord::Base
 
   def purchase
     if amount_to_pay > 0
-      if @conference.payment_method.gateway == 'stripe'
+      if conference.payment_method.gateway == 'stripe'
         gateway_response = Stripe::Charge.create source: stripe_customer_token,
                                                receipt_email: stripe_customer_email,
                                                description: "ticket purchases(#{user.username})",
