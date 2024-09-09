@@ -24,7 +24,7 @@ Osem::Application.configure do
 
   # Raise exception on mass assignment protection for Active Record models
   # config.active_record.mass_assignment_sanitizer = :strict
-
+  config.active_record.yaml_column_permitted_classes =  [Symbol, Date, Time]
   # Do not compress assets
   config.assets.compress = false
 
