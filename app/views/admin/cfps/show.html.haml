@@ -25,6 +25,12 @@
             Reg Reminder End
           %dd#speaker_registration_deadline
             = @cfp.reg_reminder_end.strftime('%A, %B %-d. %Y')  
+
+        - if @cfp.notification_deadline
+          %dt
+            Notification Deadline
+          %dd
+            = @cfp.notification_deadline.strftime('%A, %B %-d. %Y')
         %dt
           Event types:
         %dd

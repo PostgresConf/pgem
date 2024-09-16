@@ -2,11 +2,18 @@
   .row.h-100
     .col-md-4.col-md-push-8.h-100
       .poster-button-wrapper.h-100
-        %img.img-responsive.poster-small{:alt => "Conference poster", :src => "#{item.picture.url}"}
+        - if item.splashpage && item.splashpage.public
+          = link_to main_app.conference_path(item.short_title) do
+            %img.img-responsive.poster-small{:alt => "Conference poster", :src => "#{item.picture.url}"}
+        - else
+          %img.img-responsive.poster-small{:alt => "Conference poster", :src => "#{item.picture.url}"}
         .card-footer.hidden-sm
 
     .col-md-8.col-md-pull-4.col-flex
       %h4.bold.mt-0
+      - if item.splashpage && item.splashpage.public
+        = link_to item.title, main_app.conference_path(item.short_title), class: 'link-effect'
+      - else
         = item.title
       %p
         = date_string(item.start_date, item.end_date)

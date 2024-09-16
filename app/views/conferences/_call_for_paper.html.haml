@@ -16,21 +16,24 @@
           You can submit proposals for
           %span.notranslate
             = "#{event_types(@conference)}."
+          %br
         - if @conference.program.tracks.any?
           Proposals should fit in one of the
           %span.notranslate
             = "#{pluralize(@conference.program.tracks.count, 'track')}:"
             = "#{tracks(@conference)}."
+          %br
         The submission period has begun
-        %em.notranslate
-          = @conference.program.cfp.start_date.strftime('%A, %B %-d. %Y')
+        %strong.notranslate
+          = @conference.program.cfp.start_date.strftime('%a, %b %-d %Y')
         and closes
-        %em.notranslate
-          = @conference.program.cfp.end_date.strftime('%A, %B %-d. %Y.')
+        %strong.notranslate
+          = @conference.program.cfp.end_date.strftime('%a, %b %-d %Y.')
         - if @conference.program.cfp_open?
           That means you have only
           %b.notranslate= pluralize(@conference.program.cfp.remaining_days, 'day')
           left!
+          %br
           Remember
           %span.notranslate
             = @conference.short_title

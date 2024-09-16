@@ -1,24 +1,37 @@
 %p.lead
-  - if @program.event_types.any?
-    You can submit proposals for
-    = "#{event_types(@conference)}."
+  Thank you for your interest in submitting to
+  = @conference.title
+  %br
   - if @program.tracks.any?
-    Proposals should fit in one of the
-    = "#{pluralize(@program.tracks.count, 'track')}:"
+    We have
+    = "#{pluralize(@program.tracks.count, 'tracks')}:"
     = "#{tracks(@conference)}."
+    %br
   - if @program.cfp_open?
-    The submission period has begun
-    %em.notranslate
+    The Call for Papers is open from
+    %strong.notranslate
       = @program.cfp.start_date.strftime('%A, %B %-d. %Y')
-    and closes
-    %em.notranslate
+    until
+    %strong.notranslate
       = @program.cfp.end_date.strftime('%A, %B %-d. %Y.')
-    That means you have
-    %b.notranslate= pluralize(@program.cfp.remaining_days, 'day')
-    left!
-    Remember
-    %span.notranslate
+    - if @program.cfp.notification_deadline
+      %br
+      Your proposal is expected to be reviewed before
+      %strong.notranslate
+        = @program.cfp.notification_deadline.strftime('%A, %B %-d. %Y.')
+
+    - if @conference.policies.any?
+      %br
+      %br
+      Any person submitting to
       = @conference.title
-    will only be as good as the content you present. Submit early, submit often!
+      agrees to the policies set forth in:
+      %p
+
+        - @conference.policies.each do |policy|
+          %a{ href: '#', data: { toggle: 'modal', target: "##{policy.code}" }, class: 'policy' }
+            = policy.title
+          %br
+
   -else
     The submission period is closed now.

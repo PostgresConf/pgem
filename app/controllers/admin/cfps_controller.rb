@@ -54,7 +54,7 @@ module Admin
     private
 
     def cfp_params
-      params.require(:cfp).permit(:start_date, :end_date, :reg_reminder_end)
+      params.require(:cfp).permit(:start_date, :end_date, :reg_reminder_end, :notification_deadline)
     end
   end
 end
