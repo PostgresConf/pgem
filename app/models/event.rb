@@ -243,7 +243,6 @@ class Event < ActiveRecord::Base
   def progress_status
     {
       registered:       speakers.all? { |speaker| program.conference.user_registered? speaker },
-      commercials:      commercials.any?,
       biographies:      speakers.all? { |speaker| !speaker.biography.blank? },
       subtitle:         !self.subtitle.blank?,
       track:            (!self.track.blank? unless self.program.tracks.empty?),

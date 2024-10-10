@@ -8,9 +8,11 @@
     %li
       %a{href: '#proposal-tasks', "data-toggle"=>"tab"}
         Tasks
-        %span.label.label-danger{style: 'border-radius: 1em;'}
-          - progress_status = @event.progress_status
-          = progress_status.reject{ |_key, value| value || value.nil? }.length
+        - progress_status = @event.progress_status
+        - task_count = progress_status.reject{ |_key, value| value || value.nil? }.length
+        - unless task_count.zero?
+          %span.label.label-danger{style: 'border-radius: 1em;'}
+            = task_count
     - if @event.require_registration?
       %li
         = link_to "#event-attendees" do
@@ -116,9 +118,9 @@
             %td{'class'=>class_for_todo(progress_status['subtitle'])}
               %span{'class'=>[icon_for_todo(progress_status['subtitle']), 'fa-lg']}
           %tr
-            %td= link_to 'Add a commercial', edit_conference_program_proposal_path(@event.program.conference.short_title, @event, anchor: 'commercials-content')
-            %td{'class'=>class_for_todo(progress_status['commercials'])}
-              %span{'class'=>[icon_for_todo(progress_status['commercials']), 'fa-lg']}
+            %td= link_to 'Add media (optional)', edit_conference_program_proposal_path(@event.program.conference.short_title, @event, anchor: 'commercials-content')
+            %td{class: 'todolist-optional'}
+              %span{class: 'fa fa-circle fa-lg'}
           - unless progress_status['track'].nil?
             %tr
               %td= link_to 'Add a track', edit_conference_program_proposal_path(@event.program.conference.short_title, @event)
