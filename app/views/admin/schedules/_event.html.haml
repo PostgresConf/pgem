@@ -5,16 +5,19 @@
 - height = (cells_length * single_cell_height)
 - height -= 23 unless compact_grid
 / subtracting the padding before calculate the number of lines
-- lines = (height - 7) / 14
+- lines = (height - 7) / 12
 - color = event.track.try(:color).present? ? event.track.try(:color) : 'FFFFFF'
+- event_text = "#{event.speakers.collect(&:name).to_sentence}: #{event.title}"
 .schedule-event{ style: "height: #{height}px;  background-color: #{color}; color: #{contrast_color(color)}", |
                  id: "event-#{event.id}", |
                  event_id: event.id, |
                  length: cells_length, |
                  event_schedule_id: event_schedule_id, |
                  class: ('compact' if compact_grid) }
-  .schedule-event-text{ style: "-webkit-line-clamp: #{lines}; height: #{lines * 23}px;"}
+  .schedule-event-text{style: "-webkit-line-clamp: #{lines}; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical;", title: "#{event_text}"}
     %span.cursor-pointer.schedule-event-delete-button.glyphicon.glyphicon-remove{ onclick: "Schedule.remove(\'event-#{event.id}\');" }
     - if event.state != 'confirmed'
       %span.glyphicon.glyphicon-exclamation-sign.text-danger.cursor-help{ title: 'this event was cancelled or withdrawn!' }
-    = event.title
+    = link_to admin_conference_program_event_path(@conference.short_title, event) do
+      %span.glyphicon.glyphicon-link
+    = event_text
