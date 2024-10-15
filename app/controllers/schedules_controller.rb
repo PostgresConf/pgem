@@ -8,8 +8,9 @@ class SchedulesController < ApplicationController
   def show
     @rooms = @conference.venue.rooms if @conference.venue
     schedules = @program.selected_event_schedules
+    
     unless schedules.present?
-      redirect_to events_conference_schedule_path(@conference.short_title)
+      redirect_to events_conference_schedule_path(@conference.short_title) and return
     end
 
     @events_schedules = schedules
