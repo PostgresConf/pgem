@@ -293,6 +293,7 @@ Osem::Application.routes.draw do
   root to: 'refinery/pages#home'
   #root to: 'conferences#redirect_to_current'
 
+  get '/dynamicfields' => redirect('/refinery/dynamicfields')
   mount Refinery::Core::Engine, at: Refinery::Core.mounted_path
 
 end
