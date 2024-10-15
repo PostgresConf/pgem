@@ -24,10 +24,15 @@
   }
 }
 
+html {
+  // font-size: 12px;
+}
+
 .blog-head {
-  padding-top: 20px;
+  // padding-top: 20px;
+  // margin-top: -50px;
   padding-bottom: 20px;
-  background: whitesmoke;
+  background: white;
 }
 
 .blog-banner {
@@ -39,8 +44,31 @@
 }
 
 .blog-body {
-  padding-top: 30px;
+  padding-top: 20px;
+  font-size: 2rem;
+  h1 {
+    font-size: 5rem;
+  }
+  h2 {
+    font-size: 4rem;
+  }
+  h3 {
+    font-size: 3rem;
+  }
+  ul {
+    font-size: 1.5rem;
+  }
+
 }
+
+nav#next_prev_article {
+  font-size: 1.5rem;
+}
+
+nav#tags {
+  font-size: 1.5rem;
+}
+
 
 .site-body {
   margin-top: 50px;
@@ -50,11 +78,9 @@
 
 .site-footer {
    position:absolute;
-   bottom:0;
    width:100%;
    height:40px;
 
-  background-color: whitesmoke;
   p {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -280,4 +306,3 @@
       max-height: 120px;
     }
 }
-

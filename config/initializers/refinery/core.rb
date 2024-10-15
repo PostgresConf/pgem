@@ -60,4 +60,4 @@ Refinery::Core.configure do |config|
   # config.plugin_priority = %w(refinery_pages refinery_images)
 end
 
-Rails.application.config.assets.precompile += %w(refinery-admin-overrides.css refinery-admin-overrides.js refinery-new.css)
+Rails.application.config.assets.precompile += %w(refinery-admin-overrides.css refinery-admin-overrides.js refinery-new.css refinery-main.css)

@@ -2,7 +2,7 @@
   .container
     Blog
 - content_for :body do
-  .container
+  .container.blog-body
     = raw @page.content_for(Refinery::Pages.default_parts.first[:slug].to_sym) if Refinery::Pages.default_parts.any?
     - if @posts.any?
       .row

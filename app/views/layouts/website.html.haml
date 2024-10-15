@@ -1,3 +1,4 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 %html{:xmlns => "http://www.w3.org/1999/html"}
   /FIXME: nest this in body, convert partial to a proper bootstrap css
   = render('/refinery/site_bar', :head => true)
@@ -13,10 +14,21 @@
 
     = render "/refinery/head"
   %body.site-body
-    = render "/refinery/html_tag"
     = render "/refinery/header_legacy"
+    = stylesheet_link_tag "refinery-main"
     = yield
     %footer.navbar-static-bottom.site-footer
       .container.text-center
         .col-md-12
           = render "/refinery/footer"
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"}
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/jquery-ujs/1.2.2/rails.min.js"}
+    %script{:crossorigin => "anonymous", :integrity => "sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", :src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
+    :javascript
+      $("#help_link").click(function(e){$('#navbar-devise-help').collapse('toggle'); e.stopPropagation();})
+      $("#user_remember_me").click(function(e){e.stopPropagation();})
+      $('#scrolldown').click(function(event){
+        let selector = $(event.target).data('scrolldown-target')
+        //we cant scroll the invisible element immediately, the timeout is to ensure the element is visible and DOM is recalculated
+        setTimeout(function(){$(selector)[0].scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})},10);
+      })
