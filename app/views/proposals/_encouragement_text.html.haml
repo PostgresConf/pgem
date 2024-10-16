@@ -1,12 +1,14 @@
-%p.lead
-  Thank you for your interest in submitting to
-  = @conference.title
-  %br
-  - if @program.tracks.any?
-    We have
-    = "#{pluralize(@program.tracks.count, 'tracks')}:"
-    = "#{tracks(@conference)}."
-    %br
+%p.lead-sm
+  = "Thank you for your interest in submitting to #{@conference.title}."
+- if @program.tracks.any?
+  %p.lead-sm.strong
+    %strong
+      We have
+      = "#{pluralize(@program.tracks.count, 'tracks')}:"
+  %ul.list-unstyled.lead-sm
+    - @conference.program.tracks.each do |track|
+      %li
+        = markdown("**#{track.name}:** #{track.description}")
   - if @program.cfp_open?
     The Call for Papers is open from
     %strong.notranslate
@@ -26,12 +28,14 @@
       Any person submitting to
       = @conference.title
       agrees to the policies set forth in:
-      %p
 
+      %ul.list-unstyled
         - @conference.policies.each do |policy|
-          %a{ href: '#', data: { toggle: 'modal', target: "##{policy.code}" }, class: 'policy' }
-            = policy.title
-          %br
+          %li
+            %a{ href: '#', data: { toggle: 'modal', target: "##{policy.code}" }, class: 'policy' }
+              %span.fa.fa-file-text
+              = policy.title
+            %br
 
   -else
     The submission period is closed now.
