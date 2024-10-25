@@ -63,17 +63,26 @@ function restore_state () {
     }
 }
 
+function check_qty () {
+    let total_qty = 0
+    $('select.quantity').map(function() {
+        total_qty += parseInt(this.value);
+    });
+    $('#submit-checkout-btn').prop('disabled', total_qty === 0)
+}
+
 $( document ).ready(function() {
     if (typeof(tix) !== 'undefined' && tix) {
       document.getElementById('tickets__' + tix).value = '1';
     }
 
-    $('.quantity').each(function() {
+    $('select.quantity').each(function() {
         update_price($(this));
     });
 
-    $('.quantity').change(function() {
+    $('select.quantity').change(function() {
         update_price($(this));
+        check_qty();
     });
     $(function () {
       $('[data-toggle="tooltip"]').tooltip();
@@ -81,4 +90,5 @@ $( document ).ready(function() {
 
     $('#apply_code').on('click', save_state)
     restore_state();
+    check_qty();
 });

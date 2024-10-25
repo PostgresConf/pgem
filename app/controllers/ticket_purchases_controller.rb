@@ -14,8 +14,7 @@ class TicketPurchasesController < ApplicationController
       return redirect_to conference_tickets_path(@conference.short_title)
     end
 
-
-    if tkts[0].blank?
+    if tkts.map(&:values).flatten.map(&:to_i).sum.zero?
       return redirect_to conference_tickets_path(@conference.short_title),
       error: 'Please get at least one ticket to continue.'
     end
@@ -30,6 +29,7 @@ class TicketPurchasesController < ApplicationController
     current_user.ticket_purchases.by_conference(@conference).unpaid.destroy_all
     message = TicketPurchase.purchase(@conference, current_user, tkts[0],
                                       code_id, chosen_events, prices[0])
+    # this means that TicketPurchase.purchase returned no errors
     if message.blank?
       if current_user.ticket_purchases.by_conference(@conference).unpaid.any?
         redirect_to new_conference_payment_path,
