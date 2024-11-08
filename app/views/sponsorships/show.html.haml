@@ -44,6 +44,19 @@
                       Prospectus
                   .modal-body
                     // = pdfjs_viewer pdf_url: @conference.sponsorship_info.prospectus_url, style: :full
+          .row
+            .col-md-2.col-md-offset-5
+              - if @conference.contact.sponsor_email?
+                = mail_to @conference.contact.sponsor_email, class: 'btn btn-info btn-block btn-lg' do
+                  %span.fa.fa-star{aria: {hidden: true}}
+                  Sponsorship Email
+
+              %br
+              - if @conference.contact.email?
+                = mail_to @conference.contact.email, class: 'btn btn-info btn-block btn-lg' do
+                  %span.fa.fa-users{aria: {hidden: true}}
+                  Organizers Email
+
         - else
           .row.text-center
             .h2

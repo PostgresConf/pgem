@@ -54,7 +54,7 @@
     - if @conference.advantages.any? and @conference.splashpage.include_advantages
       = render 'advantage'
 
-    - if @conference.sponsorships.any? and @conference.splashpage.include_sponsors
+    - if @conference.splashpage.include_sponsors
       %section#sponsors
         = render 'sponsors'
 
