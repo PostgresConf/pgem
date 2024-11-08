@@ -64,7 +64,7 @@ function restore_state () {
 }
 
 function check_qty () {
-    let total_qty = 0
+    let total_qty = undefined
     $('select.quantity').map(function() {
         total_qty += parseInt(this.value);
     });
