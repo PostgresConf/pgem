@@ -316,7 +316,7 @@ end
 
 group :development, :test do
   # as debugger
-  gem 'byebug'
+  gem 'byebug', '~> 11.1.3'
   gem "better_errors"
   # dependency
   gem "binding_of_caller"

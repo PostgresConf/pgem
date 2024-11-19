@@ -25,4 +25,4 @@
               - if item.splashpage.include_sponsors && !item.ended?
                 = link_to "Sponsor!", main_app.conference_sponsorships_path(item.short_title), class: "btn cta-btn cta-btn-half bold uppercase"
               - if item.program.cfp_open? and item.splashpage.include_cfp
-                = link_to "CFP", main_app.conference_program_proposals_path(item.short_title), class: 'btn cta-btn cta-btn-half bold uppercase'
+                = link_to "CFP", main_app.new_conference_program_proposal_path(item.short_title), class: 'btn cta-btn cta-btn-half bold uppercase'
