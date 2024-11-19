@@ -30,7 +30,7 @@
                         Sorry, no places left
 
                     - if @conference.program.cfp_open? and @conference.splashpage.include_cfp
-                      = link_to "Submit your paper now", conference_program_proposals_path(@conference.short_title), class: 'btn btn-warning btn-lg text-center'
+                      = link_to "Submit your paper now", new_conference_program_proposal_path(@conference.short_title), class: 'btn btn-warning btn-lg text-center'
                 %p.lead
                   - if @conference.venue
                     = "#{@conference.venue.city} / #{@conference.venue.country_name}"
