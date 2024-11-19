@@ -158,9 +158,15 @@ body {
   color: #333333 !important;
 }
 
-// make the navbar pills width a litter smaller to prevents accidental clicks while filling in some form
+// make the navbar pills width a bit smaller to prevent accidental clicks while filling forms on the right
 .nav.mySidebar > li > a {
+
   width: 85%;
+}
+.nav.mySidebar li > a.text-muted {
+  
+  color: #737373 !important;
+  
 }
 
 .nav.portal-sidebar {

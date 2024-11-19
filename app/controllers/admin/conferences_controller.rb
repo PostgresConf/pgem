@@ -1,7 +1,7 @@
 module Admin
   class ConferencesController < Admin::BaseController
     load_and_authorize_resource :conference, find_by: :short_title
-    load_resource :program, through: :conference, singleton: true, except: :index
+    load_resource :program, through: :conference, singleton: true, except: [:index, :archive, :unarchive]
     load_resource :user, only: [:remove_user]
 
     def index
@@ -94,6 +94,20 @@ module Admin
       end
     end
 
+    def archive
+      @conference = Conference.find_by(short_title: params[:conference_id])
+      @conference.soft_delete
+      redirect_to admin_conferences_path,
+        notice: "Conference #{@conference.short_title} was archived."
+    end
+
+    def unarchive
+      @conference = Conference.find_by(short_title: params[:conference_id])
+      @conference.soft_undelete
+      redirect_to admin_conferences_path,
+        notice: "Conference #{@conference.short_title} was unarchived."
+    end
+
     def show
       @program = @conference.program
       unless @conference.program
@@ -157,6 +171,11 @@ module Admin
 
       # get campaigns
       @campaigns = @conference.get_campaigns
+
+      if @conference.deleted?
+        flash.now[:warning] = 'This conference is archived and will not be listed on homepage and conferences list.
+        You can unarchive it on conference edit screen'
+      end
 
       respond_to do |format|
         format.html

@@ -163,6 +163,15 @@ function word_count(text, divId, maxcount) {
     }
 };
 
+$( document ).ready(function() {
+  $('#expand_archive').on('click', function (event) {
+    $('.hidable').collapse('toggle')
+    let label =  $('#archive_label')[0]
+    label.innerText = label.innerText.includes('Show') ? 'Show Less' : 'Show More'
+    return false;
+  }); 
+});
+
 /* Wait for the DOM to be ready before attaching events to the elements */
 $( document ).ready(function() {
     /* Set the minimum and maximum proposal abstract word length */

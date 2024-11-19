@@ -9,13 +9,25 @@
         = link_to(admin_conferences_path) do
           %span.fa.fa-home
           All Conferences
-      - @conferences.each do |conference|
+      - @conferences.each_with_index do |conference, idx|
         - if can? :show, conference
-          %li
-            = link_to(admin_conference_path(conference.short_title)) do
-              %span.fa.fa-cog
-              Manage
-              = conference.short_title
+          %li{class: ("collapse hidable" if conference.deleted? or idx > 10)}
+            - if conference.deleted?
+              = link_to(admin_conference_path(conference.short_title), class: "text-muted") do
+                %span.fa.fa-archive
+                Manage
+                = "#{conference.short_title}"
+            - else
+              = link_to admin_conference_path(conference.short_title) do
+                %span.fa.fa-cog
+                Manage
+                = conference.short_title
+      %li
+        %a{id: 'expand_archive', href: '#'}
+          %span.fa.fa-ellipsis-h
+          %span#archive_label
+            Show More
+
       - if can? :create, Conference
         %li
           = link_to(new_admin_conference_path) do

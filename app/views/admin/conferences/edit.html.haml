@@ -42,3 +42,10 @@
         = f.input :require_itinerary, label: "Require the attendee's itinerary at registrion time"
       %br
       = f.action :submit, :as => :button, :button_html => {:class => "btn btn-primary"}
+      - if @conference.deleted?
+        = link_to 'Unarchive Conference', admin_conference_unarchive_path(@conference.short_title),
+          class: 'btn btn-default pull-right'
+      - else
+        = link_to 'Archive Conference', admin_conference_archive_path(@conference.short_title),
+          class: 'btn btn-warning pull-right',
+          data: { confirm: "Do you want to archive #{@conference.short_title}?" }

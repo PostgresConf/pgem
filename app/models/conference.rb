@@ -8,8 +8,9 @@ class Conference < ActiveRecord::Base
   resourcify :roles, dependent: :delete_all
 
   default_scope { order('start_date DESC') }
-
+  scope :without_archived, -> { where(deleted_at: nil) }
   has_paper_trail ignore: [:updated_at, :guid, :revision, :events_per_week], meta: { conference_id: :id }
+  has_soft_deletion default_scope: false
 
   belongs_to :conference_group
 
@@ -535,12 +536,12 @@ class Conference < ActiveRecord::Base
   # ====Returns
   # * +ActiveRecord+
   def self.get_active_conferences_for_dashboard
-    result = Conference.where('start_date > ?', Time.now).
-        select('id, short_title, color, start_date')
+    result = Conference.without_archived.where('start_date > ?', Time.now).
+        select('id, short_title, color, start_date, deleted_at')
 
     if result.length == 0
       result = Conference.
-          select('id, short_title, color, start_date').limit(2).
+          select('id, short_title, color, start_date, deleted_at').limit(2).
           order(start_date: :desc)
     end
     result
@@ -552,7 +553,7 @@ class Conference < ActiveRecord::Base
   # ====Returns
   # * +ActiveRecord+
   def self.get_conferences_without_active_for_dashboard(active_conferences)
-    result = Conference.select('id, short_title, color, start_date').order(start_date: :desc)
+    result = Conference.without_archived.select('id, short_title, color, start_date, deleted_at').order(start_date: :desc)
     result - active_conferences
   end
 

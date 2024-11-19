@@ -5,14 +5,14 @@ class ConferencesController < ApplicationController
   load_resource :program, through: :conference, singleton: true, except: [:index, :redirect_to_current]
 
   def index
-    @current = Conference.where('end_date >= ?', Date.current).reorder(sticky: :desc, start_date: :asc)
-    @recent =  Conference.where('end_date >= ?', Date.current - 12.months).
+    @current = Conference.without_archived.where('end_date >= ?', Date.current).reorder(sticky: :desc, start_date: :asc)
+    @recent =  Conference.without_archived.where('end_date >= ?', Date.current - 12.months).
                           where('end_date <= ?', Date.current)
-    @antiquated = @conferences - @current - @recent
+    @antiquated = @conferences.without_archived - @current - @recent
   end
 
   def redirect_to_current
-    @current = Conference.where('end_date >= ?', Date.current).first
+    @current = Conference.without_archived.where('end_date >= ?', Date.current).first
     if @current
       redirect_to conference_path(id: @current.short_title)
     else

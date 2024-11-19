@@ -94,6 +94,9 @@ gem 'iso-639'
 #website pagination
 gem 'will_paginate-bootstrap'
 
+#conference archival
+gem 'soft_deletion'
+
 #for automated RSS blog impoprt
 gem 'feedjira'
 
