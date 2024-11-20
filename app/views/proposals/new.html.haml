@@ -86,11 +86,14 @@
                 = f.input :description, input_html: { rows: 5 }, label: 'Requirements', placeholder: 'Eg. Whiteboard, printer, or something like that.'
 
             %p.text-right
-              = button_tag(type: 'button', id: 'submit-proposal-btn', class: 'btn btn-success') do
-                Create Proposal
+              - unless current_user
+                = button_tag(type: 'button', id: 'submit-proposal-btn', class: 'btn btn-success') do
+                  Create Proposal
+                = invisible_recaptcha_tags ui: :invisible, callback: 'submitInvisibleRecaptchaForm'
+                :javascript
+                  recapchaAttach();
+              - else
+                = f.submit 'Create Proposal', class: 'btn btn-success'
 
-            = invisible_recaptcha_tags ui: :invisible, callback: 'submitInvisibleRecaptchaForm'
-            :javascript
-              recapchaAttach();
         .tab-pane{role: 'tabpanel', id: 'signin'}
           = render partial: 'devise/shared/sign_in_form_embedded'
