@@ -48,11 +48,16 @@ class ProposalsController < ApplicationController
 
   def create
     @url = conference_program_proposals_path(@conference.short_title)
-
     # We allow proposal submission and sign up on same page.
     # If user is not signed in then first create new user and then sign them in
     unless current_user
       @user = User.new(user_params)
+
+      unless verify_recaptcha(model: @user)
+        flash.now[:error] = "Captcha verification failed"
+        render action: 'new'
+        return
+      end
 
       if @conference.use_pg_flow
         @user.username = @user.email

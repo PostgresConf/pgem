@@ -1,3 +1,15 @@
+:javascript
+  var submitInvisibleRecaptchaForm = function () {
+    document.getElementById("new_event").submit();
+  };
+
+  var recapchaAttach = function() {
+    var element = document.getElementById('submit-proposal-btn').addEventListener('click', function (e) {
+      e.preventDefault();
+      grecaptcha.execute();
+    });
+  }
+
 .container
   .row
     .col-md-12
@@ -74,7 +86,11 @@
                 = f.input :description, input_html: { rows: 5 }, label: 'Requirements', placeholder: 'Eg. Whiteboard, printer, or something like that.'
 
             %p.text-right
-              = f.submit 'Create Proposal', class: 'btn btn-success'
+              = button_tag(type: 'button', id: 'submit-proposal-btn', class: 'btn btn-success') do
+                Create Proposal
 
+            = invisible_recaptcha_tags ui: :invisible, callback: 'submitInvisibleRecaptchaForm'
+            :javascript
+              recapchaAttach();
         .tab-pane{role: 'tabpanel', id: 'signin'}
           = render partial: 'devise/shared/sign_in_form_embedded'
