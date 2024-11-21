@@ -7,7 +7,6 @@ class ProposalsController < ApplicationController
   # We authorize manually in these actions
   skip_authorize_resource :event, only: [:confirm, :restart, :withdraw, :comment, :vote, :invite, :accept_invitation]
   skip_authorization_check :only => [:comment, :vote, :my_proposals, :invite, :accept_invitation]
-  prepend_before_action :check_captcha, only: [:create, :update]
 
   def index
     @event = @program.events.new
@@ -53,6 +52,12 @@ class ProposalsController < ApplicationController
     # If user is not signed in then first create new user and then sign them in
     unless current_user
       @user = User.new(user_params)
+
+      unless verify_recaptcha(model: @user)
+        flash.now[:error] = "Captcha verification failed"
+        render action: 'new'
+        return
+      end
 
       if @conference.use_pg_flow
         @user.username = @user.email
@@ -266,13 +271,4 @@ class ProposalsController < ApplicationController
     end
   end
 
-  def check_captcha
-    unless current_user
-      unless verify_recaptcha
-        flash.now[:error] = "Captcha verification failed"
-        render action: 'new'
-        return
-      end
-    end
-  end
 end
