@@ -10,8 +10,11 @@
     %section.central-blocks
       .jumbotron
         %h1.text-center.uppercase.bold
-          - if request.domain=='postgresworld.org'
+          - from = request.params['from']
+          - if from == 'postgresworld'
             PostgresWorld
+          - elsif from == 'pgconf'
+            PgConf
           - else
             Postgres Conference
       .container-fluid
