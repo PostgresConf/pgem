@@ -2,24 +2,64 @@
   .row
     .col-md-12
       .page-header
+        = image_tag(@user.avatar_url(version: 'large'), title: "Yo #{@user.first_name}!", :alt => '', class: 'img-circle')
         %h1
-          = image_tag(@user.avatar_url(version: 'medium'), title: "Yo #{@user.first_name}!", :alt => '')
-          = @user.first_name
-          = @user.last_name
+          = @user.name
           %small
-            = @user.nickname
+            = "@#{@user.nickname}"
+        %h4
+          = @user.title
+          - if @user.affiliation.present?
+            at
+            = @user.affiliation
+      %h3
+        About
       %p
         = markdown(@user.biography)
+      %hr
   .row
     .col-md-12
-      - if @user.presented_events.confirmed.any?
-        %h3
-          = "#{@user.name} presents #{pluralize(@user.presented_events.confirmed.count, 'Event')}:"
+      - presented_events = @user.presented_events.confirmed.order(id: :desc)
+      - if presented_events.any?
         %ul.list-unstyled
-          - @user.presented_events.confirmed.each do |event|
-            %li
-              %h4
-                = link_to event.title, conference_program_proposal_path(event.program.conference.short_title, event)
-                %strong
-                  at
-                = event.program.conference.title
+          - presented_events.each do |event|
+            .panel.panel-default.eventblock
+              .panel-body
+                - event.speakers_ordered.each do |speaker|
+                  = image_tag speaker.avatar_url(version: 'medium'), :class => "img-circle pull-right all-speaker-pic", |
+                                                    :alt => speaker.name, |
+                                                    :title => speaker.name |
+                %span.h3
+                  = event.title
+                  %br
+                  %small
+                    = event.subtitle
+                %h4
+                  presented by #{event.speaker_names}
+
+                - if !defined? signage
+                  - if event.commercials.present?
+                    %br
+                    %span.fa.fa-video-camera
+                    = link_to 'video', conference_program_proposal_path(event.program.conference.short_title, event)
+                %p
+                  = markdown(truncate(event.abstract, :length => 400))
+                  - if !defined? signage
+                    = link_to 'more', conference_program_proposal_path(event.program.conference.short_title, event) if event.abstract.length > 400
+
+
+                - if event.active_schedule.present?
+                  %span.track
+                    %span.fa.fa-clock-o
+                    %span.label{ style: "background-color: grey" }
+                      = event.active_schedule.start_time.in_time_zone(event.program.conference.timezone).strftime('%a %-d %Y')
+
+                - if event.track
+                  %span.track
+                    %span.fa.fa-road
+                    %span.label{ style: "background-color: #{event.track.color}; color: #{ contrast_color(event.track.color) }" }
+                      = event.track.name
+
+      - else
+        %h4
+          = "#{@user.name} does not have any confirmed presentations..."
