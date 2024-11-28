@@ -5,8 +5,9 @@
         = image_tag(@user.avatar_url(version: 'large'), title: "Yo #{@user.first_name}!", :alt => '', class: 'img-circle')
         %h1
           = @user.name
-          %small
-            = "@#{@user.nickname}"
+          - if @user.nickname.present?
+            %small
+              = link_to "@#{@user.nickname}", "https://twitter.com/#{@user.nickname}", class: 'text-muted'
         %h4
           = @user.title
           - if @user.affiliation.present?
