@@ -51,8 +51,8 @@ en:
       failure: 'Could not authenticate you from %{kind} because "%{reason}".'
     mailer:
       magic_link:
-        user_subject: "Here's your USER magic login link ✨"
-        admin_subject: "Here's your ADMIN magic login link ✨"
+        user_subject: "Here's your postgresconf magic login link ✨"
+        admin_subject: "Here's your postgresconf magic login link ✨"
         subject: "Here's your magic login link ✨"
     passwordless:
       user:
