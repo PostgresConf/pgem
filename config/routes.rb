@@ -6,8 +6,12 @@ Osem::Application.routes.draw do
     devise_for :users,
                controllers: {
                    registrations: :registrations, confirmations: :confirmations,
-                   omniauth_callbacks: 'users/omniauth_callbacks' },
+               },
                path: 'accounts'
+    namespace "passwordless" do
+      devise_for :users,
+        controllers: { sessions: "devise/passwordless/sessions" }
+    end
   end
 
   # Use letter_opener_web to open mails in browser (e.g. necessary for Vagrant)

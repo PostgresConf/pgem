@@ -1,3 +1,6 @@
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
 $light_background: #F3F3F3;
 $main_color: #001970;
 $background_color: #111e34;
@@ -306,6 +309,19 @@ a:focus {
         height: 63vh;
     }
 
+    .alert {
+        &-info {
+            @include alert-variant(rgba(0, 135, 255, 0.1), rgba($alert-info-border,.2), $color_central_blocks);
+            .close {
+                color: white;
+                opacity: .5;
+            }
+            .close:hover {
+                opacity: 1;
+            }
+        }
+    }
+
     .main-card {
         padding: 4vh;
         background: -webkit-linear-gradient($background);
@@ -469,13 +485,13 @@ a:focus {
 
 .cta-btn-other {
     background-color: $main_color;
-    color: $button_color;
+    color: $button_color !important;
     width: 100%;
     border: 2px solid $main_color;
     transition: 0.2s all linear 0s;
     &:hover, &:focus{
       background-color: transparent;
-      color: $main_color;
+      color: $main_color !important;
       transition: 0.2s all ease-in 0s;
     }
 }

@@ -29,6 +29,7 @@ class ApplicationController < ActionController::Base
         request.path != '/accounts/password/edit' &&
         request.path != '/accounts/confirmation' &&
         request.path != '/accounts/sign_out' &&
+        request.path != '/accounts/magic_link' &&
         request.path != '/users/ichain_registration/ichain_sign_up' &&
         !request.path.starts_with?(Devise.ichain_base_url) &&
         !request.xhr?) # don't store ajax calls
@@ -48,7 +49,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_conferences
-    @conferences =Conference.all
+    @conferences = Conference.all
   end
 
   def current_ability

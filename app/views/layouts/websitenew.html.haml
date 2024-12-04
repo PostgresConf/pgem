@@ -17,6 +17,7 @@
             PgConf
           - else
             Postgres Conference
+
       .container-fluid
         .row
           - @meetups = Refinery::Meetups::Meetup.upcoming(10)
@@ -27,6 +28,13 @@
           - @top_card = @digital_events.first || @current.second
           - @bottom_card = @meetups.first || @current.third
           .col-md-10.col-md-offset-1
+            - flash.each do |type, message|
+              %div{:class=>"alert alert-dismissable #{bootstrap_class_for(type)}", :id=>"flash"}
+                .button.close{"data-dismiss" => "alert", "aria-hidden"=>"true"}
+                  &times;
+                %p
+                  = message
+
             .row.wrapper-main-cards
               .col-md-7.col-sm-12.h-100
                 = render partial: "/refinery/conference_card_main", locals: { conference: @main_conference } if @main_conference
@@ -137,3 +145,15 @@
         //we cant scroll the invisible element immediately, the timeout is to ensure the element is visible and DOM is recalculated
         setTimeout(function(){$(selector)[0].scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})},10);
       })
+
+      $('#password_toggle').on('click', function(e) {
+        e.stopPropagation()
+        $('#login_form').show()
+        $('#passwordless_login_form').hide()
+      });
+
+      $('#passwordless_toggle').on('click', function(e) {
+        e.stopPropagation()
+        $('#login_form').hide()
+        $('#passwordless_login_form').show()
+      });

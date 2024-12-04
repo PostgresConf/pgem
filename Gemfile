@@ -39,6 +39,7 @@ gem 'rails-i18n', '~> 4.0.0'
 # as authentification framework
 gem 'devise',  '>= 4.8.0'
 gem 'devise_ichain_authenticatable'
+gem 'devise-passwordless'
 # prevent bot registrations
 gem "recaptcha", require: "recaptcha/rails"
 

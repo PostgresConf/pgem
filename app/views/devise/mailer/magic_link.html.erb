@@ -1,0 +1,7 @@
+<p>Hello <%= @resource.email %>!</p>
+
+<p>You can login to Postgres Conference using the link below:</p>
+
+<p><%= link_to "Log in to my account", magic_link_url(@resource, @scope_name => {login: @resource.email, token: @token, remember_me: @remember_me}) %></p>
+
+<p>Note that the link will expire in <%= Devise.passwordless_login_within.seconds/60 %> minutes.</p>          

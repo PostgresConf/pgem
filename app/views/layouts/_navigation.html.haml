@@ -89,7 +89,7 @@
                   = password_field_tag 'password', nil, id: 'user_ichain_password_dd', placeholder: 'Password'
                   %button.btn.btn-success.btn-block Sign in
               - else
-                = form_tag new_user_session_path do
+                = form_tag new_user_session_path, id: 'login_form', style: 'display: none' do
                   = text_field_tag 'user[login]', nil, id: 'user_login_dd', placeholder: 'E-Mail'
                   = password_field_tag 'user[password]', nil, id: 'user_password_dd', placeholder: 'Password'
                   %p.text-right
@@ -97,6 +97,33 @@
                       Remember me
                       = check_box_tag 'user[remember_me]'
                   %button.btn.btn-success.btn-block Sign in
+                  .divider
+                  %h6.text-center
+                    = link_to 'Sign in with email', '#', id: 'passwordless_toggle'
+
+                  - unless omniauth_configured.empty?
+                    .divider
+                    %h6.text-center
+                      or
+                    = render 'devise/shared/openid_links'
+                  %div.dropdown-footer.clearfix
+                    %a.small.btn.btn-xs.btn-default.pull-right{"data-toggle" => "collapse", "data-target" =>  "#navbar-devise-help"}
+                      Need Help?
+                  #navbar-devise-help.collapse
+                    = render 'devise/shared/links'
+                  %li.hidden-lg
+                    = link_to('Sign In', new_user_session_path)
+
+                = form_tag new_passwordless_user_session_path, id: 'passwordless_login_form' do
+                  = text_field_tag 'passwordless_user[email]', nil, id: 'user_login_dd', placeholder: 'E-Mail'
+                  %p.text-right
+                    %small
+                      Remember me
+                      = check_box_tag 'user[remember_me]'
+                  %button.btn.btn-success.btn-block Sign in
+                  .divider
+                  %h6.text-center
+                    = link_to 'Sign in with password', '#', id: 'password_toggle'
                   - unless omniauth_configured.empty?
                     .divider
                     %h6.text-center
@@ -195,4 +222,15 @@
         $('.navbar-collapse').scrollTop(9000)
       }
     })
+    $('#password_toggle').on('click', function(e) {
+      e.stopPropagation()
+      $('#login_form').show()
+      $('#passwordless_login_form').hide()
+    });
+    
+    $('#passwordless_toggle').on('click', function(e) {
+      e.stopPropagation()
+      $('#login_form').hide()
+      $('#passwordless_login_form').show()
+    });
   })

@@ -30,7 +30,7 @@
           %h4
             To add an openID with a different email address to your account, sign in with your
             openID while logged in to PostgresConf
-          - if User.omniauth_providers.present?
+          - if User.try(:omniauth_providers).present?
             #openidlinks
               = render 'devise/shared/openid_links'
         = f.inputs name: 'Confirmation' do

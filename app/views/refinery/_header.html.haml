@@ -42,14 +42,38 @@
                   Sign in
                   %b.caret
                 .dropdown-menu.sign-in-form
-                  = form_tag main_app.new_user_session_path do
+                  = form_tag main_app.new_user_session_path, id: 'login_form', method: :post, style: 'display: none' do
                     %h2.text-center Sign in
                     .form-group
                       = text_field_tag 'user[login]', nil, id: 'user_login_dd', placeholder: 'E-Mail', class: 'form-control'
                     .form-group
                       = password_field_tag 'user[password]', nil, id: 'user_password_dd', placeholder: 'Password', class: 'form-control'
                     .form-group
-                      = button_to 'Log In', main_app.new_user_session_path, class: 'btn cta-btn-other uppercase bold'
+                      = link_to 'Sign In', '#', class: 'btn cta-btn-other uppercase bold', :onclick => "$('#login_form').submit()"
+
+                    .form-group.text-center.font-weight-normal
+                      = link_to 'Sign in with email', '#', id: 'passwordless_toggle'
+
+                    .form-group.text-center.font-weight-normal
+                      Don't have an account?
+                      = link_to 'Register', main_app.new_user_registration_path
+                    .clearfix
+                      %label.pull-left.checkbox-inline
+                        = check_box_tag 'user[remember_me]'
+                        Remember me
+                      %a.pull-right{"aria-expanded" => "true", "id" => "help_link", "data-target" => "#navbar-devise-help", "data-toggle" => "collapse", :href => "#"} Need help?
+                    #navbar-devise-help.collapse{"aria-expanded" => "true"}
+                      = render 'devise/shared/links'
+
+                  = form_tag main_app.new_passwordless_user_session_path, id: 'passwordless_login_form' do
+                    %h2.text-center Sign in
+                    .form-group
+                      = text_field_tag 'passwordless_user[email]', nil, id: 'passwordless_user_email_dd', placeholder: 'E-Mail', class: 'form-control'
+                    .form-group
+                      = link_to 'Sign In', '#', class: 'btn cta-btn-other uppercase bold', :onclick => "$('#passwordless_login_form').submit()"
+
+                    .form-group.text-center.font-weight-normal
+                      = link_to 'Sign in with password', '#', id: 'password_toggle'
 
                     .form-group.text-center.font-weight-normal
                       Don't have an account?

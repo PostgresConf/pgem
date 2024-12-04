@@ -50,9 +50,19 @@ en:
       success: 'Successfully authenticated from %{kind} account.'
       failure: 'Could not authenticate you from %{kind} because "%{reason}".'
     mailer:
-      confirmation_instructions:
-        subject: 'Confirmation instructions'
-      reset_password_instructions:
-        subject: 'Reset password instructions'
-      unlock_instructions:
-        subject: 'Unlock Instructions'
+      magic_link:
+        user_subject: "Here's your USER magic login link ✨"
+        admin_subject: "Here's your ADMIN magic login link ✨"
+        subject: "Here's your magic login link ✨"
+    passwordless:
+      user:
+        not_found_in_database: "Could not find a USER for that email address"
+        magic_link_sent: "A USER login link has been sent to your email address. Please follow the link to log in to your account."
+        magic_link_sent_paranoid: "If your USER account exists, you will receive an email with a login link. Please follow the link to log in to your account."
+      admin:
+        not_found_in_database: "Could not find an ADMIN for that email address"
+        magic_link_sent: "An ADMIN login link has been sent to your email address. Please follow the link to log in to your account."
+        magic_link_sent_paranoid: "If your ADMIN account exists, you will receive an email with a login link. Please follow the link to log in to your account."
+      not_found_in_database: "Could not find a user for that email address"
+      magic_link_sent: "A login link has been sent to your email address. Please follow the link to log in to your account."
+      magic_link_sent_paranoid: "If your account exists, you will receive an email with a login link. Please follow the link to log in to your account."
