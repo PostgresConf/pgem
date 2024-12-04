@@ -22,6 +22,8 @@
     .col-md-12
       - presented_events = @user.presented_events.confirmed.order(id: :desc)
       - if presented_events.any?
+        %h2
+          = "#{@user.name} has presented the following presentations"
         %ul.list-unstyled
           - presented_events.each do |event|
             .panel.panel-default.eventblock
@@ -31,7 +33,10 @@
                                                     :alt => speaker.name, |
                                                     :title => speaker.name |
                 %span.h3
-                  = event.title
+                  = link_to event.title, conference_program_proposal_path(event.program.conference.short_title, event), class: 'unstyled-link'
+                  %span.text-muted.h4
+                    at
+                    = event.program.conference.title
                   %br
                   %small
                     = event.subtitle
